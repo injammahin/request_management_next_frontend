@@ -23,6 +23,12 @@ const Page = () => {
           <Link href="user/changepassword">change password</Link>
         </button>
       </h3>
+      <h3 className="text-lg font-bold">
+        do you want to log out
+        <button className="ml-2 bg-red-500 text-white p-2 rounded">
+          <Link href="user/logout">logout</Link>
+        </button>
+      </h3>
     </div>
   );
 };
