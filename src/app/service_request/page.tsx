@@ -1,11 +1,24 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, ChangeEvent, FormEvent } from "react";
 import axios from "axios";
 
-interface PaymentFormProps {}
+interface RequestServiceFormProps {}
 
-const RequestServiceForm: React.FC<PaymentFormProps> = ({}) => {
-  const [serviceDetails, setServiceDetails] = useState({
+interface ServiceDetails {
+  requestNo: string;
+  date: string;
+  requestedBy: string;
+  requestFor: string;
+  department: string;
+  employeeId: string;
+  designation: string;
+  reasonOfRequest: string;
+  serviceDetails: string;
+  [key: string]: string; // Index signature to allow any additional string properties
+}
+
+const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
+  const [serviceDetails, setServiceDetails] = useState<ServiceDetails>({
     requestNo: "",
     date: "",
     requestedBy: "",
@@ -16,8 +29,12 @@ const RequestServiceForm: React.FC<PaymentFormProps> = ({}) => {
     reasonOfRequest: "",
     serviceDetails: "",
   });
+  const [successMessage, setSuccessMessage] = useState<string>("");
+  const [errorMessage, setErrorMessage] = useState<string>("");
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
     setServiceDetails((prevDetails) => ({
       ...prevDetails,
@@ -25,24 +42,43 @@ const RequestServiceForm: React.FC<PaymentFormProps> = ({}) => {
     }));
   };
 
-  // const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-  //   setServiceDetails((prevDetails) => ({
-  //     ...prevDetails,
-  //     paymentway: e.target.value,
-  //   }));
-  // };
-
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+
+    const requiredFields = [
+      "requestNo",
+      "date",
+      "requestedBy",
+      "requestFor",
+      "department",
+      "employeeId",
+      "designation",
+      "reasonOfRequest",
+      "serviceDetails",
+    ];
+
+    const hasEmptyField = requiredFields.some(
+      (field) => !serviceDetails[field] || serviceDetails[field].trim() === ""
+    );
+
+    if (hasEmptyField) {
+      setErrorMessage("Please fill in all the required fields");
+      setSuccessMessage("");
+      return;
+    }
 
     try {
       const response = await axios.post(
         "http://localhost:3001/service-requests/fillup",
         serviceDetails
       );
-      console.log("form submit successful:", response.data);
+      setSuccessMessage("Form submitted successfully");
+      setErrorMessage("");
+      console.log("Form submitted successfully:", response.data);
     } catch (error) {
-      console.error("Request  failed:", error);
+      setErrorMessage("Form submission failed");
+      setSuccessMessage("");
+      console.error("Form submission failed:", error);
     }
   };
 
@@ -134,8 +170,15 @@ const RequestServiceForm: React.FC<PaymentFormProps> = ({}) => {
         type="submit"
         className="bg-blue-500 text-white p-2 rounded hover:bg-blue-700"
       >
-        Submit Payment
+        Submit
       </button>
+
+      {successMessage && (
+        <p className="text-center text-green-500 mt-2">{successMessage}</p>
+      )}
+      {errorMessage && (
+        <p className="text-center text-red-500 mt-2">{errorMessage}</p>
+      )}
     </form>
   );
 };
