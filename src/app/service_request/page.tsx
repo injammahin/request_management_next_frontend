@@ -1,13 +1,24 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, ChangeEvent, FormEvent } from "react";
 import axios from "axios";
 
-interface PaymentFormProps {
-  onSuccess: () => void;
+interface RequestServiceFormProps {}
+
+interface ServiceDetails {
+  requestNo: string;
+  date: string;
+  requestedBy: string;
+  requestFor: string;
+  department: string;
+  employeeId: string;
+  designation: string;
+  reasonOfRequest: string;
+  serviceDetails: string;
+  [key: string]: string; // Index signature to allow any additional string properties
 }
 
-const RequestServiceForm: React.FC<PaymentFormProps> = ({ onSuccess }) => {
-  const [serviceDetails, setServiceDetails] = useState({
+const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
+  const [serviceDetails, setServiceDetails] = useState<ServiceDetails>({
     requestNo: "",
     date: "",
     requestedBy: "",
@@ -19,7 +30,9 @@ const RequestServiceForm: React.FC<PaymentFormProps> = ({ onSuccess }) => {
     serviceDetails: "",
   });
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
     setServiceDetails((prevDetails) => ({
       ...prevDetails,
@@ -27,25 +40,38 @@ const RequestServiceForm: React.FC<PaymentFormProps> = ({ onSuccess }) => {
     }));
   };
 
-  const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setServiceDetails((prevDetails) => ({
-      ...prevDetails,
-      paymentway: e.target.value,
-    }));
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+
+    const requiredFields = [
+      "requestNo",
+      "date",
+      "requestedBy",
+      "requestFor",
+      "department",
+      "employeeId",
+      "designation",
+      "reasonOfRequest",
+      "serviceDetails",
+    ];
+
+    const hasEmptyField = requiredFields.some(
+      (field) => !serviceDetails[field] || serviceDetails[field].trim() === ""
+    );
+
+    if (hasEmptyField) {
+      console.error("Please fill in all the required fields");
+      return;
+    }
 
     try {
       const response = await axios.post(
         "http://localhost:3001/service-requests/fillup",
         serviceDetails
       );
-      console.log("form submit successful:", response.data);
-      onSuccess();
+      console.log("Form submitted successfully:", response.data);
     } catch (error) {
-      console.error("Request  failed:", error);
+      console.error("Form submission failed:", error);
     }
   };
 
