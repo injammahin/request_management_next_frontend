@@ -6,24 +6,29 @@ interface PaymentFormProps {
   onSuccess: () => void;
 }
 
-const PaymentForm: React.FC<PaymentFormProps> = ({ onSuccess }) => {
-  const [paymentDetails, setPaymentDetails] = useState({
-    paymentway: "",
-    reference: "",
-    amount: 0,
-    due: "",
+const RequestServiceForm: React.FC<PaymentFormProps> = ({ onSuccess }) => {
+  const [serviceDetails, setServiceDetails] = useState({
+    requestNo: "",
+    date: "",
+    requestedBy: "",
+    requestFor: "",
+    department: "",
+    employeeId: "",
+    designation: "",
+    reasonOfRequest: "",
+    serviceDetails: "",
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setPaymentDetails((prevDetails) => ({
+    setServiceDetails((prevDetails) => ({
       ...prevDetails,
       [name]: value,
     }));
   };
 
   const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setPaymentDetails((prevDetails) => ({
+    setServiceDetails((prevDetails) => ({
       ...prevDetails,
       paymentway: e.target.value,
     }));
@@ -35,74 +40,107 @@ const PaymentForm: React.FC<PaymentFormProps> = ({ onSuccess }) => {
     try {
       const response = await axios.post(
         "http://localhost:3001/service-requests/fillup",
-        paymentDetails
+        serviceDetails
       );
-      console.log("Payment successful:", response.data);
+      console.log("form submit successful:", response.data);
       onSuccess();
     } catch (error) {
-      console.error("Payment failed:", error);
+      console.error("Request  failed:", error);
     }
   };
 
   return (
     <form onSubmit={handleSubmit} className="max-w-md mx-auto mt-8 p-4 border">
       <label className="block mb-2">
-        Payment Way:
-        <select
-          name="paymentway"
-          onChange={handleSelectChange}
-          className="block w-full p-2 border border-gray-300 rounded"
-        >
-          <option value="">Select Payment Method</option>
-          <option value="bkash">bKash</option>
-          <option value="nagad">Nagad</option>
-          <option value="card">Card</option>
-          <option value="rocket">Rocket</option>
-        </select>
-      </label>
-      <label className="block mb-2">
-        Reference:
+        requestNo:
         <input
           type="text"
-          name="reference"
+          name="requestNo"
           onChange={handleInputChange}
           className="block w-full p-2 border border-gray-300 rounded"
         />
       </label>
       <label className="block mb-2">
-        Amount:
+        date:
         <input
-          type="number"
-          name="amount"
+          type="date"
+          name="date"
           onChange={handleInputChange}
           className="block w-full p-2 border border-gray-300 rounded"
         />
       </label>
       <label className="block mb-2">
-        Due:
+        requestedBy:
         <input
           type="text"
-          name="due"
+          name="requestedBy"
           onChange={handleInputChange}
           className="block w-full p-2 border border-gray-300 rounded"
         />
       </label>
+      <label className="block mb-2">
+        requestFor:
+        <input
+          type="text"
+          name="requestFor"
+          onChange={handleInputChange}
+          className="block w-full p-2 border border-gray-300 rounded"
+        />
+      </label>
+      <label className="block mb-2">
+        department:
+        <input
+          type="text"
+          name="department"
+          onChange={handleInputChange}
+          className="block w-full p-2 border border-gray-300 rounded"
+        />
+      </label>
+      <label className="block mb-2">
+        employeeId:
+        <input
+          type="text"
+          name="employeeId"
+          onChange={handleInputChange}
+          className="block w-full p-2 border border-gray-300 rounded"
+        />
+      </label>
+      <label className="block mb-2">
+        designation:
+        <input
+          type="text"
+          name="designation"
+          onChange={handleInputChange}
+          className="block w-full p-2 border border-gray-300 rounded"
+        />
+      </label>
+      <label className="block mb-2">
+        reasonOfRequest:
+        <input
+          type="text"
+          name="reasonOfRequest"
+          onChange={handleInputChange}
+          className="block w-full p-2 border border-gray-300 rounded"
+        />
+      </label>
+      <label className="block mb-2">
+        serviceDetails:
+        <input
+          type="text"
+          name="serviceDetails"
+          onChange={handleInputChange}
+          className="block w-full p-2 border border-gray-300 rounded"
+        />
+      </label>
+
       <button
         type="submit"
         className="bg-blue-500 text-white p-2 rounded hover:bg-blue-700"
       >
         Submit Payment
       </button>
-      <h3>
-        want to show all the payment details?
-        <button className="bg-green-400 px-3 py-2 rounded-xl hover:bg-green-600">
-          <a className="font-bold " href="/payment/showdetails">
-            ShowDetails
-          </a>
-        </button>
-      </h3>
     </form>
   );
 };
 
-export default PaymentForm;
+export default RequestServiceForm;
