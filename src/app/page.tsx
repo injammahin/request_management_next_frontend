@@ -4,7 +4,7 @@ import React from "react";
 
 const HomePage: React.FC = () => {
   return (
-    <div className="flex items-center justify-center h-screen  bg-gradient-to-r from-gray-800 via-blue-300 to-gray-700 text-white">
+    <div className="flex items-center justify-center h-screen  bg-gradient-to-r from-gray-500 via-gray-600 to-gray-500 text-white">
       <div className="flex flex-col md:flex-row items-center md:items-start justify-center md:justify-between w-full max-w-5xl px-6 md:px-10">
         <div className="flex-shrink-0 mb-8 md:mb-0">
           <img src="./dhaka_bank.png" alt=" dhaka bank" className="w-96 h-44" />
