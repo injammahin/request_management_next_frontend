@@ -83,8 +83,8 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-md mx-auto mt-8 p-4 border">
-      <label className="block mb-2">
+    <form onSubmit={handleSubmit} className="max-w-md mx-auto  mt-8 p-4 border">
+      <label className="block  w-1/2 mb-2">
         requestNo:
         <input
           type="text"
@@ -93,7 +93,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
           className="block w-full p-2 border border-gray-300 rounded"
         />
       </label>
-      <label className="block mb-2">
+      <label className="block w-1/2 mb-2">
         date:
         <input
           type="date"

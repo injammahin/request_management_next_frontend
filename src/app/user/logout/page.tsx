@@ -1,40 +1,24 @@
 "use client";
 import { useEffect } from "react";
-import axios, { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 
 const LogoutPage = () => {
   const router = useRouter();
 
   useEffect(() => {
-    const handleLogout = async () => {
-      try {
-        await axios.post("http://localhost:3001/auth/signout");
+    // Perform logout logic here, such as destroying the session
 
-        await localStorage.clear();
+    // Clear local storage data
+    localStorage.clear();
 
-        router.push("/");
-      } catch (error: unknown) {
-        if (axios.isAxiosError(error)) {
-          console.error("Error logging out:", error.message);
-        } else {
-          console.error("Unknown error logging out:", error);
-        }
-      }
-    };
-
-    handleLogout();
-  }, [router]);
+    // Redirect the user to another page after logout (e.g., the home page)
+    router.push("/");
+  }, []);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8">
-        <div>
-          <button className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            Logging out...
-          </button>
-        </div>
-      </div>
+    <div>
+      <p>Logging out...</p>
+      {/* You can add a spinner or any loading indication here */}
     </div>
   );
 };
