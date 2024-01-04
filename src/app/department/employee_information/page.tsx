@@ -5,21 +5,25 @@ import axios from "axios";
 interface RequestServiceFormProps {}
 
 interface ServiceDetails {
+  user_id: string;
+
+  employee_name: string;
+
+  designation: string;
+
   department_id: string;
-
-  department_name: string;
-
-  department_supervisor: string;
   [key: string]: string; // Index signature to allow any additional string properties
 }
 
 const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
   const [serviceDetails, setServiceDetails] = useState<ServiceDetails>({
+    user_id: "",
+
+    employee_name: "",
+
+    designation: "",
+
     department_id: "",
-
-    department_name: "",
-
-    department_supervisor: "",
   });
   const [successMessage, setSuccessMessage] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("");
@@ -38,9 +42,10 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
     e.preventDefault();
 
     const requiredFields = [
+      "user_id",
+      "employee_name",
+      "designation",
       "department_id",
-      "department_name",
-      "department_supervisor",
     ];
 
     const hasEmptyField = requiredFields.some(
@@ -55,7 +60,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
 
     try {
       const response = await axios.post(
-        "http://localhost:3001/department_information/fillup",
+        "http://localhost:3001/employee/fillup",
         serviceDetails
       );
       setSuccessMessage("Form submitted successfully");
@@ -77,6 +82,33 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
       className="max-w-md mx-auto w-1/2 mt-8 p-4 border"
     >
       <label className="block mb-2">
+        user id:
+        <input
+          type="text"
+          name="user_id"
+          onChange={handleInputChange}
+          className="block w-full p-2 border border-gray-300 rounded"
+        />
+      </label>
+      <label className="block mb-2">
+        employee name:
+        <input
+          type="text"
+          name="employee_name"
+          onChange={handleInputChange}
+          className="block w-full p-2 border border-gray-300 rounded"
+        />
+      </label>
+      <label className="block mb-2">
+        designation:
+        <input
+          type="text"
+          name="designation"
+          onChange={handleInputChange}
+          className="block w-full p-2 border border-gray-300 rounded"
+        />
+      </label>
+      <label className="block mb-2">
         department id:
         <input
           type="text"
@@ -85,28 +117,10 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
           className="block w-full p-2 border border-gray-300 rounded"
         />
       </label>
-      <label className="block mb-2">
-        department name:
-        <input
-          type="text"
-          name="department_name"
-          onChange={handleInputChange}
-          className="block w-full p-2 border border-gray-300 rounded"
-        />
-      </label>
-      <label className="block mb-2">
-        department supervisor:
-        <input
-          type="text"
-          name="department_supervisor"
-          onChange={handleInputChange}
-          className="block w-full p-2 border border-gray-300 rounded"
-        />
-      </label>
 
       <button
         type="submit"
-        className="bg-blue-500 text-white p-2 rounded hover:bg-blue-700"
+        className="bg-blue-500 text-white p-2 w-full rounded hover:bg-blue-700"
       >
         Submit
       </button>
