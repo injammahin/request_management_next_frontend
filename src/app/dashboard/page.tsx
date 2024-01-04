@@ -39,6 +39,22 @@ const Page = () => {
           <Link href="user/logout">Logout</Link>
         </button>
       </div>
+      <div className="relative group">
+        <h2 className="text-xl font-bold mb-2 group-hover:text-red-500">
+          department information
+        </h2>
+        <button className="hidden bg-red-500 text-white p-2 rounded hover:bg-red-700 absolute top-1/2 right-0 transform -translate-y-1/2 group-hover:block">
+          <Link href="department/department_information">department</Link>
+        </button>
+      </div>
+      <div className="relative group">
+        <h2 className="text-xl font-bold mb-2 group-hover:text-red-500">
+          employee information
+        </h2>
+        <button className="hidden bg-red-500 text-white p-2 rounded hover:bg-red-700 absolute top-1/2 right-0 transform -translate-y-1/2 group-hover:block">
+          <Link href="department/employee_information">employee</Link>
+        </button>
+      </div>
     </div>
   );
 };
