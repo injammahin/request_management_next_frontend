@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Navbar from "@/app/components/navigation/page";
+import Link from "next/link";
 
 interface UserDetails {
   id: number;
@@ -60,12 +61,22 @@ const ProfilePage = () => {
               <span className="font-bold">Email:</span> {userDetails.email}
             </p>
           </div>
-          <a
-            href="/user/editUser"
-            className="block w-full text-center text-blue-500 hover:underline"
-          >
-            Edit Profile
-          </a>
+          <div>
+            <div className="flex justify-between">
+              <button
+                type="submit"
+                className="bg-gray-500 text-white p-2 w-32 rounded hover:bg-gray-700"
+              >
+                <Link href="/dashboard">back</Link>
+              </button>
+              <a
+                href="/user/editUser"
+                className="block w-full text-center text-blue-500 hover:underline"
+              >
+                Edit Profile
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </div>

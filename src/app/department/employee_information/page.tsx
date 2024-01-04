@@ -2,6 +2,7 @@
 import React, { useState, ChangeEvent, FormEvent } from "react";
 import axios from "axios";
 import Navbar from "@/app/components/navigation/page";
+import Link from "next/link";
 
 interface RequestServiceFormProps {}
 
@@ -120,14 +121,20 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
             className="block w-full p-2 border border-gray-300 rounded"
           />
         </label>
-
-        <button
-          type="submit"
-          className="bg-blue-500 text-white p-2 w-full rounded hover:bg-blue-700"
-        >
-          Submit
-        </button>
-
+        <div className="flex justify-between">
+          <button
+            type="submit"
+            className="bg-gray-500 text-white p-2 w-32 rounded hover:bg-gray-700"
+          >
+            <Link href="/dashboard">back</Link>
+          </button>
+          <button
+            type="submit"
+            className="bg-blue-500 text-white p-2 w-full rounded hover:bg-blue-700"
+          >
+            Submit
+          </button>
+        </div>
         {successMessage && (
           <p className="text-center text-green-500 mt-2">{successMessage}</p>
         )}

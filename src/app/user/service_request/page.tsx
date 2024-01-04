@@ -3,6 +3,7 @@ import React, { useState, ChangeEvent, FormEvent } from "react";
 import axios from "axios";
 import Navbar from "@/app/components/navigation/page";
 import Sidebar from "@/app/components/navigation/sidebar/page";
+import Link from "next/link";
 
 interface RequestServiceFormProps {}
 
@@ -93,7 +94,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
 
       <form
         onSubmit={handleSubmit}
-        className="max-w-md mx-auto w-1/2 mt-8 p-4 border"
+        className="max-w-md mx-auto  mt-8 p-4 border"
       >
         <div className="relative z-0 w-full mb-5 group">
           <input
@@ -104,7 +105,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
             placeholder=" "
             onChange={handleInputChange}
           />
-          <label className=" uppercase peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+          <label className="  uppercase peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
             request no
           </label>
         </div>
@@ -180,14 +181,20 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
             className="block w-full p-2 border border-gray-300 rounded"
           />
         </label>
-
-        <button
-          type="submit"
-          className="bg-blue-500 text-white p-2 rounded hover:bg-blue-700"
-        >
-          Submit
-        </button>
-
+        <div className="flex justify-between">
+          <button
+            type="submit"
+            className="bg-gray-500 text-white p-2 w-32 rounded hover:bg-gray-700"
+          >
+            <Link href="/dashboard">back</Link>
+          </button>
+          <button
+            type="submit"
+            className="bg-blue-500 text-white p-2 rounded hover:bg-blue-700"
+          >
+            Submit
+          </button>
+        </div>
         {successMessage && (
           <p className="text-center text-green-500 mt-2">{successMessage}</p>
         )}

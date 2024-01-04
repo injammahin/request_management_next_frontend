@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Navbar from "@/app/components/navigation/page";
+import Link from "next/link";
 
 const ProfilePage = () => {
   const [userData, setUserData] = useState({
@@ -72,13 +73,21 @@ const ProfilePage = () => {
               />
             </div>
             <div>
-              <button
-                type="button"
-                onClick={handleUpdate}
-                className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-              >
-                Change Password
-              </button>
+              <div className="flex justify-between">
+                <button
+                  type="submit"
+                  className="bg-gray-500 text-white p-2 w-32 rounded hover:bg-gray-700"
+                >
+                  <Link href="/dashboard">back</Link>
+                </button>
+                <button
+                  type="button"
+                  onClick={handleUpdate}
+                  className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                >
+                  Change Password
+                </button>
+              </div>
             </div>
             {message && (
               <p className="text-center text-green-500 mt-2">{message}</p>
