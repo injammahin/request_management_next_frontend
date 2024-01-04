@@ -94,99 +94,129 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
 
       <form
         onSubmit={handleSubmit}
-        className="max-w-md mx-auto  mt-8 p-4 border"
+        className="max-w-md uppercase mx-auto mt-8 p-4 border"
       >
-        <div className="relative z-0 w-full mb-5 group">
-          <input
-            type="text"
-            name="requestNo"
-            id="requestNo"
-            className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-            placeholder=" "
-            onChange={handleInputChange}
-          />
-          <label className="  uppercase peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
-            request no
+        <div className="grid  grid-cols-2 gap-4 mb-4">
+          <div className="relative z-0 mb-2">
+            <label className="block">
+              request no:
+              <input
+                type="text"
+                name="requestNo"
+                id="requestNo"
+                onChange={handleInputChange}
+                className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+              />
+            </label>
+          </div>
+
+          <div className="relative z-0 mb-2">
+            <label className="block">
+              date:
+              <input
+                type="date"
+                name="date"
+                onChange={handleInputChange}
+                className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+              />
+            </label>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-2 gap-4 mb-4">
+          <div className="mb-2">
+            <label className="block">
+              requested By:
+              <input
+                type="text"
+                name="requestedBy"
+                onChange={handleInputChange}
+                className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+              />
+            </label>
+          </div>
+
+          <div className="mb-2">
+            <label className="block">
+              request For:
+              <input
+                type="text"
+                name="requestFor"
+                onChange={handleInputChange}
+                className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+              />
+            </label>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-2 gap-4 mb-4">
+          <div className="mb-2">
+            <label className="block">
+              department:
+              <input
+                type="text"
+                name="department"
+                onChange={handleInputChange}
+                className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+              />
+            </label>
+          </div>
+
+          <div className="mb-2">
+            <label className="block">
+              employee Id:
+              <input
+                type="text"
+                name="employeeId"
+                onChange={handleInputChange}
+                className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+              />
+            </label>
+          </div>
+        </div>
+
+        <div className="mb-2">
+          <label className="block">
+            designation:
+            <input
+              type="text"
+              name="designation"
+              onChange={handleInputChange}
+              className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+            />
           </label>
         </div>
-        <label className="block mb-2">
-          date:
-          <input
-            type="date"
-            name="date"
-            onChange={handleInputChange}
-            className="block w-full p-2 border border-gray-300 rounded"
-          />
-        </label>
-        <label className="block mb-2">
-          requestedBy:
-          <input
-            type="text"
-            name="requestedBy"
-            onChange={handleInputChange}
-            className="block w-full p-2 border border-gray-300 rounded"
-          />
-        </label>
-        <label className="block mb-2">
-          requestFor:
-          <input
-            type="text"
-            name="requestFor"
-            onChange={handleInputChange}
-            className="block w-full p-2 border border-gray-300 rounded"
-          />
-        </label>
-        <label className="block mb-2">
-          department:
-          <input
-            type="text"
-            name="department"
-            onChange={handleInputChange}
-            className="block w-full p-2 border border-gray-300 rounded"
-          />
-        </label>
-        <label className="block mb-2">
-          employeeId:
-          <input
-            type="text"
-            name="employeeId"
-            onChange={handleInputChange}
-            className="block w-full p-2 border border-gray-300 rounded"
-          />
-        </label>
-        <label className="block mb-2">
-          designation:
-          <input
-            type="text"
-            name="designation"
-            onChange={handleInputChange}
-            className="block w-full p-2 border border-gray-300 rounded"
-          />
-        </label>
-        <label className="block mb-2">
-          reasonOfRequest:
-          <input
-            type="text"
-            name="reasonOfRequest"
-            onChange={handleInputChange}
-            className="block w-full p-2 border border-gray-300 rounded"
-          />
-        </label>
-        <label className="block mb-2">
-          serviceDetails:
-          <input
-            type="text"
-            name="serviceDetails"
-            onChange={handleInputChange}
-            className="block w-full p-2 border border-gray-300 rounded"
-          />
-        </label>
+
+        <div className="mb-2">
+          <label className="block">
+            reason Of Request:
+            <input
+              type="text"
+              name="reasonOfRequest"
+              onChange={handleInputChange}
+              className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+            />
+          </label>
+        </div>
+
+        <div className="mb-2">
+          <label className="block">
+            service Details:
+            <input
+              type="text"
+              name="serviceDetails"
+              onChange={handleInputChange}
+              className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+            />
+          </label>
+        </div>
+
         <div className="flex justify-between">
           <button
-            type="submit"
+            type="button"
             className="bg-gray-500 text-white p-2 w-32 rounded hover:bg-gray-700"
           >
-            <Link href="/dashboard">back</Link>
+            <Link href="/dashboard">Back</Link>
           </button>
           <button
             type="submit"
@@ -195,6 +225,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
             Submit
           </button>
         </div>
+
         {successMessage && (
           <p className="text-center text-green-500 mt-2">{successMessage}</p>
         )}
