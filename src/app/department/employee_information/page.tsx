@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, ChangeEvent, FormEvent } from "react";
 import axios from "axios";
+import Navbar from "@/app/components/navigation/page";
 
 interface RequestServiceFormProps {}
 
@@ -77,61 +78,64 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="max-w-md mx-auto w-1/2 mt-8 p-4 border"
-    >
-      <label className="block mb-2">
-        user id:
-        <input
-          type="text"
-          name="user_id"
-          onChange={handleInputChange}
-          className="block w-full p-2 border border-gray-300 rounded"
-        />
-      </label>
-      <label className="block mb-2">
-        employee name:
-        <input
-          type="text"
-          name="employee_name"
-          onChange={handleInputChange}
-          className="block w-full p-2 border border-gray-300 rounded"
-        />
-      </label>
-      <label className="block mb-2">
-        designation:
-        <input
-          type="text"
-          name="designation"
-          onChange={handleInputChange}
-          className="block w-full p-2 border border-gray-300 rounded"
-        />
-      </label>
-      <label className="block mb-2">
-        department id:
-        <input
-          type="text"
-          name="department_id"
-          onChange={handleInputChange}
-          className="block w-full p-2 border border-gray-300 rounded"
-        />
-      </label>
-
-      <button
-        type="submit"
-        className="bg-blue-500 text-white p-2 w-full rounded hover:bg-blue-700"
+    <div>
+      <Navbar />
+      <form
+        onSubmit={handleSubmit}
+        className="max-w-md mx-auto w-1/2 mt-8 p-4 border"
       >
-        Submit
-      </button>
+        <label className="block mb-2">
+          user id:
+          <input
+            type="text"
+            name="user_id"
+            onChange={handleInputChange}
+            className="block w-full p-2 border border-gray-300 rounded"
+          />
+        </label>
+        <label className="block mb-2">
+          employee name:
+          <input
+            type="text"
+            name="employee_name"
+            onChange={handleInputChange}
+            className="block w-full p-2 border border-gray-300 rounded"
+          />
+        </label>
+        <label className="block mb-2">
+          designation:
+          <input
+            type="text"
+            name="designation"
+            onChange={handleInputChange}
+            className="block w-full p-2 border border-gray-300 rounded"
+          />
+        </label>
+        <label className="block mb-2">
+          department id:
+          <input
+            type="text"
+            name="department_id"
+            onChange={handleInputChange}
+            className="block w-full p-2 border border-gray-300 rounded"
+          />
+        </label>
 
-      {successMessage && (
-        <p className="text-center text-green-500 mt-2">{successMessage}</p>
-      )}
-      {errorMessage && (
-        <p className="text-center text-red-500 mt-2">{errorMessage}</p>
-      )}
-    </form>
+        <button
+          type="submit"
+          className="bg-blue-500 text-white p-2 w-full rounded hover:bg-blue-700"
+        >
+          Submit
+        </button>
+
+        {successMessage && (
+          <p className="text-center text-green-500 mt-2">{successMessage}</p>
+        )}
+        {errorMessage && (
+          <p className="text-center text-red-500 mt-2">{errorMessage}</p>
+        )}
+      </form>
+    </div>
   );
 };
 

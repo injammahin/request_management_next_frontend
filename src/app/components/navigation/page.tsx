@@ -7,7 +7,7 @@ const Navbar = () => {
         {/* Logo */}
         <div className="flex items-center ">
           <img
-            src="./dhaka_bank_logo.png"
+            src="/dhaka_bank_logo.png"
             alt="Logo"
             className=" h-12 w-max mr-2 "
           />

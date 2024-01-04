@@ -5,6 +5,7 @@ import "./globals.css";
 import Navbar from "./components/navigation/page";
 
 import { useEffect, useState } from "react";
+import Sidebar from "./components/navigation/sidebar/page";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,8 +26,8 @@ export default function RootLayout({
       <body className={inter.className}>
         <div className="flex h-screen bg-gray-100">
           <div className="flex-1 flex flex-col overflow-hidden">
-            {loggedIn && <Navbar />}
-
+            {/* {loggedIn && <Navbar />}
+            {loggedIn && <Sidebar />} */}
             <main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200 ">
               {children}
             </main>
