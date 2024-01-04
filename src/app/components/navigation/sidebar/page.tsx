@@ -10,7 +10,7 @@ import {
 
 const Sidebar = () => {
   return (
-    <aside className="bg-gray-800 text-white w-64 min-h-screen">
+    <aside className="bg-gray-800 text-white w-80 min-h-screen">
       <div className="p-4 flex items-center justify-center">
         <span className="text-2xl font-bold"></span>
       </div>
