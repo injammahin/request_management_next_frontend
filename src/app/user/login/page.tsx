@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import axios from "axios";
-import { useRouter } from "next/navigation";
+import { useRouter } from "next/navigation"; // Import from 'next/router' instead of 'next/navigation'
 
 const SigninPage = () => {
   const [email, setEmail] = useState("");
@@ -19,9 +19,9 @@ const SigninPage = () => {
 
       console.log(response.data);
 
-      if (response.data) {
+      if (response.data && response.data.id) {
         setSuccessMessage(response.data.message);
-        localStorage.setItem("id", response.data.id);
+        localStorage.setItem("userId", response.data.id);
         router.push("/dashboard");
       } else {
         console.error("Error logging in: User data is undefined");
