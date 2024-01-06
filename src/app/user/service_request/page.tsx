@@ -4,6 +4,7 @@ import axios from "axios";
 import Navbar from "@/app/components/navigation/page";
 import Sidebar from "@/app/components/navigation/sidebar/page";
 import Link from "next/link";
+import router from "next/router";
 
 interface RequestServiceFormProps {}
 
@@ -17,6 +18,7 @@ interface ServiceDetails {
   designation: string;
   reasonOfRequest: string;
   serviceDetails: string;
+  userId: string;
   [key: string]: string; // Index signature to allow any additional string properties
 }
 
@@ -31,6 +33,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
     designation: "",
     reasonOfRequest: "",
     serviceDetails: "",
+    userId: "",
   });
   const [successMessage, setSuccessMessage] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("");
@@ -73,14 +76,17 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
     try {
       const response = await axios.post(
         "http://localhost:3001/service-requests/fillup",
-        serviceDetails
+        {
+          ...serviceDetails,
+          userId: localStorage.getItem("userId"),
+        }
       );
       setSuccessMessage("Form submitted successfully");
       setErrorMessage("");
       console.log("Form submitted successfully:", response.data);
-      setTimeout(() => {
-        window.location.reload();
-      }, 3000);
+      // setTimeout(() => {
+      //   router.push("/dashboard"); // Use router.push for client-side navigation
+      // }, 3000);
     } catch (error) {
       setErrorMessage("Form submission failed");
       setSuccessMessage("");
