@@ -131,35 +131,45 @@ const ProfilePage: React.FC = () => {
                       >
                         <p className="text-sm text-gray-900">
                           <span className="font-bold">Request No:</span>{" "}
-                          {request.requestNo} |{" "}
+                          {request.requestNo}{" "}
                         </p>
                         {request.showFullForm && (
                           <>
-                            {/* Include the other details here */}
-                            <p className="text-sm text-gray-900">
-                              <span className="font-bold">Date:</span>{" "}
-                              {request.date} |{" "}
-                              <span className="font-bold">Department:</span>{" "}
-                              {request.department}
-                              <span className="font-bold">
-                                Designation:
-                              </span>{" "}
-                              {request.designation} |{" "}
-                              <span className="font-bold">Employee Id:</span>{" "}
-                              {request.employeeId} |{" "}
-                              <span className="font-bold">
-                                Reason of Request:
-                              </span>{" "}
-                              {request.reasonOfRequest} -{" "}
-                              <span className="font-bold">Request For:</span>{" "}
-                              {request.requestFor} |{" "}
-                              <span className="font-bold">Requested By:</span>{" "}
-                              {request.requestedBy} |{" "}
-                              <span className="font-bold">
-                                Service Details:
-                              </span>{" "}
-                              {request.serviceDetails}
-                            </p>
+                            <ul>
+                              <li>
+                                {/* Include the other details here */}
+                                <p className="text-sm text-gray-900 ">
+                                  <span className="font-bold">Date:</span>{" "}
+                                  {request.date} |{" "}
+                                  <span className="font-bold">Department:</span>{" "}
+                                  {request.department}|{" "}
+                                  <span className="font-bold">
+                                    Designation:
+                                  </span>{" "}
+                                  {request.designation} |{" "}
+                                  <span className="font-bold">
+                                    Employee Id:
+                                  </span>{" "}
+                                  {request.employeeId} |{" "}
+                                  <span className="font-bold">
+                                    Reason of Request:
+                                  </span>{" "}
+                                  {request.reasonOfRequest} |{" "}
+                                  <span className="font-bold">
+                                    Request For:
+                                  </span>{" "}
+                                  {request.requestFor} |{" "}
+                                  <span className="font-bold">
+                                    Requested By:
+                                  </span>{" "}
+                                  {request.requestedBy} |{" "}
+                                  <span className="font-bold">
+                                    Service Details:
+                                  </span>{" "}
+                                  {request.serviceDetails}
+                                </p>
+                              </li>
+                            </ul>
                           </>
                         )}
                         <button
