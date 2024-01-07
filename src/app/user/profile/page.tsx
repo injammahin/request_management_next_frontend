@@ -79,42 +79,37 @@ const ProfilePage = () => {
             </p>
             {userData.serviceRequests &&
               userData.serviceRequests.length > 0 && (
-                <div className="bg-gray-200">
+                <div className="bg-gray-200 p-6 rounded-lg">
                   <h3 className="text-lg font-semibold mb-2">
                     Service Requests:
                   </h3>
 
-                  <ul>
-                    {userData.serviceRequests.map((request) => (
-                      <div className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
-                        <li key={request.id} className="mb-4">
-                          <p>
-                            <span className="font-bold">Request No:</span>{" "}
-                            {request.requestNo}
-                            <span className="font-bold">Date:</span>{" "}
-                            {request.date}
-                            <span className="font-bold">Department:</span>{" "}
-                            {request.department}
-                            <span className="font-bold">Designation:</span>{" "}
-                            {request.designation} -
-                            <span className="font-bold">Employee Id:</span>{" "}
-                            {request.employeeId} -
-                            <span className="font-bold">
-                              Reason of Request:
-                            </span>{" "}
-                            {request.reasonOfRequest} -
-                            <span className="font-bold">Request For:</span>{" "}
-                            {request.requestFor} -
-                            <span className="font-bold">Requested By:</span>{" "}
-                            {request.requestedBy} -
-                            <span className="font-bold">Service Details:</span>{" "}
-                            {request.serviceDetails}
-                            {/* Add more fields as needed */}
-                          </p>
-                        </li>
-                      </div>
-                    ))}
-                  </ul>
+                  {userData.serviceRequests.map((request) => (
+                    <div
+                      key={request.id}
+                      className="mb-4 bg-white border-b-2 border-gray-300 p-4"
+                    >
+                      <p className="text-sm text-gray-900">
+                        <span className="font-bold">Request No:</span>{" "}
+                        {request.requestNo} -{" "}
+                        <span className="font-bold">Date:</span> {request.date}{" "}
+                        - <span className="font-bold">Department:</span>{" "}
+                        {request.department} -{" "}
+                        <span className="font-bold">Designation:</span>{" "}
+                        {request.designation} -{" "}
+                        <span className="font-bold">Employee Id:</span>{" "}
+                        {request.employeeId} -{" "}
+                        <span className="font-bold">Reason of Request:</span>{" "}
+                        {request.reasonOfRequest} -{" "}
+                        <span className="font-bold">Request For:</span>{" "}
+                        {request.requestFor} -{" "}
+                        <span className="font-bold">Requested By:</span>{" "}
+                        {request.requestedBy} -{" "}
+                        <span className="font-bold">Service Details:</span>{" "}
+                        {request.serviceDetails}
+                      </p>
+                    </div>
+                  ))}
                 </div>
               )}
           </div>
