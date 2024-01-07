@@ -6,9 +6,9 @@ import Navbar from "@/app/components/navigation/page";
 import Link from "next/link";
 
 interface UserDetails {
-  id: number;
-  name: string;
-  email: string;
+  id: number | undefined;
+  name: string | undefined;
+  email: string | undefined;
 }
 
 interface ServiceRequest {
@@ -22,17 +22,17 @@ interface ServiceRequest {
   requestNo: string;
   requestedBy: string;
   serviceDetails: string;
+  showFullForm: boolean;
 }
 
 interface UserWithServiceRequests extends UserDetails {
-  serviceRequests: ServiceRequest[];
+  serviceRequests?: ServiceRequest[];
 }
 
 const ProfilePage = () => {
   const [userData, setUserData] = useState<UserWithServiceRequests | null>(
     null
   );
-  const [showFullForm, setShowFullForm] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -43,9 +43,15 @@ const ProfilePage = () => {
           },
         });
 
-        const userData = response.data as UserWithServiceRequests;
-        console.log("User Data:", userData);
-        setUserData(userData);
+        const fetchedUserData = response.data as UserWithServiceRequests;
+        console.log("User Data:", fetchedUserData);
+
+        // Initialize showFullForm property for each service request
+        fetchedUserData.serviceRequests?.forEach((request) => {
+          request.showFullForm = false;
+        });
+
+        setUserData(fetchedUserData);
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
@@ -54,8 +60,19 @@ const ProfilePage = () => {
     fetchData();
   }, []);
 
-  const toggleShowFullForm = () => {
-    setShowFullForm(!showFullForm);
+  const toggleShowFullForm = (request: ServiceRequest) => {
+    // Toggle the showFullForm property for the clicked request
+    request.showFullForm = !request.showFullForm;
+    setUserData((prevUserData) => {
+      if (prevUserData) {
+        // If prevUserData is not null, spread its properties and update serviceRequests
+        return {
+          ...prevUserData,
+          serviceRequests: [...prevUserData.serviceRequests!], // Use the non-null assertion operator here
+        };
+      }
+      return null;
+    });
   };
 
   if (!userData) {
@@ -96,37 +113,38 @@ const ProfilePage = () => {
                     >
                       <p className="text-sm text-gray-900">
                         <span className="font-bold">Request No:</span>{" "}
-                        {request.requestNo} -{" "}
-                        <span className="font-bold">Date:</span> {request.date}{" "}
-                        - <span className="font-bold">Department:</span>{" "}
-                        {request.department}
+                        {request.requestNo} |{" "}
                       </p>
-                      {showFullForm && (
+                      {request.showFullForm && (
                         <>
                           {/* Include the other details here */}
                           <p className="text-sm text-gray-900">
+                            <span className="font-bold">Date:</span>{" "}
+                            {request.date} |{" "}
+                            <span className="font-bold">Department:</span>{" "}
+                            {request.department}
                             <span className="font-bold">Designation:</span>{" "}
-                            {request.designation} -{" "}
+                            {request.designation} |{" "}
                             <span className="font-bold">Employee Id:</span>{" "}
-                            {request.employeeId} -{" "}
+                            {request.employeeId} |{" "}
                             <span className="font-bold">
                               Reason of Request:
                             </span>{" "}
                             {request.reasonOfRequest} -{" "}
                             <span className="font-bold">Request For:</span>{" "}
-                            {request.requestFor} -{" "}
+                            {request.requestFor} |{" "}
                             <span className="font-bold">Requested By:</span>{" "}
-                            {request.requestedBy} -{" "}
+                            {request.requestedBy} |{" "}
                             <span className="font-bold">Service Details:</span>{" "}
                             {request.serviceDetails}
                           </p>
                         </>
                       )}
                       <button
-                        onClick={toggleShowFullForm}
+                        onClick={() => toggleShowFullForm(request)}
                         className="text-blue-500 hover:underline absolute top-2 right-2"
                       >
-                        {showFullForm ? "Show Less" : "Show More"}
+                        {request.showFullForm ? "Show Less" : "Show More"}
                       </button>
                     </div>
                   ))}
