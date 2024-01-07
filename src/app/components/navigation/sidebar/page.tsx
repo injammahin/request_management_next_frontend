@@ -74,7 +74,7 @@ const Sidebar = () => {
             </Link>
             <Link
               href="/user/changepassword"
-              className="py-2 px-4 flex items-center space-x-2 uppercase text-white hover:bg-gray-700"
+              className="py-2 px-4 flex items-center space-x-2 uppercase text-white hover:bg-[#5F0F40]"
             >
               <KeyIcon className="w-5 h-5" />
               <span>Change Password</span>
