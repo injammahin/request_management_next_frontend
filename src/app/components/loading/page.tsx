@@ -8,7 +8,19 @@ interface LoadingSpinnerProps extends LoaderSizeMarginProps {
 }
 
 const StyledSpinnerContainer = styled.div<{ loading: boolean }>`
-  display: ${(props) => (props.loading ? "block" : "none")};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: rgba(255, 255, 255, 0.8);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 999;
+  opacity: ${(props) => (props.loading ? 1 : 0)};
+  transition: opacity 0.3s ease-in-out;
 `;
 
 const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
