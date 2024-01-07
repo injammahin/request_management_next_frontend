@@ -31,7 +31,7 @@ const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
   return (
     <StyledSpinnerContainer loading={loading}>
       <BeatLoader
-        color={"#36D7B7"}
+        color={"blue"}
         loading={loading}
         size={size || 15}
         margin={margin}
