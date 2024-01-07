@@ -1,4 +1,5 @@
 // src/app/user/profile/page.tsx
+
 "use client";
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -30,11 +31,13 @@ interface UserWithServiceRequests extends UserDetails {
   serviceRequests?: ServiceRequest[];
 }
 
-const ProfilePage = () => {
+const ProfilePage: React.FC = () => {
   const [userData, setUserData] = useState<UserWithServiceRequests | null>(
     null
   );
   const [isLoading, setIsLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState("");
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -45,7 +48,6 @@ const ProfilePage = () => {
         });
 
         const fetchedUserData = response.data as UserWithServiceRequests;
-        console.log("User Data:", fetchedUserData);
 
         // Initialize showFullForm property for each service request
         fetchedUserData.serviceRequests?.forEach((request) => {
@@ -53,6 +55,7 @@ const ProfilePage = () => {
         });
 
         setUserData(fetchedUserData);
+        setIsLoading(false);
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
@@ -75,6 +78,10 @@ const ProfilePage = () => {
       return null;
     });
   };
+
+  const filteredServiceRequests = userData?.serviceRequests?.filter((request) =>
+    request.requestNo.includes(searchQuery)
+  );
 
   if (!userData) {
     return <LoadingSpinner loading={isLoading} />;
@@ -104,50 +111,69 @@ const ProfilePage = () => {
             {userData.serviceRequests &&
               userData.serviceRequests.length > 0 && (
                 <div className="bg-gray-200 p-6 rounded-lg">
-                  <h3 className="text-lg font-semibold mb-2"></h3>
-
-                  {userData.serviceRequests.map((request) => (
-                    <div
-                      key={request.id}
-                      className="mb-4 bg-white border-b-2 border-gray-300 p-4 relative"
-                    >
-                      <p className="text-sm text-gray-900">
-                        <span className="font-bold">Request No:</span>{" "}
-                        {request.requestNo} |{" "}
-                      </p>
-                      {request.showFullForm && (
-                        <>
-                          {/* Include the other details here */}
-                          <p className="text-sm text-gray-900">
-                            <span className="font-bold">Date:</span>{" "}
-                            {request.date} |{" "}
-                            <span className="font-bold">Department:</span>{" "}
-                            {request.department}
-                            <span className="font-bold">Designation:</span>{" "}
-                            {request.designation} |{" "}
-                            <span className="font-bold">Employee Id:</span>{" "}
-                            {request.employeeId} |{" "}
-                            <span className="font-bold">
-                              Reason of Request:
-                            </span>{" "}
-                            {request.reasonOfRequest} -{" "}
-                            <span className="font-bold">Request For:</span>{" "}
-                            {request.requestFor} |{" "}
-                            <span className="font-bold">Requested By:</span>{" "}
-                            {request.requestedBy} |{" "}
-                            <span className="font-bold">Service Details:</span>{" "}
-                            {request.serviceDetails}
-                          </p>
-                        </>
-                      )}
-                      <button
-                        onClick={() => toggleShowFullForm(request)}
-                        className="text-blue-500 hover:underline absolute top-2 right-2"
+                  <h3 className="text-lg font-semibold mb-2">
+                    Service Requests
+                  </h3>
+                  <input
+                    type="text"
+                    placeholder="Search by Request No"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="border p-2 mb-4"
+                  />
+                  {filteredServiceRequests &&
+                  filteredServiceRequests.length > 0 ? (
+                    filteredServiceRequests.map((request) => (
+                      <div
+                        key={request.id}
+                        className="mb-4 bg-white border-b-2 border-gray-300 p-4 relative"
                       >
-                        {request.showFullForm ? "Show Less" : "Show More"}
-                      </button>
-                    </div>
-                  ))}
+                        <p className="text-sm text-gray-900">
+                          <span className="font-bold">Request No:</span>{" "}
+                          {request.requestNo} |{" "}
+                        </p>
+                        {request.showFullForm && (
+                          <>
+                            {/* Include the other details here */}
+                            <p className="text-sm text-gray-900">
+                              <span className="font-bold">Date:</span>{" "}
+                              {request.date} |{" "}
+                              <span className="font-bold">Department:</span>{" "}
+                              {request.department}
+                              <span className="font-bold">
+                                Designation:
+                              </span>{" "}
+                              {request.designation} |{" "}
+                              <span className="font-bold">Employee Id:</span>{" "}
+                              {request.employeeId} |{" "}
+                              <span className="font-bold">
+                                Reason of Request:
+                              </span>{" "}
+                              {request.reasonOfRequest} -{" "}
+                              <span className="font-bold">Request For:</span>{" "}
+                              {request.requestFor} |{" "}
+                              <span className="font-bold">Requested By:</span>{" "}
+                              {request.requestedBy} |{" "}
+                              <span className="font-bold">
+                                Service Details:
+                              </span>{" "}
+                              {request.serviceDetails}
+                            </p>
+                          </>
+                        )}
+                        <button
+                          onClick={() => toggleShowFullForm(request)}
+                          className="text-blue-500 hover:underline absolute top-2 right-2"
+                        >
+                          {request.showFullForm ? "Show Less" : "Show More"}
+                        </button>
+                      </div>
+                    ))
+                  ) : (
+                    <p className="text-sm text-gray-700">
+                      No matching service requests found.
+                    </p>
+                  )}
                 </div>
               )}
           </div>
