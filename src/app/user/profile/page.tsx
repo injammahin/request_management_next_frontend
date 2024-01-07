@@ -177,6 +177,12 @@ const ProfilePage: React.FC = () => {
                           className="text-blue-500 hover:underline absolute top-2 right-2"
                         >
                           {request.showFullForm ? "Show Less" : "Show More"}
+                          <a
+                            href="/user/updatedata"
+                            className="block w-full text-center text-blue-500 hover:underline"
+                          >
+                            Edit Profile
+                          </a>
                         </button>
                       </div>
                     ))
@@ -196,12 +202,6 @@ const ProfilePage: React.FC = () => {
               >
                 <Link href="/dashboard">Back</Link>
               </button>
-              <a
-                href="/user/editUser"
-                className="block w-full text-center text-blue-500 hover:underline"
-              >
-                Edit Profile
-              </a>
             </div>
           </div>
         </div>
