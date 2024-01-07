@@ -32,6 +32,7 @@ const ProfilePage = () => {
   const [userData, setUserData] = useState<UserWithServiceRequests | null>(
     null
   );
+  const [showFullForm, setShowFullForm] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -53,6 +54,10 @@ const ProfilePage = () => {
     fetchData();
   }, []);
 
+  const toggleShowFullForm = () => {
+    setShowFullForm(!showFullForm);
+  };
+
   if (!userData) {
     return <div>Loading...</div>;
   }
@@ -61,7 +66,7 @@ const ProfilePage = () => {
     <div>
       <Navbar />
       <div className="screen-full flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-        <div className=" w-full bg-white p-8 rounded-lg shadow-md space-y-8">
+        <div className="w-full bg-white p-8 rounded-lg shadow-md space-y-8">
           <div>
             <h2 className="text-3xl font-extrabold text-gray-900 text-center">
               User's Requests
@@ -87,27 +92,42 @@ const ProfilePage = () => {
                   {userData.serviceRequests.map((request) => (
                     <div
                       key={request.id}
-                      className="mb-4 bg-white border-b-2 border-gray-300 p-4"
+                      className="mb-4 bg-white border-b-2 border-gray-300 p-4 relative"
                     >
                       <p className="text-sm text-gray-900">
                         <span className="font-bold">Request No:</span>{" "}
                         {request.requestNo} -{" "}
                         <span className="font-bold">Date:</span> {request.date}{" "}
                         - <span className="font-bold">Department:</span>{" "}
-                        {request.department} -{" "}
-                        <span className="font-bold">Designation:</span>{" "}
-                        {request.designation} -{" "}
-                        <span className="font-bold">Employee Id:</span>{" "}
-                        {request.employeeId} -{" "}
-                        <span className="font-bold">Reason of Request:</span>{" "}
-                        {request.reasonOfRequest} -{" "}
-                        <span className="font-bold">Request For:</span>{" "}
-                        {request.requestFor} -{" "}
-                        <span className="font-bold">Requested By:</span>{" "}
-                        {request.requestedBy} -{" "}
-                        <span className="font-bold">Service Details:</span>{" "}
-                        {request.serviceDetails}
+                        {request.department}
                       </p>
+                      {showFullForm && (
+                        <>
+                          {/* Include the other details here */}
+                          <p className="text-sm text-gray-900">
+                            <span className="font-bold">Designation:</span>{" "}
+                            {request.designation} -{" "}
+                            <span className="font-bold">Employee Id:</span>{" "}
+                            {request.employeeId} -{" "}
+                            <span className="font-bold">
+                              Reason of Request:
+                            </span>{" "}
+                            {request.reasonOfRequest} -{" "}
+                            <span className="font-bold">Request For:</span>{" "}
+                            {request.requestFor} -{" "}
+                            <span className="font-bold">Requested By:</span>{" "}
+                            {request.requestedBy} -{" "}
+                            <span className="font-bold">Service Details:</span>{" "}
+                            {request.serviceDetails}
+                          </p>
+                        </>
+                      )}
+                      <button
+                        onClick={toggleShowFullForm}
+                        className="text-blue-500 hover:underline absolute top-2 right-2"
+                      >
+                        {showFullForm ? "Show Less" : "Show More"}
+                      </button>
                     </div>
                   ))}
                 </div>
