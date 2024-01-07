@@ -60,8 +60,8 @@ const ProfilePage = () => {
   return (
     <div>
       <Navbar />
-      <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-md w-full bg-white p-8 rounded-lg shadow-md space-y-8">
+      <div className="screen-full flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+        <div className=" w-full bg-white p-8 rounded-lg shadow-md space-y-8">
           <div>
             <h2 className="text-3xl font-extrabold text-gray-900 text-center">
               User's Requests
@@ -79,54 +79,42 @@ const ProfilePage = () => {
             </p>
             {userData.serviceRequests &&
               userData.serviceRequests.length > 0 && (
-                <div>
+                <div className="bg-gray-200">
                   <h3 className="text-lg font-semibold mb-2">
                     Service Requests:
                   </h3>
-                  {userData.serviceRequests.map((request) => (
-                    <div key={request.id} className="mb-4">
-                      <p>
-                        <span className="font-bold">Request No:</span>{" "}
-                        {request.requestNo}
-                      </p>
-                      <p>
-                        <span className="font-bold">date :</span> {request.date}
-                      </p>
-                      <p>
-                        <span className="font-bold">department:</span>{" "}
-                        {request.department}
-                      </p>
-                      <p>
-                        <span className="font-bold">designation :</span>{" "}
-                        {request.designation}
-                      </p>
-                      <p>
-                        <span className="font-bold">employee Id:</span>{" "}
-                        {request.employeeId}
-                      </p>
-                      <p>
-                        <span className="font-bold">reasonOfRequest :</span>{" "}
-                        {request.reasonOfRequest}
-                      </p>
-                      <p>
-                        <span className="font-bold">requestFor:</span>{" "}
-                        {request.requestFor}
-                      </p>
-                      <p>
-                        <span className="font-bold">requestNo:</span>{" "}
-                        {request.requestNo}
-                      </p>
-                      <p>
-                        <span className="font-bold">requestedBy:</span>{" "}
-                        {request.requestedBy}
-                      </p>
-                      <p>
-                        <span className="font-bold">serviceDetails:</span>{" "}
-                        {request.serviceDetails}
-                      </p>
-                      {/* Add more fields as needed */}
-                    </div>
-                  ))}
+
+                  <ul>
+                    {userData.serviceRequests.map((request) => (
+                      <div className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+                        <li key={request.id} className="mb-4">
+                          <p>
+                            <span className="font-bold">Request No:</span>{" "}
+                            {request.requestNo}
+                            <span className="font-bold">Date:</span>{" "}
+                            {request.date}
+                            <span className="font-bold">Department:</span>{" "}
+                            {request.department}
+                            <span className="font-bold">Designation:</span>{" "}
+                            {request.designation} -
+                            <span className="font-bold">Employee Id:</span>{" "}
+                            {request.employeeId} -
+                            <span className="font-bold">
+                              Reason of Request:
+                            </span>{" "}
+                            {request.reasonOfRequest} -
+                            <span className="font-bold">Request For:</span>{" "}
+                            {request.requestFor} -
+                            <span className="font-bold">Requested By:</span>{" "}
+                            {request.requestedBy} -
+                            <span className="font-bold">Service Details:</span>{" "}
+                            {request.serviceDetails}
+                            {/* Add more fields as needed */}
+                          </p>
+                        </li>
+                      </div>
+                    ))}
+                  </ul>
                 </div>
               )}
           </div>
