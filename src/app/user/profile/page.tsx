@@ -85,13 +85,14 @@ const ProfilePage = () => {
       <div className="screen-full flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
         <div className="w-full bg-white p-8 rounded-lg shadow-md space-y-8">
           <div>
-            <h2 className="text-3xl font-extrabold text-gray-900 text-center">
-              User's Requests
+            <h2 className="text-2xl font-semibold text-gray-700 text-center">
+              Service Request
             </h2>
           </div>
           <div className="space-y-4">
             <p className="text-sm text-gray-700">
-              <span className="font-bold">ID:</span> {userData.id}
+              <span className="font-bold"> your user ID is :</span>{" "}
+              {userData.id}
             </p>
             <p className="text-sm text-gray-700">
               <span className="font-bold">Name:</span> {userData.name}
@@ -102,9 +103,7 @@ const ProfilePage = () => {
             {userData.serviceRequests &&
               userData.serviceRequests.length > 0 && (
                 <div className="bg-gray-200 p-6 rounded-lg">
-                  <h3 className="text-lg font-semibold mb-2">
-                    Service Requests:
-                  </h3>
+                  <h3 className="text-lg font-semibold mb-2"></h3>
 
                   {userData.serviceRequests.map((request) => (
                     <div
