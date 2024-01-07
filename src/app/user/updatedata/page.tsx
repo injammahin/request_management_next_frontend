@@ -57,7 +57,7 @@ export default function UserProfile() {
 
   const handleEdit = () => {
     axios
-      .put("http://localhost:3001/auth/update", { ...userData })
+      .put(`http://localhost:3001/auth/${userData.id}`, { ...userData })
       .then((response) => {
         console.log(response.data);
       })
