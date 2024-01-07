@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Navbar from "@/app/components/navigation/page";
 import Link from "next/link";
+import LoadingSpinner from "@/app/components/loading/page";
 
 interface UserDetails {
   id: number | undefined;
@@ -33,7 +34,7 @@ const ProfilePage = () => {
   const [userData, setUserData] = useState<UserWithServiceRequests | null>(
     null
   );
-
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -76,7 +77,7 @@ const ProfilePage = () => {
   };
 
   if (!userData) {
-    return <div>Loading...</div>;
+    return <LoadingSpinner loading={isLoading} />;
   }
 
   return (
