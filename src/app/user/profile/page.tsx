@@ -216,7 +216,7 @@ const ProfilePage: React.FC = () => {
                         <div className="flex space-x-2">
                           <button
                             onClick={() => toggleShowFullForm(request)}
-                            className="bg-green-600 rounded-lg h-8 w-28 hover:underline text-white"
+                            className="bg-[#43766C] rounded-lg h-8 w-28 hover:underline text-white"
                           >
                             {request.showFullForm ? "Show Less" : "Show More"}
                           </button>
