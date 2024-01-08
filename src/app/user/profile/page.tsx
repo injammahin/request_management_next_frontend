@@ -83,6 +83,26 @@ const ProfilePage: React.FC = () => {
     request.requestNo.includes(searchQuery)
   );
 
+  const handleDelete = async (id: number) => {
+    try {
+      await axios.delete(`http://localhost:3001/service-requests/${id}`);
+      // Update state after successful deletion
+      setUserData((prevUserData) => {
+        if (prevUserData) {
+          return {
+            ...prevUserData,
+            serviceRequests: prevUserData.serviceRequests?.filter(
+              (request) => request.id !== id
+            ),
+          };
+        }
+        return null;
+      });
+    } catch (error) {
+      console.error("Error deleting service request:", error);
+    }
+  };
+
   if (!userData) {
     return <LoadingSpinner loading={isLoading} />;
   }
@@ -183,6 +203,13 @@ const ProfilePage: React.FC = () => {
                           >
                             Edit Profile
                           </a>
+                        </button>
+                        {/* Add the delete button */}
+                        <button
+                          onClick={() => handleDelete(request.id)}
+                          className="text-red-500 hover:underline absolute top-2 right-20"
+                        >
+                          Delete
                         </button>
                       </div>
                     ))
