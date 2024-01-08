@@ -1,10 +1,10 @@
+// src/app/service-request/form.tsx
+
 "use client";
 import React, { useState, ChangeEvent, FormEvent, useEffect } from "react";
 import axios from "axios";
 import Navbar from "@/app/components/navigation/page";
-import Sidebar from "@/app/components/navigation/sidebar/page";
 import Link from "next/link";
-import router from "next/router";
 
 interface RequestServiceFormProps {}
 
@@ -37,6 +37,8 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
   });
   const [successMessage, setSuccessMessage] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("");
+  const [submittedDetails, setSubmittedDetails] =
+    useState<ServiceDetails | null>(null);
 
   const handleInputChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -47,6 +49,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
       [name]: value,
     }));
   };
+
   const autofillRequestNo = () => {
     // Auto-generate requestNo based on date, department, and requestedBy
     const generatedRequestNo = `DBL/${serviceDetails.date}/${serviceDetails.department}/${serviceDetails.requestedBy}`;
@@ -96,12 +99,11 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
           userId: localStorage.getItem("userId"),
         }
       );
+
+      setSubmittedDetails(serviceDetails); // Set submitted details
       setSuccessMessage("Form submitted successfully");
       setErrorMessage("");
       console.log("Form submitted successfully:", response.data);
-      // setTimeout(() => {
-      //   router.push("/dashboard"); // Use router.push for client-side navigation
-      // }, 3000);
     } catch (error) {
       setErrorMessage("Form submission failed");
       setSuccessMessage("");
@@ -118,18 +120,19 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
         className="max-w-md uppercase mx-auto mt-8 p-4 border"
       >
         <div className="grid  grid-cols-2 gap-4 mb-4">
-          {/* <div className="relative z-0 mb-2">
+          <div className="relative z-0 mb-2">
             <label className="block">
               request no:
               <input
                 type="text"
                 name="requestNo"
                 id="requestNo"
-                onChange={handleInputChange}
+                value={serviceDetails.requestNo} // Display requestNo
+                readOnly
                 className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               />
             </label>
-          </div> */}
+          </div>
 
           <div className="relative z-0 mb-2">
             <label className="block">
@@ -138,6 +141,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
                 type="date"
                 name="date"
                 onChange={handleInputChange}
+                value={serviceDetails.date}
                 className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               />
             </label>
@@ -152,6 +156,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
                 type="text"
                 name="requestedBy"
                 onChange={handleInputChange}
+                value={serviceDetails.requestedBy}
                 className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               />
             </label>
@@ -164,6 +169,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
                 type="text"
                 name="requestFor"
                 onChange={handleInputChange}
+                value={serviceDetails.requestFor}
                 className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               />
             </label>
@@ -178,6 +184,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
                 type="text"
                 name="department"
                 onChange={handleInputChange}
+                value={serviceDetails.department}
                 className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               />
             </label>
@@ -190,6 +197,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
                 type="text"
                 name="employeeId"
                 onChange={handleInputChange}
+                value={serviceDetails.employeeId}
                 className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               />
             </label>
@@ -203,6 +211,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
               type="text"
               name="designation"
               onChange={handleInputChange}
+              value={serviceDetails.designation}
               className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             />
           </label>
@@ -215,6 +224,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
               type="text"
               name="reasonOfRequest"
               onChange={handleInputChange}
+              value={serviceDetails.reasonOfRequest}
               className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             />
           </label>
@@ -227,6 +237,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
               type="text"
               name="serviceDetails"
               onChange={handleInputChange}
+              value={serviceDetails.serviceDetails}
               className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             />
           </label>
@@ -254,6 +265,43 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
           <p className="text-center text-red-500 mt-2">{errorMessage}</p>
         )}
       </form>
+
+      {submittedDetails && (
+        <div className="max-w-md uppercase mx-auto mt-8 p-4 border">
+          <h2 className="text-2xl font-semibold mb-4">Submitted Details</h2>
+          <div>
+            <p>
+              <strong>Request No:</strong> {submittedDetails.requestNo}
+            </p>
+            <p>
+              <strong>Date:</strong> {submittedDetails.date}
+            </p>
+            <p>
+              <strong>Requested By:</strong> {submittedDetails.requestedBy}
+            </p>
+            <p>
+              <strong>Request For:</strong> {submittedDetails.requestFor}
+            </p>
+            <p>
+              <strong>Department:</strong> {submittedDetails.department}
+            </p>
+            <p>
+              <strong>Employee Id:</strong> {submittedDetails.employeeId}
+            </p>
+            <p>
+              <strong>Designation:</strong> {submittedDetails.designation}
+            </p>
+            <p>
+              <strong>Reason Of Request:</strong>{" "}
+              {submittedDetails.reasonOfRequest}
+            </p>
+            <p>
+              <strong>Service Details:</strong>{" "}
+              {submittedDetails.serviceDetails}
+            </p>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
