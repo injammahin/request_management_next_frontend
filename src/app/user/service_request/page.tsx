@@ -49,7 +49,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
   };
   const autofillRequestNo = () => {
     // Auto-generate requestNo based on date, department, and requestedBy
-    const generatedRequestNo = `DBA|${serviceDetails.date}|${serviceDetails.department}|${serviceDetails.requestedBy}`;
+    const generatedRequestNo = `DBL/${serviceDetails.date}/${serviceDetails.department}/${serviceDetails.requestedBy}`;
     setServiceDetails((prevDetails) => ({
       ...prevDetails,
       requestNo: generatedRequestNo,
