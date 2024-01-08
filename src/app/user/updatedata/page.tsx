@@ -1,11 +1,12 @@
+// Import statements
 "use client";
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 
+// Interface definitions
 interface UserData {
   id: string;
   name: string;
-
   email: string;
   requestNo: string;
 }
@@ -24,12 +25,21 @@ export default function UserProfile() {
     id: "",
     name: "",
     requestNo: "",
-
     email: "",
   });
 
   const [serviceRequests, setServiceRequests] = useState<ServiceRequest[]>([]);
   const [loading, setLoading] = useState(true);
+
+  const [editRequest, setEditRequest] = useState<ServiceRequest | null>(null);
+  const [editFormData, setEditFormData] = useState<ServiceRequest>({
+    id: 0,
+    requestNo: "",
+    date: "",
+    department: "",
+
+    // Add other fields as needed
+  });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -67,14 +77,61 @@ export default function UserProfile() {
   };
 
   const handleServiceRequestEdit = (id: number) => {
-    // Implement the logic to edit a specific service request
-    // You might want to open a modal or navigate to another page for editing
-    console.log(`Edit service request with id ${id}`);
+    const requestToEdit = serviceRequests.find((request) => request.id === id);
+    if (requestToEdit) {
+      setEditRequest(requestToEdit);
+      setEditFormData({ ...requestToEdit });
+    }
+  };
+
+  const handleUpdateServiceRequest = () => {
+    if (editRequest) {
+      axios
+        .put(
+          `http://localhost:3001/service-requests/${editRequest.id}`,
+          editFormData
+        )
+        .then((response) => {
+          console.log(response.data);
+          // Update the local state or refetch the service requests
+          const updatedServiceRequests = serviceRequests.map((request) => {
+            if (request.id === editRequest.id) {
+              return {
+                ...request,
+                ...editFormData,
+              };
+            }
+            return request;
+          });
+
+          setServiceRequests(updatedServiceRequests);
+          // Reset edit state
+          setEditRequest(null);
+          setEditFormData({
+            id: 0,
+            requestNo: "",
+            date: "",
+            department: "",
+
+            // Add other fields as needed
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEditFormData({
+      ...editFormData,
+      [e.target.id]: e.target.value,
+    });
   };
 
   return (
     <>
-      <div className="mb-6">
+      {/* <div className="mb-6">
         <label
           htmlFor="name"
           className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -88,42 +145,9 @@ export default function UserProfile() {
           onChange={(e) => setUserData({ ...userData, name: e.target.value })}
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         />
-      </div>
+      </div> */}
 
-      <div className="mb-6">
-        <label
-          htmlFor="email"
-          className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-        >
-          Email
-        </label>
-        <input
-          type="text"
-          id="email"
-          value={userData.email}
-          onChange={(e) => setUserData({ ...userData, email: e.target.value })}
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-        />
-      </div>
-
-      <div className="mb-6">
-        <label
-          htmlFor="requestNo"
-          className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-        >
-          requestNo
-        </label>
-        <input
-          type="text"
-          id="requestNo"
-          value={userData.requestNo}
-          onChange={(e) =>
-            setUserData({ ...userData, requestNo: e.target.value })
-          }
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-        />
-      </div>
-      <button onClick={handleEdit}>Update User</button>
+      {/* <button onClick={handleEdit}>Update User</button> */}
 
       <div className="mt-8">
         <h2 className="text-lg font-semibold mb-4">Service Requests</h2>
@@ -133,17 +157,76 @@ export default function UserProfile() {
           <ul>
             {serviceRequests.map((request) => (
               <li key={request.id} className="mb-4">
-                {/* Display service request details here */}
                 <p>Request No: {request.requestNo}</p>
-                {/* ... other details ... */}
+                {/* <p>Date: {request.date}</p>
+                <p>Department: {request.department}</p> */}
                 <button onClick={() => handleServiceRequestEdit(request.id)}>
                   Edit Service Request
                 </button>
+                {/* Add an edit form or modal here for updating Service Request */}
               </li>
             ))}
           </ul>
         )}
       </div>
+
+      {editRequest && (
+        <div>
+          <h3>Edit Service Request</h3>
+          <div className="mb-6">
+            <label
+              htmlFor="requestNo"
+              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >
+              Request No
+            </label>
+            <input
+              type="text"
+              id="requestNo"
+              value={editFormData.requestNo}
+              onChange={handleInputChange}
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            />
+          </div>
+          <div className="mb-6">
+            <label
+              htmlFor="date"
+              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >
+              Date
+            </label>
+            <input
+              type="text"
+              id="date"
+              value={editFormData.date}
+              onChange={handleInputChange}
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            />
+          </div>
+          <div className="mb-6">
+            <label
+              htmlFor="department"
+              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >
+              Department
+            </label>
+            <input
+              type="text"
+              id="department"
+              value={editFormData.department}
+              onChange={handleInputChange}
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            />
+          </div>
+          {/* Add other fields as needed */}
+          <button
+            className="bg-[#163020] w-32 h-12 rounded-xl text-white"
+            onClick={handleUpdateServiceRequest}
+          >
+            Save Changes
+          </button>
+        </div>
+      )}
     </>
   );
 }
