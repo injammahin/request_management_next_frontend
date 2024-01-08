@@ -37,6 +37,11 @@ const ProfilePage: React.FC = () => {
   );
   const [isLoading, setIsLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
+  const [isDeleteConfirmationOpen, setIsDeleteConfirmationOpen] =
+    useState(false);
+  const [selectedRequestId, setSelectedRequestId] = useState<number | null>(
+    null
+  );
 
   useEffect(() => {
     const fetchData = async () => {
@@ -83,16 +88,27 @@ const ProfilePage: React.FC = () => {
     request.requestNo.includes(searchQuery)
   );
 
+  const toggleDeleteConfirmation = (requestId: number | null) => {
+    setSelectedRequestId(requestId);
+    setIsDeleteConfirmationOpen((prev) => !prev);
+  };
+
   const handleDelete = async (id: number) => {
+    toggleDeleteConfirmation(id);
+  };
+
+  const confirmDelete = async () => {
     try {
-      await axios.delete(`http://localhost:3001/service-requests/${id}`);
+      await axios.delete(
+        `http://localhost:3001/service-requests/${selectedRequestId}`
+      );
       // Update state after successful deletion
       setUserData((prevUserData) => {
         if (prevUserData) {
           return {
             ...prevUserData,
             serviceRequests: prevUserData.serviceRequests?.filter(
-              (request) => request.id !== id
+              (request) => request.id !== selectedRequestId
             ),
           };
         }
@@ -100,7 +116,13 @@ const ProfilePage: React.FC = () => {
       });
     } catch (error) {
       console.error("Error deleting service request:", error);
+    } finally {
+      toggleDeleteConfirmation(null);
     }
+  };
+
+  const cancelDelete = () => {
+    toggleDeleteConfirmation(null);
   };
 
   if (!userData) {
@@ -132,7 +154,6 @@ const ProfilePage: React.FC = () => {
               userData.serviceRequests.length > 0 && (
                 <div className="bg-gray-200 p-6 rounded-lg">
                   <h1 className="text-lg font-semibold mb-2">
-                    {" "}
                     search your requested form
                   </h1>
                   <input
@@ -192,30 +213,26 @@ const ProfilePage: React.FC = () => {
                             </ul>
                           </>
                         )}
-                        <div>
+                        <div className="flex space-x-2">
                           <button
                             onClick={() => toggleShowFullForm(request)}
-                            className="bg-green-600 rounded-lg h-8 w-30 hover:underline text-white absolute top-2 right-2"
+                            className="bg-green-600 rounded-lg h-8 w-28 hover:underline text-white"
                           >
                             {request.showFullForm ? "Show Less" : "Show More"}
-
-                            <a
-                              onClick={() => handleDelete(request.id)}
-                              className=" bg-red-600 rounded-lg h-8 w-30 hover:underline text-white absolute top-2 right-20"
-                            >
-                              Delete
+                          </button>
+                          <button
+                            onClick={() => handleDelete(request.id)}
+                            className="bg-[#9A031E] rounded-lg h-8 w-28 hover:underline text-white"
+                          >
+                            Delete
+                          </button>
+                          <button className="bg-[#4CB9E7] rounded-lg h-8 w-28">
+                            <a href="/user/updatedata">
+                              <a className=" hover:underline text-white">
+                                Edit Profile
+                              </a>
                             </a>
                           </button>
-                          <button>
-                            <a
-                              href="/user/updatedata"
-                              className="block w-full text-center bg-blue-600 text-white rounded-lg h-8 w-30 hover:underline"
-                            >
-                              Edit Profile
-                            </a>
-                          </button>
-                          <br />
-                          {/* Add the delete button */}
                         </div>
                       </div>
                     ))
@@ -239,6 +256,29 @@ const ProfilePage: React.FC = () => {
           </div>
         </div>
       </div>
+      {isDeleteConfirmationOpen && (
+        <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-500 bg-opacity-75">
+          <div className="bg-white p-6 rounded-md">
+            <p className="text-lg font-semibold mb-4">
+              Are you sure you want to delete this request?
+            </p>
+            <div className="flex justify-end space-x-4">
+              <button
+                onClick={confirmDelete}
+                className="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700"
+              >
+                Yes
+              </button>
+              <button
+                onClick={cancelDelete}
+                className="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
