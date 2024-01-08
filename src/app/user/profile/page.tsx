@@ -292,7 +292,7 @@ const ProfilePage: React.FC = () => {
                 type="submit"
                 className="bg-gray-500 text-white p-2 w-32 rounded hover:bg-gray-700"
               >
-                <Link href="/dashboard">Back</Link>
+                <a href="/dashboard">Back</a>
               </button>
             </div>
           </div>
