@@ -6,6 +6,8 @@ import axios from "axios";
 import Navbar from "@/app/components/navigation/page";
 import Link from "next/link";
 import LoadingSpinner from "@/app/components/loading/page";
+import jsPDF from "jspdf";
+import "jspdf-autotable";
 
 interface UserDetails {
   id: number | undefined;
@@ -125,6 +127,35 @@ const ProfilePage: React.FC = () => {
     toggleDeleteConfirmation(null);
   };
 
+  const handleDownloadPDF = (id: number) => {
+    const doc = new jsPDF() as any; // Type assertion to bypass TypeScript error
+
+    if (userData) {
+      const selectedRequest = userData.serviceRequests?.find(
+        (request) => request.id === id
+      );
+
+      if (selectedRequest) {
+        doc.text("Service Request Details", 20, 20);
+        doc.text(`Request No: ${selectedRequest.requestNo}`, 20, 30);
+        doc.text(`Date: ${selectedRequest.date}`, 20, 40);
+        doc.text(`Department: ${selectedRequest.department}`, 20, 50);
+        doc.text(`Designation: ${selectedRequest.designation}`, 20, 60);
+        doc.text(`Employee Id: ${selectedRequest.employeeId}`, 20, 70);
+        doc.text(
+          `Reason of Request: ${selectedRequest.reasonOfRequest}`,
+          20,
+          80
+        );
+        doc.text(`Request For: ${selectedRequest.requestFor}`, 20, 90);
+        doc.text(`Requested By: ${selectedRequest.requestedBy}`, 20, 100);
+        doc.text(`Service Details: ${selectedRequest.serviceDetails}`, 20, 110);
+
+        doc.save(`service_request_${id}.pdf`);
+      }
+    }
+  };
+
   if (!userData) {
     return <LoadingSpinner loading={isLoading} />;
   }
@@ -175,43 +206,47 @@ const ProfilePage: React.FC = () => {
                           {request.requestNo}{" "}
                         </p>
                         {request.showFullForm && (
-                          <>
-                            <ul>
-                              <li>
-                                {/* Include the other details here */}
-                                <p className="text-sm text-gray-900 ">
-                                  <span className="font-bold">Date:</span>{" "}
-                                  {request.date} |{" "}
-                                  <span className="font-bold">Department:</span>{" "}
-                                  {request.department}|{" "}
-                                  <span className="font-bold">
-                                    Designation:
-                                  </span>{" "}
-                                  {request.designation} |{" "}
-                                  <span className="font-bold">
-                                    Employee Id:
-                                  </span>{" "}
-                                  {request.employeeId} |{" "}
-                                  <span className="font-bold">
-                                    Reason of Request:
-                                  </span>{" "}
-                                  {request.reasonOfRequest} |{" "}
-                                  <span className="font-bold">
-                                    Request For:
-                                  </span>{" "}
-                                  {request.requestFor} |{" "}
-                                  <span className="font-bold">
-                                    Requested By:
-                                  </span>{" "}
-                                  {request.requestedBy} |{" "}
-                                  <span className="font-bold">
-                                    Service Details:
-                                  </span>{" "}
-                                  {request.serviceDetails}
-                                </p>
-                              </li>
-                            </ul>
-                          </>
+                          <form>
+                            <>
+                              <ul className="list-none">
+                                <li className="border-b-2 border-gray-300 p-4">
+                                  {/* Include the other details here */}
+                                  <p className="text-sm text-gray-900">
+                                    <span className="font-bold">Date:</span>{" "}
+                                    {request.date} |{" "}
+                                    <span className="font-bold">
+                                      Department:
+                                    </span>{" "}
+                                    {request.department} |{" "}
+                                    <span className="font-bold">
+                                      Designation:
+                                    </span>{" "}
+                                    {request.designation} |{" "}
+                                    <span className="font-bold">
+                                      Employee Id:
+                                    </span>{" "}
+                                    {request.employeeId} |{" "}
+                                    <span className="font-bold">
+                                      Reason of Request:
+                                    </span>{" "}
+                                    {request.reasonOfRequest} |{" "}
+                                    <span className="font-bold">
+                                      Request For:
+                                    </span>{" "}
+                                    {request.requestFor} |{" "}
+                                    <span className="font-bold">
+                                      Requested By:
+                                    </span>{" "}
+                                    {request.requestedBy} |{" "}
+                                    <span className="font-bold">
+                                      Service Details:
+                                    </span>{" "}
+                                    {request.serviceDetails}
+                                  </p>
+                                </li>
+                              </ul>
+                            </>
+                          </form>
                         )}
                         <div className="flex space-x-2">
                           <button
@@ -232,6 +267,13 @@ const ProfilePage: React.FC = () => {
                                 Edit Profile
                               </a>
                             </a>
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => handleDownloadPDF(request.id)}
+                            className="bg-green-500 text-white h-8 w-32 rounded hover:bg-green-700"
+                          >
+                            Download PDF
                           </button>
                         </div>
                       </div>
