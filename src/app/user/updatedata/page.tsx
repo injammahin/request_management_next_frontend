@@ -16,6 +16,12 @@ interface ServiceRequest {
   requestNo: string;
   date: string;
   department: string;
+  designation: string;
+  employeeId: string;
+  reasonOfRequest: string;
+  requestFor: string;
+  requestedBy: string;
+  serviceDetails: string;
 
   // Add other fields as needed
 }
@@ -37,7 +43,12 @@ export default function UserProfile() {
     requestNo: "",
     date: "",
     department: "",
-
+    designation: "",
+    employeeId: "",
+    reasonOfRequest: "",
+    requestFor: "",
+    requestedBy: "",
+    serviceDetails: "",
     // Add other fields as needed
   });
 
@@ -112,6 +123,12 @@ export default function UserProfile() {
             requestNo: "",
             date: "",
             department: "",
+            designation: "",
+            employeeId: "",
+            reasonOfRequest: "",
+            requestFor: "",
+            requestedBy: "",
+            serviceDetails: "",
 
             // Add other fields as needed
           });
@@ -203,6 +220,7 @@ export default function UserProfile() {
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             />
           </div>
+          {/* ???????????????????????? */}
           <div className="mb-6">
             <label
               htmlFor="department"
@@ -218,6 +236,103 @@ export default function UserProfile() {
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             />
           </div>
+          {/* ???????????????????????? */}
+          <div className="mb-6">
+            <label
+              htmlFor="designation"
+              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >
+              designation
+            </label>
+            <input
+              type="text"
+              id="designation"
+              value={editFormData.designation}
+              onChange={handleInputChange}
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            />
+          </div>
+          {/* ???????????????????????? */}
+          <div className="mb-6">
+            <label
+              htmlFor="employeeId"
+              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >
+              employee Id
+            </label>
+            <input
+              type="number"
+              id="employeeId"
+              value={editFormData.employeeId}
+              onChange={handleInputChange}
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            />
+          </div>
+          {/* ???????????????????????? */}
+          <div className="mb-6">
+            <label
+              htmlFor="reasonOfRequest"
+              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >
+              Reason of Request
+            </label>
+            <input
+              type="text"
+              id="reasonOfRequest"
+              value={editFormData.reasonOfRequest}
+              onChange={handleInputChange}
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            />
+          </div>
+          {/* ???????????????????????? */}
+          <div className="mb-6">
+            <label
+              htmlFor="requestFor"
+              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >
+              requestFor
+            </label>
+            <input
+              type="text"
+              id="requestFor"
+              value={editFormData.requestFor}
+              onChange={handleInputChange}
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            />
+          </div>
+          {/* ???????????????????????? */}
+          <div className="mb-6">
+            <label
+              htmlFor="requestedBy"
+              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >
+              requestedBy
+            </label>
+            <input
+              type="text"
+              id="requestedBy"
+              value={editFormData.requestedBy}
+              onChange={handleInputChange}
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            />
+          </div>
+          {/* ???????????????????????? */}
+          <div className="mb-6">
+            <label
+              htmlFor="serviceDetails"
+              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >
+              serviceDetails
+            </label>
+            <input
+              type="text"
+              id="serviceDetails"
+              value={editFormData.serviceDetails}
+              onChange={handleInputChange}
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            />
+          </div>
+
           {/* Add other fields as needed */}
           <button
             className="bg-[#163020] w-32 h-12 rounded-xl text-white"
