@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, ChangeEvent, FormEvent } from "react";
+import React, { useState, ChangeEvent, FormEvent, useEffect } from "react";
 import axios from "axios";
 import Navbar from "@/app/components/navigation/page";
 import Sidebar from "@/app/components/navigation/sidebar/page";
@@ -47,12 +47,27 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
       [name]: value,
     }));
   };
+  const autofillRequestNo = () => {
+    // Auto-generate requestNo based on date, department, and requestedBy
+    const generatedRequestNo = `DBA|${serviceDetails.date}|${serviceDetails.department}|${serviceDetails.requestedBy}`;
+    setServiceDetails((prevDetails) => ({
+      ...prevDetails,
+      requestNo: generatedRequestNo,
+    }));
+  };
+
+  useEffect(() => {
+    autofillRequestNo();
+  }, [
+    serviceDetails.date,
+    serviceDetails.department,
+    serviceDetails.requestedBy,
+  ]);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
     const requiredFields = [
-      "requestNo",
       "date",
       "requestedBy",
       "requestFor",
@@ -103,7 +118,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
         className="max-w-md uppercase mx-auto mt-8 p-4 border"
       >
         <div className="grid  grid-cols-2 gap-4 mb-4">
-          <div className="relative z-0 mb-2">
+          {/* <div className="relative z-0 mb-2">
             <label className="block">
               request no:
               <input
@@ -114,7 +129,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
                 className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               />
             </label>
-          </div>
+          </div> */}
 
           <div className="relative z-0 mb-2">
             <label className="block">
