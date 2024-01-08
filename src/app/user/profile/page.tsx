@@ -192,25 +192,31 @@ const ProfilePage: React.FC = () => {
                             </ul>
                           </>
                         )}
-                        <button
-                          onClick={() => toggleShowFullForm(request)}
-                          className="text-blue-500 hover:underline absolute top-2 right-2"
-                        >
-                          {request.showFullForm ? "Show Less" : "Show More"}
-                          <a
-                            href="/user/updatedata"
-                            className="block w-full text-center text-blue-500 hover:underline"
+                        <div>
+                          <button
+                            onClick={() => toggleShowFullForm(request)}
+                            className="bg-green-600 rounded-lg h-8 w-30 hover:underline text-white absolute top-2 right-2"
                           >
-                            Edit Profile
-                          </a>
-                        </button>
-                        {/* Add the delete button */}
-                        <button
-                          onClick={() => handleDelete(request.id)}
-                          className="text-red-500 hover:underline absolute top-2 right-20"
-                        >
-                          Delete
-                        </button>
+                            {request.showFullForm ? "Show Less" : "Show More"}
+
+                            <a
+                              onClick={() => handleDelete(request.id)}
+                              className=" bg-red-600 rounded-lg h-8 w-30 hover:underline text-white absolute top-2 right-20"
+                            >
+                              Delete
+                            </a>
+                          </button>
+                          <button>
+                            <a
+                              href="/user/updatedata"
+                              className="block w-full text-center bg-blue-600 text-white rounded-lg h-8 w-30 hover:underline"
+                            >
+                              Edit Profile
+                            </a>
+                          </button>
+                          <br />
+                          {/* Add the delete button */}
+                        </div>
                       </div>
                     ))
                   ) : (
