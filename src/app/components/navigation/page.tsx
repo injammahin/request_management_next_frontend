@@ -23,7 +23,7 @@ const Navbar = () => {
       <div className="container mx-auto flex justify-between items-center">
         {/* Information Box (conditionally rendered based on isMenuOpen) */}
         {isMenuOpen && (
-          <div className="bg-white p-4 rounded-xl shadow-lg absolute left-0 h-auto mt-96 w-auto">
+          <div className="bg-white p-4 rounded-xl shadow-lg absolute left-0 h-auto mt-[460px] w-80">
             {/* Add your information content here */}
             <Link
               href="/user/service_request"
