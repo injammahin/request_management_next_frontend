@@ -9,13 +9,7 @@ import jsPDF from "jspdf";
 import "jspdf-autotable";
 
 interface UserDetails {
-  id: number | undefined;
-  name: string | undefined;
-  email: string | undefined;
   departments: Department[];
-  employees: Employee[];
-  maintenances: Maintenance[];
-  serviceRequests: ServiceRequest[];
 }
 
 interface Department {
@@ -23,44 +17,6 @@ interface Department {
   department_id: number;
   department_name: string;
   department_supervisor: string;
-}
-
-interface Employee {
-  id: number;
-  user_id: number;
-  employee_name: string;
-  designation: string;
-  department_id: string;
-}
-
-interface Maintenance {
-  id: number;
-  EmployeeId: string;
-  MaintenanceType: string;
-  contractNo: string;
-  date: string;
-  department: string;
-  endDate: string;
-  endTime: string;
-  impactLevel: string;
-  mentionDowntime: string;
-  priority: string;
-  purposeOfActivity: string;
-  requestNumber: string;
-  requesterName: string;
-  requiredDowntime: string;
-  startDate: string;
-  startTime: string;
-  subofChange: string;
-}
-
-interface ServiceRequest {
-  id: number;
-  requestNo: string;
-  requestedBy: string;
-  department: string;
-  designation: string;
-  // ... (other fields)
 }
 
 const ProfilePage: React.FC = () => {
@@ -113,9 +69,18 @@ const ProfilePage: React.FC = () => {
                 >
                   {/* Display department information here */}
                   <p className="text-sm text-gray-900">
+                    <span className="font-bold">Department ID:</span>{" "}
+                    {department.department_id}{" "}
+                  </p>
+                  <p className="text-sm text-gray-900">
                     <span className="font-bold">Department Name:</span>{" "}
                     {department.department_name}{" "}
                   </p>
+                  <p className="text-sm text-gray-900">
+                    <span className="font-bold">Department Supervisor:</span>{" "}
+                    {department.department_supervisor}{" "}
+                  </p>
+
                   {/* Include other department details as needed */}
                 </div>
               ))

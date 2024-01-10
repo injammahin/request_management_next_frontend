@@ -11,28 +11,7 @@ import jsPDF from "jspdf";
 import "jspdf-autotable";
 
 interface UserDetails {
-  id: number | undefined;
-  name: string | undefined;
-  email: string | undefined;
-  departments: Department[];
-  employees: Employee[];
   maintenances: Maintenance[];
-  serviceRequests: ServiceRequest[];
-}
-
-interface Department {
-  id: number;
-  department_id: number;
-  department_name: string;
-  department_supervisor: string;
-}
-
-interface Employee {
-  id: number;
-  user_id: number;
-  employee_name: string;
-  designation: string;
-  department_id: string;
 }
 
 interface Maintenance {
@@ -54,15 +33,6 @@ interface Maintenance {
   startDate: string;
   startTime: string;
   subofChange: string;
-}
-
-interface ServiceRequest {
-  id: number;
-  requestNo: string;
-  requestedBy: string;
-  department: string;
-  designation: string;
-  // ... (other fields)
 }
 
 const ProfilePage: React.FC = () => {

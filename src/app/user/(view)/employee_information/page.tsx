@@ -9,20 +9,7 @@ import jsPDF from "jspdf";
 import "jspdf-autotable";
 
 interface UserDetails {
-  id: number | undefined;
-  name: string | undefined;
-  email: string | undefined;
-  departments: Department[];
   employees: Employee[];
-  maintenances: Maintenance[];
-  serviceRequests: ServiceRequest[];
-}
-
-interface Department {
-  id: number;
-  department_id: number;
-  department_name: string;
-  department_supervisor: string;
 }
 
 interface Employee {
@@ -31,36 +18,6 @@ interface Employee {
   employee_name: string;
   designation: string;
   department_id: string;
-}
-
-interface Maintenance {
-  id: number;
-  EmployeeId: string;
-  MaintenanceType: string;
-  contractNo: string;
-  date: string;
-  department: string;
-  endDate: string;
-  endTime: string;
-  impactLevel: string;
-  mentionDowntime: string;
-  priority: string;
-  purposeOfActivity: string;
-  requestNumber: string;
-  requesterName: string;
-  requiredDowntime: string;
-  startDate: string;
-  startTime: string;
-  subofChange: string;
-}
-
-interface ServiceRequest {
-  id: number;
-  requestNo: string;
-  requestedBy: string;
-  department: string;
-  designation: string;
-  // ... (other fields)
 }
 
 const ProfilePage: React.FC = () => {
@@ -111,8 +68,20 @@ const ProfilePage: React.FC = () => {
                 >
                   {/* Display employee information here */}
                   <p className="text-sm text-gray-900">
+                    <span className="font-bold">User Id:</span>{" "}
+                    {employee.user_id}{" "}
+                  </p>
+                  <p className="text-sm text-gray-900">
                     <span className="font-bold">Employee Name:</span>{" "}
                     {employee.employee_name}{" "}
+                  </p>
+                  <p className="text-sm text-gray-900">
+                    <span className="font-bold">Designation:</span>{" "}
+                    {employee.designation}{" "}
+                  </p>
+                  <p className="text-sm text-gray-900">
+                    <span className="font-bold">Deepartment Id:</span>{" "}
+                    {employee.department_id}{" "}
                   </p>
                   {/* Include other employee details as needed */}
                 </div>
