@@ -12,7 +12,7 @@ import {
 } from "@heroicons/react/outline"; // Use outline icons from v2
 
 const Navbar = () => {
-  const [isMenuOpen, setMenuOpen] = useState(false);
+  const [isMenuOpen, setMenuOpen] = useState(true);
 
   const toggleMenu = () => {
     setMenuOpen(!isMenuOpen);
@@ -23,7 +23,7 @@ const Navbar = () => {
       <div className="container mx-auto flex justify-between items-center">
         {/* Information Box (conditionally rendered based on isMenuOpen) */}
         {isMenuOpen && (
-          <div className="bg-[#365486] text-white w-80 min-h-screen overflow-hidden rounded  absolute left-0 h-auto mt-[830px] ">
+          <div className="bg-[#365486] text-white w-80 min-h-screen overflow-hidden rounded  absolute left-0 h-auto mt-[830px] z-10 ">
             <div className="p-4 flex items-center justify-center ">
               <span className="text-2xl font-bold"></span>
             </div>
