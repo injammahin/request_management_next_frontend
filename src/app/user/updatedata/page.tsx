@@ -1,7 +1,9 @@
 // Import statements
 "use client";
+import Navbar from "@/app/components/navigation/page";
 import axios from "axios";
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 // Interface definitions
 interface UserData {
@@ -148,24 +150,7 @@ export default function UserProfile() {
 
   return (
     <>
-      {/* <div className="mb-6">
-        <label
-          htmlFor="name"
-          className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-        >
-          Name
-        </label>
-        <input
-          type="text"
-          id="name"
-          value={userData.name}
-          onChange={(e) => setUserData({ ...userData, name: e.target.value })}
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-        />
-      </div> */}
-
-      {/* <button onClick={handleEdit}>Update User</button> */}
-
+      <Navbar />
       <div className="mt-8">
         <h2 className="text-lg font-semibold mb-4">Service Requests</h2>
         {loading ? (
@@ -188,159 +173,148 @@ export default function UserProfile() {
       </div>
 
       {editRequest && (
-        <div>
-          <h3>Edit Service Request</h3>
-          <div className="mb-6">
-            <label
-              htmlFor="requestNo"
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-            >
-              Request No
-            </label>
-            <input
-              type="text"
-              id="requestNo"
-              value={editFormData.requestNo}
-              onChange={handleInputChange}
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            />
-          </div>
-          <div className="mb-6">
-            <label
-              htmlFor="date"
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-            >
-              Date
-            </label>
-            <input
-              type="text"
-              id="date"
-              value={editFormData.date}
-              onChange={handleInputChange}
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            />
-          </div>
-          {/* ???????????????????????? */}
-          <div className="mb-6">
-            <label
-              htmlFor="department"
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-            >
-              Department
-            </label>
-            <input
-              type="text"
-              id="department"
-              value={editFormData.department}
-              onChange={handleInputChange}
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            />
-          </div>
-          {/* ???????????????????????? */}
-          <div className="mb-6">
-            <label
-              htmlFor="designation"
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-            >
-              designation
-            </label>
-            <input
-              type="text"
-              id="designation"
-              value={editFormData.designation}
-              onChange={handleInputChange}
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            />
-          </div>
-          {/* ???????????????????????? */}
-          <div className="mb-6">
-            <label
-              htmlFor="employeeId"
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-            >
-              employee Id
-            </label>
-            <input
-              type="number"
-              id="employeeId"
-              value={editFormData.employeeId}
-              onChange={handleInputChange}
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            />
-          </div>
-          {/* ???????????????????????? */}
-          <div className="mb-6">
-            <label
-              htmlFor="reasonOfRequest"
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-            >
-              Reason of Request
-            </label>
-            <input
-              type="text"
-              id="reasonOfRequest"
-              value={editFormData.reasonOfRequest}
-              onChange={handleInputChange}
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            />
-          </div>
-          {/* ???????????????????????? */}
-          <div className="mb-6">
-            <label
-              htmlFor="requestFor"
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-            >
-              requestFor
-            </label>
-            <input
-              type="text"
-              id="requestFor"
-              value={editFormData.requestFor}
-              onChange={handleInputChange}
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            />
-          </div>
-          {/* ???????????????????????? */}
-          <div className="mb-6">
-            <label
-              htmlFor="requestedBy"
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-            >
-              requestedBy
-            </label>
-            <input
-              type="text"
-              id="requestedBy"
-              value={editFormData.requestedBy}
-              onChange={handleInputChange}
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            />
-          </div>
-          {/* ???????????????????????? */}
-          <div className="mb-6">
-            <label
-              htmlFor="serviceDetails"
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-            >
-              serviceDetails
-            </label>
-            <input
-              type="text"
-              id="serviceDetails"
-              value={editFormData.serviceDetails}
-              onChange={handleInputChange}
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            />
+        <form className="max-w-md uppercase mx-auto mt-8 p-4 border">
+          <div className="grid  grid-cols-2 gap-4 mb-4">
+            <div className="relative z-0 mb-2">
+              <label className="block">
+                request no:
+                <input
+                  type="text"
+                  name="requestNo"
+                  id="requestNo"
+                  value={editFormData.requestNo}
+                  // Display requestNo
+                  onChange={handleInputChange}
+                  readOnly
+                  className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                />
+              </label>
+            </div>
+
+            <div className="relative z-0 mb-2">
+              <label className="block">
+                date:
+                <input
+                  type="date"
+                  id="date"
+                  onChange={handleInputChange}
+                  value={editFormData.date}
+                  className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                />
+              </label>
+            </div>
           </div>
 
-          {/* Add other fields as needed */}
-          <button
-            className="bg-[#163020] w-32 h-12 rounded-xl text-white"
-            onClick={handleUpdateServiceRequest}
-          >
-            Save Changes
-          </button>
-        </div>
+          <div className="grid grid-cols-2 gap-4 mb-4">
+            <div className="mb-2">
+              <label className="block">
+                requested By:
+                <input
+                  type="text"
+                  id="requestedBy"
+                  onChange={handleInputChange}
+                  value={editFormData.requestedBy}
+                  className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                />
+              </label>
+            </div>
+
+            <div className="mb-2">
+              <label className="block">
+                request For:
+                <input
+                  type="text"
+                  id="requestFor"
+                  onChange={handleInputChange}
+                  value={editFormData.requestFor}
+                  className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                />
+              </label>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-4 mb-4">
+            <div className="mb-2">
+              <label className="block">
+                department:
+                <input
+                  type="text"
+                  id="department"
+                  onChange={handleInputChange}
+                  value={editFormData.department}
+                  className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                />
+              </label>
+            </div>
+
+            <div className="mb-2">
+              <label className="block">
+                employee Id:
+                <input
+                  type="text"
+                  id="employeeId"
+                  onChange={handleInputChange}
+                  value={editFormData.employeeId}
+                  className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                />
+              </label>
+            </div>
+          </div>
+
+          <div className="mb-2">
+            <label className="block">
+              designation:
+              <input
+                type="text"
+                id="designation"
+                onChange={handleInputChange}
+                value={editFormData.designation}
+                className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+              />
+            </label>
+          </div>
+
+          <div className="mb-2">
+            <label className="block">
+              reason Of Request:
+              <input
+                type="text"
+                id="reasonOfRequest"
+                onChange={handleInputChange}
+                value={editFormData.reasonOfRequest}
+                className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+              />
+            </label>
+          </div>
+
+          <div className="mb-2">
+            <label className="block">
+              service Details:
+              <input
+                type="text"
+                id="serviceDetails"
+                onChange={handleInputChange}
+                value={editFormData.serviceDetails}
+                className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+              />
+            </label>
+          </div>
+
+          <div className="flex justify-between">
+            <button
+              type="button"
+              className="bg-gray-500 text-white p-2 w-32 rounded hover:bg-gray-700"
+            >
+              <a href="/dashboard">Back</a>
+            </button>
+            <button
+              className="bg-[#163020] w-32 h-12 rounded-xl text-white"
+              onClick={handleUpdateServiceRequest}
+            >
+              Save Changes
+            </button>
+          </div>
+        </form>
       )}
     </>
   );

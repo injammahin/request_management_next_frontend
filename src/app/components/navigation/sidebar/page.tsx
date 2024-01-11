@@ -1,117 +1,329 @@
+// Import statements
 "use client";
-import React, { useState } from "react";
-import Link from "next/link";
-import {
-  ClipboardCheckIcon,
-  UserIcon,
-  InformationCircleIcon,
-  UsersIcon,
-  KeyIcon,
-} from "@heroicons/react/outline"; // Use outline icons from v2
+import axios from "axios";
+import React, { useState, useEffect } from "react";
 
-const Sidebar = () => {
-  const [isSidebarOpen, setSidebarOpen] = useState(false);
+// Interface definitions
+interface UserData {
+  id: string;
+  name: string;
+  email: string;
+  requestNo: string;
+}
 
-  const toggleSidebar = () => {
-    setSidebarOpen(!isSidebarOpen);
+interface ServiceRequest {
+  id: number;
+  requestNo: string;
+  date: string;
+  department: string;
+  designation: string;
+  employeeId: string;
+  reasonOfRequest: string;
+  requestFor: string;
+  requestedBy: string;
+  serviceDetails: string;
+
+  // Add other fields as needed
+}
+
+export default function UserProfile() {
+  const [userData, setUserData] = useState<UserData>({
+    id: "",
+    name: "",
+    requestNo: "",
+    email: "",
+  });
+
+  const [serviceRequests, setServiceRequests] = useState<ServiceRequest[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  const [editRequest, setEditRequest] = useState<ServiceRequest | null>(null);
+  const [editFormData, setEditFormData] = useState<ServiceRequest>({
+    id: 0,
+    requestNo: "",
+    date: "",
+    department: "",
+    designation: "",
+    employeeId: "",
+    reasonOfRequest: "",
+    requestFor: "",
+    requestedBy: "",
+    serviceDetails: "",
+    // Add other fields as needed
+  });
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const userId = localStorage.getItem("userId");
+        const [userDataResponse, serviceRequestsResponse] = await Promise.all([
+          axios.get<UserData>(`http://localhost:3001/auth/profile`, {
+            headers: { id: userId },
+          }),
+          axios.get<ServiceRequest[]>(
+            `http://localhost:3001/service-requests?userId=${userId}`
+          ),
+        ]);
+
+        setUserData(userDataResponse.data);
+        setServiceRequests(serviceRequestsResponse.data);
+        setLoading(false);
+      } catch (error) {
+        console.log("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const handleEdit = () => {
+    axios
+      .put(`http://localhost:3001/auth/${userData.id}`, { ...userData })
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const handleServiceRequestEdit = (id: number) => {
+    const requestToEdit = serviceRequests.find((request) => request.id === id);
+    if (requestToEdit) {
+      setEditRequest(requestToEdit);
+      setEditFormData({ ...requestToEdit });
+    }
+  };
+
+  const handleUpdateServiceRequest = () => {
+    if (editRequest) {
+      axios
+        .put(
+          `http://localhost:3001/service-requests/${editRequest.id}`,
+          editFormData
+        )
+        .then((response) => {
+          console.log(response.data);
+          // Update the local state or refetch the service requests
+          const updatedServiceRequests = serviceRequests.map((request) => {
+            if (request.id === editRequest.id) {
+              return {
+                ...request,
+                ...editFormData,
+              };
+            }
+            return request;
+          });
+
+          setServiceRequests(updatedServiceRequests);
+          // Reset edit state
+          setEditRequest(null);
+          setEditFormData({
+            id: 0,
+            requestNo: "",
+            date: "",
+            department: "",
+            designation: "",
+            employeeId: "",
+            reasonOfRequest: "",
+            requestFor: "",
+            requestedBy: "",
+            serviceDetails: "",
+
+            // Add other fields as needed
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEditFormData({
+      ...editFormData,
+      [e.target.id]: e.target.value,
+    });
   };
 
   return (
-    <div>
-      {/* Toggle Button */}
-      <button
-        onClick={toggleSidebar}
-        className="bg-gray-600 text-white px-4 py-2 rounded-full focus:outline-none"
-      >
-        {isSidebarOpen ? "Close" : "Menu"}
-      </button>
+    <>
+      <div className="mt-8">
+        <h2 className="text-lg font-semibold mb-4">Service Requests</h2>
+        {loading ? (
+          <p>Loading service requests...</p>
+        ) : (
+          <ul>
+            {serviceRequests.map((request) => (
+              <li key={request.id} className="mb-4">
+                <p>Request No: {request.requestNo}</p>
+                {/* <p>Date: {request.date}</p>
+                <p>Department: {request.department}</p> */}
+                <button onClick={() => handleServiceRequestEdit(request.id)}>
+                  Edit Service Request
+                </button>
+                {/* Add an edit form or modal here for updating Service Request */}
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
 
-      {/* Sidebar */}
-      {isSidebarOpen && (
-        <aside className="bg-[#365486] text-white w-80 min-h-screen overflow-hidden rounded-xl relative ">
-          <div className="p-4 flex items-center justify-center ">
-            <span className="text-2xl font-bold"></span>
+      {editRequest && (
+        <div>
+          <h3>Edit Service Request</h3>
+          <div className="mb-6">
+            <label
+              htmlFor="requestNo"
+              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >
+              Request No
+            </label>
+            <input
+              type="text"
+              id="requestNo"
+              value={editFormData.requestNo}
+              onChange={handleInputChange}
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            />
           </div>
-          <svg
-            className="absolute -top-0 -left-0 right-0 h-16 w-full "
-            viewBox="230 4 1140 220"
+          <div className="mb-6">
+            <label
+              htmlFor="date"
+              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >
+              Date
+            </label>
+            <input
+              type="text"
+              id="date"
+              value={editFormData.date}
+              onChange={handleInputChange}
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            />
+          </div>
+          {/* ???????????????????????? */}
+          <div className="mb-6">
+            <label
+              htmlFor="department"
+              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >
+              Department
+            </label>
+            <input
+              type="text"
+              id="department"
+              value={editFormData.department}
+              onChange={handleInputChange}
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            />
+          </div>
+          {/* ???????????????????????? */}
+          <div className="mb-6">
+            <label
+              htmlFor="designation"
+              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >
+              designation
+            </label>
+            <input
+              type="text"
+              id="designation"
+              value={editFormData.designation}
+              onChange={handleInputChange}
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            />
+          </div>
+          {/* ???????????????????????? */}
+          <div className="mb-6">
+            <label
+              htmlFor="employeeId"
+              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >
+              employee Id
+            </label>
+            <input
+              type="number"
+              id="employeeId"
+              value={editFormData.employeeId}
+              onChange={handleInputChange}
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            />
+          </div>
+          {/* ???????????????????????? */}
+          <div className="mb-6">
+            <label
+              htmlFor="reasonOfRequest"
+              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >
+              Reason of Request
+            </label>
+            <input
+              type="text"
+              id="reasonOfRequest"
+              value={editFormData.reasonOfRequest}
+              onChange={handleInputChange}
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            />
+          </div>
+          {/* ???????????????????????? */}
+          <div className="mb-6">
+            <label
+              htmlFor="requestFor"
+              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >
+              requestFor
+            </label>
+            <input
+              type="text"
+              id="requestFor"
+              value={editFormData.requestFor}
+              onChange={handleInputChange}
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            />
+          </div>
+          {/* ???????????????????????? */}
+          <div className="mb-6">
+            <label
+              htmlFor="requestedBy"
+              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >
+              requestedBy
+            </label>
+            <input
+              type="text"
+              id="requestedBy"
+              value={editFormData.requestedBy}
+              onChange={handleInputChange}
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            />
+          </div>
+          {/* ???????????????????????? */}
+          <div className="mb-6">
+            <label
+              htmlFor="serviceDetails"
+              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            >
+              serviceDetails
+            </label>
+            <input
+              type="text"
+              id="serviceDetails"
+              value={editFormData.serviceDetails}
+              onChange={handleInputChange}
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            />
+          </div>
+
+          {/* Add other fields as needed */}
+          <button
+            className="bg-[#163020] w-32 h-12 rounded-xl text-white"
+            onClick={handleUpdateServiceRequest}
           >
-            <path
-              fill="#374151"
-              fillOpacity="1"
-              d="M0,192L48,197.3C96,203,192,213,288,186.7C384,160,480,96,576,69.3C672,43,768,53,864,74.7C960,96,1056,128,1152,144C1248,160,1344,160,1392,160L1440,160L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"
-            ></path>
-          </svg>
-
-          <nav className="mt-4">
-            <Link
-              href="/user/service_request"
-              className="text- py-2 px-4 flex items-center space-x-2 uppercase text-white hover:bg-gray-700"
-            >
-              <ClipboardCheckIcon className="w-5 h-5" />
-              <span>Service Request</span>
-            </Link>
-            <Link
-              href="/user/profile"
-              className="py-2 px-4 flex items-center space-x-2 uppercase text-white hover:bg-gray-700"
-            >
-              <UserIcon className="w-5 h-5" />
-              <span>View Requested Forms</span>
-            </Link>
-            <Link
-              href="/user/maintenance-request-form"
-              className="py-2 px-4 flex items-center space-x-2 uppercase text-white hover:bg-gray-700"
-            >
-              <ClipboardCheckIcon className="w-5 h-5" />
-              <span> Create Maintenance Request Form</span>
-            </Link>
-            <Link
-              href="/user/view_maintenance_request_form"
-              className="py-2 px-4 flex items-center space-x-2 uppercase text-white hover:bg-gray-700"
-            >
-              <ClipboardCheckIcon className="w-5 h-5" />
-              <span>View Maintenance Request Form</span>
-            </Link>
-            <Link
-              href="/department/department_information"
-              className="py-2 px-4 flex items-center space-x-2 uppercase text-white hover:bg-gray-700"
-            >
-              <InformationCircleIcon className="w-5 h-5" />
-              <span>Department Information</span>
-            </Link>
-            <Link
-              href="/user/department_information"
-              className="py-2 px-4 flex items-center space-x-2 uppercase text-white hover:bg-gray-700"
-            >
-              <ClipboardCheckIcon className="w-5 h-5" />
-              <span> View Department Information</span>
-            </Link>
-            <Link
-              href="/department/employee_information"
-              className="py-2 px-4 flex items-center space-x-2 uppercase text-white hover:bg-gray-700"
-            >
-              <UsersIcon className="w-5 h-5" />
-              <span>Employee Information</span>
-            </Link>
-            <Link
-              href="/user/employee_information"
-              className="py-2 px-4 flex items-center space-x-2 uppercase text-white hover:bg-gray-700"
-            >
-              <ClipboardCheckIcon className="w-5 h-5" />
-              <span>View Employee Information</span>
-            </Link>
-            <Link
-              href="/user/changepassword"
-              className="py-2 px-4 flex items-center space-x-2 uppercase text-white hover:bg-[#5F0F40]"
-            >
-              <KeyIcon className="w-5 h-5" />
-              <span>Change Password</span>
-            </Link>
-          </nav>
-        </aside>
+            Save Changes
+          </button>
+        </div>
       )}
-    </div>
+    </>
   );
-};
-
-export default Sidebar;
+}
