@@ -202,12 +202,12 @@ const ProfilePage: React.FC = () => {
                         className="mb-4 bg-white border-b-2 border-gray-300 p-4 relative"
                       >
                         <p className="text-sm text-gray-900">
-                          <span className="font-bold">Request No:</span>{" "}
+                          <div className="font-bold">Request No:</div>{" "}
                           {request.requestNo}{" "}
                         </p>
                         {request.showFullForm && (
                           <form>
-                            <>
+                            <div>
                               <ul className="list-none">
                                 <li className="border-b-2 border-gray-300 p-4">
                                   {/* Include the other details here */}
@@ -245,7 +245,7 @@ const ProfilePage: React.FC = () => {
                                   </p>
                                 </li>
                               </ul>
-                            </>
+                            </div>
                           </form>
                         )}
                         <div className="flex space-x-2">

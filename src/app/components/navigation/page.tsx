@@ -41,7 +41,7 @@ const Navbar = () => {
             <br />
             <Link
               href="/user/service_request"
-              className="text-sm py-2 px-4 flex items-center space-x-2 uppercase text-white hover:bg-gray-700"
+              className="text-sm py-2 px-4 flex items-center space-x-2 uppercase text-white hover:bg-gray-700 "
             >
               <ClipboardCheckIcon className="w-5 h-5" />
               <span>Service Request</span>
