@@ -190,7 +190,7 @@ const ProfilePage: React.FC = () => {
                   />
                   {filteredServiceRequests &&
                   filteredServiceRequests.length > 0 ? (
-                    <table className="w-full">
+                    <table className="w-full border-collapse  border border-gray-600">
                       <thead>
                         <tr>
                           <th className="border p-2">Request No</th>
@@ -248,7 +248,7 @@ const ProfilePage: React.FC = () => {
                             {request.showFullForm && (
                               <tr>
                                 <td colSpan={5} className="p-2">
-                                  <div className="bg-blue-100 p-4 rounded-lg">
+                                  <div className="bg-blue-100 p-4 rounded-lg border border-blue-300">
                                     <p className="text-sm text-gray-900">
                                       <span className="font-bold">Date:</span>{" "}
                                       {request.date} |{" "}
