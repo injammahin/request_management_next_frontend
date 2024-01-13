@@ -21,7 +21,7 @@ const SigninPage = () => {
 
       if (response.data && response.data.id) {
         setSuccessMessage(response.data.message);
-        localStorage.setItem("userId", response.data.id);
+        localStorage.setItem("userId", response.data.email);
         router.push("/dashboard");
       } else {
         console.error("Error logging in: User data is undefined");
