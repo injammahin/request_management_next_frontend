@@ -116,7 +116,7 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
 
     try {
       const response = await axios.post(
-        "http://localhost:3001/maintenance/fillup",
+        "http://localhost:3001/maintaintance/fillup",
         {
           ...Management,
           userId: localStorage.getItem("userId"),
