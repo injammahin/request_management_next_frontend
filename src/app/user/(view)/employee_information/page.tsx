@@ -30,7 +30,7 @@ const ProfilePage: React.FC = () => {
         // Replace the following with your actual API endpoint for user data after login
         const response = await axios.get("http://localhost:3001/auth/profile", {
           headers: {
-            id: `${localStorage.getItem("id")}`,
+            id: `${localStorage.getItem("userId")}`,
           },
         });
 
