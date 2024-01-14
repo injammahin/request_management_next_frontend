@@ -23,7 +23,7 @@ const Navbar = () => {
       <div className="container mx-auto flex justify-between items-center">
         {/* Information Box (conditionally rendered based on isMenuOpen) */}
         {isMenuOpen && (
-          <div className="bg-[#365486] text-white w-80 min-h-screen overflow-hidden rounded  absolute left-0 h-auto mt-[830px] z-10 ">
+          <div className="bg-[#365486] text-white w-80 min-h-screen overflow-hidden rounded  absolute left-0 h-auto mt-[1000px] z-10 ">
             <div className="p-4 flex items-center justify-center ">
               <span className="text-2xl font-bold"></span>
             </div>

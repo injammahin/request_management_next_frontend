@@ -120,31 +120,27 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
         className="max-w-3xl uppercase mx-auto mt-8 p-4 border"
       >
         <div className="grid  grid-cols-2 gap-4 mb-4">
-          <div className="relative z-0 mb-2">
-            <label className="block">
-              request no:
-              <input
-                type="text"
-                name="requestNo"
-                id="requestNo"
-                value={serviceDetails.requestNo} // Display requestNo
-                readOnly
-                className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-              />
-            </label>
+          <div className="mb-2 flex flex-row items-center">
+            <label className="flex flex-none mr-2">request no:</label>
+            <input
+              type="text"
+              name="requestNo"
+              id="requestNo"
+              value={serviceDetails.requestNo} // Display requestNo
+              readOnly
+              className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+            />
           </div>
 
-          <div className="relative z-0 mb-2">
-            <label className="block">
-              date:
-              <input
-                type="date"
-                name="date"
-                onChange={handleInputChange}
-                value={serviceDetails.date}
-                className=" w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-              />
-            </label>
+          <div className="mb-2 flex flex-row items-center">
+            <label className="flex flex-none mr-2">date:</label>
+            <input
+              type="date"
+              name="date"
+              onChange={handleInputChange}
+              value={serviceDetails.date}
+              className=" w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+            />
           </div>
         </div>
 
@@ -160,85 +156,73 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
             />
           </div>
 
-          <div className="mb-2">
-            <label className="block">
-              request For:
-              <input
-                type="text"
-                name="requestFor"
-                onChange={handleInputChange}
-                value={serviceDetails.requestFor}
-                className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-              />
-            </label>
+          <div className="mb-2 flex flex-row items-center">
+            <label className="flex flex-none mr-2">request For:</label>
+            <input
+              type="text"
+              name="requestFor"
+              onChange={handleInputChange}
+              value={serviceDetails.requestFor}
+              className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+            />
           </div>
         </div>
 
         <div className="grid grid-cols-2 gap-4 mb-4">
-          <div className="mb-2">
-            <label className="block">
-              department:
-              <input
-                type="text"
-                name="department"
-                onChange={handleInputChange}
-                value={serviceDetails.department}
-                className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-              />
-            </label>
+          <div className="mb-2 flex flex-row items-center">
+            <label className="flex flex-none mr-2">department:</label>
+            <input
+              type="text"
+              name="department"
+              onChange={handleInputChange}
+              value={serviceDetails.department}
+              className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+            />
           </div>
 
-          <div className="mb-2">
-            <label className="block">
-              employee Id:
-              <input
-                type="text"
-                name="employeeId"
-                onChange={handleInputChange}
-                value={serviceDetails.employeeId}
-                className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-              />
-            </label>
+          <div className="mb-2 flex flex-row items-center">
+            <label className="flex flex-none mr-2">employee Id:</label>
+            <input
+              type="text"
+              name="employeeId"
+              onChange={handleInputChange}
+              value={serviceDetails.employeeId}
+              className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+            />
           </div>
         </div>
 
-        <div className="mb-2">
-          <label className="block">
-            designation:
-            <input
-              type="text"
-              name="designation"
-              onChange={handleInputChange}
-              value={serviceDetails.designation}
-              className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-            />
-          </label>
+        <div className="mb-2 flex flex-row items-center">
+          <label className="flex flex-none mr-2">designation:</label>
+          <input
+            type="text"
+            name="designation"
+            onChange={handleInputChange}
+            value={serviceDetails.designation}
+            className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+          />
         </div>
 
-        <div className="mb-2">
-          <label className="block">
-            reason Of Request:
-            <input
-              type="text"
-              name="reasonOfRequest"
-              onChange={handleInputChange}
-              value={serviceDetails.reasonOfRequest}
-              className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-            />
-          </label>
+        <div className="mb-2 flex flex-row items-center">
+          <label className="flex flex-none mr-2">reason Of Request:</label>
+          <input
+            type="text"
+            name="reasonOfRequest"
+            onChange={handleInputChange}
+            value={serviceDetails.reasonOfRequest}
+            className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+          />
         </div>
 
-        <div className="mb-2">
-          <label className="block">
-            service Details:
-            <input
-              type="text"
-              name="serviceDetails"
-              onChange={handleInputChange}
-              value={serviceDetails.serviceDetails}
-              className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-            />
-          </label>
+        <div className="mb-2 flex flex-row items-center">
+          <label className="flex flex-none mr-2">service Details:</label>
+          <input
+            type="text"
+            name="serviceDetails"
+            onChange={handleInputChange}
+            value={serviceDetails.serviceDetails}
+            className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+          />
         </div>
 
         <div className="flex justify-between">
