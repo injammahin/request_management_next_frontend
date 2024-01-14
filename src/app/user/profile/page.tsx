@@ -248,44 +248,94 @@ const ProfilePage: React.FC = () => {
                               </td>
                             </tr>
                             {request.showFullForm && (
-                              <tr>
-                                <td colSpan={5} className="p-2">
-                                  <div className="bg-blue-100 p-4 rounded-lg border border-blue-300">
-                                    <p className="text-sm text-gray-900">
-                                      <span className="font-bold">Date:</span>{" "}
-                                      {request.date} |{" "}
-                                      <span className="font-bold">
-                                        Department:
-                                      </span>{" "}
-                                      {request.department} |{" "}
-                                      <span className="font-bold">
-                                        Designation:
-                                      </span>{" "}
-                                      {request.designation} |{" "}
-                                      <span className="font-bold">
-                                        Employee Id:
-                                      </span>{" "}
-                                      {request.employeeId} |{" "}
-                                      <span className="font-bold">
-                                        Reason of Request:
-                                      </span>{" "}
-                                      {request.reasonOfRequest} |{" "}
-                                      <span className="font-bold">
-                                        Request For:
-                                      </span>{" "}
-                                      {request.requestFor} |{" "}
-                                      <span className="font-bold">
-                                        Requested By:
-                                      </span>{" "}
-                                      {request.requestedBy} |{" "}
-                                      <span className="font-bold">
-                                        Service Details:
-                                      </span>{" "}
-                                      {request.serviceDetails}
-                                    </p>
-                                  </div>
-                                </td>
-                              </tr>
+                              <div>
+                                <table className="w-full">
+                                  <tbody>
+                                    <tr>
+                                      {/* Request No and Date in one row */}
+                                      <td className="border-2 border-b-4 py-2 px-4 border-gray-600">
+                                        <div className="font-bold text-sm text-gray-900">
+                                          Request No: {request.requestNo}
+                                        </div>
+                                      </td>
+
+                                      <td className="border-2 border-b-4 py-2 px-4 border-gray-600">
+                                        <div className="font-bold text-sm text-gray-900">
+                                          Date: {request.date}
+                                        </div>
+                                      </td>
+                                    </tr>
+
+                                    <tr>
+                                      {/* Request No and Date in one row */}
+                                      <td className="border-2 border-b-4 py-2 px-4 border-gray-600">
+                                        <div className="font-bold text-sm text-gray-900">
+                                          Requested By: {request.requestedBy}
+                                        </div>
+                                      </td>
+
+                                      <td className="border-2 border-b-4 py-2 px-4 border-gray-600">
+                                        <div className="font-bold text-sm text-gray-900">
+                                          Request For: {request.requestFor}
+                                        </div>
+                                      </td>
+                                    </tr>
+
+                                    <tr>
+                                      {/* Request No and Date in one row */}
+                                      <td className="border-2 border-b-4 py-2 px-4 border-gray-600">
+                                        <div className="font-bold text-sm text-gray-900">
+                                          Department: {request.department}
+                                        </div>
+                                      </td>
+
+                                      <td className="border-2 border-b-4 py-2 px-4 border-gray-600">
+                                        <div className="font-bold text-sm text-gray-900">
+                                          Employee Id: {request.employeeId}
+                                        </div>
+                                      </td>
+                                    </tr>
+
+                                    <tr>
+                                      {/* Designation in a separate row */}
+                                      <td
+                                        colSpan={2}
+                                        className="border-2 border-b-4 py-2 px-4 border-gray-600"
+                                      >
+                                        <div className="font-bold text-sm text-gray-900">
+                                          Designation: {request.designation}
+                                        </div>
+                                      </td>
+                                    </tr>
+
+                                    <tr>
+                                      {/* Reason of Request in a separate row */}
+                                      <td
+                                        colSpan={2}
+                                        className="border-2 border-b-4 py-2 px-4 border-gray-600"
+                                      >
+                                        <div className="font-bold text-sm text-gray-900">
+                                          Reason of Request:{" "}
+                                          {request.reasonOfRequest}
+                                        </div>
+                                      </td>
+                                    </tr>
+
+                                    <tr>
+                                      {/* Service Details in a separate row */}
+                                      <td
+                                        colSpan={2}
+                                        className="border-2 border-b-4 py-2 px-4 border-gray-600"
+                                      >
+                                        <div className="font-bold text-sm text-gray-900">
+                                          Service Details:{" "}
+                                          {request.serviceDetails}
+                                        </div>
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </div>
                             )}
                           </React.Fragment>
                         ))}
