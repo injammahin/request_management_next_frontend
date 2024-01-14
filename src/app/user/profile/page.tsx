@@ -126,7 +126,9 @@ const ProfilePage: React.FC = () => {
       toggleDeleteConfirmation(null);
     }
   };
-
+  const handleEditServiceRequest = (id: number) => {
+    router.push(`/user/updatedata?requestId=${id}`);
+  };
   const cancelDelete = () => {
     toggleDeleteConfirmation(null);
   };
@@ -245,13 +247,13 @@ const ProfilePage: React.FC = () => {
                                 </button>
                               </td>
                               <td className="border-[1px] p-2 border-gray-600">
-                                <button className="bg-[#4CB9E7] rounded-lg h-8 w-28">
-                                  <a
-                                    href="/user/updatedata"
-                                    className="hover:underline text-white"
-                                  >
-                                    Edit Profile
-                                  </a>
+                                <button
+                                  onClick={() =>
+                                    handleEditServiceRequest(request.id)
+                                  }
+                                  className="bg-[#4CB9E7] rounded-lg h-8 w-28 text-white"
+                                >
+                                  Edit
                                 </button>
                               </td>
                               <td className="border-[1px] p-2 border-gray-600">
