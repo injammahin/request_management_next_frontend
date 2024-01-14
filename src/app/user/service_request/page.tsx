@@ -151,7 +151,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
         <div className="grid grid-cols-2 gap-4 mb-4">
           <div className="mb-2">
             <label className="block">
-              requested By:
+              request By:
               <input
                 type="text"
                 name="requestedBy"

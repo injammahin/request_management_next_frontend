@@ -57,11 +57,9 @@ export default function UserProfile() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const userId = localStorage.getItem("userId");
+        const userId = localStorage.getItem("id");
         const [userDataResponse, serviceRequestsResponse] = await Promise.all([
-          axios.get<UserData>(`http://localhost:3001/auth/profile`, {
-            headers: { id: userId },
-          }),
+          axios.get<UserData>(`http://localhost:3001/auth/profile`, {}),
           axios.get<ServiceRequest[]>(
             `http://localhost:3001/service-requests?userId=${userId}`
           ),
@@ -159,10 +157,13 @@ export default function UserProfile() {
           <ul>
             {serviceRequests.map((request) => (
               <li key={request.id} className="mb-4">
-                <p>Request No: {request.requestNo}</p>
+                <p>Request by: {request.requestedBy}</p>
                 {/* <p>Date: {request.date}</p>
                 <p>Department: {request.department}</p> */}
-                <button onClick={() => handleServiceRequestEdit(request.id)}>
+                <button
+                  className="bg-prple-500 rounded"
+                  onClick={() => handleServiceRequestEdit(request.id)}
+                >
                   Edit Service Request
                 </button>
                 {/* Add an edit form or modal here for updating Service Request */}
@@ -173,7 +174,7 @@ export default function UserProfile() {
       </div>
 
       {editRequest && (
-        <form className="max-w-md uppercase mx-auto mt-8 p-4 border">
+        <form className="max-w-md uppercase p-4 border mx-[500px] my-[-900px]">
           <div className="grid  grid-cols-2 gap-4 mb-4">
             <div className="relative z-0 mb-2">
               <label className="block">

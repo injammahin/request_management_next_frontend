@@ -225,10 +225,10 @@ const ProfilePage: React.FC = () => {
                         {filteredServiceRequests.map((request) => (
                           <React.Fragment key={request.id}>
                             <tr>
-                              <td className="border-2 p-2 border-gray-600">
+                              <td className="border-[1px] p-2 border-gray-600">
                                 {request.requestNo}
                               </td>
-                              <td className="border-2 p-2 border-gray-600">
+                              <td className="border-[1px] p-2 border-gray-600">
                                 <button
                                   onClick={() => toggleShowFullForm(request)}
                                   className="bg-[#43766C] rounded-lg h-8 w-28 hover:underline text-white"
