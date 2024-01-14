@@ -202,7 +202,7 @@ const ProfilePage: React.FC = () => {
                     <table className="w-full border-collapse  border border-gray-600">
                       <thead>
                         <tr>
-                          <th className="border px-52">Request No</th>
+                          <th className="border px-60">Request No</th>
                           <th className="border p-2">Show More</th>
                           <th className="border p-2">Delete</th>
                           <th className="border p-2">Edit</th>
