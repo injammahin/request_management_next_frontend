@@ -8,6 +8,8 @@ import LoadingSpinner from "@/app/components/loading/page";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
 import React from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 interface UserDetails {
   id: number | undefined;
@@ -45,6 +47,11 @@ const ProfilePage: React.FC = () => {
     null
   );
 
+  const router = useRouter();
+
+  const handleBackButtonClick = () => {
+    router.push("/dashboard");
+  };
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -352,10 +359,11 @@ const ProfilePage: React.FC = () => {
           <div>
             <div className="flex justify-between">
               <button
-                type="submit"
+                type="button"
                 className="bg-gray-500 text-white p-2 w-32 rounded hover:bg-gray-700"
+                onClick={handleBackButtonClick}
               >
-                <a href="/dashboard">Back</a>
+                Back
               </button>
             </div>
           </div>
