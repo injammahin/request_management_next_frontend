@@ -169,7 +169,7 @@ const ProfilePage: React.FC = () => {
   return (
     <div>
       <Navbar />
-      <div className="screen-full flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8 ">
+      <div className="  screen-full flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8 ">
         <div className="w-full bg-white p-8 rounded-lg shadow-md space-y-8">
           <div>
             <h2 className="text-2xl font-semibold text-gray-700 text-center">
@@ -271,18 +271,18 @@ const ProfilePage: React.FC = () => {
                               </tr>
                               {request.showFullForm && (
                                 <div>
-                                  <table className="w-full ">
+                                  <table className="w-full  bg-gray-100">
                                     <tbody>
                                       <tr>
                                         {/* Request No and Date in one row */}
                                         <td className="border-[1px] border-b-1 py-2 px-4 border-gray-600">
-                                          <div className="font-bold text-sm text-gray-900">
+                                          <div className="font-semibold text-sm text-gray-900">
                                             Request No: {request.requestNo}
                                           </div>
                                         </td>
 
                                         <td className="border-[1px] border-b-1 py-2 px-4 border-gray-600">
-                                          <div className="font-bold text-sm text-gray-900">
+                                          <div className="font-semibold text-sm text-gray-900">
                                             Date: {request.date}
                                           </div>
                                         </td>
@@ -291,13 +291,13 @@ const ProfilePage: React.FC = () => {
                                       <tr>
                                         {/* Request No and Date in one row */}
                                         <td className="border-[1px] border-b-1 py-2 px-4 border-gray-600">
-                                          <div className="font-bold text-sm text-gray-900">
+                                          <div className="font-semibold text-sm text-gray-900">
                                             Requested By: {request.requestedBy}
                                           </div>
                                         </td>
 
                                         <td className="border-[1px] border-b-1 py-2 px-4 border-gray-600">
-                                          <div className="font-bold text-sm text-gray-900">
+                                          <div className="font-semibold text-sm text-gray-900">
                                             Request For: {request.requestFor}
                                           </div>
                                         </td>
@@ -306,13 +306,13 @@ const ProfilePage: React.FC = () => {
                                       <tr>
                                         {/* Request No and Date in one row */}
                                         <td className="border-[1px] border-b-1 py-2 px-4 border-gray-600">
-                                          <div className="font-bold text-sm text-gray-900">
+                                          <div className="font-semibold text-sm text-gray-900">
                                             Department: {request.department}
                                           </div>
                                         </td>
 
                                         <td className="border-[1px] border-b-1 py-2 px-4 border-gray-600">
-                                          <div className="font-bold text-sm text-gray-900">
+                                          <div className="font-semibold text-sm text-gray-900">
                                             Employee Id: {request.employeeId}
                                           </div>
                                         </td>
@@ -324,7 +324,7 @@ const ProfilePage: React.FC = () => {
                                           colSpan={2}
                                           className="border-[1px] border-b-1 py-2 px-4 border-gray-600"
                                         >
-                                          <div className="font-bold text-sm text-gray-900">
+                                          <div className="font-semibold text-sm text-gray-900">
                                             Designation: {request.designation}
                                           </div>
                                         </td>
@@ -336,7 +336,7 @@ const ProfilePage: React.FC = () => {
                                           colSpan={2}
                                           className="border-[1px] border-b-1 py-2 px-4 border-gray-600"
                                         >
-                                          <div className="font-bold text-sm text-gray-900">
+                                          <div className="font-semibold text-sm text-gray-900">
                                             Reason of Request:{" "}
                                             {request.reasonOfRequest}
                                           </div>
@@ -349,7 +349,7 @@ const ProfilePage: React.FC = () => {
                                           colSpan={2}
                                           className="border-[1px] border-b-1 py-2 px-4 border-gray-600"
                                         >
-                                          <div className="font-bold text-sm text-gray-900">
+                                          <div className="font-semibold text-sm text-gray-900">
                                             Service Details:{" "}
                                             {request.serviceDetails}
                                           </div>
