@@ -8,8 +8,7 @@ import { Link } from "react-router-dom";
 // Interface definitions
 interface UserData {
   id: string;
-  name: string;
-  email: string;
+
   requestNo: string;
 }
 
@@ -31,9 +30,8 @@ interface ServiceRequest {
 export default function UserProfile() {
   const [userData, setUserData] = useState<UserData>({
     id: "",
-    name: "",
+
     requestNo: "",
-    email: "",
   });
 
   const [serviceRequests, setServiceRequests] = useState<ServiceRequest[]>([]);
@@ -75,17 +73,6 @@ export default function UserProfile() {
 
     fetchData();
   }, []);
-
-  const handleEdit = () => {
-    axios
-      .put(`http://localhost:3001/auth/${userData.id}`, { ...userData })
-      .then((response) => {
-        console.log(response.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
 
   const handleServiceRequestEdit = (id: number) => {
     const requestToEdit = serviceRequests.find((request) => request.id === id);
