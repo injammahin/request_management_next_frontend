@@ -42,7 +42,7 @@ const EditServiceRequest: React.FC<EditServiceRequestProps> = () => {
           `http://localhost:3001/service-requests/${requestId}`
         );
         setEditFormData(response.data);
-        setInitialFormData(response.data);
+        setInitialFormData(response.data && response.data);
       } catch (error) {
         console.log("Error fetching data:", error);
       }
@@ -63,17 +63,14 @@ const EditServiceRequest: React.FC<EditServiceRequestProps> = () => {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     setEditFormData({
-      ...editFormData!,
+      ...initialFormData!,
       [e.target.id]: e.target.value,
     });
   };
   console.log(initialFormData, "adkjfkah");
 
   return (
-    <form
-      // onSubmit={handleSubmit}
-      className="max-w-3xl uppercase mx-auto mt-8 p-4 border"
-    >
+    <form className="max-w-3xl uppercase mx-auto mt-8 p-4 border">
       <div className="grid  grid-cols-2 gap-4 mb-4">
         <div className="mb-2 flex flex-row items-center">
           <label className="flex flex-none mr-2">request no:</label>
@@ -81,7 +78,7 @@ const EditServiceRequest: React.FC<EditServiceRequestProps> = () => {
             type="text"
             name="requestNo"
             id="requestNo"
-            // value={initialFormData.requestNo} // Display requestNo
+            value={initialFormData?.requestNo} // Display requestNo
             readOnly
             className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
           />
@@ -93,7 +90,7 @@ const EditServiceRequest: React.FC<EditServiceRequestProps> = () => {
             type="date"
             name="date"
             onChange={handleInputChange}
-            // value={editFormData.date}
+            value={initialFormData?.date}
             className=" w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
           />
         </div>
@@ -106,7 +103,7 @@ const EditServiceRequest: React.FC<EditServiceRequestProps> = () => {
             type="text"
             name="requestedBy"
             onChange={handleInputChange}
-            // value={serviceDetails.requestedBy}
+            value={initialFormData?.requestedBy}
             className="block w-full  py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
           />
         </div>
@@ -117,7 +114,7 @@ const EditServiceRequest: React.FC<EditServiceRequestProps> = () => {
             type="text"
             name="requestFor"
             onChange={handleInputChange}
-            // value={serviceDetails.requestFor}
+            value={initialFormData?.requestFor}
             className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
           />
         </div>
@@ -130,7 +127,7 @@ const EditServiceRequest: React.FC<EditServiceRequestProps> = () => {
             type="text"
             name="department"
             onChange={handleInputChange}
-            // value={serviceDetails.department}
+            value={initialFormData?.department}
             className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
           />
         </div>
@@ -141,7 +138,7 @@ const EditServiceRequest: React.FC<EditServiceRequestProps> = () => {
             type="text"
             name="employeeId"
             onChange={handleInputChange}
-            // value={serviceDetails.employeeId}
+            value={initialFormData?.employeeId}
             className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
           />
         </div>
@@ -153,7 +150,7 @@ const EditServiceRequest: React.FC<EditServiceRequestProps> = () => {
           type="text"
           name="designation"
           onChange={handleInputChange}
-          // value={serviceDetails.designation}
+          value={initialFormData?.designation}
           className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
         />
       </div>
@@ -164,7 +161,7 @@ const EditServiceRequest: React.FC<EditServiceRequestProps> = () => {
           type="text"
           name="reasonOfRequest"
           onChange={handleInputChange}
-          // value={serviceDetails.reasonOfRequest}
+          value={initialFormData?.reasonOfRequest}
           className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
         />
       </div>
@@ -175,7 +172,7 @@ const EditServiceRequest: React.FC<EditServiceRequestProps> = () => {
           type="text"
           name="serviceDetails"
           onChange={handleInputChange}
-          // value={serviceDetails.serviceDetails}
+          value={initialFormData?.serviceDetails}
           className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
         />
       </div>
