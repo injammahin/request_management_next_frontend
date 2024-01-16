@@ -7,9 +7,9 @@ const SignupPage = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [role, setRole] = useState("user"); // Default role is user
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const [role, setRole] = useState("user");
 
   const handleSubmit = async () => {
     // Validation check
@@ -24,14 +24,14 @@ const SignupPage = () => {
         name,
         email,
         password,
-        role,
+        role, // Include the selected role in the request
       });
       console.log(response.data);
       setSuccessMessage("Signup successful");
       setErrorMessage("");
     } catch (error) {
       console.error("Error signing up:", error);
-      setErrorMessage("Email address aldready exists");
+      setErrorMessage("Email address already exists");
       setSuccessMessage("");
     }
   };
@@ -44,7 +44,13 @@ const SignupPage = () => {
             Sign up
           </h2>
         </div>
-        <form className="mt-8 space-y-6" onSubmit={(e) => e.preventDefault()}>
+        <form
+          className="mt-8 space-y-6"
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleSubmit();
+          }}
+        >
           <div className="rounded-md shadow-sm -space-y-px">
             <div>
               <label htmlFor="name" className="sr-only">
@@ -95,24 +101,45 @@ const SignupPage = () => {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
+
+            {/* Role Selection Dropdown */}
+            <div>
+              <label htmlFor="role" className="sr-only">
+                Role
+              </label>
+              <select
+                id="role"
+                name="role"
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                value={role}
+                onChange={(e) => setRole(e.target.value)}
+              >
+                <option value="user">User</option>
+                <option value="admin">Admin</option>
+                <option value="admin">Admin1</option>
+                <option value="admin">Admin2</option>
+                <option value="admin">Admin3</option>
+              </select>
+            </div>
           </div>
 
           <div>
             <button
-              type="button"
+              type="submit"
               className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-              onClick={handleSubmit}
             >
               Sign up
             </button>
           </div>
         </form>
+
         {successMessage && (
           <p className="text-green-500 mt-2">{successMessage}</p>
         )}
         {errorMessage && <p className="text-red-500 mt-2">{errorMessage}</p>}
+
         <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-          Already have an account ?
+          Already have an account?{" "}
           <a
             href="./login"
             className="text-blue-600 hover:underline dark:text-blue-500"
