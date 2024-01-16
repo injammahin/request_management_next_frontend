@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Navbar from "@/app/components/navigation/page";
 import Link from "next/link";
+import router, { useRouter } from "next/navigation";
 
 const ProfilePage = () => {
   const [userData, setUserData] = useState({
@@ -40,7 +41,11 @@ const ProfilePage = () => {
 
     setRequestId(Number(idParam));
   }, []); // Empty dependency array ensures this effect runs once after component mounts
+  const router = useRouter();
 
+  const handleBackButtonClick = () => {
+    router.push("/user/profile");
+  };
   const handleUpdate = async () => {
     try {
       const response = await axios.put(
@@ -210,8 +215,9 @@ const ProfilePage = () => {
           <button
             type="button"
             className="bg-gray-500 text-white p-2 w-32 rounded hover:bg-gray-700"
+            onClick={handleBackButtonClick}
           >
-            <Link href="/user/profile">Back</Link>
+            Back
           </button>
           <button
             type="button"
