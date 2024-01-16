@@ -1,124 +1,79 @@
-// src/app/service-request/form.tsx
-
+// Import the necessary dependencies
 "use client";
-import React, { useState, ChangeEvent, FormEvent, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Navbar from "@/app/components/navigation/page";
 import Link from "next/link";
-
-interface RequestServiceFormProps {}
-
-interface ServiceDetails {
+import Navbar from "@/app/components/navigation/page";
+export interface ServiceRequest {
   requestNo: string;
   date: string;
-  requestedBy: string;
-  requestFor: string;
   department: string;
-  employeeId: string;
   designation: string;
+  employeeId: string;
   reasonOfRequest: string;
+  requestFor: string;
+  requestedBy: string;
   serviceDetails: string;
-  userId: string;
-  [key: string]: string; // Index signature to allow any additional string properties
+  // Add other fields as needed
 }
 
-const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
-  const [serviceDetails, setServiceDetails] = useState<ServiceDetails>({
-    requestNo: "",
-    date: "",
-    requestedBy: "",
-    requestFor: "",
-    department: "",
-    employeeId: "",
-    designation: "",
-    reasonOfRequest: "",
-    serviceDetails: "",
-    userId: "",
-  });
-  const [successMessage, setSuccessMessage] = useState<string>("");
-  const [errorMessage, setErrorMessage] = useState<string>("");
-  const [submittedDetails, setSubmittedDetails] =
-    useState<ServiceDetails | null>(null);
+interface EditServiceRequestProps {}
+
+const EditServiceRequest: React.FC<EditServiceRequestProps> = () => {
+  const [editFormData, setEditFormData] = useState<ServiceRequest | null>(null);
+  const [reqNo, setReqNo] = useState<any>(null);
+  const [requestId, setRequestId] = useState<number | null>(null);
+  const [initialFormData, setInitialFormData] = useState<ServiceRequest | null>(
+    null
+  );
+
+  // Use useEffect to parse query parameters
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const idParam = urlParams.get("requestId");
+
+    setRequestId(Number(idParam));
+  }, []);
+
+  // Use useEffect to fetch data when requestId changes
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.put<ServiceRequest>(
+          `http://localhost:3001/service-requests/${requestId}`
+        );
+        setEditFormData(response.data);
+        setInitialFormData(response.data && response.data);
+      } catch (error) {
+        console.log("Error fetching data:", error);
+      }
+    };
+
+    // Fetch data only if requestId is available
+    if (requestId !== null) {
+      fetchData();
+    }
+  }, [requestId]);
+
+  const handleUpdateServiceRequest = () => {
+    // Implement your update logic here using editFormData
+    // ...
+  };
 
   const handleInputChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    const { name, value } = e.target;
-    setServiceDetails((prevDetails) => ({
-      ...prevDetails,
-      [name]: value,
-    }));
+    setEditFormData({
+      ...initialFormData!,
+      [e.target.id]: e.target.value,
+    });
   };
-
-  const autofillRequestNo = () => {
-    // Auto-generate requestNo based on date, department, and requestedBy
-    const generatedRequestNo = `DBL/${serviceDetails.date}/${serviceDetails.department}/${serviceDetails.requestedBy}`;
-    setServiceDetails((prevDetails) => ({
-      ...prevDetails,
-      requestNo: generatedRequestNo,
-    }));
-  };
-
-  useEffect(() => {
-    autofillRequestNo();
-  }, [
-    serviceDetails.date,
-    serviceDetails.department,
-    serviceDetails.requestedBy,
-  ]);
-
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-
-    const requiredFields = [
-      "date",
-      "requestedBy",
-      "requestFor",
-      "department",
-      "employeeId",
-      "designation",
-      "reasonOfRequest",
-      "serviceDetails",
-    ];
-
-    const hasEmptyField = requiredFields.some(
-      (field) => !serviceDetails[field] || serviceDetails[field].trim() === ""
-    );
-
-    if (hasEmptyField) {
-      setErrorMessage("Please fill in all the required fields");
-      setSuccessMessage("");
-      return;
-    }
-
-    try {
-      const response = await axios.post(
-        "http://localhost:3001/service-requests/fillup",
-        {
-          ...serviceDetails,
-          userId: localStorage.getItem("userId"),
-        }
-      );
-
-      setSubmittedDetails(serviceDetails); // Set submitted details
-      setSuccessMessage("Form submitted successfully");
-      setErrorMessage("");
-      console.log("Form submitted successfully:", response.data);
-    } catch (error) {
-      setErrorMessage("Form submission failed");
-      setSuccessMessage("");
-      console.error("Form submission failed:", error);
-    }
-  };
+  console.log(initialFormData, "adkjfkah");
 
   return (
-    <div>
+    <>
       <Navbar />
-
-      <form
-        onSubmit={handleSubmit}
-        className="max-w-3xl uppercase mx-auto mt-8 p-4 border"
-      >
+      <form className="max-w-3xl uppercase mx-auto mt-8 p-4 border">
         <div className="grid  grid-cols-2 gap-4 mb-4">
           <div className="mb-2 flex flex-row items-center">
             <label className="flex flex-none mr-2">request no:</label>
@@ -126,7 +81,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
               type="text"
               name="requestNo"
               id="requestNo"
-              value={serviceDetails.requestNo} // Display requestNo
+              value={initialFormData?.requestNo} // Display requestNo
               readOnly
               className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             />
@@ -138,7 +93,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
               type="date"
               name="date"
               onChange={handleInputChange}
-              value={serviceDetails.date}
+              value={initialFormData?.date}
               className=" w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             />
           </div>
@@ -151,7 +106,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
               type="text"
               name="requestedBy"
               onChange={handleInputChange}
-              value={serviceDetails.requestedBy}
+              value={initialFormData?.requestedBy}
               className="block w-full  py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             />
           </div>
@@ -162,7 +117,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
               type="text"
               name="requestFor"
               onChange={handleInputChange}
-              value={serviceDetails.requestFor}
+              value={initialFormData?.requestFor}
               className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             />
           </div>
@@ -175,7 +130,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
               type="text"
               name="department"
               onChange={handleInputChange}
-              value={serviceDetails.department}
+              value={initialFormData?.department}
               className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             />
           </div>
@@ -186,7 +141,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
               type="text"
               name="employeeId"
               onChange={handleInputChange}
-              value={serviceDetails.employeeId}
+              value={initialFormData?.employeeId}
               className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             />
           </div>
@@ -198,7 +153,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
             type="text"
             name="designation"
             onChange={handleInputChange}
-            value={serviceDetails.designation}
+            value={initialFormData?.designation}
             className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
           />
         </div>
@@ -209,7 +164,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
             type="text"
             name="reasonOfRequest"
             onChange={handleInputChange}
-            value={serviceDetails.reasonOfRequest}
+            value={initialFormData?.reasonOfRequest}
             className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
           />
         </div>
@@ -220,7 +175,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
             type="text"
             name="serviceDetails"
             onChange={handleInputChange}
-            value={serviceDetails.serviceDetails}
+            value={initialFormData?.serviceDetails}
             className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
           />
         </div>
@@ -230,7 +185,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
             type="button"
             className="bg-gray-500 text-white p-2 w-32 rounded hover:bg-gray-700"
           >
-            <Link href="/dashboard">Back</Link>
+            <Link href="/user/profile">Back</Link>
           </button>
           <button
             type="submit"
@@ -239,53 +194,9 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
             Submit
           </button>
         </div>
-
-        {successMessage && (
-          <p className="text-center text-green-500 mt-2">{successMessage}</p>
-        )}
-        {errorMessage && (
-          <p className="text-center text-red-500 mt-2">{errorMessage}</p>
-        )}
       </form>
-
-      {submittedDetails && (
-        <div className="max-w-md uppercase mx-auto mt-8 p-4 border">
-          <h2 className="text-2xl font-semibold mb-4">Submitted Details</h2>
-          <div>
-            <p>
-              <strong>Request No:</strong> {submittedDetails.requestNo}
-            </p>
-            <p>
-              <strong>Date:</strong> {submittedDetails.date}
-            </p>
-            <p>
-              <strong>Requested By:</strong> {submittedDetails.requestedBy}
-            </p>
-            <p>
-              <strong>Request For:</strong> {submittedDetails.requestFor}
-            </p>
-            <p>
-              <strong>Department:</strong> {submittedDetails.department}
-            </p>
-            <p>
-              <strong>Employee Id:</strong> {submittedDetails.employeeId}
-            </p>
-            <p>
-              <strong>Designation:</strong> {submittedDetails.designation}
-            </p>
-            <p>
-              <strong>Reason Of Request:</strong>{" "}
-              {submittedDetails.reasonOfRequest}
-            </p>
-            <p>
-              <strong>Service Details:</strong>{" "}
-              {submittedDetails.serviceDetails}
-            </p>
-          </div>
-        </div>
-      )}
-    </div>
+    </>
   );
 };
 
-export default RequestServiceForm;
+export default EditServiceRequest;
