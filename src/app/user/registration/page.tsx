@@ -9,6 +9,7 @@ const SignupPage = () => {
   const [password, setPassword] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [role, setRole] = useState("user");
 
   const handleSubmit = async () => {
     // Validation check
@@ -23,6 +24,7 @@ const SignupPage = () => {
         name,
         email,
         password,
+        role,
       });
       console.log(response.data);
       setSuccessMessage("Signup successful");
@@ -33,7 +35,7 @@ const SignupPage = () => {
       setSuccessMessage("");
     }
   };
-  23;
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
