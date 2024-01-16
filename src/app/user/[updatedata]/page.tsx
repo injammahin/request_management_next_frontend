@@ -19,7 +19,7 @@ const ProfilePage = () => {
   });
 
   const [updateData, setUpdateData] = useState({
-    requestNo: "",
+    // requestNo: "",
     date: "",
     department: "",
     reasonOfRequest: "",
@@ -40,7 +40,7 @@ const ProfilePage = () => {
 
     setRequestId(Number(idParam));
   }, []); // Empty dependency array ensures this effect runs once after component mounts
-  console.log(requestId);
+
   const handleUpdate = async () => {
     try {
       const response = await axios.put(
@@ -52,7 +52,7 @@ const ProfilePage = () => {
       setMessage("information change successful!");
       // Optionally, you can clear the updateData after a successful update
       setUpdateData({
-        requestNo: "",
+        // requestNo: "",
         date: "",
         department: "",
         reasonOfRequest: "",
@@ -79,7 +79,7 @@ const ProfilePage = () => {
               type="text"
               name="requestNo"
               id="requestNo"
-              value={updateData?.requestNo} // Display requestNo
+              value={userData?.requestNo} // Display requestNo
               readOnly
               className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             />
@@ -91,7 +91,7 @@ const ProfilePage = () => {
               type="date"
               name="date"
               onChange={(e) =>
-                setUpdateData({ ...updateData, requestFor: e.target.value })
+                setUpdateData({ ...updateData, date: e.target.value })
               }
               value={updateData?.date}
               className=" w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
@@ -106,7 +106,7 @@ const ProfilePage = () => {
               type="text"
               name="requestedBy"
               onChange={(e) =>
-                setUpdateData({ ...updateData, requestFor: e.target.value })
+                setUpdateData({ ...updateData, requestedBy: e.target.value })
               }
               value={updateData?.requestedBy}
               className="block w-full  py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
@@ -134,7 +134,7 @@ const ProfilePage = () => {
               type="text"
               name="department"
               onChange={(e) =>
-                setUpdateData({ ...updateData, requestFor: e.target.value })
+                setUpdateData({ ...updateData, department: e.target.value })
               }
               value={updateData?.department}
               className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
@@ -147,7 +147,7 @@ const ProfilePage = () => {
               type="text"
               name="employeeId"
               onChange={(e) =>
-                setUpdateData({ ...updateData, requestFor: e.target.value })
+                setUpdateData({ ...updateData, employeeId: e.target.value })
               }
               value={updateData?.employeeId}
               className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
@@ -161,7 +161,7 @@ const ProfilePage = () => {
             type="text"
             name="designation"
             onChange={(e) =>
-              setUpdateData({ ...updateData, requestFor: e.target.value })
+              setUpdateData({ ...updateData, designation: e.target.value })
             }
             value={updateData?.designation}
             className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
@@ -174,7 +174,7 @@ const ProfilePage = () => {
             type="text"
             name="reasonOfRequest"
             onChange={(e) =>
-              setUpdateData({ ...updateData, requestFor: e.target.value })
+              setUpdateData({ ...updateData, reasonOfRequest: e.target.value })
             }
             value={updateData?.reasonOfRequest}
             className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
@@ -187,7 +187,7 @@ const ProfilePage = () => {
             type="text"
             name="serviceDetails"
             onChange={(e) =>
-              setUpdateData({ ...updateData, requestFor: e.target.value })
+              setUpdateData({ ...updateData, serviceDetails: e.target.value })
             }
             value={updateData?.serviceDetails}
             className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
