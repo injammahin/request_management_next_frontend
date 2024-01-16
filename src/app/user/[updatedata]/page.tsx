@@ -88,6 +88,12 @@ const ProfilePage = () => {
   return (
     <>
       <Navbar />
+      <div className="mb-2 flex flex-row items-center">
+        <label className="flex flex-none mr-2">Request ID:</label>
+        <span className="text-gray-900">
+          {requestId !== null ? requestId : "N/A"}
+        </span>
+      </div>
       <form className="max-w-3xl uppercase mx-auto mt-8 p-4 border">
         <div className="grid  grid-cols-2 gap-4 mb-4">
           <div className="mb-2 flex flex-row items-center">

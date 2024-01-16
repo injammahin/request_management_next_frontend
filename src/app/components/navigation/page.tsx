@@ -12,7 +12,7 @@ import {
 } from "@heroicons/react/outline"; // Use outline icons from v2
 
 const Navbar = () => {
-  const [isMenuOpen, setMenuOpen] = useState(true);
+  const [isMenuOpen, setMenuOpen] = useState(false);
 
   const toggleMenu = () => {
     setMenuOpen(!isMenuOpen);
