@@ -11,7 +11,12 @@ import {
   KeyIcon,
 } from "@heroicons/react/outline"; // Use outline icons from v2
 
-const Navbar = () => {
+// Define a TypeScript interface for the Navbar props
+interface NavbarProps {
+  userRole: string;
+}
+
+const Navbar: React.FC<NavbarProps> = ({ userRole }) => {
   const [isMenuOpen, setMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -39,6 +44,24 @@ const Navbar = () => {
               ></path>
             </svg>
             <br />
+            {userRole === "admin" && (
+              <>
+                <Link
+                  href="/department/department_information"
+                  className="text-sm py-2 px-4 flex items-center space-x-2 uppercase text-white hover:bg-gray-700"
+                >
+                  <InformationCircleIcon className="w-5 h-5" />
+                  <span>Create Department Information</span>
+                </Link>
+                <Link
+                  href="/department/employee_information"
+                  className="text-sm py-2 px-4 flex items-center space-x-2 uppercase text-white hover:bg-gray-700"
+                >
+                  <UsersIcon className="w-5 h-5" />
+                  <span>Create Employee Information</span>
+                </Link>
+              </>
+            )}
             <Link
               href="/user/service_request"
               className="text-sm py-2 px-4 flex items-center space-x-2 uppercase text-white hover:bg-gray-700 "
@@ -68,25 +91,11 @@ const Navbar = () => {
               <span>View Maintenance Request Form</span>
             </Link>
             <Link
-              href="/department/department_information"
-              className="text-sm py-2 px-4 flex items-center space-x-2 uppercase text-white hover:bg-gray-700"
-            >
-              <InformationCircleIcon className="w-5 h-5" />
-              <span>Department Information</span>
-            </Link>
-            <Link
               href="/user/department_information"
               className="text-sm py-2 px-4 flex items-center space-x-2 uppercase text-white hover:bg-[#6DA4AA]"
             >
               <ClipboardCheckIcon className="w-5 h-5" />
               <span> View Department Information</span>
-            </Link>
-            <Link
-              href="/department/employee_information"
-              className="text-sm py-2 px-4 flex items-center space-x-2 uppercase text-white hover:bg-gray-700"
-            >
-              <UsersIcon className="w-5 h-5" />
-              <span>Employee Information</span>
             </Link>
             <Link
               href="/user/employee_information"

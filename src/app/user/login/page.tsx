@@ -1,7 +1,8 @@
+// Import necessary libraries and components
 "use client";
 import { useState } from "react";
 import axios from "axios";
-import { useRouter } from "next/navigation"; // Import from 'next/router' instead of 'next/navigation'
+import { useRouter } from "next/navigation";
 
 const SigninPage = () => {
   const [email, setEmail] = useState("");
@@ -21,8 +22,17 @@ const SigninPage = () => {
 
       if (response.data && response.data.id) {
         setSuccessMessage(response.data.message);
+
+        // Store user information in localStorage
         localStorage.setItem("userId", response.data.email);
-        router.push("/dashboard");
+        localStorage.setItem("userRole", response.data.role);
+
+        // Redirect based on user role
+        if (response.data.role === "admin") {
+          router.push("/admin-dashboard");
+        } else {
+          router.push("/user-dashboard");
+        }
       } else {
         console.error("Error logging in: User data is undefined");
         setErrorMessage("Failed to login. User data is undefined.");

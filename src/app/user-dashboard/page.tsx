@@ -67,7 +67,7 @@ import Sidebar from "../components/navigation/sidebar/page";
 const page = () => {
   return (
     <div>
-      <Navbar />
+      <Navbar userRole={"user"} />
 
       <div className="container mx-auto p-8 pt text-center">
         <div className="mb-8  relative group">
