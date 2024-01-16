@@ -19,7 +19,7 @@ const ProfilePage = () => {
   });
 
   const [updateData, setUpdateData] = useState({
-    // requestNo: "",
+    requestNo: "",
     date: "",
     department: "",
     reasonOfRequest: "",
@@ -47,12 +47,12 @@ const ProfilePage = () => {
         `http://localhost:3001/service-requests/${requestId}`,
         updateData
       );
-      console.log(userData);
+      // console.log(userData);
       setUserData(response.data);
       setMessage("information change successful!");
       // Optionally, you can clear the updateData after a successful update
       setUpdateData({
-        // requestNo: "",
+        requestNo: "",
         date: "",
         department: "",
         reasonOfRequest: "",
@@ -67,7 +67,19 @@ const ProfilePage = () => {
       setMessage("information change failed. Please try again.");
     }
   };
+  const autofillRequestNo = () => {
+    // Auto-generate requestNo based on date, department, and requestedBy
+    const generatedRequestNo = `DBL/${updateData.date}/${updateData.department}/${updateData.requestedBy}`;
+    setUpdateData((prevDetails) => ({
+      ...prevDetails,
+      requestNo: generatedRequestNo,
+    }));
+  };
 
+  useEffect(() => {
+    autofillRequestNo();
+  }, [updateData.date, updateData.department, updateData.requestedBy]);
+  console.log(updateData);
   return (
     <>
       <Navbar />
@@ -79,7 +91,7 @@ const ProfilePage = () => {
               type="text"
               name="requestNo"
               id="requestNo"
-              value={userData?.requestNo} // Display requestNo
+              value={updateData.requestNo} // Display requestNo
               readOnly
               className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             />
