@@ -39,6 +39,21 @@ const AdminDashboard = () => {
     setSelectedForm(form);
   };
 
+  const handleApprove = (form: SubmittedForm) => {
+    // Add logic to handle form approval
+    console.log(`Approve form with ID ${form.id}`);
+  };
+
+  const handleDelete = (form: SubmittedForm) => {
+    // Add logic to handle form deletion
+    console.log(`Delete form with ID ${form.id}`);
+  };
+
+  const handleRevision = (form: SubmittedForm) => {
+    // Add logic to handle form revision
+    console.log(`Request revision for form with ID ${form.id}`);
+  };
+
   const handleShowAllForms = () => {
     setShowAllForms((prevShowAllForms) => !prevShowAllForms);
   };
@@ -56,12 +71,14 @@ const AdminDashboard = () => {
             Click the menu button to show more
           </h2>
         </div>
+
         <button
           className="bg-blue-500 text-white p-2 rounded hover:bg-blue-700 mt-4"
           onClick={handleShowAllForms}
         >
           {showAllForms ? "Hide Forms" : "Show All Submitted Forms"}
         </button>
+
         <div>
           <h2 className="text-2xl font-bold mb-4">
             {showAllForms ? "All Submitted Forms" : "Selected Form"}
@@ -82,24 +99,60 @@ const AdminDashboard = () => {
                 <p>
                   <strong>Requested By:</strong> {form.requestedBy}
                 </p>
-                {/* ... */}
+                {/* ... (other details) */}
+                {/* Buttons for actions */}
+                <div className="flex space-x-2 mt-2">
+                  <button
+                    className="bg-green-500 text-white p-2 rounded hover:bg-green-700"
+                    onClick={() => handleApprove(form)}
+                  >
+                    Approve
+                  </button>
+                  <button
+                    className="bg-red-500 text-white p-2 rounded hover:bg-red-700"
+                    onClick={() => handleDelete(form)}
+                  >
+                    Delete
+                  </button>
+                  <button
+                    className="bg-yellow-500 text-white p-2 rounded hover:bg-yellow-700"
+                    onClick={() => handleRevision(form)}
+                  >
+                    Request Revision
+                  </button>
+                </div>
               </div>
             ))
           ) : (
             <div
               className="border p-4 mb-4 cursor-pointer"
               onClick={() => handleFormClick(selectedForm as SubmittedForm)}
-            ></div>
+            >
+              {/* ... (selected form details) */}
+              {/* Buttons for actions */}
+              <div className="flex space-x-2 mt-2">
+                <button
+                  className="bg-green-500 text-white p-2 rounded hover:bg-green-700"
+                  onClick={() => handleApprove(selectedForm as SubmittedForm)}
+                >
+                  Approve
+                </button>
+                <button
+                  className="bg-red-500 text-white p-2 rounded hover:bg-red-700"
+                  onClick={() => handleDelete(selectedForm as SubmittedForm)}
+                >
+                  Delete
+                </button>
+                <button
+                  className="bg-yellow-500 text-white p-2 rounded hover:bg-yellow-700"
+                  onClick={() => handleRevision(selectedForm as SubmittedForm)}
+                >
+                  Request Revision
+                </button>
+              </div>
+            </div>
           )}
         </div>
-
-        {/* Button to show all submitted forms */}
-        {/* <button
-          className="bg-blue-500 text-white p-2 rounded hover:bg-blue-700 mt-4"
-          onClick={handleShowAllForms}
-        >
-          {showAllForms ? "Hide Forms" : "Show All Submitted Forms"}
-        </button> */}
       </div>
     </div>
   );
