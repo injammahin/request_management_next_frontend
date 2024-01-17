@@ -233,13 +233,13 @@ const AdminDashboard = () => {
                     className="bg-red-500 text-white p-2 rounded hover:bg-red-700"
                     onClick={() => handleDelete(form)}
                   >
-                    Delete
+                    Decline
                   </button>
                   <button
                     className="bg-yellow-500 text-white p-2 rounded hover:bg-yellow-700"
                     onClick={() => handleRevision(form)}
                   >
-                    Request Revision
+                    Revision
                   </button>
                 </div>
               </div>
@@ -251,7 +251,7 @@ const AdminDashboard = () => {
             >
               {/* ... (selected form details) */}
               {/* Buttons for actions */}
-              <div className="flex space-x-2 mt-2">
+              {/* <div className="flex space-x-2 mt-2">
                 <button
                   className="bg-green-500 text-white p-2 rounded hover:bg-green-700"
                   onClick={() => handleApprove(selectedForm as SubmittedForm)}
@@ -270,7 +270,7 @@ const AdminDashboard = () => {
                 >
                   Request Revision
                 </button>
-              </div>
+              </div> */}
             </div>
           )}
         </div>
