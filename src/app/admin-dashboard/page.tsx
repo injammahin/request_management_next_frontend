@@ -6,9 +6,15 @@ import Navbar from "../components/navigation/page";
 
 interface SubmittedForm {
   id: number;
-  requestNo: string;
   date: string;
+  department: string;
+  designation: string;
+  employeeId: string;
+  reasonOfRequest: string;
+  requestFor: string;
+  requestNo: string;
   requestedBy: string;
+  serviceDetails: string;
   // Add other properties based on your form structure
 }
 
@@ -62,7 +68,7 @@ const AdminDashboard = () => {
     <div>
       <Navbar userRole={"admin"} />
 
-      <div className="container mx-auto p-8 pt text-center">
+      <div className="container mx-auto p-8 pt ">
         <div className="mb-8 relative group">
           <h2 className="text-3xl uppercase font-bold mb-2 pt-16 group-hover:text-blue-500">
             Welcome to your admin dashboard
@@ -90,16 +96,92 @@ const AdminDashboard = () => {
                 className="border p-4 mb-4 cursor-pointer"
                 onClick={() => handleFormClick(form)}
               >
-                <p>
-                  <strong>Request No:</strong> {form.requestNo}
-                </p>
-                <p>
-                  <strong>Date:</strong> {form.date}
-                </p>
-                <p>
-                  <strong>Requested By:</strong> {form.requestedBy}
-                </p>
-                {/* ... (other details) */}
+                <div>
+                  <table className="w-full  bg-gray-100">
+                    <tbody>
+                      <tr>
+                        {/* Request No and Date in one row */}
+                        <td className="border-[1px] border-b-1 py-2 px-4 border-gray-600">
+                          <div className="font-semibold text-sm text-gray-900">
+                            Request No: {form.requestNo}
+                          </div>
+                        </td>
+
+                        <td className="border-[1px] border-b-1 py-2 px-4 border-gray-600">
+                          <div className="font-semibold text-sm text-gray-900">
+                            Date: {form.date}
+                          </div>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        {/* Request No and Date in one row */}
+                        <td className="border-[1px] border-b-1 py-2 px-4 border-gray-600">
+                          <div className="font-semibold text-sm text-gray-900">
+                            Requested By: {form.requestedBy}
+                          </div>
+                        </td>
+
+                        <td className="border-[1px] border-b-1 py-2 px-4 border-gray-600">
+                          <div className="font-semibold text-sm text-gray-900">
+                            Request For: {form.requestFor}
+                          </div>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        {/* Request No and Date in one row */}
+                        <td className="border-[1px] border-b-1 py-2 px-4 border-gray-600">
+                          <div className="font-semibold text-sm text-gray-900">
+                            Department: {form.department}
+                          </div>
+                        </td>
+
+                        <td className="border-[1px] border-b-1 py-2 px-4 border-gray-600">
+                          <div className="font-semibold text-sm text-gray-900">
+                            Employee Id: {form.employeeId}
+                          </div>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        {/* Designation in a separate row */}
+                        <td
+                          colSpan={2}
+                          className="border-[1px] border-b-1 py-2 px-4 border-gray-600"
+                        >
+                          <div className="font-semibold text-sm text-gray-900">
+                            Designation: {form.designation}
+                          </div>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        {/* Reason of Request in a separate row */}
+                        <td
+                          colSpan={2}
+                          className="border-[1px] border-b-1 py-2 px-4 border-gray-600"
+                        >
+                          <div className="font-semibold text-sm text-gray-900">
+                            Reason of Request: {form.reasonOfRequest}
+                          </div>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        {/* Service Details in a separate row */}
+                        <td
+                          colSpan={2}
+                          className="border-[1px] border-b-1 py-2 px-4 border-gray-600"
+                        >
+                          <div className="font-semibold text-sm text-gray-900">
+                            Service Details: {form.serviceDetails}
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
                 {/* Buttons for actions */}
                 <div className="flex space-x-2 mt-2">
                   <button
