@@ -136,7 +136,7 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
 
   return (
     <div>
-      <Navbar />
+      <Navbar userRole={""} />
 
       <form
         onSubmit={handleSubmit}

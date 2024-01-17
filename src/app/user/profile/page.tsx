@@ -195,7 +195,7 @@ const ProfilePage: React.FC = () => {
 
   return (
     <div>
-      <Navbar />
+      <Navbar userRole={""} />
       <div className="container-xl screen-full flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8 overflow-x-auto">
         <div className="w-full bg-white p-8 rounded-lg shadow-md space-y-8">
           <div>

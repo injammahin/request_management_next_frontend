@@ -67,7 +67,7 @@ const Navbar: React.FC<NavbarProps> = ({ userRole }) => {
               className="text-sm py-2 px-4 flex items-center space-x-2 uppercase text-white hover:bg-gray-700 "
             >
               <ClipboardCheckIcon className="w-5 h-5" />
-              <span>Service Request</span>
+              <span> Create Service Request Form</span>
             </Link>
             <Link
               href="/user/profile"
