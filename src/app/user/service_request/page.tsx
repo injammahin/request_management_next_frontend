@@ -18,7 +18,7 @@ interface ServiceDetails {
   designation: string;
   reasonOfRequest: string;
   serviceDetails: string;
-  userId: string;
+  user: string;
   [key: string]: string; // Index signature to allow any additional string properties
 }
 
@@ -33,7 +33,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
     designation: "",
     reasonOfRequest: "",
     serviceDetails: "",
-    userId: "",
+    user: "",
   });
   const [successMessage, setSuccessMessage] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("");

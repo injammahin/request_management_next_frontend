@@ -50,7 +50,7 @@ const ProfilePage: React.FC = () => {
   const router = useRouter();
 
   const handleBackButtonClick = () => {
-    router.push("/dashboard");
+    router.push("/user-dashboard");
   };
   useEffect(() => {
     const fetchData = async () => {
