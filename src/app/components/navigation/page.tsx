@@ -22,6 +22,17 @@ const Navbar: React.FC<NavbarProps> = ({ userRole }) => {
   const toggleMenu = () => {
     setMenuOpen(!isMenuOpen);
   };
+  const logout = async () => {
+    try {
+      // Make an API request or perform any necessary logout actions
+      // ...
+
+      // Redirect the user to the logout page or perform any necessary navigation
+      window.location.href = "/user/logout";
+    } catch (error) {
+      console.error("Error during logout:", error);
+    }
+  };
 
   return (
     <nav className="bg-gray-700 p-4 relative">
@@ -134,16 +145,15 @@ const Navbar: React.FC<NavbarProps> = ({ userRole }) => {
 
         {/* Navigation Links (conditionally rendered based on isMenuOpen) */}
         <div className={`lg:flex ${isMenuOpen ? "flex" : "hidden"} space-x-4`}>
-          <Link href="/dashboard" className="text-white">
+          {/* <Link href="/dashboard" className="text-white">
             Home
-          </Link>
+          </Link> */}
 
-          <Link href="/about" className="text-white">
-            About Us
-          </Link>
-
-          <button className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700">
-            <Link href="/user/logout">Logout</Link>
+          <button
+            className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700"
+            onClick={logout} // Call the logout function on click
+          >
+            Logout
           </button>
         </div>
       </div>
