@@ -29,11 +29,11 @@ const SigninPage = () => {
 
         // Redirect based on user role
         if (response.data.role === "admin") {
-          router.push("/admin-dashboard");
+          router.push("/dashboard/admin-dashboard");
         } else if (response.data.role === "supervisor") {
-          router.push("/supervisor-dashboard");
+          router.push("/dashboard/supervisor-dashboard");
         } else if (response.data.role === "user") {
-          router.push("/user-dashboard");
+          router.push("/dashboard/user-dashboard");
         } else {
           // Handle other roles or scenarios
           console.error("Unknown role:", response.data.role);

@@ -61,8 +61,8 @@
 
 // export default Page;
 import React from "react";
-import Navbar from "../components/navigation/page";
-import Sidebar from "../components/navigation/sidebar/page";
+import Navbar from "../../components/navigation/page";
+// import Sidebar from "../../components/navigation/sidebar/page";
 
 const page = () => {
   return (

@@ -2,7 +2,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Navbar from "../components/navigation/page";
+import Navbar from "../../components/navigation/page";
 
 interface SubmittedForm {
   id: number;
