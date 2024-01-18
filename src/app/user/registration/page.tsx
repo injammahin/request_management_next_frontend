@@ -116,8 +116,8 @@ const SignupPage = () => {
               >
                 <option value="user">User</option>
                 <option value="admin">Admin</option>
-                <option value="admin">Admin1</option>
-                <option value="admin">Admin2</option>
+                <option value="supervisor">supervisor</option>
+                <option value="mainadmin">main admin</option>
                 <option value="admin">Admin3</option>
               </select>
             </div>
