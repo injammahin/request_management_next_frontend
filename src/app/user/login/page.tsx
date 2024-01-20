@@ -26,6 +26,7 @@ const SigninPage = () => {
         // Store user information in localStorage
         localStorage.setItem("userId", response.data.email);
         localStorage.setItem("userRole", response.data.role);
+        localStorage.setItem("Id", response.data.id);
 
         // Redirect based on user role
         if (response.data.role === "admin") {
@@ -36,6 +37,8 @@ const SigninPage = () => {
           router.push("/dashboard/user-dashboard");
         } else if (response.data.role === "superadmin") {
           router.push("/dashboard/admin2-dashboard");
+        } else if (response.data.role === "subadmin") {
+          router.push("/dashboard/subadmin-dashboard");
         } else {
           // Handle other roles or scenarios
           console.error("Unknown role:", response.data.role);

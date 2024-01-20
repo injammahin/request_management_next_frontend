@@ -96,7 +96,9 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
         "http://localhost:3001/service-requests/fillup",
         {
           ...serviceDetails,
-          userId: localStorage.getItem("userId"),
+          userId: localStorage.getItem("Id"),
+          user: localStorage.getItem("Id"),
+          Userid: localStorage.getItem("Id"),
         }
       );
 
