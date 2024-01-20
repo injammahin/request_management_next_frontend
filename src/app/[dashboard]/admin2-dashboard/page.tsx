@@ -47,18 +47,23 @@ const AdminDashboard: React.FC = () => {
     }
   }, [showAllPending, successMessage]);
 
+  const confirmAction = (action: string, id: number) => {
+    return window.confirm(`Are you sure you want to ${action} request ${id}?`);
+  };
+
   const handleApprove = async (id: number) => {
-    try {
-      await axios.patch(`http://localhost:3001/service-requests/approve/${id}`);
-
-      // Remove the approved form from the pendingRequests array
-      setPendingRequests((prevRequests) =>
-        prevRequests.filter((request) => request.id !== id)
-      );
-
-      setSuccessMessage(`Service Request ${id} approved successfully`);
-    } catch (error) {
-      console.error(`Error approving service request ${id}:`, error);
+    if (confirmAction("approve", id)) {
+      try {
+        await axios.patch(
+          `http://localhost:3001/service-requests/approve/${id}`
+        );
+        setPendingRequests((prevRequests) =>
+          prevRequests.filter((request) => request.id !== id)
+        );
+        setSuccessMessage(`Service Request ${id} approved successfully`);
+      } catch (error) {
+        console.error(`Error approving service request ${id}:`, error);
+      }
     }
   };
 
@@ -81,12 +86,14 @@ const AdminDashboard: React.FC = () => {
 
   const handlePending = async (id: number) => {
     try {
-      await axios.patch(`http://localhost:3001/service-requests/pending/${id}`);
+      await axios.patch(
+        `http://localhost:3001/service-requests/revision/${id}`
+      );
       // Update the approval status locally without making another request
       setPendingRequests((prevRequests) =>
         prevRequests.map((request) =>
           request.id === id
-            ? { ...request, approvalStatus: "pending" }
+            ? { ...request, approvalStatus: "revision" }
             : request
         )
       );
@@ -102,7 +109,7 @@ const AdminDashboard: React.FC = () => {
 
   return (
     <div>
-      <Navbar userRole={"user"} />
+      {/* <Navbar userRole={"supervisor"} /> */}
       <h1>Admin Dashboard</h1>
       {successMessage && <p className="text-green-500">{successMessage}</p>}
       <button

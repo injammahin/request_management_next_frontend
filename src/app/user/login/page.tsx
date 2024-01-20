@@ -35,7 +35,7 @@ const SigninPage = () => {
         } else if (response.data.role === "user") {
           router.push("/dashboard/user-dashboard");
         } else if (response.data.role === "superadmin") {
-          router.push("/admin2-dashboard");
+          router.push("/dashboard/admin2-dashboard");
         } else {
           // Handle other roles or scenarios
           console.error("Unknown role:", response.data.role);
@@ -55,7 +55,7 @@ const SigninPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div className=" min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
         <div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
