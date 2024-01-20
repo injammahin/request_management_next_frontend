@@ -385,6 +385,18 @@ const ProfilePage: React.FC = () => {
                                       </tr>
                                       <tr>
                                         {/* Service Details in a separate row */}
+                                        <td
+                                          colSpan={2}
+                                          className="border-[1px] border-b-1 py-2 px-4 text-center border-gray-600"
+                                        >
+                                          <div className="font-semibold text-sm text-gray-900">
+                                            show all approval status
+                                            {/* {request.id} */}
+                                          </div>
+                                        </td>
+                                      </tr>
+                                      <tr>
+                                        {/* Service Details in a separate row */}
 
                                         <tr>
                                           <td
@@ -392,7 +404,7 @@ const ProfilePage: React.FC = () => {
                                             className="border-[1px]  border-b-1 py-2 px-4 border-gray-600"
                                           >
                                             <div className="font-semibold text-sm text-gray-900">
-                                              Approval Status:
+                                              supervisor :{"          "}
                                               {request.approvalStatus}
                                             </div>
                                           </td>
@@ -402,7 +414,8 @@ const ProfilePage: React.FC = () => {
                                             className="border-[1px]  border-b-1 py-2 px-4 border-gray-600"
                                           >
                                             <div className="font-semibold text-sm text-gray-900">
-                                              Approval Status:
+                                              depaetment of Ifra/App :
+                                              {"          "}
                                               {request.approvalStatus}
                                             </div>
                                           </td>
@@ -412,7 +425,7 @@ const ProfilePage: React.FC = () => {
                                             className="border-[1px]  border-b-1 py-2 px-4 border-gray-600"
                                           >
                                             <div className="font-semibold text-sm text-gray-900">
-                                              Approval Status:
+                                              CISO :{"          "}
                                               {request.approvalStatus}
                                             </div>
                                           </td>
@@ -422,7 +435,7 @@ const ProfilePage: React.FC = () => {
                                             className="border-[1px]  border-b-1 py-2 px-4 border-gray-600"
                                           >
                                             <div className="font-semibold text-sm text-gray-900">
-                                              Approval Status:
+                                              Head of Division :{"          "}
                                               {request.approvalStatus}
                                             </div>
                                           </td>
