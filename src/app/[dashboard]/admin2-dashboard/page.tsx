@@ -3,6 +3,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Navbar from "@/app/components/navigation/page";
 
 interface ServiceRequest {
   id: number;
@@ -101,6 +102,7 @@ const AdminDashboard: React.FC = () => {
 
   return (
     <div>
+      <Navbar userRole={"user"} />
       <h1>Admin Dashboard</h1>
       {successMessage && <p className="text-green-500">{successMessage}</p>}
       <button

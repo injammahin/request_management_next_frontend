@@ -28,6 +28,7 @@ interface ServiceRequest {
   requestNo: string;
   requestedBy: string;
   serviceDetails: string;
+  approvalStatus: string;
   showFullForm: boolean;
 }
 
@@ -379,6 +380,18 @@ const ProfilePage: React.FC = () => {
                                           <div className="font-semibold text-sm text-gray-900">
                                             Service Details:{" "}
                                             {request.serviceDetails}
+                                          </div>
+                                        </td>
+                                      </tr>
+                                      <tr>
+                                        {/* Service Details in a separate row */}
+                                        <td
+                                          colSpan={2}
+                                          className="border-[1px] border-b-1 py-2 px-4 border-gray-600"
+                                        >
+                                          <div className="font-semibold text-sm text-gray-900">
+                                            approval status:{" "}
+                                            {request.approvalStatus}
                                           </div>
                                         </td>
                                       </tr>
