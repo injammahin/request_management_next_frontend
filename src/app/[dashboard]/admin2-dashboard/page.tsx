@@ -29,7 +29,7 @@ const AdminDashboard: React.FC = () => {
     const fetchPendingRequests = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:3001/service-requests/pending"
+          "http://localhost:3001/service-requests/released"
         );
         setPendingRequests(
           response.data.filter(
