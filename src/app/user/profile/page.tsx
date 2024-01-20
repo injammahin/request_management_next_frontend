@@ -29,6 +29,7 @@ interface ServiceRequest {
   requestedBy: string;
   serviceDetails: string;
   approvalStatus: string;
+  supervisorStatus: string;
   showFullForm: boolean;
 }
 
@@ -405,7 +406,7 @@ const ProfilePage: React.FC = () => {
                                           >
                                             <div className="font-semibold text-sm text-gray-900">
                                               supervisor :{"          "}
-                                              {request.approvalStatus}
+                                              {request.supervisorStatus}
                                             </div>
                                           </td>
 
