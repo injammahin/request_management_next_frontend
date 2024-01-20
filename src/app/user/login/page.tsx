@@ -34,6 +34,8 @@ const SigninPage = () => {
           router.push("/dashboard/supervisor-dashboard");
         } else if (response.data.role === "user") {
           router.push("/dashboard/user-dashboard");
+        } else if (response.data.role === "superadmin") {
+          router.push("/admin2-dashboard");
         } else {
           // Handle other roles or scenarios
           console.error("Unknown role:", response.data.role);
