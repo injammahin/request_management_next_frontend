@@ -385,15 +385,48 @@ const ProfilePage: React.FC = () => {
                                       </tr>
                                       <tr>
                                         {/* Service Details in a separate row */}
-                                        <td
-                                          colSpan={2}
-                                          className="border-[1px] border-b-1 py-2 px-4 border-gray-600"
-                                        >
-                                          <div className="font-semibold text-sm text-gray-900">
-                                            approval status:{" "}
-                                            {request.approvalStatus}
-                                          </div>
-                                        </td>
+
+                                        <tr>
+                                          <td
+                                            colSpan={1}
+                                            className="border-[1px]  border-b-1 py-2 px-4 border-gray-600"
+                                          >
+                                            <div className="font-semibold text-sm text-gray-900">
+                                              Approval Status:
+                                              {request.approvalStatus}
+                                            </div>
+                                          </td>
+
+                                          <td
+                                            colSpan={1}
+                                            className="border-[1px]  border-b-1 py-2 px-4 border-gray-600"
+                                          >
+                                            <div className="font-semibold text-sm text-gray-900">
+                                              Approval Status:
+                                              {request.approvalStatus}
+                                            </div>
+                                          </td>
+
+                                          <td
+                                            colSpan={1}
+                                            className="border-[1px]  border-b-1 py-2 px-4 border-gray-600"
+                                          >
+                                            <div className="font-semibold text-sm text-gray-900">
+                                              Approval Status:
+                                              {request.approvalStatus}
+                                            </div>
+                                          </td>
+
+                                          <td
+                                            colSpan={1}
+                                            className="border-[1px]  border-b-1 py-2 px-4 border-gray-600"
+                                          >
+                                            <div className="font-semibold text-sm text-gray-900">
+                                              Approval Status:
+                                              {request.approvalStatus}
+                                            </div>
+                                          </td>
+                                        </tr>
                                       </tr>
                                     </tbody>
                                   </table>

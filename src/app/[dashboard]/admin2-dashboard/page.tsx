@@ -109,7 +109,7 @@ const AdminDashboard: React.FC = () => {
 
   return (
     <div>
-      {/* <Navbar userRole={"supervisor"} /> */}
+      <Navbar userRole={"supervisor"} />
       <h1>Admin Dashboard</h1>
       {successMessage && <p className="text-green-500">{successMessage}</p>}
       <button
