@@ -1,5 +1,6 @@
 // pages/ServiceRequests.tsx
 "use client";
+import Navbar from "@/app/components/navigation/page";
 import React, { useState, useEffect } from "react";
 
 interface ServiceRequest {
@@ -61,6 +62,7 @@ const ServiceRequests: React.FC = () => {
 
   return (
     <div className="container mx-auto p-4">
+      <Navbar userRole={""} />
       <h1 className="text-2xl font-bold text-center mb-6">
         IT Department Service Requests
       </h1>
