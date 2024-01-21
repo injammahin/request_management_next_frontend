@@ -23,6 +23,7 @@ const AdminDashboard: React.FC = () => {
   const [showAllPending, setShowAllPending] = useState(false);
   const [showAllDetails, setShowAllDetails] = useState<number | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     const fetchPendingRequests = async () => {
@@ -97,14 +98,23 @@ const AdminDashboard: React.FC = () => {
       }
     }
   };
+  const handleMenuToggle = (isOpen: boolean) => {
+    setIsMenuOpen(isOpen);
+  };
 
   const handleShowAllDetails = (id: number) =>
     setShowAllDetails((prev) => (prev === id ? null : id));
 
   return (
-    <div className=" bg-gray-100 min-h-screen">
-      <Navbar userRole={"supervisor"} />
-      <div className="container mx-auto p-6">
+    <div
+      className={`bg-gray-100 min-h-screen ${isMenuOpen ? "menu-open" : ""}`}
+    >
+      <Navbar userRole={"supervisor"} onMenuToggle={handleMenuToggle} />
+      <div
+        className={`container mx-auto p-6 ${
+          isMenuOpen ? "translate-x-[300px]" : ""
+        }`}
+      >
         <h1 className="text-3xl font-bold text-gray-800 mb-4">
           Admin Dashboard
         </h1>

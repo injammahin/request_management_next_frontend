@@ -43,6 +43,8 @@ const ProfilePage: React.FC = () => {
   );
   const [isLoading, setIsLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   const [isDeleteConfirmationOpen, setIsDeleteConfirmationOpen] =
     useState(false);
   const [selectedRequestId, setSelectedRequestId] = useState<number | null>(
@@ -190,15 +192,24 @@ const ProfilePage: React.FC = () => {
       }
     }
   };
+  const handleMenuToggle = (isOpen: boolean) => {
+    setIsMenuOpen(isOpen);
+  };
 
   if (!userData) {
     return <LoadingSpinner loading={isLoading} />;
   }
 
   return (
-    <div>
-      <Navbar userRole={""} />
-      <div className="container-xl screen-full flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8 overflow-x-auto">
+    <div
+      className={`bg-gray-100 min-h-screen ${isMenuOpen ? "menu-open" : ""}`}
+    >
+      <Navbar userRole={"supervisor"} onMenuToggle={handleMenuToggle} />
+      <div
+        className={`container mx-auto p-6 ${
+          isMenuOpen ? "translate-x-[200px]" : ""
+        }`}
+      >
         <div className="w-full bg-white p-8 rounded-lg shadow-md space-y-8">
           <div>
             <h2 className="text-2xl font-semibold text-gray-700 text-center">

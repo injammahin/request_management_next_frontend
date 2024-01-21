@@ -43,11 +43,15 @@ const ProfilePage: React.FC = () => {
   const [userData, setUserData] = useState<UserDetails | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDeleteConfirmationOpen, setIsDeleteConfirmationOpen] =
     useState(false);
   const [selectedRequestId, setSelectedRequestId] = useState<number | null>(
     null
   );
+  const handleMenuToggle = (isOpen: boolean) => {
+    setIsMenuOpen(isOpen);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -199,9 +203,15 @@ const ProfilePage: React.FC = () => {
   }
 
   return (
-    <div>
-      <Navbar userRole={""} />
-      <div className="screen-full flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8 overflow-x-auto">
+    <div
+      className={`bg-gray-100 min-h-screen ${isMenuOpen ? "menu-open" : ""}`}
+    >
+      <Navbar userRole={"user"} onMenuToggle={handleMenuToggle} />
+      <div
+        className={`container mx-auto p-6 ${
+          isMenuOpen ? "translate-x-[200px]" : ""
+        }`}
+      >
         <div className="w-full bg-white p-8 rounded-lg shadow-md space-y-8">
           <div className="bg-gray-200 p-6 rounded-lg">
             <h1 className="text-lg font-semibold mb-2">

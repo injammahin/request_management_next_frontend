@@ -87,7 +87,12 @@ const ProfilePage = () => {
   console.log(updateData);
   return (
     <>
-      <Navbar />
+      <Navbar
+        userRole={""}
+        onMenuToggle={function (isOpen: boolean): void {
+          throw new Error("Function not implemented.");
+        }}
+      />
       <div className="mb-2 flex flex-row items-center">
         <label className="flex flex-none mr-2">Request ID:</label>
         <span className="text-gray-900">

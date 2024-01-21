@@ -115,7 +115,12 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
 
   return (
     <div>
-      <Navbar userRole={""} />
+      <Navbar
+        userRole={""}
+        onMenuToggle={function (isOpen: boolean): void {
+          throw new Error("Function not implemented.");
+        }}
+      />
 
       <form
         onSubmit={handleSubmit}

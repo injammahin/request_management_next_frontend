@@ -36,6 +36,12 @@ const ServiceRequests: React.FC = () => {
       .catch((error) => setError(error.message))
       .finally(() => setIsLoading(false));
   }, []);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  // This function will be called by the Navbar component
+  const handleMenuToggle = (isOpen: boolean) => {
+    setIsMenuOpen(isOpen);
+  };
 
   const handleAction = async (id: number, action: "release" | "block") => {
     try {
@@ -68,9 +74,15 @@ const ServiceRequests: React.FC = () => {
     return <div className="text-center text-red-500">Error: {error}</div>;
 
   return (
-    <>
-      <Navbar userRole={""} />
-      <div className="container  mx-auto p-4">
+    <div
+      className={`bg-gray-100 min-h-screen ${isMenuOpen ? "menu-open" : ""}`}
+    >
+      <Navbar userRole={"supervisor"} onMenuToggle={handleMenuToggle} />
+      <div
+        className={`container mx-auto p-6 ${
+          isMenuOpen ? "translate-x-[300px]" : ""
+        }`}
+      >
         <h1 className="text-2xl font-bold text-center mb-6">
           IT Department Service Requests
         </h1>
@@ -217,7 +229,7 @@ const ServiceRequests: React.FC = () => {
           ))}
         </ul>
       </div>
-    </>
+    </div>
   );
 };
 

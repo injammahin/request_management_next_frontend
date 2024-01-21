@@ -24,6 +24,12 @@ const AdminDashboard = () => {
   const [expandedForms, setExpandedForms] = useState<Record<number, boolean>>(
     {}
   );
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  // This function will be called by the Navbar component
+  const handleMenuToggle = (isOpen: boolean) => {
+    setIsMenuOpen(isOpen);
+  };
 
   useEffect(() => {
     fetchSubmittedForms();
@@ -85,10 +91,15 @@ const AdminDashboard = () => {
   };
 
   return (
-    <div>
-      <Navbar userRole={"admin"} />
-
-      <div className="container mx-auto p-8 pt ">
+    <div
+      className={`bg-gray-100 min-h-screen ${isMenuOpen ? "menu-open" : ""}`}
+    >
+      <Navbar userRole={"supervisor"} onMenuToggle={handleMenuToggle} />
+      <div
+        className={`container mx-auto p-6 ${
+          isMenuOpen ? "translate-x-[300px]" : ""
+        }`}
+      >
         <div className="mb-8 relative group">
           <h2 className="text-3xl uppercase font-bold mb-2 pt-16 group-hover:text-blue-500">
             Welcome to your admin dashboard

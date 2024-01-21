@@ -14,13 +14,16 @@ import {
 // Define a TypeScript interface for the Navbar props
 interface NavbarProps {
   userRole: string;
+  onMenuToggle: (isOpen: boolean) => void; // New prop
 }
 
-const Navbar: React.FC<NavbarProps> = ({ userRole }) => {
+const Navbar: React.FC<NavbarProps> = ({ userRole, onMenuToggle }) => {
   const [isMenuOpen, setMenuOpen] = useState(false);
 
   const toggleMenu = () => {
-    setMenuOpen(!isMenuOpen);
+    const newMenuState = !isMenuOpen;
+    setMenuOpen(newMenuState);
+    onMenuToggle(newMenuState); // Notify the parent component about the menu state change
   };
   const logout = async () => {
     try {
