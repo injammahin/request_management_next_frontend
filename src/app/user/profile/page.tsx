@@ -413,41 +413,71 @@ const ProfilePage: React.FC = () => {
                                         <tr>
                                           <td
                                             colSpan={1}
-                                            className="border-[1px]  border-b-1 py-2 px-4 border-gray-600"
+                                            className="py-2 px-4"
+                                            style={{
+                                              borderBottom: "2px solid",
+                                              borderColor:
+                                                request.supervisorStatus ===
+                                                "Released"
+                                                  ? "green"
+                                                  : "red",
+                                            }}
                                           >
                                             <div className="font-semibold text-sm text-gray-900">
-                                              supervisor :{"          "}
+                                              supervisor :{" "}
                                               {request.supervisorStatus}
                                             </div>
                                           </td>
 
                                           <td
                                             colSpan={1}
-                                            className="border-[1px]  border-b-1 py-2 px-4 border-gray-600"
+                                            className="py-2 px-4"
+                                            style={{
+                                              borderBottom: "2px solid",
+                                              borderColor:
+                                                request.approvalStatus ===
+                                                "approve"
+                                                  ? "green"
+                                                  : "red",
+                                            }}
                                           >
                                             <div className="font-semibold text-sm text-gray-900">
-                                              depaetment of Ifra/App :
-                                              {"          "}
+                                              department of Ifra/App :{" "}
                                               {request.approvalStatus}
                                             </div>
                                           </td>
 
                                           <td
                                             colSpan={1}
-                                            className="border-[1px]  border-b-1 py-2 px-4 border-gray-600"
+                                            className="py-2 px-4"
+                                            style={{
+                                              borderBottom: "2px solid",
+                                              borderColor:
+                                                request.approvalStatus ===
+                                                "approved"
+                                                  ? "green"
+                                                  : "red",
+                                            }}
                                           >
                                             <div className="font-semibold text-sm text-gray-900">
-                                              CISO :{"          "}
-                                              {request.approvalStatus}
+                                              CISO : {request.approvalStatus}
                                             </div>
                                           </td>
 
                                           <td
                                             colSpan={1}
-                                            className="border-[1px]  border-b-1 py-2 px-4 border-gray-600"
+                                            className="py-2 px-4"
+                                            style={{
+                                              borderBottom: "2px solid",
+                                              borderColor:
+                                                request.approvalStatus ===
+                                                "confirmed"
+                                                  ? "green"
+                                                  : "red",
+                                            }}
                                           >
                                             <div className="font-semibold text-sm text-gray-900">
-                                              Head of Division :{"          "}
+                                              Head of Division :{" "}
                                               {request.approvalStatus}
                                             </div>
                                           </td>
