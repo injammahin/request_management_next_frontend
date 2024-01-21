@@ -145,33 +145,104 @@ const ProfilePage: React.FC = () => {
       );
 
       if (selectedRequest) {
-        // Create a new jsPDF instance
         const pdf = new jsPDF();
-
-        // Set font size and style
         pdf.setFontSize(12);
         pdf.setFont("helvetica", "normal");
 
-        // Add content to the PDF
-        pdf.text(`Request No: ${selectedRequest.requestNo}`, 20, 20);
-        pdf.text(`Date: ${selectedRequest.date}`, 20, 30);
-        pdf.text(`Department: ${selectedRequest.department}`, 20, 40);
-        pdf.text(`Designation: ${selectedRequest.designation}`, 20, 50);
-        pdf.text(`Employee Id: ${selectedRequest.employeeId}`, 20, 60);
-        pdf.text(
-          `Reason of Request: ${selectedRequest.reasonOfRequest}`,
-          20,
-          70
-        );
-        pdf.text(`Request For: ${selectedRequest.requestFor}`, 20, 80);
-        pdf.text(`Requested By: ${selectedRequest.requestedBy}`, 20, 90);
-        pdf.text(`Service Details: ${selectedRequest.serviceDetails}`, 20, 100);
+        const lineHeight = 10;
+        let currentY = 20;
 
-        // Save the PDF with a specific filename
+        // Function to draw text within a box, handling multiple fields
+        const drawBoxedText = (
+          labelsAndTexts: any[],
+          y: number,
+          isSingleLine = true
+        ) => {
+          const boxWidth = isSingleLine ? 180 : 85; // Adjusted for half-width boxes
+          labelsAndTexts.forEach((item, index) => {
+            const offsetX = isSingleLine ? 15 : 15 + index * 90; // Adjusting X position for second box on the same line
+            pdf.rect(offsetX, y, boxWidth, lineHeight); // x, y, width, height
+            pdf.text(`${item.label}: ${item.text}`, offsetX + 5, y + 5); // adding padding for x and y
+          });
+        };
+
+        // Drawing boxes with text
+        drawBoxedText(
+          [
+            { label: "Request No", text: selectedRequest.requestNo },
+            { label: "Date", text: selectedRequest.date },
+          ],
+          currentY,
+          false
+        );
+        currentY += lineHeight;
+
+        drawBoxedText(
+          [
+            { label: "Requested By", text: selectedRequest.requestedBy },
+            { label: "Request For", text: selectedRequest.requestFor },
+          ],
+          currentY,
+          false
+        );
+        currentY += lineHeight;
+
+        drawBoxedText(
+          [
+            { label: "Department", text: selectedRequest.department },
+            { label: "Employee Id", text: selectedRequest.employeeId },
+          ],
+          currentY,
+          false
+        );
+        currentY += lineHeight;
+
+        // Individual lines
+        drawBoxedText(
+          [{ label: "Designation", text: selectedRequest.designation }],
+          currentY
+        );
+        currentY += lineHeight;
+        drawBoxedText(
+          [
+            {
+              label: "Reason of Request",
+              text: selectedRequest.reasonOfRequest,
+            },
+          ],
+          currentY
+        );
+        currentY += lineHeight;
+        drawBoxedText(
+          [{ label: "Service Details", text: selectedRequest.serviceDetails }],
+          currentY
+        );
+        currentY += lineHeight;
+
+        // Approval statuses in one line
+        drawBoxedText(
+          [
+            {
+              label: "Supervisor Status",
+              text: selectedRequest.supervisorStatus,
+            },
+            { label: "CISO Status", text: selectedRequest.cisoStatus },
+            {
+              label: "Head Of Division",
+              text: selectedRequest.HeadOfDivisionStatus,
+            },
+            { label: "Approval Status", text: selectedRequest.approvalStatus },
+          ],
+          currentY,
+          false
+        );
+        currentY += lineHeight;
+
         pdf.save(`service_request_${id}.pdf`);
       }
     }
   };
+
   const handleMenuToggle = (isOpen: boolean) => {
     setIsMenuOpen(isOpen);
   };
