@@ -102,7 +102,7 @@ const AdminDashboard: React.FC = () => {
     setShowAllDetails((prev) => (prev === id ? null : id));
 
   return (
-    <div className="bg-gray-100 min-h-screen">
+    <div className=" bg-gray-100 min-h-screen">
       <Navbar userRole={"supervisor"} />
       <div className="container mx-auto p-6">
         <h1 className="text-3xl font-bold text-gray-800 mb-4">
@@ -153,11 +153,88 @@ const AdminDashboard: React.FC = () => {
                   </button>
                 </div>
                 {showAllDetails === request.id && (
-                  <div className="mt-4">
-                    {/* Details here */}
-                    <p>Date: {request.date}</p>
-                    {/* More details... */}
-                  </div>
+                  <tbody>
+                    <tr>
+                      {/* Request No and Date in one row */}
+                      <td className="border-[1px]    border-b-1 py-2 px-4 border-gray-600">
+                        <div className="font-semibold text-sm text-gray-900">
+                          Request No: {request.requestNo}
+                        </div>
+                      </td>
+
+                      <td className="border-[1px] border-b-1 py-2 px-4  border-gray-600">
+                        <div className="font-semibold text-sm text-gray-900">
+                          Date: {request.date}
+                        </div>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      {/* Request No and Date in one row */}
+                      <td className="border-[1px] border-b-1 py-2 px-4 border-gray-600">
+                        <div className="font-semibold text-sm text-gray-900">
+                          Requested By: {request.requestedBy}
+                        </div>
+                      </td>
+
+                      <td className="border-[1px] border-b-1 py-2 px-4 border-gray-600">
+                        <div className="font-semibold text-sm text-gray-900">
+                          Request For: {request.requestFor}
+                        </div>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      {/* Request No and Date in one row */}
+                      <td className="border-[1px] border-b-1 py-2 px-4 border-gray-600">
+                        <div className="font-semibold text-sm text-gray-900">
+                          Department: {request.department}
+                        </div>
+                      </td>
+
+                      <td className="border-[1px] border-b-1 py-2 px-4 border-gray-600">
+                        <div className="font-semibold text-sm text-gray-900">
+                          Employee Id: {request.employeeId}
+                        </div>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      {/* Designation in a separate row */}
+                      <td
+                        colSpan={2}
+                        className="border-[1px] border-b-1 py-2 px-4 border-gray-600"
+                      >
+                        <div className="font-semibold text-sm text-gray-900">
+                          Designation: {request.designation}
+                        </div>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      {/* Reason of Request in a separate row */}
+                      <td
+                        colSpan={2}
+                        className="border-[1px] border-b-1 py-2 px-4 border-gray-600"
+                      >
+                        <div className="font-semibold text-sm text-gray-900">
+                          Reason of Request: {request.reasonOfRequest}
+                        </div>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      {/* Service Details in a separate row */}
+                      <td
+                        colSpan={2}
+                        className="border-[1px] border-b-1 py-2 px-4 border-gray-600"
+                      >
+                        <div className="font-semibold text-sm text-gray-900">
+                          Service Details: {request.serviceDetails}
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
                 )}
               </div>
             ))}
