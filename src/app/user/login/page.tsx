@@ -41,6 +41,8 @@ const SigninPage = () => {
           router.push("/dashboard/subadmin-dashboard");
         } else if (response.data.role === "ciso") {
           router.push("/dashboard/ciso-dashboard");
+        } else if (response.data.role === "departmentHead") {
+          router.push("/dashboard/headOfDepartment-dashboard");
         } else {
           // Handle other roles or scenarios
           console.error("Unknown role:", response.data.role);
