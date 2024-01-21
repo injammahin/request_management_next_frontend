@@ -241,7 +241,7 @@ const ProfilePage: React.FC = () => {
                   />
                   {filteredServiceRequests &&
                   filteredServiceRequests.length > 0 ? (
-                    <div className="table-responsive">
+                    <div className="table-responsive ">
                       <table className="w-full border-collapse   border border-gray-600">
                         <thead>
                           <tr>
