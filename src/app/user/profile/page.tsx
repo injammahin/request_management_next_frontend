@@ -31,6 +31,7 @@ interface ServiceRequest {
   approvalStatus: string;
   supervisorStatus: string;
   cisoStatus: string;
+  HeadOfDivisionStatus: string;
   showFullForm: boolean;
 }
 
@@ -471,15 +472,15 @@ const ProfilePage: React.FC = () => {
                                             style={{
                                               borderBottom: "2px solid",
                                               borderColor:
-                                                request.approvalStatus ===
-                                                "approved"
+                                                request.HeadOfDivisionStatus ===
+                                                "confirm"
                                                   ? "green"
                                                   : "red",
                                             }}
                                           >
                                             <div className="font-semibold text-sm text-gray-900">
                                               Head of Division :{" "}
-                                              {request.approvalStatus}
+                                              {request.HeadOfDivisionStatus}
                                             </div>
                                           </td>
                                         </tr>
