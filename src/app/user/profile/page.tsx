@@ -30,6 +30,7 @@ interface ServiceRequest {
   serviceDetails: string;
   approvalStatus: string;
   supervisorStatus: string;
+  cisoStatus: string;
   showFullForm: boolean;
 }
 
@@ -453,14 +454,14 @@ const ProfilePage: React.FC = () => {
                                             style={{
                                               borderBottom: "2px solid",
                                               borderColor:
-                                                request.approvalStatus ===
-                                                "approved"
+                                                request.cisoStatus ===
+                                                "approveed"
                                                   ? "green"
                                                   : "red",
                                             }}
                                           >
                                             <div className="font-semibold text-sm text-gray-900">
-                                              CISO : {request.approvalStatus}
+                                              CISO : {request.cisoStatus}
                                             </div>
                                           </td>
 
@@ -471,7 +472,7 @@ const ProfilePage: React.FC = () => {
                                               borderBottom: "2px solid",
                                               borderColor:
                                                 request.approvalStatus ===
-                                                "confirmed"
+                                                "approved"
                                                   ? "green"
                                                   : "red",
                                             }}
