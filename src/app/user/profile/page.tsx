@@ -145,52 +145,30 @@ const ProfilePage: React.FC = () => {
       );
 
       if (selectedRequest) {
-        const tableHtml = `
-          <table border="4">
-            <thead>
-              <tr>
-                <th>Request No</th>
-                <th>Date</th>
-                <th>Department</th>
-                <th>Designation</th>
-                <th>Employee Id</th>
-                <th>Reason of Request</th>
-                <th>Request For</th>
-                <th>Requested By</th>
-                <th>Service Details</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>${selectedRequest.requestNo}</td>
-                <td>${selectedRequest.date}</td>
-                <br/>
-                <td>${selectedRequest.department}</td>
-                <td>${selectedRequest.designation}</td>
-                <br/>
-                <td>${selectedRequest.employeeId}</td>
-                <td>${selectedRequest.reasonOfRequest}</td>
-                <br/>
-                <td>${selectedRequest.requestFor}</td>
-                <td>${selectedRequest.requestedBy}</td>
-                <td>${selectedRequest.serviceDetails}</td>
-              </tr>
-            </tbody>
-          </table>
-        `;
+        // Create a new jsPDF instance
+        const pdf = new jsPDF();
 
-        // Convert HTML to Blob
-        const blob = new Blob([tableHtml], { type: "text/html/pdf" });
+        // Set font size and style
+        pdf.setFontSize(12);
+        pdf.setFont("helvetica", "normal");
 
-        // Create a download link
-        const link = document.createElement("a");
-        link.href = URL.createObjectURL(blob);
-        link.download = `service_request_${id}.html`;
+        // Add content to the PDF
+        pdf.text(`Request No: ${selectedRequest.requestNo}`, 20, 20);
+        pdf.text(`Date: ${selectedRequest.date}`, 20, 30);
+        pdf.text(`Department: ${selectedRequest.department}`, 20, 40);
+        pdf.text(`Designation: ${selectedRequest.designation}`, 20, 50);
+        pdf.text(`Employee Id: ${selectedRequest.employeeId}`, 20, 60);
+        pdf.text(
+          `Reason of Request: ${selectedRequest.reasonOfRequest}`,
+          20,
+          70
+        );
+        pdf.text(`Request For: ${selectedRequest.requestFor}`, 20, 80);
+        pdf.text(`Requested By: ${selectedRequest.requestedBy}`, 20, 90);
+        pdf.text(`Service Details: ${selectedRequest.serviceDetails}`, 20, 100);
 
-        // Trigger the download
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
+        // Save the PDF with a specific filename
+        pdf.save(`service_request_${id}.pdf`);
       }
     }
   };
