@@ -158,7 +158,7 @@ const ProfilePage: React.FC = () => {
           y: number,
           isSingleLine = true
         ) => {
-          const boxWidth = isSingleLine ? 180 : 85; // Adjusted for half-width boxes
+          const boxWidth = isSingleLine ? 180 : 90; // Adjusted for half-width boxes
           labelsAndTexts.forEach((item, index) => {
             const offsetX = isSingleLine ? 15 : 15 + index * 90; // Adjusting X position for second box on the same line
             pdf.rect(offsetX, y, boxWidth, lineHeight); // x, y, width, height
@@ -227,6 +227,13 @@ const ProfilePage: React.FC = () => {
               text: selectedRequest.supervisorStatus,
             },
             { label: "CISO Status", text: selectedRequest.cisoStatus },
+          ],
+          currentY,
+          false
+        );
+        currentY += lineHeight;
+        drawBoxedText(
+          [
             {
               label: "Head Of Division",
               text: selectedRequest.HeadOfDivisionStatus,
@@ -237,7 +244,6 @@ const ProfilePage: React.FC = () => {
           false
         );
         currentY += lineHeight;
-
         pdf.save(`service_request_${id}.pdf`);
       }
     }
