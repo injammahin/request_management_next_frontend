@@ -361,7 +361,7 @@ const ProfilePage: React.FC = () => {
                                     onClick={() => handleDetailsClick(request)}
                                     className="bg-[#4CB9E7] rounded-lg h-8 w-28 text-white"
                                   >
-                                    Details
+                                    Edit
                                   </button>
                                 </td>
                                 <td className="border-[1px] p-2 border-gray-600">
