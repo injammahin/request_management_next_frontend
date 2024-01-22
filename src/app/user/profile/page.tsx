@@ -85,6 +85,10 @@ const ProfilePage: React.FC = () => {
     fetchData();
   }, []);
 
+  const handleDetailsClick = (request: ServiceRequest) => {
+    localStorage.setItem("selectedRequestDetails", JSON.stringify(request));
+    window.location.href = "/user/request-details"; // Change to your details page path
+  };
   const toggleShowFullForm = (request: ServiceRequest) => {
     setUserData((prevUserData) => {
       if (prevUserData) {
@@ -345,13 +349,19 @@ const ProfilePage: React.FC = () => {
                                   </button>
                                 </td>
                                 <td className="border-[1px] p-2 border-gray-600">
-                                  <button
+                                  {/* <button
                                     onClick={() =>
                                       handleEditServiceRequest(request.id)
                                     }
                                     className="bg-[#4CB9E7] rounded-lg h-8 w-28 text-white"
                                   >
                                     Edit
+                                  </button> */}
+                                  <button
+                                    onClick={() => handleDetailsClick(request)}
+                                    className="bg-[#4CB9E7] rounded-lg h-8 w-28 text-white"
+                                  >
+                                    Details
                                   </button>
                                 </td>
                                 <td className="border-[1px] p-2 border-gray-600">
