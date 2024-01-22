@@ -486,8 +486,8 @@ const ProfilePage: React.FC = () => {
                                                 borderColor:
                                                   request.supervisorStatus ===
                                                   "Released"
-                                                    ? "green"
-                                                    : "red",
+                                                    ? "#294B29"
+                                                    : "#D24545",
                                               }}
                                             >
                                               <div className="font-semibold text-sm text-gray-900">
@@ -504,8 +504,8 @@ const ProfilePage: React.FC = () => {
                                                 borderColor:
                                                   request.approvalStatus ===
                                                   "approve"
-                                                    ? "green"
-                                                    : "red",
+                                                    ? "#294B29"
+                                                    : "#D24545",
                                               }}
                                             >
                                               <div className="font-semibold text-sm text-gray-900">
@@ -522,8 +522,8 @@ const ProfilePage: React.FC = () => {
                                                 borderColor:
                                                   request.cisoStatus ===
                                                   "approveed"
-                                                    ? "green"
-                                                    : "red",
+                                                    ? "#294B29"
+                                                    : "#D24545",
                                               }}
                                             >
                                               <div className="font-semibold text-sm text-gray-900">
@@ -539,8 +539,8 @@ const ProfilePage: React.FC = () => {
                                                 borderColor:
                                                   request.HeadOfDivisionStatus ===
                                                   "confirm"
-                                                    ? "green"
-                                                    : "red",
+                                                    ? "#294B29"
+                                                    : "#D24545",
                                               }}
                                             >
                                               <div className="font-semibold text-sm text-gray-900">
