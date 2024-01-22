@@ -466,78 +466,79 @@ const ProfilePage: React.FC = () => {
                                       </tr>
                                       <tr>
                                         {/* Service Details in a separate row */}
-
                                         <tr>
-                                          <td
-                                            colSpan={1}
-                                            className="py-2 px-4"
-                                            style={{
-                                              borderBottom: "2px solid",
-                                              borderColor:
-                                                request.supervisorStatus ===
-                                                "Released"
-                                                  ? "green"
-                                                  : "red",
-                                            }}
-                                          >
-                                            <div className="font-semibold text-sm text-gray-900">
-                                              supervisor :{" "}
-                                              {request.supervisorStatus}
-                                            </div>
-                                          </td>
+                                          <tr>
+                                            <td
+                                              colSpan={1}
+                                              className="py-2 px-4"
+                                              style={{
+                                                borderBottom: "2px solid",
+                                                borderColor:
+                                                  request.supervisorStatus ===
+                                                  "Released"
+                                                    ? "green"
+                                                    : "red",
+                                              }}
+                                            >
+                                              <div className="font-semibold text-sm text-gray-900">
+                                                supervisor :{" "}
+                                                {request.supervisorStatus}
+                                              </div>
+                                            </td>
 
-                                          <td
-                                            colSpan={1}
-                                            className="py-2 px-4"
-                                            style={{
-                                              borderBottom: "2px solid",
-                                              borderColor:
-                                                request.approvalStatus ===
-                                                "approve"
-                                                  ? "green"
-                                                  : "red",
-                                            }}
-                                          >
-                                            <div className="font-semibold text-sm text-gray-900">
-                                              department of Ifra/App :{" "}
-                                              {request.approvalStatus}
-                                            </div>
-                                          </td>
+                                            <td
+                                              colSpan={1}
+                                              className="py-2 px-4"
+                                              style={{
+                                                borderBottom: "2px solid",
+                                                borderColor:
+                                                  request.approvalStatus ===
+                                                  "approve"
+                                                    ? "green"
+                                                    : "red",
+                                              }}
+                                            >
+                                              <div className="font-semibold text-sm text-gray-900">
+                                                department of Ifra/App :{" "}
+                                                {request.approvalStatus}
+                                              </div>
+                                            </td>
 
-                                          <td
-                                            colSpan={1}
-                                            className="py-2 px-4"
-                                            style={{
-                                              borderBottom: "2px solid",
-                                              borderColor:
-                                                request.cisoStatus ===
-                                                "approveed"
-                                                  ? "green"
-                                                  : "red",
-                                            }}
-                                          >
-                                            <div className="font-semibold text-sm text-gray-900">
-                                              CISO : {request.cisoStatus}
-                                            </div>
-                                          </td>
+                                            <td
+                                              colSpan={1}
+                                              className="py-2 px-4"
+                                              style={{
+                                                borderBottom: "2px solid",
+                                                borderColor:
+                                                  request.cisoStatus ===
+                                                  "approveed"
+                                                    ? "green"
+                                                    : "red",
+                                              }}
+                                            >
+                                              <div className="font-semibold text-sm text-gray-900">
+                                                CISO : {request.cisoStatus}
+                                              </div>
+                                            </td>
 
-                                          <td
-                                            colSpan={1}
-                                            className="py-2 px-4"
-                                            style={{
-                                              borderBottom: "2px solid",
-                                              borderColor:
-                                                request.HeadOfDivisionStatus ===
-                                                "confirm"
-                                                  ? "green"
-                                                  : "red",
-                                            }}
-                                          >
-                                            <div className="font-semibold text-sm text-gray-900">
-                                              Head of Division :{" "}
-                                              {request.HeadOfDivisionStatus}
-                                            </div>
-                                          </td>
+                                            <td
+                                              colSpan={1}
+                                              className="py-2 px-4"
+                                              style={{
+                                                borderBottom: "2px solid",
+                                                borderColor:
+                                                  request.HeadOfDivisionStatus ===
+                                                  "confirm"
+                                                    ? "green"
+                                                    : "red",
+                                              }}
+                                            >
+                                              <div className="font-semibold text-sm text-gray-900">
+                                                Head of Division :{" "}
+                                                {request.HeadOfDivisionStatus}
+                                              </div>
+                                            </td>
+                                          </tr>
                                         </tr>
                                       </tr>
                                     </tbody>
