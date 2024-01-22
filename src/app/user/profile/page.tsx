@@ -482,7 +482,7 @@ const ProfilePage: React.FC = () => {
                                               colSpan={1}
                                               className="py-2 px-4"
                                               style={{
-                                                borderBottom: "2px solid",
+                                                borderBottom: "8px solid",
                                                 borderColor:
                                                   request.supervisorStatus ===
                                                   "Released"
@@ -500,7 +500,7 @@ const ProfilePage: React.FC = () => {
                                               colSpan={1}
                                               className="py-2 px-4"
                                               style={{
-                                                borderBottom: "2px solid",
+                                                borderBottom: "8px solid",
                                                 borderColor:
                                                   request.approvalStatus ===
                                                   "approve"
@@ -518,7 +518,7 @@ const ProfilePage: React.FC = () => {
                                               colSpan={1}
                                               className="py-2 px-4"
                                               style={{
-                                                borderBottom: "2px solid",
+                                                borderBottom: "8px solid",
                                                 borderColor:
                                                   request.cisoStatus ===
                                                   "approveed"
@@ -535,7 +535,7 @@ const ProfilePage: React.FC = () => {
                                               colSpan={1}
                                               className="py-2 px-4"
                                               style={{
-                                                borderBottom: "2px solid",
+                                                borderBottom: "8px solid",
                                                 borderColor:
                                                   request.HeadOfDivisionStatus ===
                                                   "confirm"
