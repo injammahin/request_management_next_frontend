@@ -346,8 +346,8 @@ const ProfilePage: React.FC = () => {
                               <tr>
                                 <td className="border-[1px] p-2 border-gray-600">
                                   {request.requestNo} |{" "}
-                                  {request.reasonOfRequest.slice(0, 15)}
-                                  {" ............"}
+                                  {request.reasonOfRequest.slice(0, 30)}
+                                  {" ....."}
                                 </td>
                                 <td className="border-[1px] p-2 border-gray-600">
                                   {determineOverallStatus(request)}
@@ -538,8 +538,8 @@ const ProfilePage: React.FC = () => {
                                             }}
                                           >
                                             <div className=" text-sm text-gray-900">
-                                              <label className="font-semibold mr-10">
-                                                supervisor{" "}
+                                              <label className="font-semibold mr-10 underline">
+                                                Team Lead{" "}
                                               </label>
                                               {request.supervisorStatus}
                                             </div>
@@ -558,8 +558,8 @@ const ProfilePage: React.FC = () => {
                                             }}
                                           >
                                             <div className=" text-sm text-gray-900">
-                                              <label className="font-semibold mr-10">
-                                                department of Ifra/App{" "}
+                                              <label className="font-semibold mr-10 underline ">
+                                                Head of Ifra/App{" "}
                                               </label>
 
                                               {request.approvalStatus}
@@ -579,7 +579,7 @@ const ProfilePage: React.FC = () => {
                                             }}
                                           >
                                             <div className=" text-sm text-gray-900">
-                                              <label className="font-semibold  mr-10">
+                                              <label className="font-semibold  mr-10 underline">
                                                 CISO
                                               </label>{" "}
                                               {request.cisoStatus}
@@ -599,7 +599,7 @@ const ProfilePage: React.FC = () => {
                                             }}
                                           >
                                             <div className=" text-sm text-gray-900">
-                                              <label className="font-semibold mr-10  ">
+                                              <label className="font-semibold mr-10  underline">
                                                 Head of Division{" "}
                                               </label>{" "}
                                               {request.HeadOfDivisionStatus}
