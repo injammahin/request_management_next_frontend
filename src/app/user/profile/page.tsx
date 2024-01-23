@@ -384,29 +384,21 @@ const ProfilePage: React.FC = () => {
                                       <tr>
                                         {/* Request No and Date in one row */}
                                         <td className="border-[1px] border-b-1 py-2 px-4 border-gray-600">
-                                          <div className="font-semibold text-sm text-gray-900">
-                                            Request No: {request.requestNo}
+                                          <div className=" text-sm text-gray-900">
+                                            <label className="font-semibold">
+                                              {" "}
+                                              Request No:
+                                            </label>{" "}
+                                            {request.requestNo}
                                           </div>
                                         </td>
 
                                         <td className="border-[1px] border-b-1 py-2 px-4 border-gray-600">
-                                          <div className="font-semibold text-sm text-gray-900">
-                                            Date: {request.date}
-                                          </div>
-                                        </td>
-                                      </tr>
-
-                                      <tr>
-                                        {/* Request No and Date in one row */}
-                                        <td className="border-[1px] border-b-1 py-2 px-4 border-gray-600">
-                                          <div className="font-semibold text-sm text-gray-900">
-                                            Requested By: {request.requestedBy}
-                                          </div>
-                                        </td>
-
-                                        <td className="border-[1px] border-b-1 py-2 px-4 border-gray-600">
-                                          <div className="font-semibold text-sm text-gray-900">
-                                            Request For: {request.requestFor}
+                                          <div className=" text-sm text-gray-900">
+                                            <label className="font-semibold">
+                                              Date:
+                                            </label>{" "}
+                                            {request.date}
                                           </div>
                                         </td>
                                       </tr>
@@ -414,14 +406,41 @@ const ProfilePage: React.FC = () => {
                                       <tr>
                                         {/* Request No and Date in one row */}
                                         <td className="border-[1px] border-b-1 py-2 px-4 border-gray-600">
-                                          <div className="font-semibold text-sm text-gray-900">
-                                            Department: {request.department}
+                                          <div className=" text-sm text-gray-900">
+                                            <label className="font-semibold">
+                                              Requested By:{" "}
+                                            </label>
+                                            {request.requestedBy}
                                           </div>
                                         </td>
 
                                         <td className="border-[1px] border-b-1 py-2 px-4 border-gray-600">
                                           <div className="font-semibold text-sm text-gray-900">
-                                            Employee Id: {request.employeeId}
+                                            <label className="font-semibold">
+                                              Request For:{" "}
+                                            </label>
+                                            {request.requestFor}
+                                          </div>
+                                        </td>
+                                      </tr>
+
+                                      <tr>
+                                        {/* Request No and Date in one row */}
+                                        <td className="border-[1px] border-b-1 py-2 px-4 border-gray-600">
+                                          <div className=" text-sm text-gray-900">
+                                            <label className="font-semibold">
+                                              Department:{" "}
+                                            </label>
+                                            {request.department}
+                                          </div>
+                                        </td>
+
+                                        <td className="border-[1px] border-b-1 py-2 px-4 border-gray-600">
+                                          <div className=" text-sm text-gray-900">
+                                            <label className="font-semibold">
+                                              Employee Id:{" "}
+                                            </label>
+                                            {request.employeeId}
                                           </div>
                                         </td>
                                       </tr>
@@ -432,8 +451,11 @@ const ProfilePage: React.FC = () => {
                                           colSpan={2}
                                           className="border-[1px] border-b-1 py-2 px-4 border-gray-600"
                                         >
-                                          <div className="font-semibold text-sm text-gray-900">
-                                            Designation: {request.designation}
+                                          <div className=" text-sm text-gray-900">
+                                            <label className="font-semibold">
+                                              Designation:{" "}
+                                            </label>
+                                            {request.designation}
                                           </div>
                                         </td>
                                       </tr>
@@ -444,8 +466,10 @@ const ProfilePage: React.FC = () => {
                                           colSpan={2}
                                           className="border-[1px] border-b-1 py-2 px-4 border-gray-600"
                                         >
-                                          <div className="font-semibold text-sm text-gray-900">
-                                            Reason of Request:{" "}
+                                          <div className=" text-sm text-gray-900">
+                                            <label className="font-semibold">
+                                              Reason of Request:{" "}
+                                            </label>
                                             {request.reasonOfRequest}
                                           </div>
                                         </td>
@@ -457,8 +481,10 @@ const ProfilePage: React.FC = () => {
                                           colSpan={2}
                                           className="border-[1px] border-b-1 py-2 px-4 border-gray-600"
                                         >
-                                          <div className="font-semibold text-sm text-gray-900">
-                                            Service Details:{" "}
+                                          <div className=" text-sm text-gray-900">
+                                            <label className="font-semibold">
+                                              Service Details:
+                                            </label>
                                             {request.serviceDetails}
                                           </div>
                                         </td>
