@@ -23,7 +23,7 @@ const ServiceRequests: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [expandedRequests, setExpandedRequests] = useState<number[]>([]);
-
+  const [showAllRequests, setShowAllRequests] = useState(false);
   useEffect(() => {
     fetch("http://localhost:3001/service-requests/it-department")
       .then((response) => {
@@ -41,6 +41,12 @@ const ServiceRequests: React.FC = () => {
   // This function will be called by the Navbar component
   const handleMenuToggle = (isOpen: boolean) => {
     setIsMenuOpen(isOpen);
+  };
+  const toggleExpandAll = () => {
+    setExpandedRequests((prev) =>
+      showAllRequests ? [] : serviceRequests.map((req) => req.id)
+    );
+    setShowAllRequests(!showAllRequests);
   };
 
   const handleAction = async (id: number, action: "release" | "block") => {
@@ -86,15 +92,24 @@ const ServiceRequests: React.FC = () => {
         <h1 className="text-2xl font-bold text-center mb-6">
           IT Department Service Requests
         </h1>
+        {/* <button
+          onClick={toggleExpandAll}
+          className="text-blue-500 cursor-pointer mb-4"
+        >
+          {showAllRequests ? "Hide All" : "Show All"}
+        </button> */}
 
         <ul>
           {serviceRequests.map((request) => (
-            <li key={request.id} className="bg-white shadow-lg  rounded-lg  ">
+            <li
+              key={request.id}
+              className="bg-white shadow-lg    border-b-2 border-gray-400 "
+            >
               <td>
                 <tr className="border-gray-300">
                   <div className="flex">
-                    <h2 className="   mb-2 underline underline-offset-[20px] ">
-                      <label className="font-semibold"> Request No:</label>{" "}
+                    <h2 className="   mb-2   ">
+                      <label className="font-semibold "> Request No:</label>{" "}
                       {request.requestNo}|{request.reasonOfRequest.slice(0, 30)}
                       {"....."}
                     </h2>
@@ -116,14 +131,18 @@ const ServiceRequests: React.FC = () => {
                       <tr>
                         {/* Request No and Date in one row */}
                         <td className="border-[1px]    border-b-1 py-2 px-4 border-gray-600">
-                          <div className="font-semibold text-sm text-gray-900">
-                            Request No: {request.requestNo}
+                          <div className=" text-sm text-gray-900">
+                            <label className="font-semibold ">
+                              Request No:{" "}
+                            </label>{" "}
+                            {request.requestNo}
                           </div>
                         </td>
 
                         <td className="border-[1px] border-b-1 py-2 px-4  border-gray-600">
-                          <div className="font-semibold text-sm text-gray-900">
-                            Date: {request.date}
+                          <div className=" text-sm text-gray-900">
+                            <label className="font-semibold ">Date </label>{" "}
+                            {request.date}
                           </div>
                         </td>
                       </tr>
@@ -131,14 +150,20 @@ const ServiceRequests: React.FC = () => {
                       <tr>
                         {/* Request No and Date in one row */}
                         <td className="border-[1px] border-b-1 py-2 px-4 border-gray-600">
-                          <div className="font-semibold text-sm text-gray-900">
-                            Requested By: {request.requestedBy}
+                          <div className=" text-sm text-gray-900">
+                            <label className="font-semibold ">
+                              Requested By{" "}
+                            </label>{" "}
+                            {request.requestedBy}
                           </div>
                         </td>
 
                         <td className="border-[1px] border-b-1 py-2 px-4 border-gray-600">
-                          <div className="font-semibold text-sm text-gray-900">
-                            Request For: {request.requestFor}
+                          <div className=" text-sm text-gray-900">
+                            <label className="font-semibold ">
+                              Request For
+                            </label>{" "}
+                            {request.requestFor}
                           </div>
                         </td>
                       </tr>
@@ -146,14 +171,18 @@ const ServiceRequests: React.FC = () => {
                       <tr>
                         {/* Request No and Date in one row */}
                         <td className="border-[1px] border-b-1 py-2 px-4 border-gray-600">
-                          <div className="font-semibold text-sm text-gray-900">
-                            Department: {request.department}
+                          <div className=" text-sm text-gray-900">
+                            <label className="font-semibold ">Department</label>{" "}
+                            {request.department}
                           </div>
                         </td>
 
                         <td className="border-[1px] border-b-1 py-2 px-4 border-gray-600">
-                          <div className="font-semibold text-sm text-gray-900">
-                            Employee Id: {request.employeeId}
+                          <div className=" text-sm text-gray-900">
+                            <label className="font-semibold ">
+                              Employee Id
+                            </label>{" "}
+                            {request.employeeId}
                           </div>
                         </td>
                       </tr>
@@ -164,8 +193,11 @@ const ServiceRequests: React.FC = () => {
                           colSpan={2}
                           className="border-[1px] border-b-1 py-2 px-4 border-gray-600"
                         >
-                          <div className="font-semibold text-sm text-gray-900">
-                            Designation: {request.designation}
+                          <div className=" text-sm text-gray-900">
+                            <label className="font-semibold ">
+                              Designation
+                            </label>{" "}
+                            {request.designation}
                           </div>
                         </td>
                       </tr>
@@ -176,8 +208,11 @@ const ServiceRequests: React.FC = () => {
                           colSpan={2}
                           className="border-[1px] border-b-1 py-2 px-4 border-gray-600"
                         >
-                          <div className="font-semibold text-sm text-gray-900">
-                            Reason of Request: {request.reasonOfRequest}
+                          <div className=" text-sm text-gray-900">
+                            <label className="font-semibold ">
+                              Reason Of Request
+                            </label>{" "}
+                            {request.reasonOfRequest}
                           </div>
                         </td>
                       </tr>
@@ -189,7 +224,10 @@ const ServiceRequests: React.FC = () => {
                           className="border-[1px] border-b-1 py-2 px-4 border-gray-600"
                         >
                           <div className="font-semibold text-sm text-gray-900">
-                            Service Details: {request.serviceDetails}
+                            <label className="font-semibold ">
+                              Service Details
+                            </label>{" "}
+                            {request.serviceDetails}
                           </div>
                         </td>
                       </tr>
