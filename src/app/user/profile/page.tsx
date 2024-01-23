@@ -256,6 +256,20 @@ const ProfilePage: React.FC = () => {
   const handleMenuToggle = (isOpen: boolean) => {
     setIsMenuOpen(isOpen);
   };
+  const determineOverallStatus = (request: {
+    supervisorStatus: string;
+    approvalStatus: string;
+    cisoStatus: string;
+    HeadOfDivisionStatus: string;
+  }) => {
+    const isApproved =
+      request.supervisorStatus === "Released" &&
+      request.approvalStatus === "approve" &&
+      request.cisoStatus === "approveed" &&
+      request.HeadOfDivisionStatus === "confirm";
+
+    return isApproved ? "Approved" : "On Process";
+  };
 
   if (!userData) {
     return <LoadingSpinner loading={isLoading} />;
@@ -302,12 +316,15 @@ const ProfilePage: React.FC = () => {
                   />
                   {filteredServiceRequests &&
                   filteredServiceRequests.length > 0 ? (
-                    <div className="table-responsive ">
-                      <table className="w-full border-collapse   border border-gray-600">
+                    <div className=" ">
+                      <table className=" w-auto border-collapse   border border-gray-600">
                         <thead>
                           <tr>
                             <th className="border-[1px] px-60  border-gray-600">
                               Request No
+                            </th>
+                            <th className="border-[1px] p-2 border-gray-600">
+                              Status
                             </th>
                             <th className="border-1 p-2 border-gray-600">
                               Show More
@@ -331,6 +348,9 @@ const ProfilePage: React.FC = () => {
                                   {request.requestNo} |{" "}
                                   {request.reasonOfRequest.slice(0, 15)}
                                   {" ............"}
+                                </td>
+                                <td className="border-[1px] p-2 border-gray-600">
+                                  {determineOverallStatus(request)}
                                 </td>
                                 <td className="border-[1px] p-2 border-gray-600">
                                   <button
