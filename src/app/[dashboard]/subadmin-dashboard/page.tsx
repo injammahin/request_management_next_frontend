@@ -48,6 +48,15 @@ const ServiceRequests: React.FC = () => {
     );
     setShowAllRequests(!showAllRequests);
   };
+  const pendingToRelease = serviceRequests.filter(
+    (request) => request.supervisorStatus === "Pending"
+  );
+  const released = serviceRequests.filter(
+    (request) => request.supervisorStatus === "Released"
+  );
+
+  const totalPendingToRelease = pendingToRelease.length;
+  const totalReleased = released.length;
 
   const handleAction = async (id: number, action: "release" | "block") => {
     try {
@@ -94,6 +103,8 @@ const ServiceRequests: React.FC = () => {
         <h1 className="text-2xl font-bold text-center mb-6">
           IT Department Service Requests
         </h1>
+        <h2>Total Pending to Release: {totalPendingToRelease}</h2>
+        <h2>Total Released: {totalReleased}</h2>
         {/* <button
           onClick={toggleExpandAll}
           className="text-blue-500 cursor-pointer mb-4"
