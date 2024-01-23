@@ -86,17 +86,28 @@ const ServiceRequests: React.FC = () => {
         <h1 className="text-2xl font-bold text-center mb-6">
           IT Department Service Requests
         </h1>
+
         <ul>
           {serviceRequests.map((request) => (
             <li
               key={request.id}
-              className="bg-white shadow-lg rounded-lg p-4 mb-4"
+              className="bg-white shadow-lg  rounded-lg p-4 mb-4"
             >
-              <h2 className="text-xl font-semibold mb-2">
-                Request No: {request.requestNo}|
-                {request.reasonOfRequest.slice(0, 30)}
-                {"....."}
-              </h2>
+              <div className="flex">
+                <h2 className="text-xl font-semibold mb-2">
+                  Request No: {request.requestNo}|
+                  {request.reasonOfRequest.slice(0, 30)}
+                  {"....."}
+                </h2>
+                <button
+                  onClick={() => toggleExpand(request.id)}
+                  className="text-white cursor-pointer bg-green-500 hover:bg-green-700 rounded-lg h-6 w-24"
+                >
+                  {expandedRequests.includes(request.id)
+                    ? "Show Less"
+                    : "Show More"}
+                </button>
+              </div>
               {expandedRequests.includes(request.id) ? (
                 <>
                   <div>
@@ -215,17 +226,13 @@ const ServiceRequests: React.FC = () => {
                   <button
                     onClick={() => toggleExpand(request.id)}
                     className="text-blue-500 mt-2 cursor-pointer"
-                  >
-                    Show Less
-                  </button>
+                  ></button>
                 </>
               ) : (
                 <button
                   onClick={() => toggleExpand(request.id)}
                   className="text-blue-500 cursor-pointer"
-                >
-                  Show More
-                </button>
+                ></button>
               )}
             </li>
           ))}
