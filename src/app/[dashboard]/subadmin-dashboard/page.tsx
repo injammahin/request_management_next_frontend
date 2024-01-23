@@ -93,7 +93,9 @@ const ServiceRequests: React.FC = () => {
               className="bg-white shadow-lg rounded-lg p-4 mb-4"
             >
               <h2 className="text-xl font-semibold mb-2">
-                Request No: {request.requestNo}
+                Request No: {request.requestNo}|
+                {request.reasonOfRequest.slice(0, 30)}
+                {"....."}
               </h2>
               {expandedRequests.includes(request.id) ? (
                 <>

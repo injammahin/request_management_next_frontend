@@ -162,7 +162,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
 
           <div className="grid grid-cols-2 gap-4 mb-4">
             <div className="mb-2 flex flex-row items-center">
-              <label className="font-semibold font-semibold flex flex-none mr-2">
+              <label className=" font-semibold flex flex-none mr-2">
                 request by :{" "}
               </label>
               <input
