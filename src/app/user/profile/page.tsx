@@ -320,7 +320,7 @@ const ProfilePage: React.FC = () => {
                       <table className=" w-auto border-collapse   border border-gray-600">
                         <thead>
                           <tr>
-                            <th className="border-[1px] px-60  border-gray-600">
+                            <th className="border-[1px] px-56  border-gray-600">
                               Request No
                             </th>
                             <th className="border-[1px] p-2 border-gray-600">
@@ -336,7 +336,7 @@ const ProfilePage: React.FC = () => {
                               Edit
                             </th>
                             <th className="border-[1px] p-2 border-gray-600">
-                              Download PDF
+                              Download
                             </th>
                           </tr>
                         </thead>
@@ -355,7 +355,7 @@ const ProfilePage: React.FC = () => {
                                 <td className="border-[1px] p-2 border-gray-600">
                                   <button
                                     onClick={() => toggleShowFullForm(request)}
-                                    className="bg-[#43766C] rounded-lg h-8 w-28 hover:underline text-white"
+                                    className="bg-[#43766C] rounded-lg h-6 w-24 hover:underline text-white"
                                   >
                                     {request.showFullForm
                                       ? "Show Less"
@@ -365,7 +365,7 @@ const ProfilePage: React.FC = () => {
                                 <td className="border-[1px]   p-2 border-gray-600">
                                   <button
                                     onClick={() => handleDelete(request.id)}
-                                    className="bg-[#9A031E] rounded-lg h-8 w-28 hover:underline text-white"
+                                    className="bg-[#9A031E] rounded-lg h-6 w-24 hover:underline text-white"
                                   >
                                     Delete
                                   </button>
@@ -381,7 +381,7 @@ const ProfilePage: React.FC = () => {
                                   </button> */}
                                   <button
                                     onClick={() => handleDetailsClick(request)}
-                                    className="bg-[#4CB9E7] rounded-lg h-8 w-28 text-white"
+                                    className="bg-[#4CB9E7] rounded-lg h-6 w-24 text-white"
                                   >
                                     Edit
                                   </button>
@@ -392,9 +392,9 @@ const ProfilePage: React.FC = () => {
                                     onClick={() =>
                                       handleDownloadPDF(request.id)
                                     }
-                                    className="bg-green-500 text-white h-8 w-32 rounded hover:bg-green-700"
+                                    className="bg-green-500 text-white h-6 w-28 rounded hover:bg-green-700"
                                   >
-                                    Download PDF
+                                    PDF
                                   </button>
                                 </td>
                               </tr>
