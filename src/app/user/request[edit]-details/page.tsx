@@ -4,6 +4,7 @@ import axios from "axios";
 import Navbar from "@/app/components/navigation/page";
 
 import { Link } from "react-router-dom";
+import router from "next/dist/client/router";
 
 interface ServiceRequest {
   id: number;
@@ -40,6 +41,9 @@ const RequestDetailsPage = () => {
     setRequestDetails((prevDetails) =>
       prevDetails ? { ...prevDetails, [name]: value } : null
     );
+  };
+  const handleBackButtonClick = () => {
+    router.push("../dashboard/user-dashboard");
   };
 
   const handleSubmit = async (event: React.FormEvent) => {
@@ -195,27 +199,28 @@ const RequestDetailsPage = () => {
             className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
           />
         </div>
+        <div>
+          <div className="flex justify-between">
+            <button
+              type="button"
+              className="bg-gray-500 text-white p-2 w-32 rounded hover:bg-gray-700"
+              onClick={handleBackButtonClick}
+            >
+              Back
+            </button>
 
-        <div className="flex justify-between">
-          <button
-            type="button"
-            className="bg-gray-500 text-white p-2 w-32 rounded hover:bg-gray-700"
-            onClick={back}
-          >
-            Back
-          </button>
-
-          <button
-            type="button"
-            onClick={handleSubmit}
-            className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-          >
-            Change information
-          </button>
+            <button
+              type="button"
+              onClick={handleSubmit}
+              className="group relative w-24 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            >
+              Change information
+            </button>
+          </div>
+          {message && (
+            <p className="text-center text-green-500 mt-2">{message}</p>
+          )}
         </div>
-        {message && (
-          <p className="text-center text-green-500 mt-2">{message}</p>
-        )}
       </form>
     </>
   );

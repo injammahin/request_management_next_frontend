@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Navbar from "@/app/components/navigation/page";
+import { useRouter } from "next/navigation";
 
 interface ServiceRequest {
   id: number;
@@ -38,6 +39,11 @@ const RequestDetailsPage = () => {
     setRequestDetails((prevDetails) =>
       prevDetails ? { ...prevDetails, [name]: value } : null
     );
+  };
+  const router = useRouter();
+
+  const handleBackButtonClick = () => {
+    router.push("./profile");
   };
 
   const handleSubmit = async (event: React.FormEvent) => {
@@ -184,13 +190,13 @@ const RequestDetailsPage = () => {
         </div>
 
         <div className="flex justify-between">
-          {/* <button
+          <button
             type="button"
             className="bg-gray-500 text-white p-2 w-32 rounded hover:bg-gray-700"
             onClick={handleBackButtonClick}
           >
             Back
-          </button> */}
+          </button>
           <button
             type="button"
             onClick={handleSubmit}
