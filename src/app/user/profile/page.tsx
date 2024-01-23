@@ -415,7 +415,7 @@ const ProfilePage: React.FC = () => {
                                         </td>
 
                                         <td className="border-[1px] border-b-1 py-2 px-4 border-gray-600">
-                                          <div className="font-semibold text-sm text-gray-900">
+                                          <div className=" text-sm text-gray-900">
                                             <label className="font-semibold">
                                               Request For:{" "}
                                             </label>
@@ -501,81 +501,89 @@ const ProfilePage: React.FC = () => {
                                           </div>
                                         </td>
                                       </tr>
+
                                       <tr>
-                                        {/* Service Details in a separate row */}
-                                        <tr>
-                                          <tr>
-                                            <td
-                                              colSpan={1}
-                                              className="py-2 px-4"
-                                              style={{
-                                                borderBottom: "8px solid",
-                                                borderColor:
-                                                  request.supervisorStatus ===
-                                                  "Released"
-                                                    ? "#294B29"
-                                                    : "#D24545",
-                                              }}
-                                            >
-                                              <div className="font-semibold text-sm text-gray-900">
-                                                supervisor :{" "}
-                                                {request.supervisorStatus}
-                                              </div>
-                                            </td>
+                                        <tr className="flex">
+                                          <td
+                                            colSpan={1}
+                                            className="py-2 px-4"
+                                            style={{
+                                              borderBottom: "8px solid",
+                                              borderColor:
+                                                request.supervisorStatus ===
+                                                "Released"
+                                                  ? "#294B29"
+                                                  : "#D24545",
+                                            }}
+                                          >
+                                            <div className=" text-sm text-gray-900">
+                                              <label className="font-semibold mr-10">
+                                                supervisor{" "}
+                                              </label>
+                                              {request.supervisorStatus}
+                                            </div>
+                                          </td>
 
-                                            <td
-                                              colSpan={1}
-                                              className="py-2 px-4"
-                                              style={{
-                                                borderBottom: "8px solid",
-                                                borderColor:
-                                                  request.approvalStatus ===
-                                                  "approve"
-                                                    ? "#294B29"
-                                                    : "#D24545",
-                                              }}
-                                            >
-                                              <div className="font-semibold text-sm text-gray-900">
-                                                department of Ifra/App :{" "}
-                                                {request.approvalStatus}
-                                              </div>
-                                            </td>
+                                          <td
+                                            colSpan={1}
+                                            className="py-2 px-4"
+                                            style={{
+                                              borderBottom: "8px solid",
+                                              borderColor:
+                                                request.approvalStatus ===
+                                                "approve"
+                                                  ? "#294B29"
+                                                  : "#D24545",
+                                            }}
+                                          >
+                                            <div className=" text-sm text-gray-900">
+                                              <label className="font-semibold mr-10">
+                                                department of Ifra/App{" "}
+                                              </label>
 
-                                            <td
-                                              colSpan={1}
-                                              className="py-2 px-4"
-                                              style={{
-                                                borderBottom: "8px solid",
-                                                borderColor:
-                                                  request.cisoStatus ===
-                                                  "approveed"
-                                                    ? "#294B29"
-                                                    : "#D24545",
-                                              }}
-                                            >
-                                              <div className="font-semibold text-sm text-gray-900">
-                                                CISO : {request.cisoStatus}
-                                              </div>
-                                            </td>
+                                              {request.approvalStatus}
+                                            </div>
+                                          </td>
 
-                                            <td
-                                              colSpan={1}
-                                              className="py-2 px-4"
-                                              style={{
-                                                borderBottom: "8px solid",
-                                                borderColor:
-                                                  request.HeadOfDivisionStatus ===
-                                                  "confirm"
-                                                    ? "#294B29"
-                                                    : "#D24545",
-                                              }}
-                                            >
-                                              <div className="font-semibold text-sm text-gray-900">
-                                                Head of Division :{" "}
-                                                {request.HeadOfDivisionStatus}
-                                              </div>
-                                            </td>
-                                          </tr>
+                                          <td
+                                            colSpan={1}
+                                            className="py-2 px-4"
+                                            style={{
+                                              borderBottom: "8px solid",
+                                              borderColor:
+                                                request.cisoStatus ===
+                                                "approveed"
+                                                  ? "#294B29"
+                                                  : "#D24545",
+                                            }}
+                                          >
+                                            <div className=" text-sm text-gray-900">
+                                              <label className="font-semibold  mr-10">
+                                                CISO
+                                              </label>{" "}
+                                              {request.cisoStatus}
+                                            </div>
+                                          </td>
+
+                                          <td
+                                            colSpan={1}
+                                            className="py-2 px-4 pt-2"
+                                            style={{
+                                              borderBottom: "8px solid",
+                                              borderColor:
+                                                request.HeadOfDivisionStatus ===
+                                                "confirm"
+                                                  ? "#294B29"
+                                                  : "#D24545",
+                                            }}
+                                          >
+                                            <div className=" text-sm text-gray-900">
+                                              <label className="font-semibold mr-10  ">
+                                                Head of Division{" "}
+                                              </label>{" "}
+                                              {request.HeadOfDivisionStatus}
+                                            </div>
+                                          </td>
                                         </tr>
                                       </tr>
                                     </tbody>
