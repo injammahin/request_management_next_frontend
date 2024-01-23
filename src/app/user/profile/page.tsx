@@ -323,12 +323,13 @@ const ProfilePage: React.FC = () => {
                             <th className="border-[1px] px-56  border-gray-600">
                               Request No
                             </th>
+
                             <th className="border-[1px] p-2 border-gray-600">
                               Status
                             </th>
-                            <th className="border-1 p-2 border-gray-600">
+                            {/* <th className="border-1 p-2 border-gray-600">
                               Show More
-                            </th>
+                            </th> */}
                             <th className="border-[1px] p-2 border-gray-600">
                               Delete
                             </th>
@@ -344,15 +345,27 @@ const ProfilePage: React.FC = () => {
                           {filteredServiceRequests.map((request) => (
                             <React.Fragment key={request.id}>
                               <tr>
-                                <td className="border-[1px] p-2 border-gray-600">
+                                <td className=" flex border-[1px] p-2 border-gray-600">
                                   {request.requestNo} |{" "}
                                   {request.reasonOfRequest.slice(0, 30)}
                                   {" ....."}
+                                  <td className=" p-2 border-gray-600">
+                                    <button
+                                      onClick={() =>
+                                        toggleShowFullForm(request)
+                                      }
+                                      className="bg-[#43766C] rounded-lg h-6 w-24 hover:underline text-white"
+                                    >
+                                      {request.showFullForm
+                                        ? "Show Less"
+                                        : "Show More"}
+                                    </button>
+                                  </td>
                                 </td>
                                 <td className="border-[1px] p-2 border-gray-600">
                                   {determineOverallStatus(request)}
                                 </td>
-                                <td className="border-[1px] p-2 border-gray-600">
+                                {/* <td className="border-[1px] p-2 border-gray-600">
                                   <button
                                     onClick={() => toggleShowFullForm(request)}
                                     className="bg-[#43766C] rounded-lg h-6 w-24 hover:underline text-white"
@@ -361,7 +374,7 @@ const ProfilePage: React.FC = () => {
                                       ? "Show Less"
                                       : "Show More"}
                                   </button>
-                                </td>
+                                </td> */}
                                 <td className="border-[1px]   p-2 border-gray-600">
                                   <button
                                     onClick={() => handleDelete(request.id)}
