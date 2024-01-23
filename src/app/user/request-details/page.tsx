@@ -77,7 +77,9 @@ const RequestDetailsPage = () => {
       <form className="max-w-3xl uppercase mx-auto mt-8 p-4 border">
         <div className="grid  grid-cols-2 gap-4 mb-4">
           <div className="mb-2 flex flex-row items-center">
-            <label className="flex flex-none mr-2">request no:</label>
+            <label className=" font-semibold flex flex-none mr-2">
+              request no:
+            </label>
             <input
               type="text"
               name="requestNo"
@@ -89,7 +91,7 @@ const RequestDetailsPage = () => {
           </div>
 
           <div className="mb-2 flex flex-row items-center">
-            <label className="flex flex-none mr-2">date:</label>
+            <label className="font-semibold flex flex-none mr-2">date:</label>
             <input
               type="date"
               name="date"
@@ -103,7 +105,9 @@ const RequestDetailsPage = () => {
 
         <div className="grid grid-cols-2 gap-4 mb-4">
           <div className="mb-2 flex flex-row items-center">
-            <label className=" flex flex-none mr-2">request by : </label>
+            <label className="font-semibold flex flex-none mr-2">
+              request by :{" "}
+            </label>
             <input
               type="text"
               name="requestedBy"
@@ -115,7 +119,9 @@ const RequestDetailsPage = () => {
           </div>
 
           <div className="mb-2 flex flex-row items-center">
-            <label className="flex flex-none mr-2">request For:</label>
+            <label className="font-semibold flex flex-none mr-2">
+              request For:
+            </label>
             <input
               type="text"
               name="requestFor"
@@ -129,7 +135,9 @@ const RequestDetailsPage = () => {
 
         <div className="grid grid-cols-2 gap-4 mb-4">
           <div className="mb-2 flex flex-row items-center">
-            <label className="flex flex-none mr-2">department:</label>
+            <label className="font-semibold flex flex-none mr-2">
+              department:
+            </label>
             <input
               type="text"
               name="department"
@@ -141,7 +149,9 @@ const RequestDetailsPage = () => {
           </div>
 
           <div className="mb-2 flex flex-row items-center">
-            <label className="flex flex-none mr-2">employee Id:</label>
+            <label className="font-semibold flex flex-none mr-2">
+              employee Id:
+            </label>
             <input
               type="text"
               name="employeeId"
@@ -154,7 +164,9 @@ const RequestDetailsPage = () => {
         </div>
 
         <div className="mb-2 flex flex-row items-center">
-          <label className="flex flex-none mr-2">designation:</label>
+          <label className="font-semibold flex flex-none mr-2">
+            designation:
+          </label>
           <input
             type="text"
             name="designation"
@@ -166,7 +178,9 @@ const RequestDetailsPage = () => {
         </div>
 
         <div className="mb-2 flex flex-row items-center">
-          <label className="flex flex-none mr-2">reason Of Request:</label>
+          <label className="font-semibold flex flex-none mr-2">
+            reason Of Request:
+          </label>
           <input
             type="text"
             name="reasonOfRequest"
@@ -178,7 +192,9 @@ const RequestDetailsPage = () => {
         </div>
 
         <div className="mb-2 flex flex-row items-center">
-          <label className="flex flex-none mr-2">service Details:</label>
+          <label className="font-semibold flex flex-none mr-2">
+            service Details:
+          </label>
           <input
             type="text"
             name="serviceDetails"
