@@ -329,7 +329,8 @@ const ProfilePage: React.FC = () => {
                               <tr>
                                 <td className="border-[1px] p-2 border-gray-600">
                                   {request.requestNo} |{" "}
-                                  {request.reasonOfRequest}
+                                  {request.reasonOfRequest.slice(0, 15)}
+                                  {" ............"}
                                 </td>
                                 <td className="border-[1px] p-2 border-gray-600">
                                   <button
