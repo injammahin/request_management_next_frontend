@@ -1,7 +1,7 @@
 // pages/ServiceRequests.tsx
 "use client";
-import Navbar from "@/app/components/navigation/page";
 import React, { useState, useEffect } from "react";
+import Navbar from "@/app/components/navigation/page";
 
 interface ServiceRequest {
   id: number;
@@ -25,6 +25,7 @@ const ServiceRequests: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [expandedRequests, setExpandedRequests] = useState<number[]>([]);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     fetch("http://localhost:3001/service-requests/confirm")
@@ -38,24 +39,28 @@ const ServiceRequests: React.FC = () => {
       .catch((error) => setError(error.message))
       .finally(() => setIsLoading(false));
   }, []);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  // This function will be called by the Navbar component
   const handleMenuToggle = (isOpen: boolean) => {
     setIsMenuOpen(isOpen);
   };
 
   const handleAction = async (id: number, action: "confirm" | "cancel") => {
     try {
-      await fetch(`http://localhost:3001/service-requests/${action}/${id}`, {
-        method: "PATCH",
-      });
+      const response = await fetch(
+        `http://localhost:3001/service-requests/${action}/${id}`,
+        {
+          method: "PATCH",
+        }
+      );
+      if (!response.ok) throw new Error("Failed to update status");
+
       setServiceRequests((prev) =>
         prev.map((req) =>
           req.id === id
             ? {
                 ...req,
-                cisoStatus: action === "confirm" ? "confirm" : "cancel",
+                HeadOfDivisionStatus:
+                  action === "confirm" ? "Approved" : "Cancelled",
               }
             : req
         )
@@ -190,7 +195,7 @@ const ServiceRequests: React.FC = () => {
                       className={`font-bold ${
                         request.HeadOfDivisionStatus === "cancel"
                           ? "text-yellow-500"
-                          : request.HeadOfDivisionStatus === "confirm"
+                          : request.HeadOfDivisionStatus === "Approved"
                           ? "text-green-500"
                           : "text-red-500"
                       }`}

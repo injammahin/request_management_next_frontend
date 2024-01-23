@@ -1,249 +1,239 @@
-// Import necessary libraries and components
+// pages/ServiceRequests.tsx
 "use client";
-import { useState, useEffect } from "react";
-import axios from "axios";
 import Navbar from "@/app/components/navigation/page";
-import Link from "next/link";
-import router, { useRouter } from "next/navigation";
+import React, { useState, useEffect } from "react";
 
-const ProfilePage = () => {
-  const [userData, setUserData] = useState({
-    requestNo: "",
-    date: "",
-    department: "",
-    reasonOfRequest: "",
-    requestFor: "",
-    requestedBy: "",
-    serviceDetails: "",
-    employeeId: "",
-    designation: "",
-  });
+interface ServiceRequest {
+  id: number;
+  requestNo: string;
+  requestedBy: string;
+  department: string;
+  designation: string;
+  date: string;
+  requestFor: string;
+  employeeId: string;
+  reasonOfRequest: string;
+  serviceDetails: string;
+  approvalStatus: string;
+  cisoStatus: string;
+  supervisorStatus: string;
+  HeadOfDivisionStatus: string;
+}
 
-  const [updateData, setUpdateData] = useState({
-    requestNo: "",
-    date: "",
-    department: "",
-    reasonOfRequest: "",
-    requestFor: "",
-    requestedBy: "",
-    serviceDetails: "",
-    employeeId: "",
-    designation: "",
-  });
-
-  const [message, setMessage] = useState("");
-  const [requestId, setRequestId] = useState<number | null>(null);
+const ServiceRequests: React.FC = () => {
+  const [serviceRequests, setServiceRequests] = useState<ServiceRequest[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [expandedRequests, setExpandedRequests] = useState<number[]>([]);
 
   useEffect(() => {
-    // Fetch the user's data after they log in
-    const urlParams = new URLSearchParams(window.location.search);
-    const idParam = urlParams.get("requestId");
+    fetch("http://localhost:3001/service-requests/confirm")
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => setServiceRequests(data))
+      .catch((error) => setError(error.message))
+      .finally(() => setIsLoading(false));
+  }, []);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-    setRequestId(Number(idParam));
-  }, []); // Empty dependency array ensures this effect runs once after component mounts
-  const router = useRouter();
-
-  const handleBackButtonClick = () => {
-    router.push("/user/profile");
+  // This function will be called by the Navbar component
+  const handleMenuToggle = (isOpen: boolean) => {
+    setIsMenuOpen(isOpen);
   };
-  const handleUpdate = async () => {
+
+  const handleAction = async (id: number, action: "confirm" | "cancel") => {
     try {
-      const response = await axios.put(
-        `http://localhost:3001/service-requests/${requestId}`,
-        updateData
-      );
-      // console.log(userData);
-      setUserData(response.data);
-      setMessage("information change successful!");
-      // Optionally, you can clear the updateData after a successful update
-      setUpdateData({
-        requestNo: "",
-        date: "",
-        department: "",
-        reasonOfRequest: "",
-        requestFor: "",
-        requestedBy: "",
-        serviceDetails: "",
-        employeeId: "",
-        designation: "",
+      await fetch(`http://localhost:3001/service-requests/${action}/${id}`, {
+        method: "PATCH",
       });
+      setServiceRequests((prev) =>
+        prev.map((req) =>
+          req.id === id
+            ? {
+                ...req,
+                cisoStatus: action === "confirm" ? "confirm" : "cancel",
+              }
+            : req
+        )
+      );
     } catch (error) {
-      console.error("Update failed:", error);
-      setMessage("information change failed. Please try again.");
+      console.error("Error:", error);
     }
   };
-  const autofillRequestNo = () => {
-    // Auto-generate requestNo based on date, department, and requestedBy
-    const generatedRequestNo = `DBL/${updateData.date}/${updateData.department}/${updateData.requestedBy}`;
-    setUpdateData((prevDetails) => ({
-      ...prevDetails,
-      requestNo: generatedRequestNo,
-    }));
+
+  const toggleExpand = (id: number) => {
+    setExpandedRequests((prev) =>
+      prev.includes(id) ? prev.filter((prevId) => prevId !== id) : [...prev, id]
+    );
   };
 
-  useEffect(() => {
-    autofillRequestNo();
-  }, [updateData.date, updateData.department, updateData.requestedBy]);
-  console.log(updateData);
+  if (isLoading) return <div className="text-center">Loading...</div>;
+  if (error)
+    return <div className="text-center text-red-500">Error: {error}</div>;
+
   return (
-    <>
-      <Navbar
-        userRole={""}
-        onMenuToggle={function (isOpen: boolean): void {
-          throw new Error("Function not implemented.");
-        }}
-      />
-      <div className="mb-2 flex flex-row items-center">
-        <label className="flex flex-none mr-2">Request ID:</label>
-        <span className="text-gray-900">
-          {requestId !== null ? requestId : "N/A"}
-        </span>
+    <div
+      className={`bg-gray-100 min-h-screen ${isMenuOpen ? "menu-open" : ""}`}
+    >
+      <Navbar userRole={"supervisor"} onMenuToggle={handleMenuToggle} />
+      <div
+        className={`container mx-auto p-6 ${
+          isMenuOpen ? "translate-x-[300px]" : ""
+        }`}
+      >
+        <h1 className="text-2xl font-bold text-center mb-6">
+          IT Department Service Requests
+        </h1>
+        <ul>
+          {serviceRequests.map((request) => (
+            <li
+              key={request.id}
+              className="bg-white shadow-lg rounded-lg p-4 mb-4"
+            >
+              <h2 className="text-xl font-semibold mb-2">
+                Request No: {request.requestNo}
+              </h2>
+              {expandedRequests.includes(request.id) ? (
+                <>
+                  <div>
+                    <tbody>
+                      <tr>
+                        {/* Request No and Date in one row */}
+                        <td className="border-[1px]    border-b-1 py-2 px-4 border-gray-600">
+                          <div className="font-semibold text-sm text-gray-900">
+                            Request No: {request.requestNo}
+                          </div>
+                        </td>
+
+                        <td className="border-[1px] border-b-1 py-2 px-4  border-gray-600">
+                          <div className="font-semibold text-sm text-gray-900">
+                            Date: {request.date}
+                          </div>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        {/* Request No and Date in one row */}
+                        <td className="border-[1px] border-b-1 py-2 px-4 border-gray-600">
+                          <div className="font-semibold text-sm text-gray-900">
+                            Requested By: {request.requestedBy}
+                          </div>
+                        </td>
+
+                        <td className="border-[1px] border-b-1 py-2 px-4 border-gray-600">
+                          <div className="font-semibold text-sm text-gray-900">
+                            Request For: {request.requestFor}
+                          </div>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        {/* Request No and Date in one row */}
+                        <td className="border-[1px] border-b-1 py-2 px-4 border-gray-600">
+                          <div className="font-semibold text-sm text-gray-900">
+                            Department: {request.department}
+                          </div>
+                        </td>
+
+                        <td className="border-[1px] border-b-1 py-2 px-4 border-gray-600">
+                          <div className="font-semibold text-sm text-gray-900">
+                            Employee Id: {request.employeeId}
+                          </div>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        {/* Designation in a separate row */}
+                        <td
+                          colSpan={2}
+                          className="border-[1px] border-b-1 py-2 px-4 border-gray-600"
+                        >
+                          <div className="font-semibold text-sm text-gray-900">
+                            Designation: {request.designation}
+                          </div>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        {/* Reason of Request in a separate row */}
+                        <td
+                          colSpan={2}
+                          className="border-[1px] border-b-1 py-2 px-4 border-gray-600"
+                        >
+                          <div className="font-semibold text-sm text-gray-900">
+                            Reason of Request: {request.reasonOfRequest}
+                          </div>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        {/* Service Details in a separate row */}
+                        <td
+                          colSpan={2}
+                          className="border-[1px] border-b-1 py-2 px-4 border-gray-600"
+                        >
+                          <div className="font-semibold text-sm text-gray-900">
+                            Service Details: {request.serviceDetails}
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </div>
+
+                  <p>
+                    <strong>Status:</strong>{" "}
+                    <span
+                      className={`font-bold ${
+                        request.HeadOfDivisionStatus === "cancel"
+                          ? "text-yellow-500"
+                          : request.HeadOfDivisionStatus === "confirm"
+                          ? "text-green-500"
+                          : "text-red-500"
+                      }`}
+                    >
+                      {request.HeadOfDivisionStatus}
+                    </span>
+                  </p>
+
+                  <div className="flex space-x-2 mt-3">
+                    <button
+                      onClick={() => handleAction(request.id, "confirm")}
+                      className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                    >
+                      confirm
+                    </button>
+                    <button
+                      onClick={() => handleAction(request.id, "cancel")}
+                      className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+                    >
+                      decline
+                    </button>
+                  </div>
+                  <button
+                    onClick={() => toggleExpand(request.id)}
+                    className="text-blue-500 mt-2 cursor-pointer"
+                  >
+                    Show Less
+                  </button>
+                </>
+              ) : (
+                <button
+                  onClick={() => toggleExpand(request.id)}
+                  className="text-blue-500 cursor-pointer"
+                >
+                  Show More
+                </button>
+              )}
+            </li>
+          ))}
+        </ul>
       </div>
-      <form className="max-w-3xl uppercase mx-auto mt-8 p-4 border">
-        <div className="grid  grid-cols-2 gap-4 mb-4">
-          <div className="mb-2 flex flex-row items-center">
-            <label className="flex flex-none mr-2">request no:</label>
-            <input
-              type="text"
-              name="requestNo"
-              id="requestNo"
-              value={updateData.requestNo} // Display requestNo
-              readOnly
-              className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-            />
-          </div>
-
-          <div className="mb-2 flex flex-row items-center">
-            <label className="flex flex-none mr-2">date:</label>
-            <input
-              type="date"
-              name="date"
-              onChange={(e) =>
-                setUpdateData({ ...updateData, date: e.target.value })
-              }
-              value={updateData?.date}
-              className=" w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-            />
-          </div>
-        </div>
-
-        <div className="grid grid-cols-2 gap-4 mb-4">
-          <div className="mb-2 flex flex-row items-center">
-            <label className=" flex flex-none mr-2">request by : </label>
-            <input
-              type="text"
-              name="requestedBy"
-              onChange={(e) =>
-                setUpdateData({ ...updateData, requestedBy: e.target.value })
-              }
-              value={updateData?.requestedBy}
-              className="block w-full  py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-            />
-          </div>
-
-          <div className="mb-2 flex flex-row items-center">
-            <label className="flex flex-none mr-2">request For:</label>
-            <input
-              type="text"
-              name="requestFor"
-              onChange={(e) =>
-                setUpdateData({ ...updateData, requestFor: e.target.value })
-              }
-              value={updateData?.requestFor}
-              className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-            />
-          </div>
-        </div>
-
-        <div className="grid grid-cols-2 gap-4 mb-4">
-          <div className="mb-2 flex flex-row items-center">
-            <label className="flex flex-none mr-2">department:</label>
-            <input
-              type="text"
-              name="department"
-              onChange={(e) =>
-                setUpdateData({ ...updateData, department: e.target.value })
-              }
-              value={updateData?.department}
-              className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-            />
-          </div>
-
-          <div className="mb-2 flex flex-row items-center">
-            <label className="flex flex-none mr-2">employee Id:</label>
-            <input
-              type="text"
-              name="employeeId"
-              onChange={(e) =>
-                setUpdateData({ ...updateData, employeeId: e.target.value })
-              }
-              value={updateData?.employeeId}
-              className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-            />
-          </div>
-        </div>
-
-        <div className="mb-2 flex flex-row items-center">
-          <label className="flex flex-none mr-2">designation:</label>
-          <input
-            type="text"
-            name="designation"
-            onChange={(e) =>
-              setUpdateData({ ...updateData, designation: e.target.value })
-            }
-            value={updateData?.designation}
-            className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-          />
-        </div>
-
-        <div className="mb-2 flex flex-row items-center">
-          <label className="flex flex-none mr-2">reason Of Request:</label>
-          <input
-            type="text"
-            name="reasonOfRequest"
-            onChange={(e) =>
-              setUpdateData({ ...updateData, reasonOfRequest: e.target.value })
-            }
-            value={updateData?.reasonOfRequest}
-            className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-          />
-        </div>
-
-        <div className="mb-2 flex flex-row items-center">
-          <label className="flex flex-none mr-2">service Details:</label>
-          <input
-            type="text"
-            name="serviceDetails"
-            onChange={(e) =>
-              setUpdateData({ ...updateData, serviceDetails: e.target.value })
-            }
-            value={updateData?.serviceDetails}
-            className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-          />
-        </div>
-
-        <div className="flex justify-between">
-          <button
-            type="button"
-            className="bg-gray-500 text-white p-2 w-32 rounded hover:bg-gray-700"
-            onClick={handleBackButtonClick}
-          >
-            Back
-          </button>
-          <button
-            type="button"
-            onClick={handleUpdate}
-            className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-          >
-            Change information
-          </button>
-        </div>
-        {message && (
-          <p className="text-center text-green-500 mt-2">{message}</p>
-        )}
-      </form>
-    </>
+    </div>
   );
 };
 
-export default ProfilePage;
+export default ServiceRequests;
