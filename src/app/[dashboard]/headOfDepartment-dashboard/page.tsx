@@ -90,7 +90,7 @@ const ServiceRequests: React.FC = () => {
           isMenuOpen ? "translate-x-[300px]" : ""
         }`}
       >
-        <h1 className="text-2xl font-bold text-center mb-6">
+        <h1 className="text-2xl  pt-10 font-bold text-center mb-6">
           IT Department Service Requests
         </h1>
         <ul>

@@ -57,7 +57,7 @@ const ProfilePage: React.FC = () => {
 
   return (
     <div
-      className={`bg-gray-100 min-h-screen ${isMenuOpen ? "menu-open" : ""}`}
+      className={`bg-gray-100  min-h-screen ${isMenuOpen ? "menu-open" : ""}`}
     >
       <Navbar userRole={"supervisor"} onMenuToggle={handleMenuToggle} />
       <div
@@ -65,7 +65,7 @@ const ProfilePage: React.FC = () => {
           isMenuOpen ? "translate-x-[200px]" : ""
         }`}
       >
-        <div className="w-full bg-white p-8 rounded-lg shadow-md space-y-8">
+        <div className="w-full pt-20 bg-white p-8 rounded-lg shadow-md space-y-8">
           {/* ... (existing code) */}
 
           {/* Display department information */}

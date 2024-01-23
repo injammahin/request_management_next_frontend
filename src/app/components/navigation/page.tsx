@@ -38,7 +38,7 @@ const Navbar: React.FC<NavbarProps> = ({ userRole, onMenuToggle }) => {
   };
 
   return (
-    <nav className="bg-gray-700 p-4 relative">
+    <nav className="bg-gray-700 p-4 fixed top-0 pt-3 w-full z-50 ">
       <div className="container mx-auto flex justify-between items-center">
         {/* Information Box (conditionally rendered based on isMenuOpen) */}
         {isMenuOpen && (

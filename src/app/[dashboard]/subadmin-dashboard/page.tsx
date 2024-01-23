@@ -81,12 +81,14 @@ const ServiceRequests: React.FC = () => {
 
   return (
     <div
-      className={`bg-gray-100 min-h-screen ${isMenuOpen ? "menu-open" : ""}`}
+      className={`bg-gray-100 pt-20 min-h-screen ${
+        isMenuOpen ? "menu-open" : ""
+      }`}
     >
       <Navbar userRole={"supervisor"} onMenuToggle={handleMenuToggle} />
       <div
         className={`container mx-auto p-6 ${
-          isMenuOpen ? "translate-x-[300px]" : ""
+          isMenuOpen ? "translate-x-[230px]" : ""
         }`}
       >
         <h1 className="text-2xl font-bold text-center mb-6">
@@ -103,7 +105,7 @@ const ServiceRequests: React.FC = () => {
           {serviceRequests.map((request) => (
             <li
               key={request.id}
-              className="bg-white shadow-lg  text text-center  border-b-2 border-gray-400 "
+              className="bg-white shadow-lg   text text-center  border-b-2 border-gray-400 "
             >
               <td>
                 <tr className="border-gray-300">

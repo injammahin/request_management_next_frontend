@@ -212,7 +212,7 @@ const ProfilePage: React.FC = () => {
           isMenuOpen ? "translate-x-[200px]" : ""
         }`}
       >
-        <div className="w-full bg-white p-8 rounded-lg shadow-md space-y-8">
+        <div className="w-full pt-20 bg-white p-8 rounded-lg shadow-md space-y-8">
           <div className="bg-gray-200 p-6 rounded-lg">
             <h1 className="text-lg font-semibold mb-2">
               Maintenance Information
