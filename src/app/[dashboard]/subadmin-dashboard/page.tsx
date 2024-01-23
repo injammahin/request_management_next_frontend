@@ -89,25 +89,26 @@ const ServiceRequests: React.FC = () => {
 
         <ul>
           {serviceRequests.map((request) => (
-            <li
-              key={request.id}
-              className="bg-white shadow-lg  rounded-lg p-4 mb-4"
-            >
-              <div className="flex">
-                <h2 className="text-xl font-semibold mb-2">
-                  Request No: {request.requestNo}|
-                  {request.reasonOfRequest.slice(0, 30)}
-                  {"....."}
-                </h2>
-                <button
-                  onClick={() => toggleExpand(request.id)}
-                  className="text-white cursor-pointer bg-green-500 hover:bg-green-700 rounded-lg h-6 w-24"
-                >
-                  {expandedRequests.includes(request.id)
-                    ? "Show Less"
-                    : "Show More"}
-                </button>
-              </div>
+            <li key={request.id} className="bg-white shadow-lg  rounded-lg  ">
+              <td>
+                <tr className="border-gray-300">
+                  <div className="flex">
+                    <h2 className="   mb-2 underline underline-offset-[20px] ">
+                      <label className="font-semibold"> Request No:</label>{" "}
+                      {request.requestNo}|{request.reasonOfRequest.slice(0, 30)}
+                      {"....."}
+                    </h2>
+                    <button
+                      onClick={() => toggleExpand(request.id)}
+                      className="text-white cursor-pointer bg-green-500 hover:bg-green-700 rounded-lg h-6 w-24"
+                    >
+                      {expandedRequests.includes(request.id)
+                        ? "Show Less"
+                        : "Show More"}
+                    </button>
+                  </div>
+                </tr>
+              </td>
               {expandedRequests.includes(request.id) ? (
                 <>
                   <div>
