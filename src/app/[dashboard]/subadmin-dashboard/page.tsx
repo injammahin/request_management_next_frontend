@@ -103,7 +103,7 @@ const ServiceRequests: React.FC = () => {
           {serviceRequests.map((request) => (
             <li
               key={request.id}
-              className="bg-white shadow-lg    border-b-2 border-gray-400 "
+              className="bg-white shadow-lg  text text-center  border-b-2 border-gray-400 "
             >
               <td>
                 <tr className="border-gray-300">
