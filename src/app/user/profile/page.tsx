@@ -328,7 +328,8 @@ const ProfilePage: React.FC = () => {
                             <React.Fragment key={request.id}>
                               <tr>
                                 <td className="border-[1px] p-2 border-gray-600">
-                                  {request.requestNo}
+                                  {request.requestNo} |{" "}
+                                  {request.reasonOfRequest}
                                 </td>
                                 <td className="border-[1px] p-2 border-gray-600">
                                   <button
