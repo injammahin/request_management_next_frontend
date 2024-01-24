@@ -49,10 +49,10 @@ const ServiceRequests: React.FC = () => {
     setShowAllRequests(!showAllRequests);
   };
   const pendingToRelease = serviceRequests.filter(
-    (request) => request.supervisorStatus === "Pending"
+    (request) => request.supervisorStatus === "Pending "
   );
   const released = serviceRequests.filter(
-    (request) => request.supervisorStatus === "Released"
+    (request) => request.supervisorStatus === "Pending"
   );
 
   const totalPendingToRelease = pendingToRelease.length;

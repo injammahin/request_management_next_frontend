@@ -125,7 +125,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
     >
       <Navbar userRole={"supervisor"} onMenuToggle={handleMenuToggle} />
       <div
-        className={`container mx-auto p-6 ${
+        className={`container mx-auto p-20 ${
           isMenuOpen ? "translate-x-[0px]" : ""
         }`}
       >
