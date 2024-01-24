@@ -19,6 +19,7 @@ interface ServiceDetails {
   reasonOfRequest: string;
   serviceDetails: string;
   user: string;
+  submissionDateTime: "";
   [key: string]: string; // Index signature to allow any additional string properties
 }
 
@@ -34,11 +35,13 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
     reasonOfRequest: "",
     serviceDetails: "",
     user: "",
+    submissionDateTime: "",
   });
   const [successMessage, setSuccessMessage] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [submittedDetails, setSubmittedDetails] =
     useState<ServiceDetails | null>(null);
+  const currentDateTime = new Date().toLocaleString();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   // This function will be called by the Navbar component
@@ -105,8 +108,10 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
           userId: localStorage.getItem("Id"),
           user: localStorage.getItem("Id"),
           Userid: localStorage.getItem("Id"),
+          submissionDateTime: currentDateTime,
         }
       );
+      console.log(currentDateTime);
 
       setSubmittedDetails(serviceDetails); // Set submitted details
       setSuccessMessage("Form submitted successfully");
