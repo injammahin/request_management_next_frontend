@@ -138,9 +138,9 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
           onSubmit={handleSubmit}
           className="max-w-3xl pt-10 uppercase mx-auto mt-8 p-4 border"
         >
-          <div className="grid  grid-cols-2 gap-4 mb-4">
-            <div className="mb-2 flex flex-row items-center">
-              <label className="font-semibold flex flex-none mr-2">
+          <div className="grid  grid-cols-2 gap-4 mb-1">
+            <div className="mb-1 flex flex-row items-center">
+              <label className="font-semibold text-sm flex flex-none mr-2">
                 request no:
               </label>
               <input
@@ -154,7 +154,9 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
             </div>
 
             <div className="mb-2 flex flex-row items-center">
-              <label className="font-semibold flex flex-none mr-2">date:</label>
+              <label className="font-semibold flex flex-none text-sm mr-2">
+                date:
+              </label>
               <input
                 type="date"
                 name="date"
@@ -167,7 +169,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
 
           <div className="grid grid-cols-2 gap-4 mb-4">
             <div className="mb-2 flex flex-row items-center">
-              <label className=" font-semibold flex flex-none mr-2">
+              <label className=" font-semibold flex text-sm flex-none mr-2">
                 request by :{" "}
               </label>
               <input
@@ -180,7 +182,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
             </div>
 
             <div className="mb-2 flex flex-row items-center">
-              <label className="font-semibold flex flex-none mr-2">
+              <label className="font-semibold flex flex-none text-sm mr-2">
                 request For:
               </label>
               <input
@@ -194,8 +196,8 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
           </div>
 
           <div className="grid grid-cols-2 gap-4 mb-4">
-            <div className="mb-2 flex flex-row items-center">
-              <label className="font-semibold flex flex-none mr-2">
+            <div className="mb-1 flex flex-row items-center">
+              <label className="font-semibold flex flex-none text-sm mr-2">
                 department:
               </label>
               <input
@@ -207,8 +209,8 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
               />
             </div>
 
-            <div className="mb-2 flex flex-row items-center">
-              <label className="font-semibold flex flex-none mr-2">
+            <div className="mb-1 flex flex-row items-center">
+              <label className="font-semibold flex flex-none text-sm mr-2">
                 employee Id:
               </label>
               <input
@@ -221,8 +223,8 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
             </div>
           </div>
 
-          <div className="mb-2 flex flex-row items-center">
-            <label className="font-semibold flex flex-none mr-2">
+          <div className="mb-1 flex flex-row items-center">
+            <label className="font-semibold flex flex-none text-sm mr-2">
               designation:
             </label>
             <input
@@ -235,7 +237,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
           </div>
 
           <div className="mb-2 flex flex-row items-center">
-            <label className="font-semibold flex flex-none mr-2">
+            <label className="font-semibold flex flex-none text-sm mr-2">
               reason Of Request:
             </label>
             <input
@@ -248,7 +250,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
           </div>
 
           <div className="mb-2 flex flex-row items-center">
-            <label className="font-semibold flex flex-none mr-2">
+            <label className="font-semibold flex flex-none text-sm mr-2">
               service Details:
             </label>
             <input

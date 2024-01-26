@@ -27,6 +27,7 @@ interface Management {
   startTime: string;
   endDate: string;
   endTime: string;
+  user: string;
   [key: string]: string; // Index signature to allow any additional string properties
 }
 
@@ -50,6 +51,7 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
     startTime: "",
     endDate: "",
     endTime: "",
+    user: "",
   });
   const [successMessage, setSuccessMessage] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("");
@@ -125,7 +127,7 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
         "http://localhost:3001/maintaintance/fillup",
         {
           ...Management,
-          userId: localStorage.getItem("userId"),
+          user: localStorage.getItem("Id"),
         }
       );
 
