@@ -160,7 +160,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
       >
         <form
           onSubmit={handleSubmit}
-          className="max-w-3xl pt-10 uppercase mx-auto mt-8 p-4 border"
+          className="max-w-[1000px] pt-10 uppercase mx-auto mt-8 p-4 border"
         >
           <div className="grid  grid-cols-2 gap-4 ">
             <div className=" flex flex-row items-center">
@@ -295,7 +295,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
             />
           </div>
           <div className=" flex flex-row items-center">
-            <label className="font-semibold flex flex-none text-sm mr-2">
+            <label className="font-semibold flex flex-none text-sm mr-2 ">
               Details of Access/Service:
             </label>
             <input
@@ -303,7 +303,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
               name="serviceDetails"
               onChange={handleInputChange}
               value={serviceDetails.serviceDetails}
-              className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+              className="block w-full py-2.5 px-0  pt-16 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             />
           </div>
           <div className="grid grid-cols-2  ">
@@ -318,7 +318,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
                 id="execusion"
                 onChange={handleInputChange}
                 value={serviceDetails.execusion}
-                className="block w-[200px]  py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                className="block w-[900px]  py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               />
             </div>
 
@@ -434,13 +434,16 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
               />
             </div>
           </div>
-          <div className="flex justify-between">
-            <button
-              type="button"
-              className="bg-gray-500 text-white p-2 w-20 rounded hover:bg-gray-700"
-            >
-              <Link href="../dashboard/user-dashboard">Back</Link>
-            </button>
+          <div className="grid grid-cols-4 gap-4 mb-10 pt-10">
+            {/* Column 1 */}
+            <div className=" flex flex-row items-center">
+              <label className="font-semibold flex flex-none text-sm mr-2">
+                Applicant Team leader
+              </label>
+            </div>
+
+            {/* Column 2 */}
+
             <div className=" flex flex-row items-center">
               <label className="font-semibold flex flex-none text-sm mr-2">
                 submitted to:
@@ -455,6 +458,30 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
                 <option value="Mahin">head Of App</option>
               </select>
             </div>
+
+            {/* Column 4 */}
+            <div className=" flex flex-row items-center">
+              <label className="font-semibold flex flex-none text-sm mr-2 mx-20">
+                CISO
+              </label>
+            </div>
+
+            {/* Column 5 */}
+            <div className=" flex flex-row items-center">
+              <label className="font-semibold flex flex-none text-sm mr-2">
+                Head Of Division
+              </label>
+            </div>
+          </div>
+
+          <div className="flex justify-between">
+            <button
+              type="button"
+              className="bg-gray-500 text-white p-2 w-20 rounded hover:bg-gray-700"
+            >
+              <Link href="../dashboard/user-dashboard">Back</Link>
+            </button>
+
             <button
               type="submit"
               className="bg-blue-500 text-white p-2 rounded hover:bg-blue-700"
