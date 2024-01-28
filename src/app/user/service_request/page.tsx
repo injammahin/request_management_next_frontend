@@ -50,7 +50,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
   };
 
   const handleInputChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
     setServiceDetails((prevDetails) => ({
@@ -183,15 +183,17 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
 
             <div className="mb-2 flex flex-row items-center">
               <label className="font-semibold flex flex-none text-sm mr-2">
-                request For:
+                Request For:
               </label>
-              <input
-                type="text"
+              <select
                 name="requestFor"
                 onChange={handleInputChange}
                 value={serviceDetails.requestFor}
-                className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-              />
+                className="block w-full py-2.5 px-2 text-sm text-gray-900 bg-transparent border-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 focus:outline-none focus:ring-20 "
+              >
+                <option value="Access">Access</option>
+                <option value="Mahin">Service Request</option>
+              </select>
             </div>
           </div>
 
