@@ -19,6 +19,17 @@ interface ServiceDetails {
   reasonOfRequest: string;
   serviceDetails: string;
   user: string;
+  accessDateDuration: string;
+  accessTimeDuration: string;
+  vandorName: string;
+  vandorAssignedReason: string;
+  deviceRequired: string;
+  WorkTeamWithId: string;
+  readBy: string;
+  ReturnTimeDate: string;
+  revokeBy: string;
+  execusion: string;
+  deviceApprovedBy: string;
   submissionDateTime: "";
   [key: string]: string; // Index signature to allow any additional string properties
 }
@@ -36,6 +47,17 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
     serviceDetails: "",
     user: "",
     submissionDateTime: "",
+    accessDateDuration: "",
+    accessTimeDuration: "",
+    vandorName: "",
+    vandorAssignedReason: "",
+    deviceRequired: "",
+    WorkTeamWithId: "",
+    readBy: "",
+    ReturnTimeDate: "",
+    revokeBy: "",
+    execusion: "",
+    deviceApprovedBy: "",
   });
   const [successMessage, setSuccessMessage] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("");
@@ -88,6 +110,8 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
       "designation",
       "reasonOfRequest",
       "serviceDetails",
+      "accessDateDuration",
+      "accessTimeDuration",
     ];
 
     const hasEmptyField = requiredFields.some(
@@ -138,8 +162,8 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
           onSubmit={handleSubmit}
           className="max-w-3xl pt-10 uppercase mx-auto mt-8 p-4 border"
         >
-          <div className="grid  grid-cols-2 gap-4 mb-1">
-            <div className="mb-1 flex flex-row items-center">
+          <div className="grid  grid-cols-2 gap-4 ">
+            <div className=" flex flex-row items-center">
               <label className="font-semibold text-sm flex flex-none mr-2">
                 request no:
               </label>
@@ -153,7 +177,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
               />
             </div>
 
-            <div className="mb-2 flex flex-row items-center">
+            <div className=" flex flex-row items-center">
               <label className="font-semibold flex flex-none text-sm mr-2">
                 date:
               </label>
@@ -166,8 +190,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
               />
             </div>
           </div>
-
-          <div className="grid grid-cols-2 gap-4 mb-4">
+          <div className="grid grid-cols-2 gap-4 ">
             <div className="mb-2 flex flex-row items-center">
               <label className=" font-semibold flex text-sm flex-none mr-2">
                 request by :{" "}
@@ -181,7 +204,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
               />
             </div>
 
-            <div className="mb-2 flex flex-row items-center">
+            <div className=" flex flex-row items-center">
               <label className="font-semibold flex flex-none text-sm mr-2">
                 Request For:
               </label>
@@ -196,8 +219,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
               </select>
             </div>
           </div>
-
-          <div className="grid grid-cols-2 gap-4 mb-4">
+          <div className="grid grid-cols-2 gap-4 ">
             <div className="mb-1 flex flex-row items-center">
               <label className="font-semibold flex flex-none text-sm mr-2">
                 department:
@@ -224,8 +246,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
               />
             </div>
           </div>
-
-          <div className="mb-1 flex flex-row items-center">
+          <div className=" flex flex-row items-center">
             <label className="font-semibold flex flex-none text-sm mr-2">
               designation:
             </label>
@@ -237,10 +258,9 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
               className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             />
           </div>
-
-          <div className="mb-2 flex flex-row items-center">
+          <div className=" flex flex-row items-center">
             <label className="font-semibold flex flex-none text-sm mr-2">
-              reason Of Request:
+              Request For Person:
             </label>
             <input
               type="text"
@@ -250,10 +270,33 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
               className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             />
           </div>
-
-          <div className="mb-2 flex flex-row items-center">
+          <div className=" flex flex-row items-center">
             <label className="font-semibold flex flex-none text-sm mr-2">
-              service Details:
+              Access Date Duration:
+            </label>
+            <input
+              type="text"
+              name="accessDateDuration"
+              onChange={handleInputChange}
+              value={serviceDetails.accessDateDuration}
+              className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+            />
+          </div>
+          <div className=" flex flex-row items-center">
+            <label className="font-semibold flex flex-none text-sm mr-2">
+              Access Time Duration:
+            </label>
+            <input
+              type="text"
+              name="accessTimeDuration"
+              onChange={handleInputChange}
+              value={serviceDetails.accessTimeDuration}
+              className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+            />
+          </div>
+          <div className=" flex flex-row items-center">
+            <label className="font-semibold flex flex-none text-sm mr-2">
+              Details of Access/Service:
             </label>
             <input
               type="text"
@@ -263,7 +306,132 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
               className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             />
           </div>
+          <div className="grid grid-cols-2  ">
+            <div className="mb-2  flex flex-row items-center">
+              <label className=" font-semibold flex text-sm flex-none mr-2">
+                Change/Execusion/request ID :
+              </label>
+              <input
+                type="text"
+                id="execusion"
+                onChange={handleInputChange}
+                value={serviceDetails.execusion}
+                className="block w-[200px]  py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+              />
+            </div>
 
+            <div className=" flex flex-row items-center text-center">
+              <label className=" mx-20 lex flex-none text-sm ">
+                referred from change/ Maintenance
+                <br /> request Form
+              </label>
+            </div>
+          </div>
+          <div className=" flex flex-row items-center">
+            <label className="font-semibold flex flex-none text-sm mr-2">
+              Vendor Name:
+            </label>
+            <input
+              type="text"
+              name="vandorName"
+              onChange={handleInputChange}
+              value={serviceDetails.vandorName}
+              className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+            />
+          </div>
+          <div className=" flex flex-row items-center">
+            <label className="font-semibold flex flex-none text-sm mr-2">
+              vendor Assigned Reason:
+            </label>
+            <input
+              type="text"
+              name="vandorAssignedReason"
+              onChange={handleInputChange}
+              value={serviceDetails.vandorAssignedReason}
+              className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+            />
+          </div>
+          <div className="grid grid-cols-2 gap-4 ">
+            <div className="mb-1 flex flex-row items-center">
+              <label className="font-semibold flex flex-none text-sm mr-2">
+                Tools/Device
+                <br />
+                required
+              </label>
+              <input
+                type="text"
+                name="deviceRequired"
+                onChange={handleInputChange}
+                value={serviceDetails.deviceRequired}
+                className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+              />
+            </div>
+
+            <div className="mb-1 flex flex-row items-center">
+              <label className="font-semibold  text-center flex flex-none text-sm mr-2">
+                Device
+                <br /> Approved By
+              </label>
+              <input
+                type="text"
+                name="deviceApprovedBy"
+                onChange={handleInputChange}
+                value={serviceDetails.deviceApprovedBy}
+                className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+              />
+            </div>
+          </div>
+          <div className=" flex flex-row items-center">
+            <label className="font-semibold flex flex-none text-sm mr-2">
+              Work Team With Id
+            </label>
+            <input
+              type="text"
+              name="WorkTeamWithId"
+              onChange={handleInputChange}
+              value={serviceDetails.WorkTeamWithId}
+              className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+            />
+          </div>
+          <div className=" flex flex-row items-center">
+            <label className="font-semibold flex flex-none text-sm mr-2">
+              Read By
+            </label>
+            <input
+              type="text"
+              name="readBy"
+              onChange={handleInputChange}
+              value={serviceDetails.readBy}
+              className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+            />
+          </div>
+          <div className="grid grid-cols-2 gap-4 ">
+            <div className="mb-1 flex flex-row items-center">
+              <label className="font-semibold flex flex-none text-sm mr-2">
+                Revoke/return date <br /> & time:
+              </label>
+              <input
+                type="text"
+                name="ReturnTimeDate"
+                onChange={handleInputChange}
+                value={serviceDetails.ReturnTimeDate}
+                className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+              />
+            </div>
+
+            <div className="mb-1 flex flex-row items-center">
+              <label className="font-semibold flex flex-none text-sm mr-2">
+                revoked BY:
+              </label>
+              <input
+                type="text"
+                name="revokeBy"
+                onChange={handleInputChange}
+                value={serviceDetails.revokeBy}
+                className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+              />
+            </div>
+          </div>
           <div className="flex justify-between">
             <button
               type="button"
@@ -289,8 +457,8 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
 
         {submittedDetails && (
           <div className="max-w-md uppercase mx-auto mt-8 p-4 border">
-            <h2 className="text-2xl font-semibold mb-4">Submitted Details</h2>
-            <div>
+            {/* <h2 className="text-2xl font-semibold mb-4">Submitted Details</h2> */}
+            {/* <div>
               <p>
                 <strong>Request No:</strong> {submittedDetails.requestNo}
               </p>
@@ -320,7 +488,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
                 <strong>Service Details:</strong>{" "}
                 {submittedDetails.serviceDetails}
               </p>
-            </div>
+            </div> */}
           </div>
         )}
       </div>
