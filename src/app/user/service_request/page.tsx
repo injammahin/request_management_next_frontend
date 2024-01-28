@@ -309,7 +309,9 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
           <div className="grid grid-cols-2  ">
             <div className="mb-2  flex flex-row items-center">
               <label className=" font-semibold flex text-sm flex-none mr-2">
-                Change/Execusion/request ID :
+                Change/Execusion/
+                <br />
+                request ID :
               </label>
               <input
                 type="text"
@@ -439,6 +441,20 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
             >
               <Link href="../dashboard/user-dashboard">Back</Link>
             </button>
+            <div className=" flex flex-row items-center">
+              <label className="font-semibold flex flex-none text-sm mr-2">
+                submitted to:
+              </label>
+              <select
+                name=""
+                onChange={handleInputChange}
+                value={serviceDetails.requestFor}
+                className="block w-full py-2 px-14 text-sm text-gray-900 bg-transparent border-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600   "
+              >
+                <option value="Access">head Of Ifra</option>
+                <option value="Mahin">head Of App</option>
+              </select>
+            </div>
             <button
               type="submit"
               className="bg-blue-500 text-white p-2 rounded hover:bg-blue-700"
