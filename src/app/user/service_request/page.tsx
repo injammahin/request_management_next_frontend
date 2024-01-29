@@ -59,8 +59,8 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
     revokeBy: "",
     execusion: "",
     deviceApprovedBy: "",
-    superadmin: localStorage.getItem("superadmin") || "",
-    subadmin: localStorage.getItem("subadmin") || "",
+    superadmin: localStorage.getItem("subadmin") || "",
+    subadmin: localStorage.getItem("superadmin") || "",
     ciso: localStorage.getItem("ciso") || "",
     head: localStorage.getItem("head") || "",
   });
@@ -171,6 +171,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
             <div className=" flex flex-row items-center">
               <label className="font-semibold text-sm flex flex-none mr-2">
                 Request No:
+                <span style={{ color: "red" }}>*</span>
               </label>
               <input
                 type="text"
@@ -185,6 +186,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
             <div className=" flex flex-row items-center">
               <label className="font-semibold flex flex-none text-sm mr-2">
                 Date:
+                <span style={{ color: "red" }}>*</span>
               </label>
               <input
                 type="date"
@@ -198,7 +200,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
           <div className="grid grid-cols-2 gap-4 ">
             <div className="mb-2 flex flex-row items-center">
               <label className=" font-semibold flex text-sm flex-none mr-2">
-                Request By :{" "}
+                Request By : <span style={{ color: "red" }}>*</span>
               </label>
               <input
                 type="text"
@@ -213,6 +215,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
             <div className=" flex flex-row items-center">
               <label className="font-semibold flex flex-none text-sm mr-2">
                 Request For:
+                <span style={{ color: "red" }}>*</span>
               </label>
               <select
                 name="requestFor"
@@ -230,6 +233,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
             <div className="mb-1 flex flex-row items-center">
               <label className="font-semibold flex flex-none text-sm mr-2">
                 Department:
+                <span style={{ color: "red" }}>*</span>
               </label>
               <input
                 type="text"
@@ -244,6 +248,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
             <div className="mb-1 flex flex-row items-center">
               <label className="font-semibold flex flex-none text-sm mr-2">
                 Employee Id:
+                <span style={{ color: "red" }}>*</span>
               </label>
               <input
                 type="text"
@@ -258,6 +263,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
           <div className=" flex flex-row items-center">
             <label className="font-semibold flex flex-none text-sm mr-2">
               Designation:
+              <span style={{ color: "red" }}>*</span>
             </label>
             <input
               type="text"
@@ -270,6 +276,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
           <div className=" flex flex-row items-center">
             <label className="font-semibold flex flex-none text-sm mr-2">
               Request For Person:
+              <span style={{ color: "red" }}>*</span>
             </label>
             <input
               type="text"
@@ -282,6 +289,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
           <div className=" flex flex-row items-center">
             <label className="font-semibold flex flex-none text-sm mr-2">
               Access Date Duration:
+              <span style={{ color: "red" }}>*</span>
             </label>
             <input
               type="text"
@@ -294,6 +302,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
           <div className=" flex flex-row items-center">
             <label className="font-semibold flex flex-none text-sm mr-2">
               Access Time Duration:
+              <span style={{ color: "red" }}>*</span>
             </label>
             <input
               type="text"
@@ -306,6 +315,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
           <div className=" flex flex-row items-center">
             <label className="font-semibold flex flex-none text-sm mr-2 ">
               Details of Access/Service:
+              <span style={{ color: "red" }}> *</span>
             </label>
             <input
               type="text"
@@ -443,7 +453,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
               />
             </div>
           </div>
-          <div className="grid grid-cols-4  border-2 gap-4 bg-gray-300 mb-10  p-10">
+          <div className="grid grid-cols-4  border-2 gap-4 bg-gray-300 mb-10  p-4">
             {/* Column 1 */}
             <div className="  text-center">
               <input
@@ -461,19 +471,18 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
 
             {/* Column 2 */}
 
-            <div className=" flex flex-row items-center">
-              <label className="font-semibold flex flex-none text-sm mr-2">
-                ( submitted to )
+            <div className="  text-center">
+              <input
+                type="text"
+                name="revokeBy"
+                // onChange={handleInputChange}
+                readOnly
+                value={serviceDetails.subadmin}
+                className="block w-full py-2.5 px-0 text-lg underline underline-offset-4 text-gray-900 bg-transparent text-center border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+              />
+              <label className="font-semibold flex flex-none text-sm mr-2  mx-6 ">
+                ( Head Of Irfa/App )
               </label>
-              <select
-                name=""
-                onChange={handleInputChange}
-                value={serviceDetails.superadmin}
-                className="block w-full py-2 px-14 text-sm text-gray-900 bg-transparent border-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600   "
-              >
-                <option value="Access">head Of Ifra</option>
-                <option value="Mahin">head Of App</option>
-              </select>
             </div>
 
             {/* Column 4 */}
