@@ -19,15 +19,27 @@ interface UserDetails {
 
 interface ServiceRequest {
   id: number;
-  date: string;
-  department: string;
-  designation: string;
-  employeeId: string;
-  reasonOfRequest: string;
-  requestFor: string;
   requestNo: string;
+  date: string;
   requestedBy: string;
+  requestFor: string;
+  department: string;
+  employeeId: string;
+  designation: string;
+  reasonOfRequest: string;
   serviceDetails: string;
+  user: string;
+  accessDateDuration: string;
+  accessTimeDuration: string;
+  vandorName: string;
+  vandorAssignedReason: string;
+  deviceRequired: string;
+  WorkTeamWithId: string;
+  readBy: string;
+  ReturnTimeDate: string;
+  revokeBy: string;
+  execusion: string;
+  deviceApprovedBy: string;
   approvalStatus: string;
   supervisorStatus: string;
   cisoStatus: string;
@@ -493,6 +505,34 @@ const ProfilePage: React.FC = () => {
                                           </div>
                                         </td>
                                       </tr>
+                                      <tr>
+                                        {/* Reason of Request in a separate row */}
+                                        <td
+                                          colSpan={2}
+                                          className="border-[1px] border-b-1 py-2 px-4 border-gray-600"
+                                        >
+                                          <div className=" text-sm text-gray-900">
+                                            <label className="font-semibold">
+                                              Request For Persons:{" "}
+                                            </label>
+                                            {request.reasonOfRequest}
+                                          </div>
+                                        </td>
+                                      </tr>
+                                      <tr>
+                                        {/* Reason of Request in a separate row */}
+                                        <td
+                                          colSpan={2}
+                                          className="border-[1px] border-b-1 py-2 px-4 border-gray-600"
+                                        >
+                                          <div className=" text-sm text-gray-900">
+                                            <label className="font-semibold">
+                                              Access Date Duration:{" "}
+                                            </label>
+                                            {request.accessDateDuration}
+                                          </div>
+                                        </td>
+                                      </tr>
 
                                       <tr>
                                         {/* Reason of Request in a separate row */}
@@ -502,7 +542,22 @@ const ProfilePage: React.FC = () => {
                                         >
                                           <div className=" text-sm text-gray-900">
                                             <label className="font-semibold">
-                                              Reason of Request:{" "}
+                                              Access Time Duration:{" "}
+                                            </label>
+                                            {request.accessTimeDuration}
+                                          </div>
+                                        </td>
+                                      </tr>
+
+                                      <tr>
+                                        {/* Reason of Request in a separate row */}
+                                        <td
+                                          colSpan={2}
+                                          className="border-[1px] border-b-1 py-2 px-4 border-gray-600"
+                                        >
+                                          <div className=" text-sm text-gray-900">
+                                            <label className="font-semibold">
+                                              Reason Of Request :{" "}
                                             </label>
                                             {request.reasonOfRequest}
                                           </div>
@@ -523,6 +578,7 @@ const ProfilePage: React.FC = () => {
                                           </div>
                                         </td>
                                       </tr>
+
                                       <tr>
                                         {/* Service Details in a separate row */}
                                         <td
