@@ -89,7 +89,7 @@ const RequestDetailsPage = () => {
       />
 
       <form className="max-w-3xl  mx-auto mt-8 p-4 border pt-20">
-        <div className="grid  grid-cols-2 gap-4 mb-4">
+        <div className="grid  grid-cols-2 gap-4 ">
           <div className="mb-2 flex flex-row items-center">
             <label className=" font-semibold  text-sm flex flex-none mr-2">
               Request No:
@@ -104,7 +104,7 @@ const RequestDetailsPage = () => {
             />
           </div>
 
-          <div className="mb-2 flex flex-row items-center">
+          <div className=" flex flex-row items-center">
             <label className="font-semibold text-sm flex flex-none mr-2">
               Date:
               <span style={{ color: "red" }}>*</span>
@@ -120,8 +120,8 @@ const RequestDetailsPage = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-4 mb-4">
-          <div className="mb-2 flex flex-row items-center">
+        <div className="grid grid-cols-2 gap-4 ">
+          <div className=" flex flex-row items-center">
             <label className="font-semibold  text-sm flex flex-none mr-2">
               Request By : <span style={{ color: "red" }}>*</span>
             </label>
@@ -135,7 +135,7 @@ const RequestDetailsPage = () => {
             />
           </div>
 
-          <div className="mb-2 flex flex-row items-center">
+          <div className=" flex flex-row items-center">
             <label className="font-semibold text-sm flex flex-none mr-2">
               Request For:
               <span style={{ color: "red" }}>*</span>
@@ -151,8 +151,8 @@ const RequestDetailsPage = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-4 mb-4">
-          <div className="mb-2 flex flex-row items-center">
+        <div className="grid grid-cols-2 gap-4 ">
+          <div className=" flex flex-row items-center">
             <label className="font-semibold  text-sm flex flex-none mr-2">
               Department:
               <span style={{ color: "red" }}>*</span>
@@ -167,7 +167,7 @@ const RequestDetailsPage = () => {
             />
           </div>
 
-          <div className="mb-2 flex flex-row items-center">
+          <div className=" flex flex-row items-center">
             <label className="font-semibold flex  text-sm flex-none mr-2">
               Employee Id:
               <span style={{ color: "red" }}>*</span>
