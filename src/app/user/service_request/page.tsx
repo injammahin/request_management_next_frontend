@@ -31,6 +31,7 @@ interface ServiceDetails {
   execusion: string;
   deviceApprovedBy: string;
   submissionDateTime: "";
+  superadmin: string;
   [key: string]: string; // Index signature to allow any additional string properties
 }
 
@@ -58,6 +59,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
     revokeBy: "",
     execusion: "",
     deviceApprovedBy: "",
+    superadmin: localStorage.getItem("roles") || "",
   });
   const [successMessage, setSuccessMessage] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("");
@@ -446,7 +448,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
                 name="revokeBy"
                 // onChange={handleInputChange}
                 readOnly
-                value={serviceDetails.requestedBy}
+                value={serviceDetails.superadmin}
                 className="block w-full py-2.5 px-0 text-lg underline underline-offset-4 text-gray-900 bg-transparent text-center border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               />
               <label className="font-semibold flex flex-none text-sm mr-2  mx-6 ">
