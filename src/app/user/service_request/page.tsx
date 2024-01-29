@@ -70,6 +70,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
     useState<ServiceDetails | null>(null);
   const currentDateTime = new Date().toLocaleString();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [headRole, setHeadRole] = useState("");
 
   // This function will be called by the Navbar component
   const handleMenuToggle = (isOpen: boolean) => {
@@ -471,17 +472,29 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
 
             {/* Column 2 */}
 
-            <div className="  text-center">
-              <input
-                type="text"
-                name="revokeBy"
-                // onChange={handleInputChange}
-                readOnly
-                value={serviceDetails.subadmin}
-                className="block w-full py-2.5 px-0 text-lg underline underline-offset-4 text-gray-900 bg-transparent text-center border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-              />
-              <label className="font-semibold flex flex-none text-sm mr-2  mx-6 ">
-                ( Head Of Irfa/App )
+            <div className="text-center">
+              <select
+                name="headRole"
+                value={headRole}
+                onChange={(e) => {
+                  setHeadRole(e.target.value);
+                  if (e.target.value === "Head of Irfa") {
+                    setServiceDetails({
+                      ...serviceDetails,
+                      superadmin: "superadmin",
+                    });
+                  } else {
+                    setServiceDetails({ ...serviceDetails, superadmin: "" });
+                  }
+                }}
+                className="block w-full py-2.5 px-0 text-center text-sm text-gray-900 bg-transparent border-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+              >
+                <option value="">Select </option>
+                <option value="Head of Irfa">Head of Irfa</option>
+                <option value="Head of App">Head of App</option>
+              </select>
+              <label className="font-semibold text-sm mr-2 mx-6">
+                ( Select Head Of Irfa/App )
               </label>
             </div>
 
