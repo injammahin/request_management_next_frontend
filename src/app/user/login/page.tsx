@@ -30,6 +30,7 @@ const SigninPage = () => {
         localStorage.setItem("userName", response.data.name);
         localStorage.setItem("employeeId", response.data.user_id);
         localStorage.setItem("network", response.data.department_id);
+        localStorage.setItem("designation", response.data.designation);
         // Redirect based on user role
         if (response.data.role === "admin") {
           router.push("/dashboard/admin-dashboard");

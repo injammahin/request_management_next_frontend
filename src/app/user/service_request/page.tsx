@@ -43,7 +43,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
     requestFor: "",
     department: localStorage.getItem("network") || "",
     employeeId: localStorage.getItem("employeeId") || "",
-    designation: "",
+    designation: localStorage.getItem("designation") || "",
     reasonOfRequest: "",
     serviceDetails: "",
     user: "",
@@ -172,7 +172,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
             <div className=" flex flex-row items-center">
               <label className="font-semibold text-sm flex flex-none mr-2">
                 Request No:
-                <span style={{ color: "red" }}>*</span>
+                {/* <span style={{ color: "red" }}>*</span> */}
               </label>
               <input
                 type="text"
@@ -201,7 +201,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
           <div className="grid grid-cols-2 gap-4 ">
             <div className="mb-2 flex flex-row items-center">
               <label className=" font-semibold flex text-sm flex-none mr-2">
-                Request By : <span style={{ color: "red" }}>*</span>
+                Request By :{/* <span style={{ color: "red" }}>*</span> */}
               </label>
               <input
                 type="text"
@@ -234,7 +234,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
             <div className="mb-1 flex flex-row items-center">
               <label className="font-semibold flex flex-none text-sm mr-2">
                 Department:
-                <span style={{ color: "red" }}>*</span>
+                {/* <span style={{ color: "red" }}>*</span> */}
               </label>
               <input
                 type="text"
@@ -269,7 +269,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
             <input
               type="text"
               name="designation"
-              onChange={handleInputChange}
+              readOnly
               value={serviceDetails.designation}
               className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             />
@@ -490,8 +490,8 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
                 className="block w-full py-2.5 px-0 text-center text-sm text-gray-900 bg-transparent border-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               >
                 <option value="">Select </option>
-                <option value="Head of Irfa">Head of Irfa</option>
-                <option value="Head of App">Head of App</option>
+                <option value="Head of Irfa">NAME 1</option>
+                <option value="Head of App">NAME 2</option>
               </select>
               <label className="font-semibold text-sm mr-2 mx-6">
                 ( Select Head Of Irfa/App )
