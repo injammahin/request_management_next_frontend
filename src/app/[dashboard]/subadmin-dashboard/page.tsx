@@ -121,7 +121,7 @@ const ServiceRequests: React.FC = () => {
               <td>
                 <tr className="border-gray-300">
                   <div className="flex">
-                    <h2 className="   mb-2   ">
+                    <h2 className="      ">
                       <label className="font-semibold "> Request No:</label>{" "}
                       {request.requestNo}|{request.reasonOfRequest.slice(0, 30)}
                       {"....."}

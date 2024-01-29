@@ -38,10 +38,10 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
   const [serviceDetails, setServiceDetails] = useState<ServiceDetails>({
     requestNo: "",
     date: "",
-    requestedBy: "",
+    requestedBy: localStorage.getItem("userName") || "",
     requestFor: "",
-    department: "",
-    employeeId: "",
+    department: localStorage.getItem("network") || "",
+    employeeId: localStorage.getItem("employeeId") || "",
     designation: "",
     reasonOfRequest: "",
     serviceDetails: "",
@@ -160,12 +160,12 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
       >
         <form
           onSubmit={handleSubmit}
-          className="max-w-[1000px] pt-10 uppercase mx-auto mt-8 p-4 border"
+          className="max-w-[1000px] pt-10  mx-auto mt-8 p-4 border"
         >
           <div className="grid  grid-cols-2 gap-4 ">
             <div className=" flex flex-row items-center">
               <label className="font-semibold text-sm flex flex-none mr-2">
-                request no:
+                Request No:
               </label>
               <input
                 type="text"
@@ -179,7 +179,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
 
             <div className=" flex flex-row items-center">
               <label className="font-semibold flex flex-none text-sm mr-2">
-                date:
+                Date:
               </label>
               <input
                 type="date"
@@ -193,12 +193,13 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
           <div className="grid grid-cols-2 gap-4 ">
             <div className="mb-2 flex flex-row items-center">
               <label className=" font-semibold flex text-sm flex-none mr-2">
-                request by :{" "}
+                Request By :{" "}
               </label>
               <input
                 type="text"
                 name="requestedBy"
-                onChange={handleInputChange}
+                // onChange={handleInputChange}
+                readOnly
                 value={serviceDetails.requestedBy}
                 className="block w-full  py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               />
@@ -214,6 +215,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
                 value={serviceDetails.requestFor}
                 className="block w-full py-2.5 px-2 text-sm text-gray-900 bg-transparent border-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 focus:outline-none focus:ring-20 "
               >
+                <option value="">( select )</option>
                 <option value="Access">Access</option>
                 <option value="Mahin">Service Request</option>
               </select>
@@ -222,12 +224,13 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
           <div className="grid grid-cols-2 gap-4 ">
             <div className="mb-1 flex flex-row items-center">
               <label className="font-semibold flex flex-none text-sm mr-2">
-                department:
+                Department:
               </label>
               <input
                 type="text"
                 name="department"
-                onChange={handleInputChange}
+                //onChange={handleInputChange}
+                readOnly
                 value={serviceDetails.department}
                 className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               />
@@ -235,12 +238,13 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
 
             <div className="mb-1 flex flex-row items-center">
               <label className="font-semibold flex flex-none text-sm mr-2">
-                employee Id:
+                Employee Id:
               </label>
               <input
                 type="text"
                 name="employeeId"
-                onChange={handleInputChange}
+                //onChange={handleInputChange}
+                readOnly
                 value={serviceDetails.employeeId}
                 className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               />
@@ -248,7 +252,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
           </div>
           <div className=" flex flex-row items-center">
             <label className="font-semibold flex flex-none text-sm mr-2">
-              designation:
+              Designation:
             </label>
             <input
               type="text"
@@ -436,10 +440,18 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
           </div>
           <div className="grid grid-cols-4 gap-4 mb-10 pt-10">
             {/* Column 1 */}
-            <div className=" flex flex-row items-center">
+            <div className="  items-center">
               <label className="font-semibold flex flex-none text-sm mr-2">
                 Applicant Team leader
               </label>
+              <input
+                type="text"
+                name="revokeBy"
+                // onChange={handleInputChange}
+                readOnly
+                value={serviceDetails.requestedBy}
+                className="block w-full py-2.5 px-0 text-lg underline underline-offset-4 text-gray-900 bg-transparent text-center border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+              />
             </div>
 
             {/* Column 2 */}
@@ -460,16 +472,32 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
             </div>
 
             {/* Column 4 */}
-            <div className=" flex flex-row items-center">
+            <div className="  items-center">
               <label className="font-semibold flex flex-none text-sm mr-2 mx-20">
                 CISO
               </label>
+              <input
+                type="text"
+                name="revokeBy"
+                // onChange={handleInputChange}
+                readOnly
+                value={serviceDetails.requestedBy}
+                className="block w-full py-2.5 px-0 text-lg  underline underline-offset-4 text-gray-900 bg-transparent text-center border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer "
+              />
             </div>
 
             {/* Column 5 */}
-            <div className=" flex flex-row items-center">
-              <label className="font-semibold flex flex-none text-sm mr-2">
-                Head Of Division
+            <div className="  text-center">
+              <input
+                type="text"
+                name="revokeBy"
+                // onChange={handleInputChange}
+                readOnly
+                value={serviceDetails.requestedBy}
+                className="block w-full py-2.5 px-0 text-lg underline underline-offset-4 text-gray-900 bg-transparent text-center border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+              />
+              <label className="font-semibold flex flex-none mx-4   text-sm mr-2">
+                ( Head Of Division )
               </label>
             </div>
           </div>
