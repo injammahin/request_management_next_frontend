@@ -16,7 +16,22 @@ const RolesDisplayComponent: React.FC = () => {
           "http://localhost:3001/users/all-roles"
         );
         setRoles(response.data);
-        localStorage.setItem("roles", JSON.stringify(response.data));
+        console.log(response.data);
+        if (response.data.superadmin) {
+          localStorage.setItem("superadmin", response.data.superadmin);
+        }
+        if (response.data.subadmin) {
+          localStorage.setItem(
+            "subadmin",
+            JSON.stringify(response.data.subadmin)
+          );
+        }
+        if (response.data.ciso) {
+          localStorage.setItem("ciso", response.data.ciso);
+        }
+        if (response.data.head) {
+          localStorage.setItem("head", response.data.head);
+        }
       } catch (error) {
         console.error("Failed to fetch roles:", error);
       }
