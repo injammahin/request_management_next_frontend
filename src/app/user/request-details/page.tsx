@@ -6,15 +6,29 @@ import { useRouter } from "next/navigation";
 
 interface ServiceRequest {
   id: number;
-  date: string;
-  department: string;
-  designation: string;
-  employeeId: string;
-  reasonOfRequest: string;
-  requestFor: string;
   requestNo: string;
+  date: string;
   requestedBy: string;
+  requestFor: string;
+  department: string;
+  employeeId: string;
+  designation: string;
+  reasonOfRequest: string;
   serviceDetails: string;
+  user: string;
+  accessDateDuration: string;
+  accessTimeDuration: string;
+  vandorName: string;
+  vandorAssignedReason: string;
+  deviceRequired: string;
+  WorkTeamWithId: string;
+  readBy: string;
+  ReturnTimeDate: string;
+  revokeBy: string;
+  execusion: string;
+  deviceApprovedBy: string;
+  submissionDateTime: "";
+  superadmin: string;
   approvalStatus: string;
   supervisorStatus: string;
   cisoStatus: string;
@@ -74,11 +88,11 @@ const RequestDetailsPage = () => {
         }}
       />
 
-      <form className="max-w-3xl uppercase mx-auto mt-8 p-4 border">
+      <form className="max-w-3xl  mx-auto mt-8 p-4 border pt-20">
         <div className="grid  grid-cols-2 gap-4 mb-4">
           <div className="mb-2 flex flex-row items-center">
-            <label className=" font-semibold flex flex-none mr-2">
-              request no:
+            <label className=" font-semibold  text-sm flex flex-none mr-2">
+              Request No:
             </label>
             <input
               type="text"
@@ -91,7 +105,10 @@ const RequestDetailsPage = () => {
           </div>
 
           <div className="mb-2 flex flex-row items-center">
-            <label className="font-semibold flex flex-none mr-2">date:</label>
+            <label className="font-semibold text-sm flex flex-none mr-2">
+              Date:
+              <span style={{ color: "red" }}>*</span>
+            </label>
             <input
               type="date"
               name="date"
@@ -105,8 +122,8 @@ const RequestDetailsPage = () => {
 
         <div className="grid grid-cols-2 gap-4 mb-4">
           <div className="mb-2 flex flex-row items-center">
-            <label className="font-semibold flex flex-none mr-2">
-              request by :{" "}
+            <label className="font-semibold  text-sm flex flex-none mr-2">
+              Request By : <span style={{ color: "red" }}>*</span>
             </label>
             <input
               type="text"
@@ -119,8 +136,9 @@ const RequestDetailsPage = () => {
           </div>
 
           <div className="mb-2 flex flex-row items-center">
-            <label className="font-semibold flex flex-none mr-2">
-              request For:
+            <label className="font-semibold text-sm flex flex-none mr-2">
+              Request For:
+              <span style={{ color: "red" }}>*</span>
             </label>
             <input
               type="text"
@@ -135,8 +153,9 @@ const RequestDetailsPage = () => {
 
         <div className="grid grid-cols-2 gap-4 mb-4">
           <div className="mb-2 flex flex-row items-center">
-            <label className="font-semibold flex flex-none mr-2">
-              department:
+            <label className="font-semibold  text-sm flex flex-none mr-2">
+              Department:
+              <span style={{ color: "red" }}>*</span>
             </label>
             <input
               type="text"
@@ -149,8 +168,9 @@ const RequestDetailsPage = () => {
           </div>
 
           <div className="mb-2 flex flex-row items-center">
-            <label className="font-semibold flex flex-none mr-2">
-              employee Id:
+            <label className="font-semibold flex  text-sm flex-none mr-2">
+              Employee Id:
+              <span style={{ color: "red" }}>*</span>
             </label>
             <input
               type="text"
@@ -163,46 +183,198 @@ const RequestDetailsPage = () => {
           </div>
         </div>
 
-        <div className="mb-2 flex flex-row items-center">
-          <label className="font-semibold flex flex-none mr-2">
-            designation:
+        <div className=" flex flex-row items-center">
+          <label className="font-semibold flex flex-none text-sm mr-2">
+            Designation:
+            <span style={{ color: "red" }}>*</span>
           </label>
           <input
             type="text"
             name="designation"
-            id="designation"
-            value={requestDetails.designation}
             onChange={handleInputChange}
+            value={requestDetails.designation}
             className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
           />
         </div>
-
-        <div className="mb-2 flex flex-row items-center">
-          <label className="font-semibold flex flex-none mr-2">
-            reason Of Request:
+        <div className=" flex flex-row items-center">
+          <label className="font-semibold flex flex-none text-sm mr-2">
+            Request For Person:
+            <span style={{ color: "red" }}>*</span>
           </label>
           <input
             type="text"
             name="reasonOfRequest"
-            id="reasonOfRequest"
-            value={requestDetails.reasonOfRequest}
             onChange={handleInputChange}
+            value={requestDetails.reasonOfRequest}
             className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
           />
         </div>
-
-        <div className="mb-2 flex flex-row items-center">
-          <label className="font-semibold flex flex-none mr-2">
-            service Details:
+        <div className=" flex flex-row items-center">
+          <label className="font-semibold flex flex-none text-sm mr-2">
+            Access Date Duration:
+            <span style={{ color: "red" }}>*</span>
+          </label>
+          <input
+            type="text"
+            name="accessDateDuration"
+            onChange={handleInputChange}
+            value={requestDetails.accessDateDuration}
+            className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+          />
+        </div>
+        <div className=" flex flex-row items-center">
+          <label className="font-semibold flex flex-none text-sm mr-2">
+            Access Time Duration:
+            <span style={{ color: "red" }}>*</span>
+          </label>
+          <input
+            type="text"
+            name="accessTimeDuration"
+            onChange={handleInputChange}
+            value={requestDetails.accessTimeDuration}
+            className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+          />
+        </div>
+        <div className=" flex flex-row items-center">
+          <label className="font-semibold flex flex-none text-sm mr-2 ">
+            Details of Access/Service:
+            <span style={{ color: "red" }}> *</span>
           </label>
           <input
             type="text"
             name="serviceDetails"
-            id="serviceDetails"
-            value={requestDetails.serviceDetails}
             onChange={handleInputChange}
+            value={requestDetails.serviceDetails}
+            className="block w-full py-2.5 px-0  pt-16 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+          />
+        </div>
+        <div className="grid grid-cols-2  ">
+          <div className="mb-2  flex flex-row items-center">
+            <label className=" font-semibold flex text-sm flex-none mr-2">
+              Change/Execusion/
+              <br />
+              request ID :
+            </label>
+            <input
+              type="text"
+              id="execusion"
+              onChange={handleInputChange}
+              value={requestDetails.execusion}
+              className="block w-[900px]  py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+            />
+          </div>
+
+          <div className=" flex flex-row items-center text-center">
+            <label className=" mx-20 lex flex-none text-sm ">
+              referred from change/ Maintenance
+              <br /> request Form
+            </label>
+          </div>
+        </div>
+        <div className=" flex flex-row items-center">
+          <label className="font-semibold flex flex-none text-sm mr-2">
+            Vendor Name:
+          </label>
+          <input
+            type="text"
+            name="vandorName"
+            onChange={handleInputChange}
+            value={requestDetails.vandorName}
             className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
           />
+        </div>
+        <div className=" flex flex-row items-center">
+          <label className="font-semibold flex flex-none text-sm mr-2">
+            vendor Assigned Reason:
+          </label>
+          <input
+            type="text"
+            name="vandorAssignedReason"
+            onChange={handleInputChange}
+            value={requestDetails.vandorAssignedReason}
+            className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+          />
+        </div>
+        <div className="grid grid-cols-2 gap-4 ">
+          <div className="mb-1 flex flex-row items-center">
+            <label className="font-semibold flex flex-none text-sm mr-2">
+              Tools/Device
+              <br />
+              required
+            </label>
+            <input
+              type="text"
+              name="deviceRequired"
+              onChange={handleInputChange}
+              value={requestDetails.deviceRequired}
+              className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+            />
+          </div>
+
+          <div className="mb-1 flex flex-row items-center">
+            <label className="font-semibold  text-center flex flex-none text-sm mr-2">
+              Device
+              <br /> Approved By
+            </label>
+            <input
+              type="text"
+              name="deviceApprovedBy"
+              onChange={handleInputChange}
+              value={requestDetails.deviceApprovedBy}
+              className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+            />
+          </div>
+        </div>
+        <div className=" flex flex-row items-center">
+          <label className="font-semibold flex flex-none text-sm mr-2">
+            Work Team With Id
+          </label>
+          <input
+            type="text"
+            name="WorkTeamWithId"
+            onChange={handleInputChange}
+            value={requestDetails.WorkTeamWithId}
+            className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+          />
+        </div>
+        <div className=" flex flex-row items-center">
+          <label className="font-semibold flex flex-none text-sm mr-2">
+            Read By
+          </label>
+          <input
+            type="text"
+            name="readBy"
+            onChange={handleInputChange}
+            value={requestDetails.readBy}
+            className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+          />
+        </div>
+        <div className="grid grid-cols-2 gap-4 ">
+          <div className="mb-1 flex flex-row items-center">
+            <label className="font-semibold flex flex-none text-sm mr-2">
+              Revoke/return date <br /> & time:
+            </label>
+            <input
+              type="text"
+              name="ReturnTimeDate"
+              onChange={handleInputChange}
+              value={requestDetails.ReturnTimeDate}
+              className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+            />
+          </div>
+
+          <div className="mb-1 flex flex-row items-center">
+            <label className="font-semibold flex flex-none text-sm mr-2">
+              revoked BY:
+            </label>
+            <input
+              type="text"
+              name="revokeBy"
+              onChange={handleInputChange}
+              value={requestDetails.revokeBy}
+              className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+            />
+          </div>
         </div>
 
         <div className="flex justify-between">
