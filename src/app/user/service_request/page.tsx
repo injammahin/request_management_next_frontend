@@ -83,7 +83,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
 
   const autofillRequestNo = () => {
     // Auto-generate requestNo based on date, department, and requestedBy
-    const generatedRequestNo = `DBL/${serviceDetails.date}/${serviceDetails.department}/${serviceDetails.requestedBy}`;
+    const generatedRequestNo = `DBL/${serviceDetails.date}/${serviceDetails.department}/${serviceDetails.employeeId}/01`;
     setServiceDetails((prevDetails) => ({
       ...prevDetails,
       requestNo: generatedRequestNo,
@@ -155,7 +155,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
       <Navbar userRole={"supervisor"} onMenuToggle={handleMenuToggle} />
       <div
         className={`container mx-auto p-20 ${
-          isMenuOpen ? "translate-x-[0px]" : ""
+          isMenuOpen ? "translate-x-[120px]" : ""
         }`}
       >
         <form
@@ -438,12 +438,9 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
               />
             </div>
           </div>
-          <div className="grid grid-cols-4 gap-4 mb-10 pt-10">
+          <div className="grid grid-cols-4  border-2 gap-4 bg-gray-300 mb-10  p-10">
             {/* Column 1 */}
-            <div className="  items-center">
-              <label className="font-semibold flex flex-none text-sm mr-2">
-                Applicant Team leader
-              </label>
+            <div className="  text-center">
               <input
                 type="text"
                 name="revokeBy"
@@ -452,13 +449,16 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
                 value={serviceDetails.requestedBy}
                 className="block w-full py-2.5 px-0 text-lg underline underline-offset-4 text-gray-900 bg-transparent text-center border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               />
+              <label className="font-semibold flex flex-none text-sm mr-2  mx-6 ">
+                ( Applicant Team leader )
+              </label>
             </div>
 
             {/* Column 2 */}
 
             <div className=" flex flex-row items-center">
               <label className="font-semibold flex flex-none text-sm mr-2">
-                submitted to:
+                ( submitted to )
               </label>
               <select
                 name=""
@@ -473,9 +473,6 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
 
             {/* Column 4 */}
             <div className="  items-center">
-              <label className="font-semibold flex flex-none text-sm mr-2 mx-20">
-                CISO
-              </label>
               <input
                 type="text"
                 name="revokeBy"
@@ -484,6 +481,9 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
                 value={serviceDetails.requestedBy}
                 className="block w-full py-2.5 px-0 text-lg  underline underline-offset-4 text-gray-900 bg-transparent text-center border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer "
               />
+              <label className="font-semibold flex flex-none text-sm mr-2 mx-[85px]">
+                (CISO)
+              </label>
             </div>
 
             {/* Column 5 */}
@@ -496,7 +496,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
                 value={serviceDetails.requestedBy}
                 className="block w-full py-2.5 px-0 text-lg underline underline-offset-4 text-gray-900 bg-transparent text-center border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               />
-              <label className="font-semibold flex flex-none mx-4   text-sm mr-2">
+              <label className="font-semibold flex flex-none mx-10   text-sm mr-2">
                 ( Head Of Division )
               </label>
             </div>
