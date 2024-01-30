@@ -133,13 +133,13 @@ const Navbar: React.FC<NavbarProps> = ({ userRole, onMenuToggle }) => {
               <UserIcon className="w-5 h-5" />
               <span>Admin Dashboard</span>
             </Link>
-            <Link
+            {/* <Link
               href="/user/changepassword"
               className="text-sm py-2 px-4 flex items-center space-x-2 uppercase text-white hover:bg-[#5F0F40]"
             >
               <KeyIcon className="w-5 h-5" />
               <span>Change Password</span>
-            </Link>
+            </Link> */}
             <Link
               href="/dashboard/role"
               className="text-sm py-2 px-4 flex items-center space-x-2 uppercase text-white hover:bg-[#5F0F40]"
