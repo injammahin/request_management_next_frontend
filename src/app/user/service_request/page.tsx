@@ -489,7 +489,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
                 }}
                 className="block w-full py-2.5 px-0 text-center text-sm text-gray-900 bg-transparent border-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               >
-                <option value="">Select </option>
+                <option value="">( Select )</option>
                 <option value="Head of Irfa">NAME 1</option>
                 <option value="Head of App">NAME 2</option>
               </select>

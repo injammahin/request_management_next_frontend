@@ -20,6 +20,7 @@ interface NavbarProps {
 const Navbar: React.FC<NavbarProps> = ({ userRole, onMenuToggle }) => {
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const userEmail = localStorage.getItem("userId");
   const toggleMenu = () => {
     const newMenuState = !isMenuOpen;
     setMenuOpen(newMenuState);
@@ -155,7 +156,7 @@ const Navbar: React.FC<NavbarProps> = ({ userRole, onMenuToggle }) => {
         </button>
 
         {/* Logo */}
-        <div className="flex items-center">
+        <div className="flex items-center ">
           <img
             src="/dhaka_bank_logo.png"
             alt="Logo"
@@ -164,7 +165,7 @@ const Navbar: React.FC<NavbarProps> = ({ userRole, onMenuToggle }) => {
         </div>
 
         {/* Navigation Links (conditionally rendered based on isMenuOpen) */}
-        <div className={`lg:flex ${isMenuOpen ? "flex" : ""} space-x-4`}>
+        <div className={`lg:flex ${isMenuOpen ? "flex" : "hidden"} space-x-4`}>
           {/* <Link href="/dashboard" className="text-white">
             Home
           </Link> */}
@@ -175,7 +176,10 @@ const Navbar: React.FC<NavbarProps> = ({ userRole, onMenuToggle }) => {
           >
             Logout
           </button> */}
-          <div className="relative ">
+          <div className="relative flex ">
+            <div className="block   px-4  py-2 text-sm text-gray-100  dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
+              {userEmail}
+            </div>
             <button
               type="button"
               className="flex text-sm  bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-blue-400 dark:focus:ring-gray-600"
