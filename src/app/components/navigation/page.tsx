@@ -20,6 +20,7 @@ interface NavbarProps {
 const Navbar: React.FC<NavbarProps> = ({ userRole, onMenuToggle }) => {
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [IsDropdownOpen, setisDropdownOpen] = useState(true);
   const userEmail = localStorage.getItem("userId");
   const toggleMenu = () => {
     const newMenuState = !isMenuOpen;
@@ -39,6 +40,9 @@ const Navbar: React.FC<NavbarProps> = ({ userRole, onMenuToggle }) => {
     } catch (error) {
       console.error("Error during logout:", error);
     }
+  };
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
   };
 
   return (
@@ -176,34 +180,22 @@ const Navbar: React.FC<NavbarProps> = ({ userRole, onMenuToggle }) => {
           >
             Logout
           </button> */}
-          <div className="relative flex ">
-            <div className="block   px-4  py-2 text-sm text-gray-100  dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
+          <div className="relative flex items-center">
+            <div
+              className="block px-4 py-2 text-sm  mx-[-20px] text-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+              onMouseEnter={toggleDropdown}
+            >
               {userEmail}
             </div>
-            <button
-              type="button"
-              className="flex text-sm  bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-blue-400 dark:focus:ring-gray-600"
-              id="user-menu-button"
-              aria-expanded={isDropdownOpen}
-              onClick={handleDropdownToggle}
-            >
-              <span className="sr-only">Open user menu</span>
-              <img
-                className="w-9 h-9 rounded-full"
-                src="/image.jpeg"
-                alt="user photo"
-              />
-            </button>
-
             {isDropdownOpen && (
-              <div className="absolute mt-5 mx-[-30px]  right-0  w-52 bg-white border border-gray-200 rounded-lg shadow-md divide-y divide-gray-100 dark:bg-gray-700 dark:border-gray-600">
-                <ul className="py-2" aria-labelledby="user-menu-button">
+              <div className="absolute mt-52 mx-[-30px] right-0 w-52 bg-white border border-gray-200 rounded-lg shadow-md divide-y divide-gray-100 dark:bg-gray-700 dark:border-gray-600">
+                <ul className="py-2" aria-labelledby="user-menu-button ">
                   <li>
                     <a
                       href="/user/user_information"
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                     >
-                      user informtion
+                      User Information
                     </a>
                   </li>
                   <li>
@@ -226,6 +218,41 @@ const Navbar: React.FC<NavbarProps> = ({ userRole, onMenuToggle }) => {
                 </ul>
               </div>
             )}
+            <button
+              type="button"
+              className={`ml-2 text-gray-100 hover:text-white focus:outline-none ${
+                isDropdownOpen ? "rotate-180" : ""
+              }`}
+              onClick={toggleDropdown}
+            >
+              {/* You can replace the icon with your preferred one */}
+              <svg
+                className="w-5 h-5"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+            <button
+              type="button"
+              className="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-blue-400 dark:focus:ring-gray-600"
+              id="user-menu-button"
+              aria-expanded={isDropdownOpen}
+              onClick={handleDropdownToggle}
+            >
+              <span className="sr-only">Open user menu</span>
+              <img
+                className="w-8 h-8 rounded-full"
+                src="/image.jpeg"
+                alt="user photo"
+              />
+            </button>
           </div>
         </div>
       </div>
