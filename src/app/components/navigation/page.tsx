@@ -20,7 +20,7 @@ interface NavbarProps {
 const Navbar: React.FC<NavbarProps> = ({ userRole, onMenuToggle }) => {
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [IsDropdownOpen, setisDropdownOpen] = useState(true);
+  const [IsDropdownOpen, setisDropdownOpen] = useState(false);
   const userEmail = localStorage.getItem("userId");
   const toggleMenu = () => {
     const newMenuState = !isMenuOpen;
@@ -177,12 +177,12 @@ const Navbar: React.FC<NavbarProps> = ({ userRole, onMenuToggle }) => {
             Logout
           </button> */}
           <div className="relative flex items-center">
-            <div
+            <button
               className="block px-4 py-2 text-sm  mx-[-20px] text-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-              onMouseEnter={toggleDropdown}
+              onClick={toggleDropdown}
             >
               {userEmail}
-            </div>
+            </button>
             {isDropdownOpen && (
               <div className="absolute mt-52 mx-[-30px] right-0 w-52 bg-white border border-gray-200 rounded-lg shadow-md divide-y divide-gray-100 dark:bg-gray-700 dark:border-gray-600">
                 <ul className="py-2" aria-labelledby="user-menu-button ">

@@ -304,7 +304,7 @@ const ProfilePage: React.FC = () => {
             </h2>
           </div>
           <div className="space-y-4">
-            <p className="text-sm text-gray-700">
+            {/* <p className="text-sm text-gray-700">
               <span className="font-bold">Your user ID is:</span> {userData.id}
             </p>
             <p className="text-sm text-gray-700">
@@ -312,7 +312,7 @@ const ProfilePage: React.FC = () => {
             </p>
             <p className="text-sm text-gray-700">
               <span className="font-bold">Email:</span> {userData.email}
-            </p>
+            </p> */}
             {userData.serviceRequests &&
               userData.serviceRequests.length > 0 && (
                 <div className="bg-gray-200 p-6 rounded-lg">
