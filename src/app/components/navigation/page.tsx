@@ -161,11 +161,7 @@ const Navbar: React.FC<NavbarProps> = ({ userRole, onMenuToggle }) => {
 
         {/* Logo */}
         <div className="flex items-center ">
-          <img
-            src="/dhaka_bank_logo.png"
-            alt="Logo"
-            className="h-12 w-max mr-2"
-          />
+          <img src="/new-logo.png" alt="Logo" className="h-12 w-max mr-2" />
         </div>
 
         {/* Navigation Links (conditionally rendered based on isMenuOpen) */}
