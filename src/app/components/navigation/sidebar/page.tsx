@@ -1,239 +1,89 @@
-// pages/ServiceRequests.tsx
-"use client";
-import Navbar from "@/app/components/navigation/page";
-import React, { useState, useEffect } from "react";
-
-interface ServiceRequest {
-  id: number;
-  requestNo: string;
-  requestedBy: string;
-  department: string;
-  designation: string;
-  date: string;
-  requestFor: string;
-  employeeId: string;
-  reasonOfRequest: string;
-  serviceDetails: string;
-  approvalStatus: string;
-  cisoStatus: string;
-  supervisorStatus: string;
-  HeadOfDivisionStatus: string;
-}
-
-const ServiceRequests: React.FC = () => {
-  const [serviceRequests, setServiceRequests] = useState<ServiceRequest[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [expandedRequests, setExpandedRequests] = useState<number[]>([]);
-
-  useEffect(() => {
-    fetch("http://localhost:3001/service-requests/confirm")
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then((data) => setServiceRequests(data))
-      .catch((error) => setError(error.message))
-      .finally(() => setIsLoading(false));
-  }, []);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  // This function will be called by the Navbar component
-  const handleMenuToggle = (isOpen: boolean) => {
-    setIsMenuOpen(isOpen);
-  };
-
-  const handleAction = async (id: number, action: "confirm" | "cancel") => {
-    try {
-      await fetch(`http://localhost:3001/service-requests/${action}/${id}`, {
-        method: "PATCH",
-      });
-      setServiceRequests((prev) =>
-        prev.map((req) =>
-          req.id === id
-            ? {
-                ...req,
-                cisoStatus: action === "confirm" ? "confirm" : "cancel",
-              }
-            : req
-        )
-      );
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  };
-
-  const toggleExpand = (id: number) => {
-    setExpandedRequests((prev) =>
-      prev.includes(id) ? prev.filter((prevId) => prevId !== id) : [...prev, id]
-    );
-  };
-
-  if (isLoading) return <div className="text-center">Loading...</div>;
-  if (error)
-    return <div className="text-center text-red-500">Error: {error}</div>;
-
-  return (
-    <div
-      className={`bg-gray-100 min-h-screen ${isMenuOpen ? "menu-open" : ""}`}
-    >
-      <Navbar userRole={"supervisor"} onMenuToggle={handleMenuToggle} />
-      <div
-        className={`container mx-auto p-6 ${
-          isMenuOpen ? "translate-x-[300px]" : ""
-        }`}
-      >
-        <h1 className="text-2xl font-bold text-center mb-6">
-          IT Department Service Requests
-        </h1>
-        <ul>
-          {serviceRequests.map((request) => (
-            <li
-              key={request.id}
-              className="bg-white shadow-lg rounded-lg p-4 mb-4"
-            >
-              <h2 className="text-xl font-semibold mb-2">
-                Request No: {request.requestNo}
-              </h2>
-              {expandedRequests.includes(request.id) ? (
-                <>
-                  <div>
-                    <tbody>
-                      <tr>
-                        {/* Request No and Date in one row */}
-                        <td className="border-[1px]    border-b-1 py-2 px-4 border-gray-600">
-                          <div className="font-semibold text-sm text-gray-900">
-                            Request No: {request.requestNo}
-                          </div>
-                        </td>
-
-                        <td className="border-[1px] border-b-1 py-2 px-4  border-gray-600">
-                          <div className="font-semibold text-sm text-gray-900">
-                            Date: {request.date}
-                          </div>
-                        </td>
-                      </tr>
-
-                      <tr>
-                        {/* Request No and Date in one row */}
-                        <td className="border-[1px] border-b-1 py-2 px-4 border-gray-600">
-                          <div className="font-semibold text-sm text-gray-900">
-                            Requested By: {request.requestedBy}
-                          </div>
-                        </td>
-
-                        <td className="border-[1px] border-b-1 py-2 px-4 border-gray-600">
-                          <div className="font-semibold text-sm text-gray-900">
-                            Request For: {request.requestFor}
-                          </div>
-                        </td>
-                      </tr>
-
-                      <tr>
-                        {/* Request No and Date in one row */}
-                        <td className="border-[1px] border-b-1 py-2 px-4 border-gray-600">
-                          <div className="font-semibold text-sm text-gray-900">
-                            Department: {request.department}
-                          </div>
-                        </td>
-
-                        <td className="border-[1px] border-b-1 py-2 px-4 border-gray-600">
-                          <div className="font-semibold text-sm text-gray-900">
-                            Employee Id: {request.employeeId}
-                          </div>
-                        </td>
-                      </tr>
-
-                      <tr>
-                        {/* Designation in a separate row */}
-                        <td
-                          colSpan={2}
-                          className="border-[1px] border-b-1 py-2 px-4 border-gray-600"
-                        >
-                          <div className="font-semibold text-sm text-gray-900">
-                            Designation: {request.designation}
-                          </div>
-                        </td>
-                      </tr>
-
-                      <tr>
-                        {/* Reason of Request in a separate row */}
-                        <td
-                          colSpan={2}
-                          className="border-[1px] border-b-1 py-2 px-4 border-gray-600"
-                        >
-                          <div className="font-semibold text-sm text-gray-900">
-                            Reason of Request: {request.reasonOfRequest}
-                          </div>
-                        </td>
-                      </tr>
-
-                      <tr>
-                        {/* Service Details in a separate row */}
-                        <td
-                          colSpan={2}
-                          className="border-[1px] border-b-1 py-2 px-4 border-gray-600"
-                        >
-                          <div className="font-semibold text-sm text-gray-900">
-                            Service Details: {request.serviceDetails}
-                          </div>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </div>
-
-                  <p>
-                    <strong>Status:</strong>{" "}
-                    <span
-                      className={`font-bold ${
-                        request.HeadOfDivisionStatus === "cancel"
-                          ? "text-yellow-500"
-                          : request.HeadOfDivisionStatus === "confirm"
-                          ? "text-green-500"
-                          : "text-red-500"
-                      }`}
-                    >
-                      {request.HeadOfDivisionStatus}
-                    </span>
-                  </p>
-
-                  <div className="flex space-x-2 mt-3">
-                    <button
-                      onClick={() => handleAction(request.id, "confirm")}
-                      className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-                    >
-                      confirm
-                    </button>
-                    <button
-                      onClick={() => handleAction(request.id, "cancel")}
-                      className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
-                    >
-                      decline
-                    </button>
-                  </div>
-                  <button
-                    onClick={() => toggleExpand(request.id)}
-                    className="text-blue-500 mt-2 cursor-pointer"
-                  >
-                    Show Less
-                  </button>
-                </>
-              ) : (
-                <button
-                  onClick={() => toggleExpand(request.id)}
-                  className="text-blue-500 cursor-pointer"
-                >
-                  Show More
-                </button>
-              )}
-            </li>
-          ))}
-        </ul>
-      </div>
+<div className="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+  <button
+    type="button"
+    className="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+    id="user-menu-button"
+    aria-expanded="false"
+    data-dropdown-toggle="user-dropdown"
+    data-dropdown-placement="bottom"
+  >
+    <span className="sr-only">Open user menu</span>
+    <img
+      className="w-8 h-8 rounded-full"
+      src="/docs/images/people/profile-picture-3.jpg"
+      alt="user photo"
+    />
+  </button>
+  {/* Dropdown menu */}
+  <div
+    className="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600"
+    id="user-dropdown"
+  >
+    <div className="px-4 py-3">
+      <span className="block text-sm text-gray-900 dark:text-white">
+        Bonnie Green
+      </span>
+      <span className="block text-sm  text-gray-500 truncate dark:text-gray-400">
+        name@flowbite.com
+      </span>
     </div>
-  );
-};
-
-export default ServiceRequests;
+    <ul className="py-2" aria-labelledby="user-menu-button">
+      <li>
+        <a
+          href="#"
+          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+        >
+          Dashboard
+        </a>
+      </li>
+      <li>
+        <a
+          href="#"
+          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+        >
+          Settings
+        </a>
+      </li>
+      <li>
+        <a
+          href="#"
+          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+        >
+          Earnings
+        </a>
+      </li>
+      <li>
+        <a
+          href="#"
+          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+        >
+          Sign out
+        </a>
+      </li>
+    </ul>
+  </div>
+  <button
+    data-collapse-toggle="navbar-user"
+    type="button"
+    className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+    aria-controls="navbar-user"
+    aria-expanded="false"
+  >
+    <span className="sr-only">Open main menu</span>
+    <svg
+      className="w-5 h-5"
+      aria-hidden="true"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 17 14"
+    >
+      <path
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
+        d="M1 1h15M1 7h15M1 13h15"
+      />
+    </svg>
+  </button>
+</div>;

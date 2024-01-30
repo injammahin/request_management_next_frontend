@@ -19,11 +19,14 @@ interface NavbarProps {
 
 const Navbar: React.FC<NavbarProps> = ({ userRole, onMenuToggle }) => {
   const [isMenuOpen, setMenuOpen] = useState(false);
-
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const toggleMenu = () => {
     const newMenuState = !isMenuOpen;
     setMenuOpen(newMenuState);
     onMenuToggle(newMenuState); // Notify the parent component about the menu state change
+  };
+  const handleDropdownToggle = () => {
+    setIsDropdownOpen(!isDropdownOpen);
   };
   const logout = async () => {
     try {
@@ -161,17 +164,65 @@ const Navbar: React.FC<NavbarProps> = ({ userRole, onMenuToggle }) => {
         </div>
 
         {/* Navigation Links (conditionally rendered based on isMenuOpen) */}
-        <div className={`lg:flex ${isMenuOpen ? "flex" : "hidden"} space-x-4`}>
+        <div className={`lg:flex ${isMenuOpen ? "flex" : ""} space-x-4`}>
           {/* <Link href="/dashboard" className="text-white">
             Home
           </Link> */}
 
-          <button
+          {/* <button
             className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700"
             onClick={logout} // Call the logout function on click
           >
             Logout
-          </button>
+          </button> */}
+          <div className="relative ">
+            <button
+              type="button"
+              className="flex text-sm  bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-blue-400 dark:focus:ring-gray-600"
+              id="user-menu-button"
+              aria-expanded={isDropdownOpen}
+              onClick={handleDropdownToggle}
+            >
+              <span className="sr-only">Open user menu</span>
+              <img
+                className="w-9 h-9 rounded-full"
+                src="/image.jpeg"
+                alt="user photo"
+              />
+            </button>
+
+            {isDropdownOpen && (
+              <div className="absolute mt-5 mx-[-30px]  right-0  w-52 bg-white border border-gray-200 rounded-lg shadow-md divide-y divide-gray-100 dark:bg-gray-700 dark:border-gray-600">
+                <ul className="py-2" aria-labelledby="user-menu-button">
+                  <li>
+                    <a
+                      href="/user/user_information"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                    >
+                      user informtion
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="/user/changepassword"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                    >
+                      Change Password
+                    </a>
+                  </li>
+                  <li>
+                    <Link
+                      href={""}
+                      onClick={logout}
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                    >
+                      Logout
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </nav>
