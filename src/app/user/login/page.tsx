@@ -44,7 +44,7 @@ const SigninPage = () => {
           router.push("/dashboard/subadmin-dashboard");
         } else if (response.data.role === "ciso") {
           router.push("/dashboard/ciso-dashboard");
-        } else if (response.data.role === "departmentHead") {
+        } else if (response.data.role === "head") {
           router.push("/dashboard/headOfDepartment-dashboard");
         } else {
           // Handle other roles or scenarios
