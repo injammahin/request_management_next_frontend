@@ -40,9 +40,7 @@ const SigninPage = () => {
           router.push("/dashboard/user-dashboard");
         } else if (response.data.role === "superadmin") {
           router.push("/dashboard/admin2-dashboard");
-        } else if (
-          response.data.role === "departmentHeadofDatabaseAdministration"
-        ) {
+        } else if (response.data.role === "subadmin") {
           router.push(
             "/dashboard/DepartmentHead/AlternativeChannels-dashboard"
           );

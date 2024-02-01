@@ -54,7 +54,9 @@ const ServiceRequests: React.FC = () => {
   const released = serviceRequests.filter(
     (request) => request.supervisorStatus === "Pending"
   );
-
+  const toggleShowAllRequests = () => {
+    setShowAllRequests((prev) => !prev);
+  };
   const totalPendingToRelease = pendingToRelease.length;
   const totalReleased = released.length;
 
@@ -111,6 +113,12 @@ const ServiceRequests: React.FC = () => {
         >
           {showAllRequests ? "Hide All" : "Show All"}
         </button> */}
+        <button
+          onClick={toggleShowAllRequests}
+          className="text-blue-500 cursor-pointer mb-4"
+        >
+          {showAllRequests ? "Hide All" : "View All"}
+        </button>
 
         <ul>
           {serviceRequests.map((request) => (

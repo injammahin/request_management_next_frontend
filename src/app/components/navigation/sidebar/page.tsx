@@ -1,263 +1,305 @@
-// Navbar.js
+// pages/ServiceRequests.tsx
 "use client";
-import Link from "next/link";
-import { useState } from "react";
-import { MenuIcon, XIcon } from "@heroicons/react/solid";
-import {
-  ClipboardCheckIcon,
-  UserIcon,
-  InformationCircleIcon,
-  UsersIcon,
-  KeyIcon,
-} from "@heroicons/react/outline"; // Use outline icons from v2
+import Navbar from "@/app/components/navigation/page";
+import React, { useState, useEffect } from "react";
 
-// Define a TypeScript interface for the Navbar props
-interface NavbarProps {
-  userRole: string;
-  onMenuToggle: (isOpen: boolean) => void; // New prop
+interface ServiceRequest {
+  id: number;
+  requestNo: string;
+  requestedBy: string;
+  department: string;
+  designation: string;
+  date: string;
+  requestFor: string;
+  employeeId: string;
+  reasonOfRequest: string;
+  serviceDetails: string;
+  approvalStatus: string;
+  supervisorStatus: string;
 }
 
-const Navbar: React.FC<NavbarProps> = ({ userRole, onMenuToggle }) => {
-  const [isMenuOpen, setMenuOpen] = useState(false);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [IsDropdownOpen, setisDropdownOpen] = useState(true);
-  const userEmail = localStorage.getItem("userId");
-  const toggleMenu = () => {
-    const newMenuState = !isMenuOpen;
-    setMenuOpen(newMenuState);
-    onMenuToggle(newMenuState); // Notify the parent component about the menu state change
-  };
-  const handleDropdownToggle = () => {
-    setIsDropdownOpen(!isDropdownOpen);
-  };
-  const logout = async () => {
-    try {
-      // Make an API request or perform any necessary logout actions
-      // ...
+const ServiceRequests: React.FC = () => {
+  const [serviceRequests, setServiceRequests] = useState<ServiceRequest[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [expandedRequests, setExpandedRequests] = useState<number[]>([]);
+  const [showAllRequests, setShowAllRequests] = useState(false);
+  useEffect(() => {
+    fetch("http://localhost:3001/service-requests/DatabaseAdministration")
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => setServiceRequests(data))
+      .catch((error) => setError(error.message))
+      .finally(() => setIsLoading(false));
+  }, []);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-      // Redirect the user to the logout page or perform any necessary navigation
-      window.location.href = "/user/logout";
+  // This function will be called by the Navbar component
+  const handleMenuToggle = (isOpen: boolean) => {
+    setIsMenuOpen(isOpen);
+  };
+  const toggleExpandAll = () => {
+    setExpandedRequests((prev) =>
+      showAllRequests ? [] : serviceRequests.map((req) => req.id)
+    );
+    setShowAllRequests(!showAllRequests);
+  };
+  const pendingToRelease = serviceRequests.filter(
+    (request) => request.supervisorStatus === "Pending "
+  );
+  const released = serviceRequests.filter(
+    (request) => request.supervisorStatus === "Pending"
+  );
+  const toggleShowAllRequests = () => {
+    setShowAllRequests((prev) => !prev);
+  };
+  const totalPendingToRelease = pendingToRelease.length;
+  const totalReleased = released.length;
+
+  const handleAction = async (id: number, action: "release" | "block") => {
+    try {
+      await fetch(`http://localhost:3001/service-requests/${action}/${id}`, {
+        method: "PATCH",
+      });
+      setServiceRequests((prev) =>
+        prev.map((req) =>
+          req.id === id
+            ? {
+                ...req,
+                supervisorStatus: action === "release" ? "Released" : "Blocked",
+              }
+            : req
+        )
+      );
     } catch (error) {
-      console.error("Error during logout:", error);
+      console.error("Error:", error);
     }
   };
-  const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
+
+  const toggleExpand = (id: number) => {
+    setExpandedRequests((prev) =>
+      prev.includes(id) ? prev.filter((prevId) => prevId !== id) : [...prev, id]
+    );
   };
 
-  return (
-    <nav className="bg-gray-700 p-4 fixed top-0 pt-3 w-full z-50 ">
-      <div className="container mx-auto flex justify-between items-center">
-        {/* Information Box (conditionally rendered based on isMenuOpen) */}
-        {isMenuOpen && (
-          <div className="bg-[#365486] text-white w-80 min-h-screen overflow-hidden rounded  absolute left-0 h-auto mt-[800px] z-10 ">
-            <div className="p-4 flex items-center justify-center ">
-              <span className="text-2xl font-bold"></span>
-            </div>
-            {/* Add your information content here */}
-            <svg
-              className="absolute -top-0 -left-0 right-0 h-16 w-full "
-              viewBox="230 4 1140 220"
-            >
-              <path
-                fill="#374151"
-                fillOpacity="1"
-                d="M0,192L48,197.3C96,203,192,213,288,186.7C384,160,480,96,576,69.3C672,43,768,53,864,74.7C960,96,1056,128,1152,144C1248,160,1344,160,1392,160L1440,160L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"
-              ></path>
-            </svg>
-            <br />
-            {userRole === "admin" && (
-              <>
-                <Link
-                  href="/department/department_information"
-                  className="text-sm py-2 px-4 flex items-center space-x-2 uppercase text-white hover:bg-gray-700"
-                >
-                  <InformationCircleIcon className="w-5 h-5" />
-                  <span>Create Department Information</span>
-                </Link>
-                <Link
-                  href="/department/employee_information"
-                  className="text-sm py-2 px-4 flex items-center space-x-2 uppercase text-white hover:bg-gray-700"
-                >
-                  <UsersIcon className="w-5 h-5" />
-                  <span>Create Employee Information</span>
-                </Link>
-              </>
-            )}
-            <Link
-              href="/user/service_request"
-              className="text-sm py-2 px-4 flex items-center space-x-2 uppercase text-white hover:bg-gray-700 "
-            >
-              <ClipboardCheckIcon className="w-5 h-5" />
-              <span> Create Service Request Form</span>
-            </Link>
-            <Link
-              href="/user/profile"
-              className="text-sm py-2 px-4 flex items-center space-x-2 uppercase text-white hover:bg-[#6DA4AA]"
-            >
-              <UserIcon className="w-5 h-5" />
-              <span>View Requested Forms</span>
-            </Link>
-            <Link
-              href="/user/maintenance-request-form"
-              className=" text-sm py-2 px-4 flex items-center space-x-2 uppercase text-white hover:bg-gray-700"
-            >
-              <ClipboardCheckIcon className="w-5 h-5" />
-              <span> Create Maintenance Request Form</span>
-            </Link>
-            <Link
-              href="/user/view_maintenance_request_form"
-              className="text-sm py-2 px-4 flex items-center space-x-2 uppercase text-white hover:bg-[#6DA4AA]"
-            >
-              <ClipboardCheckIcon className="w-5 h-5" />
-              <span>View Maintenance Request Form</span>
-            </Link>
-            <Link
-              href="/user/department_information"
-              className="text-sm py-2 px-4 flex items-center space-x-2 uppercase text-white hover:bg-[#6DA4AA]"
-            >
-              <ClipboardCheckIcon className="w-5 h-5" />
-              <span> View Department Information</span>
-            </Link>
-            <Link
-              href="/user/employee_information"
-              className="text-sm py-2 px-4 flex items-center space-x-2 uppercase text-white hover:bg-[#6DA4AA]"
-            >
-              <ClipboardCheckIcon className="w-5 h-5" />
-              <span>View Employee Information</span>
-            </Link>
-            <Link
-              href="/dashboard/subadmin-dashboard"
-              className="text-sm py-2 px-4 flex items-center space-x-2 uppercase text-white hover:bg-[#5F0F40]"
-            >
-              <UserIcon className="w-5 h-5" />
-              <span>Admin Dashboard</span>
-            </Link>
-            <Link
-              href="/user/changepassword"
-              className="text-sm py-2 px-4 flex items-center space-x-2 uppercase text-white hover:bg-[#5F0F40]"
-            >
-              <KeyIcon className="w-5 h-5" />
-              <span>Change Password</span>
-            </Link>
-            <Link
-              href="/dashboard/role"
-              className="text-sm py-2 px-4 flex items-center space-x-2 uppercase text-white hover:bg-[#5F0F40]"
-            >
-              <KeyIcon className="w-5 h-5" />
-              <span>role</span>
-            </Link>
-          </div>
-        )}
+  if (isLoading) return <div className="text-center">Loading...</div>;
+  if (error)
+    return <div className="text-center text-red-500">Error: {error}</div>;
 
-        {/* Hamburger Toggle Button */}
-        <button className="text-white focus:outline-none" onClick={toggleMenu}>
-          {isMenuOpen ? (
-            <XIcon className="h-10 w-10" />
-          ) : (
-            <MenuIcon className="h-10 w-10" />
-          )}
+  return (
+    <div
+      className={`bg-gray-100 pt-20 min-h-screen ${
+        isMenuOpen ? "menu-open" : ""
+      }`}
+    >
+      <Navbar userRole={"supervisor"} onMenuToggle={handleMenuToggle} />
+      <div
+        className={`container mx-auto p-6 ${
+          isMenuOpen ? "translate-x-[230px]" : ""
+        }`}
+      >
+        <h1 className="text-2xl font-bold text-center mb-6">
+          Department Of Database Administration Service Requests
+        </h1>
+        <h2>Total Pending to Release: {totalPendingToRelease}</h2>
+        <h2>Total Released: {totalReleased}</h2>
+        {/* <button
+          onClick={toggleExpandAll}
+          className="text-blue-500 cursor-pointer mb-4"
+        >
+          {showAllRequests ? "Hide All" : "Show All"}
+        </button> */}
+        <button
+          onClick={toggleShowAllRequests}
+          className="text-blue-500 cursor-pointer mb-4"
+        >
+          {showAllRequests ? "Hide All" : "View All"}
         </button>
 
-        {/* Logo */}
-        <div className="flex items-center ">
-          <img
-            src="/dhaka_bank_logo.png"
-            alt="Logo"
-            className="h-12 w-max mr-2"
-          />
-        </div>
+        <ul>
+          {serviceRequests.map((request) => (
+            <li
+              key={request.id}
+              className="bg-white shadow-lg   text text-center  border-b-2 border-gray-400 "
+            >
+              <td>
+                <tr className="border-gray-300">
+                  <div className="flex">
+                    <h2 className="      ">
+                      <label className="font-semibold "> Request No:</label>{" "}
+                      {request.requestNo}|{request.reasonOfRequest.slice(0, 30)}
+                      {"....."}
+                    </h2>
+                    <button
+                      onClick={() => toggleExpand(request.id)}
+                      className="text-white cursor-pointer bg-green-500 hover:bg-green-700 rounded-lg h-6 w-24"
+                    >
+                      {expandedRequests.includes(request.id)
+                        ? "Show Less"
+                        : "Show More"}
+                    </button>
+                  </div>
+                </tr>
+              </td>
+              {expandedRequests.includes(request.id) ? (
+                <>
+                  <div>
+                    <tbody>
+                      <tr>
+                        {/* Request No and Date in one row */}
+                        <td className="border-[1px]    border-b-1 py-2 px-4 border-gray-600">
+                          <div className=" text-sm text-gray-900">
+                            <label className="font-semibold ">
+                              Request No:{" "}
+                            </label>{" "}
+                            {request.requestNo}
+                          </div>
+                        </td>
 
-        {/* Navigation Links (conditionally rendered based on isMenuOpen) */}
-        <div className={`lg:flex ${isMenuOpen ? "flex" : "hidden"} space-x-4`}>
-          {/* <Link href="/dashboard" className="text-white">
-            Home
-          </Link> */}
+                        <td className="border-[1px] border-b-1 py-2 px-4  border-gray-600">
+                          <div className=" text-sm text-gray-900">
+                            <label className="font-semibold ">Date </label>{" "}
+                            {request.date}
+                          </div>
+                        </td>
+                      </tr>
 
-          {/* <button
-            className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700"
-            onClick={logout} // Call the logout function on click
-          >
-            Logout
-          </button> */}
-          <div className="relative flex items-center">
-            <div
-              className="block px-4 py-2 text-sm  text-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-              onMouseEnter={toggleDropdown}
-            >
-              {userEmail}
-            </div>
-            {isDropdownOpen && (
-              <div className="absolute mt-52 mx-[-30px] right-0 w-52 bg-white border border-gray-200 rounded-lg shadow-md divide-y divide-gray-100 dark:bg-gray-700 dark:border-gray-600">
-                <ul className="py-2" aria-labelledby="user-menu-button ">
-                  <li>
-                    <a
-                      href="/user/user_information"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                      <tr>
+                        {/* Request No and Date in one row */}
+                        <td className="border-[1px] border-b-1 py-2 px-4 border-gray-600">
+                          <div className=" text-sm text-gray-900">
+                            <label className="font-semibold ">
+                              Requested By{" "}
+                            </label>{" "}
+                            {request.requestedBy}
+                          </div>
+                        </td>
+
+                        <td className="border-[1px] border-b-1 py-2 px-4 border-gray-600">
+                          <div className=" text-sm text-gray-900">
+                            <label className="font-semibold ">
+                              Request For
+                            </label>{" "}
+                            {request.requestFor}
+                          </div>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        {/* Request No and Date in one row */}
+                        <td className="border-[1px] border-b-1 py-2 px-4 border-gray-600">
+                          <div className=" text-sm text-gray-900">
+                            <label className="font-semibold ">Department</label>{" "}
+                            {request.department}
+                          </div>
+                        </td>
+
+                        <td className="border-[1px] border-b-1 py-2 px-4 border-gray-600">
+                          <div className=" text-sm text-gray-900">
+                            <label className="font-semibold ">
+                              Employee Id
+                            </label>{" "}
+                            {request.employeeId}
+                          </div>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        {/* Designation in a separate row */}
+                        <td
+                          colSpan={2}
+                          className="border-[1px] border-b-1 py-2 px-4 border-gray-600"
+                        >
+                          <div className=" text-sm text-gray-900">
+                            <label className="font-semibold ">
+                              Designation
+                            </label>{" "}
+                            {request.designation}
+                          </div>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        {/* Reason of Request in a separate row */}
+                        <td
+                          colSpan={2}
+                          className="border-[1px] border-b-1 py-2 px-4 border-gray-600"
+                        >
+                          <div className=" text-sm text-gray-900">
+                            <label className="font-semibold ">
+                              Reason Of Request
+                            </label>{" "}
+                            {request.reasonOfRequest}
+                          </div>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        {/* Service Details in a separate row */}
+                        <td
+                          colSpan={2}
+                          className="border-[1px] border-b-1 py-2 px-4 border-gray-600"
+                        >
+                          <div className="font-semibold text-sm text-gray-900">
+                            <label className="font-semibold ">
+                              Service Details
+                            </label>{" "}
+                            {request.serviceDetails}
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </div>
+
+                  <p>
+                    <strong>Status:</strong>{" "}
+                    <span
+                      className={`font-bold ${
+                        request.supervisorStatus === "Pending"
+                          ? "text-yellow-500"
+                          : request.supervisorStatus === "Released"
+                          ? "text-green-500"
+                          : "text-red-500"
+                      }`}
                     >
-                      User Information
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="/user/changepassword"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                      {request.supervisorStatus}
+                    </span>
+                  </p>
+                  <div className="flex space-x-2 mt-3">
+                    <button
+                      onClick={() => handleAction(request.id, "release")}
+                      className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
                     >
-                      Change Password
-                    </a>
-                  </li>
-                  <li>
-                    <Link
-                      href={""}
-                      onClick={logout}
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                      Release
+                    </button>
+                    <button
+                      onClick={() => handleAction(request.id, "block")}
+                      className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
                     >
-                      Logout
-                    </Link>
-                  </li>
-                </ul>
-              </div>
-            )}
-            <button
-              type="button"
-              className={`ml-2 text-gray-100 hover:text-white focus:outline-none ${
-                isDropdownOpen ? "rotate-180" : ""
-              }`}
-              onClick={toggleDropdown}
-            >
-              {/* You can replace the icon with your preferred one */}
-              <svg
-                className="w-5 h-5"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M19 9l-7 7-7-7"></path>
-              </svg>
-            </button>
-            <button
-              type="button"
-              className="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-blue-400 dark:focus:ring-gray-600"
-              id="user-menu-button"
-              aria-expanded={isDropdownOpen}
-              onClick={handleDropdownToggle}
-            >
-              <span className="sr-only">Open user menu</span>
-              <img
-                className="w-9 h-9 rounded-full"
-                src="/image.jpeg"
-                alt="user photo"
-              />
-            </button>
-          </div>
-        </div>
+                      Block
+                    </button>
+                  </div>
+                  <button
+                    onClick={() => toggleExpand(request.id)}
+                    className="text-blue-500 mt-2 cursor-pointer"
+                  ></button>
+                </>
+              ) : (
+                <button
+                  onClick={() => toggleExpand(request.id)}
+                  className="text-blue-500 cursor-pointer"
+                ></button>
+              )}
+            </li>
+          ))}
+        </ul>
       </div>
-    </nav>
+    </div>
   );
 };
 
-export default Navbar;
+export default ServiceRequests;
