@@ -25,7 +25,7 @@ const ServiceRequests: React.FC = () => {
   const [expandedRequests, setExpandedRequests] = useState<number[]>([]);
   const [showAllRequests, setShowAllRequests] = useState(false);
   useEffect(() => {
-    fetch("http://localhost:3001/service-requests/Alternative-Channels")
+    fetch("http://localhost:3001/service-requests/DatabaseAdministration")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -101,7 +101,7 @@ const ServiceRequests: React.FC = () => {
         }`}
       >
         <h1 className="text-2xl font-bold text-center mb-6">
-          Department Of Alternative Channels Service Requests
+          Department Of Database Administration Service Requests
         </h1>
         <h2>Total Pending to Release: {totalPendingToRelease}</h2>
         <h2>Total Released: {totalReleased}</h2>
