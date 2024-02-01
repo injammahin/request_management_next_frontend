@@ -41,7 +41,7 @@ const SigninPage = () => {
         } else if (response.data.role === "superadmin") {
           router.push("/dashboard/admin2-dashboard");
         } else if (
-          response.data.role === "departmentHeadOfAlternativeChannels"
+          response.data.role === "departmentHeadofAlternativeChannels"
         ) {
           router.push(
             "/dashboard/DepartmentHead/AlternativeChannels-dashboard"
