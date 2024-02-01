@@ -43,7 +43,9 @@ const SigninPage = () => {
         } else if (
           response.data.role === "departmentHeadOfAlternativeChannels"
         ) {
-          router.push("/dashboard/AlternativeChannels-dashboard");
+          router.push(
+            "/dashboard/DepartmentHead/AlternativeChannels-dashboard"
+          );
         } else if (response.data.role === "ciso") {
           router.push("/dashboard/ciso-dashboard");
         } else if (response.data.role === "head") {
