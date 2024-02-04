@@ -29,7 +29,10 @@ const SigninPage = () => {
         localStorage.setItem("Id", response.data.id);
         localStorage.setItem("userName", response.data.name);
         localStorage.setItem("employeeId", response.data.user_id);
-        localStorage.setItem("network", response.data.department_id);
+        localStorage.setItem(
+          "network",
+          response.data.department.department_name
+        );
         localStorage.setItem("designation", response.data.designation);
         // Redirect based on user role
         if (response.data.role === "admin") {
