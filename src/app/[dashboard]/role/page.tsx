@@ -21,10 +21,7 @@ const RolesDisplayComponent: React.FC = () => {
           localStorage.setItem("superadmin", response.data.superadmin);
         }
         if (response.data.subadmin) {
-          localStorage.setItem(
-            "subadmin",
-            JSON.stringify(response.data.subadmin)
-          );
+          localStorage.setItem("subadmin", response.data.subadmin);
         }
         if (response.data.ciso) {
           localStorage.setItem("ciso", response.data.ciso);

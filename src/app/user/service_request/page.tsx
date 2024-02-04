@@ -170,10 +170,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
           localStorage.setItem("superadmin", response.data.superadmin);
         }
         if (response.data.subadmin) {
-          localStorage.setItem(
-            "subadmin",
-            JSON.stringify(response.data.subadmin)
-          );
+          localStorage.setItem("subadmin", response.data.subadmin);
         }
         if (response.data.ciso) {
           localStorage.setItem("ciso", response.data.ciso);
@@ -337,7 +334,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
               <option value="1 month">1 month</option>
               <option value="3 months">3 months</option>
               <option value="6 months">6 months</option>
-              <option value="continous">1 year</option>
+              <option value="continous">1 year (Continous)</option>
             </select>
           </div>
           <div className=" flex flex-row items-center">
