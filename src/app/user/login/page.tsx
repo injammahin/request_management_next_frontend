@@ -27,7 +27,7 @@ const SigninPage = () => {
         localStorage.setItem("userId", response.data.email);
         localStorage.setItem("userRole", response.data.role);
         localStorage.setItem("Id", response.data.id);
-        localStorage.setItem("userName", response.data.name);
+        localStorage.setItem("userName", response.data.employee_name);
         localStorage.setItem("employeeId", response.data.user_id);
         localStorage.setItem(
           "network",

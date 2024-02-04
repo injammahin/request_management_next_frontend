@@ -153,6 +153,41 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
       console.error("Form submission failed:", error);
     }
   };
+  interface Roles {
+    [key: string]: string[]; // Define the structure of your roles data
+  }
+  const [roles, setRoles] = useState<Roles>({}); // Use the Roles interface for typing the state
+
+  useEffect(() => {
+    const fetchRoles = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:3001/users/all-roles"
+        );
+        setRoles(response.data);
+        console.log(response.data);
+        if (response.data.superadmin) {
+          localStorage.setItem("superadmin", response.data.superadmin);
+        }
+        if (response.data.subadmin) {
+          localStorage.setItem(
+            "subadmin",
+            JSON.stringify(response.data.subadmin)
+          );
+        }
+        if (response.data.ciso) {
+          localStorage.setItem("ciso", response.data.ciso);
+        }
+        if (response.data.head) {
+          localStorage.setItem("head", response.data.head);
+        }
+      } catch (error) {
+        console.error("Failed to fetch roles:", error);
+      }
+    };
+
+    fetchRoles();
+  }, []);
 
   return (
     <div
@@ -292,13 +327,18 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
               Access Date Duration:
               <span style={{ color: "red" }}>*</span>
             </label>
-            <input
-              type="text"
+            <select
               name="accessDateDuration"
               onChange={handleInputChange}
               value={serviceDetails.accessDateDuration}
               className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-            />
+            >
+              <option value="">( select )</option>
+              <option value="1 month">1 month</option>
+              <option value="3 months">3 months</option>
+              <option value="6 months">6 months</option>
+              <option value="continous">1 year</option>
+            </select>
           </div>
           <div className=" flex flex-row items-center">
             <label className="font-semibold flex flex-none text-sm mr-2">
