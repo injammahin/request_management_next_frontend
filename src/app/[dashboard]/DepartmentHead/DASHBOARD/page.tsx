@@ -13,7 +13,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import Navbar from "@/app/components/navigation/page"; // Ensure this path is correct based on your project structure
+import Navbar from "@/app/components/navigation/page";
 
 ChartJS.register(
   CategoryScale,
@@ -51,55 +51,63 @@ const Dashboard: React.FC = () => {
         isMenuOpen ? "menu-open" : ""
       }`}
     >
-      <Navbar userRole="supervisor" onMenuToggle={handleMenuToggle} />
+      <Navbar userRole={"supervisor"} onMenuToggle={handleMenuToggle} />
       <div
         className={`container mx-auto p-6 ${
           isMenuOpen ? "translate-x-[230px]" : ""
         }`}
       >
-        <div className="flex justify-between items-center mb-6">
-          <h1 className="text-2xl font-semibold">Dashboard</h1>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {/* Cards */}
-          <div className="bg-white p-4 rounded-xl shadow-md hover:shadow-lg">
-            <button className="relative p-2 bg-blue-500 rounded-full text-white ">
-              <FiBell className="w-6 h-6" />
-              <span className="absolute top-0 right-0 inline-flex items-center justify-center w-5 h-5 text-xs font-bold leading-none text-red-100 bg-red-600 rounded-full">
-                3
-              </span>
-            </button>
-            <h2 className="font-semibold text-xl">Service Requests</h2>
-            <p className="text-gray-600">You have 42 pending requests.</p>
+        <div className="container mx-auto p-6">
+          <div className="flex justify-between items-center mb-6">
+            <h1 className="text-2xl font-semibold  text-center">Dashboard</h1>
           </div>
-          <div className="bg-white p-4 rounded-xl shadow-md hover:shadow-lg">
-            <button className="relative p-2 bg-blue-500 rounded-full text-white">
-              <FiBell className="w-6 h-6" />
-              <span className="absolute top-0 right-0 inline-flex items-center justify-center w-5 h-5 text-xs font-bold leading-none text-red-100 bg-red-600 rounded-full">
-                3
-              </span>
-            </button>
-            <h2 className="font-semibold text-xl">Maintenance Requests</h2>
-            <p className="text-gray-600">5 new maintenance tasks.</p>
-          </div>
-          <div className="bg-white p-4 rounded-xl shadow-md hover:shadow-lg">
-            <button className="relative p-2 bg-blue-500 rounded-full text-white">
-              <FiBell className="w-6 h-6" />
-              <span className="absolute top-0 right-0 inline-flex items-center justify-center w-5 h-5 text-xs font-bold leading-none text-red-100 bg-red-600 rounded-full">
-                3
-              </span>
-            </button>
-            <h2 className="font-semibold text-xl">User Feedback</h2>
-            <p className="text-gray-600">You have 89 unread messages.</p>
-          </div>
-        </div>
 
-        {/* Chart */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {/* Cards with smaller title */}
+            <div className="bg-white p-4 rounded-xl shadow-md flex justify-between items-center">
+              <div>
+                <h2 className="font-semibold text-lg">Service Requests</h2>
+                <p className="text-gray-600">You have 42 pending requests.</p>
+              </div>
+              <button className="relative p-2 rounded-full text-white bg-blue-500">
+                <FiBell className="w-6 h-6" />
+                <span className="absolute top-0 right-0 inline-flex items-center justify-center w-5 h-5 text-xs font-bold text-red-100 bg-red-600 rounded-full">
+                  3
+                </span>
+              </button>
+            </div>
+            <div className="bg-white p-4 rounded-xl shadow-md flex justify-between items-center">
+              <div>
+                <h2 className="font-semibold text-lg">Service Requests</h2>
+                <p className="text-gray-600">You have 14 pending requests.</p>
+              </div>
+              <button className="relative p-2 rounded-full text-white bg-blue-500">
+                <FiBell className="w-6 h-6" />
+                <span className="absolute top-0 right-0 inline-flex items-center justify-center w-5 h-5 text-xs font-bold text-red-100 bg-red-600 rounded-full">
+                  3
+                </span>
+              </button>
+            </div>
+            <div className="bg-white p-4 rounded-xl shadow-md flex justify-between items-center">
+              <div>
+                <h2 className="font-semibold text-lg">Service Requests</h2>
+                <p className="text-gray-600">You have 5 unread message</p>
+              </div>
+              <button className="relative p-2 rounded-full text-white bg-blue-500">
+                <FiBell className="w-6 h-6" />
+                <span className="absolute top-0 right-0 inline-flex items-center justify-center w-5 h-5 text-xs font-bold text-red-100 bg-red-600 rounded-full">
+                  3
+                </span>
+              </button>
+            </div>
+            {/* Repeat for other cards */}
+          </div>
 
-        <div className="bg-white p-10 rounded-xl h-[500px] w-[900px] shadow-md mt-6">
-          <h2 className="font-semibold text-xl mb-4">Monthly Active Users</h2>
-          <Line className="h-96 w-96" data={data} />
+          {/* Chart */}
+          <div className="bg-white p-10 rounded-xl shadow-md mt-6">
+            <h2 className="font-semibold text-xl mb-4">Monthly Active Users</h2>
+            <Line data={data} />
+          </div>
         </div>
       </div>
     </div>
