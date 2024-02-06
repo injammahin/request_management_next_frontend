@@ -26,7 +26,9 @@ const ServiceRequests: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
-    fetch("http://localhost:3001/service-requests/ApplicationUser-Management")
+    fetch(
+      "http://localhost:3001/service-requests/ProcurementzzAndAssetManagement"
+    )
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -98,7 +100,7 @@ const ServiceRequests: React.FC = () => {
         }`}
       >
         <h1 className="text-2xl font-bold text-center mb-6">
-          Department Of ApplicationUser Management Service Requests
+          Department Of Procurementzz And AssetManagement Service Requests
         </h1>
         <h2>Total Pending to Release: {totalPendingToRelease}</h2>
         <h2>Total Released: {totalReleased}</h2>
