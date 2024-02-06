@@ -33,8 +33,8 @@ const Dashboard: React.FC = () => {
     const targetAccepted = 1204; // Target number for accepted forms
     const targetDeclined = 234; // Target number for declined forms
 
-    const incrementAccepted = targetAccepted / 100; // Increment for accepted forms
-    const incrementDeclined = targetDeclined / 100; // Increment for declined forms
+    const incrementAccepted = targetAccepted / 1000; // Increment for accepted forms
+    const incrementDeclined = targetDeclined / 1000; // Increment for declined forms
 
     const animateAcceptedForms = () => {
       if (acceptedForms < targetAccepted) {
@@ -135,7 +135,7 @@ const Dashboard: React.FC = () => {
               {/* Chart */}
               <div className="md:col-span-2 lg:col-span-4 bg-white p-5 rounded-xl shadow-md mt-3">
                 <h2 className="font-semibold text-xl mb-4">
-                  Monthly Active Users
+                  Monthly Form Submit
                 </h2>
                 <div className="h-96 ">
                   <Line data={data} />
