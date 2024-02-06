@@ -102,28 +102,31 @@ const Dashboard: React.FC = () => {
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
             >
               {/* Cards with smaller title */}
-              <div className="bg-white p-4 rounded-xl shadow-md flex justify-between items-center">
+              <div className=" p-4 bg-white text-gray-900 rounded-xl shadow-md flex justify-between items-center">
                 <div>
                   <animated.h2
                     style={fadeInUp}
-                    className="font-semibold text-lg"
+                    className="font-semibold text-lg "
                   >
                     Service Requests
                   </animated.h2>
-                  <animated.p style={fadeInUp} className="text-gray-600">
+                  <animated.p style={fadeInUp} className="text-gray-800">
                     You have 42 pending requests.
                   </animated.p>
                 </div>
-                <button className="relative p-2 rounded-full text-white bg-blue-700">
+                <animated.button
+                  style={fadeInUp}
+                  className="relative p-2 rounded-full text-gray-800 bg-[#0B60B0]"
+                >
                   <FiBell className="w-6 h-6" />
                   <span className="absolute top-0 right-0 inline-flex items-center justify-center w-5 h-5 text-xs font-bold text-red-100 bg-red-600 rounded-full">
                     3
                   </span>
-                </button>
+                </animated.button>
               </div>
               <animated.div
                 style={fadeInUp}
-                className="bg-white p-4 rounded-xl shadow-md flex justify-between items-center"
+                className="bg-white text-gray-800 p-4 rounded-xl shadow-md flex justify-between items-center"
               >
                 <div>
                   <animated.h2
@@ -132,20 +135,23 @@ const Dashboard: React.FC = () => {
                   >
                     Maintenance Request
                   </animated.h2>
-                  <animated.p style={fadeInUp} className="text-gray-600">
+                  <animated.p style={fadeInUp} className=" text-gray-900">
                     You have 14 pending requests.
                   </animated.p>
                 </div>
-                <button className="relative p-2 rounded-full text-white bg-blue-700">
+                <animated.button
+                  style={fadeInUp}
+                  className="relative p-2 rounded-full text-gray-800 bg-[#0B60B0]"
+                >
                   <FiBell className="w-6 h-6" />
                   <span className="absolute top-0 right-0 inline-flex items-center justify-center w-5 h-5 text-xs font-bold text-red-100 bg-red-600 rounded-full">
                     3
                   </span>
-                </button>
+                </animated.button>
               </animated.div>
               <animated.div
                 style={fadeInUp}
-                className="bg-white p-4 rounded-xl shadow-md flex justify-between items-center"
+                className="bg-white text-gray-800 p-4 rounded-xl shadow-md flex justify-between items-center"
               >
                 <div>
                   <animated.h2
@@ -154,16 +160,19 @@ const Dashboard: React.FC = () => {
                   >
                     Messages
                   </animated.h2>
-                  <animated.p style={fadeInUp} className="text-gray-600">
+                  <animated.p style={fadeInUp} className="text-gray-800">
                     You have 5 unread message
                   </animated.p>
                 </div>
-                <button className="relative p-2 rounded-full text-white bg-blue-700">
+                <animated.button
+                  style={fadeInUp}
+                  className="relative p-2 rounded-full text-gray-800 bg-[#0B60B0]"
+                >
                   <FiBell className="w-6 h-6" />
                   <span className="absolute top-0 right-0 inline-flex items-center justify-center w-5 h-5 text-xs font-bold text-red-100 bg-red-600 rounded-full">
                     7
                   </span>
-                </button>
+                </animated.button>
               </animated.div>
               {/* Repeat for other cards */}
 
