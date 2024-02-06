@@ -1,6 +1,5 @@
-// Dashboard.tsx
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FiBell } from "react-icons/fi";
 import { Line } from "react-chartjs-2";
 import {
@@ -27,6 +26,36 @@ ChartJS.register(
 
 const Dashboard: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [acceptedForms, setAcceptedForms] = useState(0);
+  const [declinedForms, setDeclinedForms] = useState(0);
+
+  useEffect(() => {
+    const targetAccepted = 1204; // Target number for accepted forms
+    const targetDeclined = 234; // Target number for declined forms
+
+    const incrementAccepted = targetAccepted / 100; // Increment for accepted forms
+    const incrementDeclined = targetDeclined / 100; // Increment for declined forms
+
+    const animateAcceptedForms = () => {
+      if (acceptedForms < targetAccepted) {
+        setAcceptedForms((prev) => prev + incrementAccepted);
+      }
+    };
+
+    const animateDeclinedForms = () => {
+      if (declinedForms < targetDeclined) {
+        setDeclinedForms((prev) => prev + incrementDeclined);
+      }
+    };
+
+    const intervalAccepted = setInterval(animateAcceptedForms, 20);
+    const intervalDeclined = setInterval(animateDeclinedForms, 20);
+
+    return () => {
+      clearInterval(intervalAccepted);
+      clearInterval(intervalDeclined);
+    };
+  }, [acceptedForms, declinedForms]);
 
   const data = {
     labels: ["January", "February", "March", "April", "May", "June"],
@@ -40,6 +69,7 @@ const Dashboard: React.FC = () => {
       },
     ],
   };
+
   const handleMenuToggle = (isOpen: boolean) => {
     setIsMenuOpen(isOpen);
   };
@@ -113,25 +143,35 @@ const Dashboard: React.FC = () => {
               </div>
             </div>
 
-            {/* Task List */}
-
-            {/* Overview Section */}
-            <div className="mt-6">
-              <h2 className="text-xl font-semibold mb-2">Overview</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="bg-white p-4 rounded-xl shadow-md">
-                  <h3 className="font-semibold text-lg">
-                    Total accepted form this month
-                  </h3>
-                  <p className="text-3xl">1,204</p>
+            <div
+              className={`bg-gray-100 pt-0 min-h-screen ${
+                isMenuOpen ? "menu-open" : ""
+              }`}
+            >
+              {/* Navbar Component */}
+              <div
+                className={`container mx-auto p-6 ${
+                  isMenuOpen ? "translate-x-[230px]" : ""
+                }`}
+              >
+                {/* Dashboard Content */}
+                <div className="mt-6">
+                  <h2 className="text-xl font-semibold mb-2">Overview</h2>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="bg-white p-4 rounded-xl shadow-md">
+                      <h3 className="font-semibold text-lg">
+                        Total accepted forms this month
+                      </h3>
+                      <p className="text-3xl">{Math.floor(acceptedForms)} +</p>
+                    </div>
+                    <div className="bg-white p-4 rounded-xl shadow-md">
+                      <h3 className="font-semibold text-lg">
+                        Declined forms this month
+                      </h3>
+                      <p className="text-3xl">{Math.floor(declinedForms)} +</p>
+                    </div>
+                  </div>
                 </div>
-                <div className="bg-white p-4 rounded-xl shadow-md">
-                  <h3 className="font-semibold text-lg">
-                    Declined form in this moth
-                  </h3>
-                  <p className="text-3xl">234</p>
-                </div>
-                {/* Add more overview cards as needed */}
               </div>
             </div>
           </div>
