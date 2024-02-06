@@ -110,12 +110,12 @@ const Dashboard: React.FC = () => {
               {/* Cards with smaller title */}
               <div className=" p-4 bg-white text-gray-900 rounded-xl shadow-md flex justify-between items-center">
                 <div>
-                  <animated.h2
+                  <animated.div
                     style={fadeInUp}
                     className="font-semibold text-lg "
                   >
                     Service Requests
-                  </animated.h2>
+                  </animated.div>
                   <animated.p style={fadeInUp} className="text-gray-800">
                     You have 42 pending requests.
                   </animated.p>
