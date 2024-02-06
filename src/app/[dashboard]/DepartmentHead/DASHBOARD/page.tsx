@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { FiBell } from "react-icons/fi";
 import { Line } from "react-chartjs-2";
+import { useSpring, animated } from "react-spring";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -33,8 +34,8 @@ const Dashboard: React.FC = () => {
     const targetAccepted = 1204; // Target number for accepted forms
     const targetDeclined = 234; // Target number for declined forms
 
-    const incrementAccepted = targetAccepted / 1000; // Increment for accepted forms
-    const incrementDeclined = targetDeclined / 1000; // Increment for declined forms
+    const incrementAccepted = targetAccepted / 300; // Increment for accepted forms
+    const incrementDeclined = targetDeclined / 300; // Increment for declined forms
 
     const animateAcceptedForms = () => {
       if (acceptedForms < targetAccepted) {
@@ -56,7 +57,11 @@ const Dashboard: React.FC = () => {
       clearInterval(intervalDeclined);
     };
   }, [acceptedForms, declinedForms]);
-
+  const fadeInUp = useSpring({
+    from: { opacity: 0, transform: "translateY(30px)" },
+    to: { opacity: 1, transform: "translateY(0)" },
+    config: { duration: 900 },
+  });
   const data = {
     labels: ["January", "February", "March", "April", "May", "June"],
     datasets: [
@@ -92,12 +97,22 @@ const Dashboard: React.FC = () => {
               <h1 className="text-2xl font-semibold  text-center">Dashboard</h1>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <animated.div
+              style={fadeInUp}
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
+            >
               {/* Cards with smaller title */}
               <div className="bg-white p-4 rounded-xl shadow-md flex justify-between items-center">
                 <div>
-                  <h2 className="font-semibold text-lg">Service Requests</h2>
-                  <p className="text-gray-600">You have 42 pending requests.</p>
+                  <animated.h2
+                    style={fadeInUp}
+                    className="font-semibold text-lg"
+                  >
+                    Service Requests
+                  </animated.h2>
+                  <animated.p style={fadeInUp} className="text-gray-600">
+                    You have 42 pending requests.
+                  </animated.p>
                 </div>
                 <button className="relative p-2 rounded-full text-white bg-blue-700">
                   <FiBell className="w-6 h-6" />
@@ -106,10 +121,20 @@ const Dashboard: React.FC = () => {
                   </span>
                 </button>
               </div>
-              <div className="bg-white p-4 rounded-xl shadow-md flex justify-between items-center">
+              <animated.div
+                style={fadeInUp}
+                className="bg-white p-4 rounded-xl shadow-md flex justify-between items-center"
+              >
                 <div>
-                  <h2 className="font-semibold text-lg">Service Requests</h2>
-                  <p className="text-gray-600">You have 14 pending requests.</p>
+                  <animated.h2
+                    style={fadeInUp}
+                    className="font-semibold text-lg"
+                  >
+                    Service Requests
+                  </animated.h2>
+                  <animated.p style={fadeInUp} className="text-gray-600">
+                    You have 14 pending requests.
+                  </animated.p>
                 </div>
                 <button className="relative p-2 rounded-full text-white bg-blue-700">
                   <FiBell className="w-6 h-6" />
@@ -117,11 +142,21 @@ const Dashboard: React.FC = () => {
                     3
                   </span>
                 </button>
-              </div>
-              <div className="bg-white p-4 rounded-xl shadow-md flex justify-between items-center">
+              </animated.div>
+              <animated.div
+                style={fadeInUp}
+                className="bg-white p-4 rounded-xl shadow-md flex justify-between items-center"
+              >
                 <div>
-                  <h2 className="font-semibold text-lg">Service Requests</h2>
-                  <p className="text-gray-600">You have 5 unread message</p>
+                  <animated.h2
+                    style={fadeInUp}
+                    className="font-semibold text-lg"
+                  >
+                    Service Requests
+                  </animated.h2>
+                  <animated.p style={fadeInUp} className="text-gray-600">
+                    You have 5 unread message
+                  </animated.p>
                 </div>
                 <button className="relative p-2 rounded-full text-white bg-blue-700">
                   <FiBell className="w-6 h-6" />
@@ -129,19 +164,25 @@ const Dashboard: React.FC = () => {
                     7
                   </span>
                 </button>
-              </div>
+              </animated.div>
               {/* Repeat for other cards */}
 
               {/* Chart */}
-              <div className="md:col-span-2 lg:col-span-4 bg-white p-5 rounded-xl shadow-md mt-3">
-                <h2 className="font-semibold text-xl mb-4">
+              <animated.div
+                style={fadeInUp}
+                className="md:col-span-2 lg:col-span-4 bg-white p-5 rounded-xl shadow-md mt-3"
+              >
+                <animated.h2
+                  style={fadeInUp}
+                  className="font-semibold text-xl mb-4"
+                >
                   Monthly Form Submit
-                </h2>
+                </animated.h2>
                 <div className="h-96 ">
                   <Line data={data} />
                 </div>
-              </div>
-            </div>
+              </animated.div>
+            </animated.div>
 
             <div
               className={`bg-gray-100 pt-0 min-h-screen ${
@@ -158,18 +199,34 @@ const Dashboard: React.FC = () => {
                 <div className="mt-6">
                   <h2 className="text-xl font-semibold mb-2">Overview</h2>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="bg-white p-4 rounded-xl shadow-md">
-                      <h3 className="font-semibold text-lg">
+                    <animated.div
+                      style={fadeInUp}
+                      className="bg-white p-4 rounded-xl shadow-md"
+                    >
+                      <animated.h3
+                        style={fadeInUp}
+                        className="font-semibold text-lg"
+                      >
                         Total accepted forms this month
-                      </h3>
-                      <p className="text-3xl">{Math.floor(acceptedForms)} +</p>
-                    </div>
-                    <div className="bg-white p-4 rounded-xl shadow-md">
-                      <h3 className="font-semibold text-lg">
+                      </animated.h3>
+                      <animated.p style={fadeInUp} className="text-3xl">
+                        {Math.floor(acceptedForms)} +
+                      </animated.p>
+                    </animated.div>
+                    <animated.div
+                      style={fadeInUp}
+                      className="bg-white p-4 rounded-xl shadow-md"
+                    >
+                      <animated.h3
+                        style={fadeInUp}
+                        className="font-semibold text-lg"
+                      >
                         Declined forms this month
-                      </h3>
-                      <p className="text-3xl">{Math.floor(declinedForms)} +</p>
-                    </div>
+                      </animated.h3>
+                      <animated.p style={fadeInUp} className="text-3xl">
+                        {Math.floor(declinedForms)} +
+                      </animated.p>
+                    </animated.div>
                   </div>
                 </div>
               </div>
