@@ -60,7 +60,7 @@ const Dashboard: React.FC = () => {
   const fadeInUp = useSpring({
     from: { opacity: 0, transform: "translateY(30px)" },
     to: { opacity: 1, transform: "translateY(0)" },
-    config: { duration: 900 },
+    config: { duration: 1200 },
   });
   const data = {
     labels: ["January", "February", "March", "April", "May", "June"],
@@ -130,7 +130,7 @@ const Dashboard: React.FC = () => {
                     style={fadeInUp}
                     className="font-semibold text-lg"
                   >
-                    Service Requests
+                    Maintenance Request
                   </animated.h2>
                   <animated.p style={fadeInUp} className="text-gray-600">
                     You have 14 pending requests.
@@ -152,7 +152,7 @@ const Dashboard: React.FC = () => {
                     style={fadeInUp}
                     className="font-semibold text-lg"
                   >
-                    Service Requests
+                    Messages
                   </animated.h2>
                   <animated.p style={fadeInUp} className="text-gray-600">
                     You have 5 unread message
