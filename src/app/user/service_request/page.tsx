@@ -36,6 +36,7 @@ interface ServiceDetails {
 }
 
 const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
+  const [vendorNames, setVendorNames] = useState<string[]>([]);
   const [serviceDetails, setServiceDetails] = useState<ServiceDetails>({
     requestNo: "",
     date: "",
@@ -95,6 +96,22 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
       requestNo: generatedRequestNo,
     }));
   };
+
+  ///// fetch verdor name////////
+  useEffect(() => {
+    const fetchVendorNames = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:3001/vendor/all-vendors"
+        );
+        setVendorNames(response.data);
+      } catch (error) {
+        console.error("Failed to fetch vendor names:", error);
+      }
+    };
+
+    fetchVendorNames();
+  }, []);
 
   useEffect(() => {
     autofillRequestNo();
@@ -349,10 +366,12 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
               className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             >
               <option value="">( select )</option>
-              <option value="1 month">1 month</option>
-              <option value="3 months">3 months</option>
-              <option value="6 months">6 months</option>
-              <option value="continous">1 year (Continous)</option>
+              <option value="30 mins"> 30 mins</option>
+              <option value="1 hours">1 hour</option>
+              <option value="3 hours">3 hours</option>
+              <option value="6 hours">6 hours</option>
+              <option value="12 hours">12 hours</option>
+              <option value="continous">12+ ( continous )</option>
             </select>
           </div>
           <div className=" flex flex-row items-center">
@@ -395,13 +414,19 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
             <label className="font-semibold flex flex-none text-sm mr-2">
               Vendor Name:
             </label>
-            <input
-              type="text"
+            <select
               name="vandorName"
               onChange={handleInputChange}
               value={serviceDetails.vandorName}
               className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-            />
+            >
+              <option value="">( select )</option>
+              {vendorNames.map((vendorName) => (
+                <option key={vendorName} value={vendorName}>
+                  {vendorName}
+                </option>
+              ))}
+            </select>
           </div>
           <div className=" flex flex-row items-center">
             <label className="font-semibold flex flex-none text-sm mr-2">
