@@ -29,6 +29,7 @@ const Dashboard: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [acceptedForms, setAcceptedForms] = useState(0);
   const [declinedForms, setDeclinedForms] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
     const targetAccepted = 1204; // Target number for accepted forms
@@ -74,6 +75,11 @@ const Dashboard: React.FC = () => {
       },
     ],
   };
+  const jumpAnimation = useSpring({
+    to: { transform: isHovered ? "translateY(-10px)" : "translateY(0px)" },
+    from: { transform: "translateY(0px)" },
+    config: { mass: 1, tension: 180, friction: 12 },
+  });
 
   const handleMenuToggle = (isOpen: boolean) => {
     setIsMenuOpen(isOpen);
@@ -114,15 +120,18 @@ const Dashboard: React.FC = () => {
                     You have 42 pending requests.
                   </animated.p>
                 </div>
-                <animated.button
-                  style={fadeInUp}
-                  className="relative p-2 rounded-full text-gray-800 bg-[#0B60B0]"
+                <animated.div
+                  style={jumpAnimation}
+                  onMouseEnter={() => setIsHovered(true)}
+                  onMouseLeave={() => setIsHovered(false)}
                 >
-                  <FiBell className="w-6 h-6" />
-                  <span className="absolute top-0 right-0 inline-flex items-center justify-center w-5 h-5 text-xs font-bold text-red-100 bg-red-600 rounded-full">
-                    3
-                  </span>
-                </animated.button>
+                  <button className="relative p-2 rounded-full text-gray-800 bg-[#0B60B0]">
+                    <FiBell className="w-6 h-6" />
+                    <span className="absolute top-0 right-0 inline-flex items-center justify-center w-5 h-5 text-xs font-bold text-red-100 bg-red-600 rounded-full">
+                      3
+                    </span>
+                  </button>
+                </animated.div>
               </div>
               <animated.div
                 style={fadeInUp}
