@@ -197,21 +197,25 @@ const Dashboard: React.FC = () => {
                     <animated.button
                       style={fadeInUp}
                       onClick={toggleShowAllRequests}
-                      className="text-gray-900 text-start h-10 w-60 font-bold rounded"
+                      className="text-gray-900 text-start h-10 w-60 font-bold  rounded"
                     >
                       {showAllRequests
                         ? "Hide Requests"
                         : "Show All Service Requests"}
-                      <animated.p style={fadeInUp} className="text-gray-800">
-                        You have {totalPendingToRelease} pending
-                      </animated.p>
                     </animated.button>
+
                     <button className="relative   p-2 mr-16 rounded-full text-gray-800 bg-[#0B60B0]">
                       <FiBell className="w-6 h-6" />
-                      <span className="absolute top-0 right-0 inline-flex items-center justify-center w-5 h-5 text-xs font-bold text-red-100 bg-red-600 rounded-full">
+                      <span className="absolute top-0 right-0 inline-flex items-center justify-center w-5 h-5 text-xs font-bold text-red-100 bg-red-500 rounded-full">
                         {totalPendingToRelease}
                       </span>
                     </button>
+                    <animated.p
+                      style={fadeInUp}
+                      className="text-gray-800 font-semibold"
+                    >
+                      You have {totalPendingToRelease} pending
+                    </animated.p>
 
                     {showAllRequests && (
                       <ul>
@@ -226,7 +230,8 @@ const Dashboard: React.FC = () => {
                                   Request No:
                                 </label>{" "}
                                 {request.requestNo} |{" "}
-                                {request.reasonOfRequest.slice(0, 30)}...
+                                {request.reasonOfRequest.slice(0, 30)}...|
+                                {request.approvalStatus}
                               </h2>
                               <button
                                 onClick={() => toggleExpand(request.id)}
@@ -414,8 +419,48 @@ const Dashboard: React.FC = () => {
                     )}
                   </animated.div>
                 </div>
-                <div className=" bg-gray-100 shadow-lg rounded-lg"> mahin</div>
-                <div className="bg-gay-100 rounded-lg shadow-lg"> nur </div>
+                <div className="bg-gay-100 rounded-lg shadow-lg text-start p-4">
+                  <animated.div style={fadeInUp} className="font-bold">
+                    {" "}
+                    Show All Maintenance Request
+                    <animated.button
+                      style={fadeInUp}
+                      className="relative   p-2 mr-16 rounded-full text-gray-800 bg-[#0B60B0]"
+                    >
+                      <FiBell className="w-6 h-6" />
+                      <span className="absolute top-0 right-0 inline-flex items-center justify-center w-5 h-5 text-xs font-bold text-red-100 bg-red-500 rounded-full">
+                        {totalPendingToRelease}
+                      </span>
+                    </animated.button>
+                  </animated.div>
+                  <animated.p
+                    style={fadeInUp}
+                    className="text-gray-800 font-semibold"
+                  >
+                    You have 30 pending
+                  </animated.p>{" "}
+                </div>
+                <div className="bg-gay-100 rounded-lg shadow-lg text-start p-4 pr-4">
+                  <animated.div style={fadeInUp} className="font-bold">
+                    {" "}
+                    Show All Maintenance Request
+                    <animated.button
+                      style={fadeInUp}
+                      className="relative   p-2 mr-16 rounded-full text-gray-800 bg-[#0B60B0]"
+                    >
+                      <FiBell className="w-6 h-6 " />
+                      <span className="absolute top-0 right-0 inline-flex items-center justify-center w-5 h-5 text-xs font-bold text-red-100 bg-red-500 rounded-full">
+                        {totalPendingToRelease}
+                      </span>
+                    </animated.button>
+                  </animated.div>
+                  <animated.p
+                    style={fadeInUp}
+                    className="text-gray-800 font-semibold"
+                  >
+                    You have 6 unread messages
+                  </animated.p>{" "}
+                </div>
                 <animated.div
                   style={jumpAnimation}
                   onMouseEnter={() => setIsHovered(false)}
