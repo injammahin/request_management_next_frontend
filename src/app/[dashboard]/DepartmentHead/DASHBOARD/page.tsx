@@ -125,7 +125,7 @@ const Dashboard: React.FC = () => {
                   onMouseEnter={() => setIsHovered(true)}
                   onMouseLeave={() => setIsHovered(false)}
                 >
-                  <button className="relative p-2 rounded-full text-gray-800 bg-[#0B60B0]">
+                  <button className="relative animate-bounce p-2 rounded-full text-gray-800 bg-[#0B60B0]">
                     <FiBell className="w-6 h-6" />
                     <span className="absolute top-0 right-0 inline-flex items-center justify-center w-5 h-5 text-xs font-bold text-red-100 bg-red-600 rounded-full">
                       3
@@ -150,9 +150,9 @@ const Dashboard: React.FC = () => {
                 </div>
                 <animated.button
                   style={fadeInUp}
-                  className="relative p-2 rounded-full text-gray-800 bg-[#0B60B0]"
+                  className="relative  animate-bounce  p-2 rounded-full text-gray-800 bg-[#0B60B0]"
                 >
-                  <FiBell className="w-6 h-6" />
+                  <FiBell className="w-6 h-6 " />
                   <span className="absolute top-0 right-0 inline-flex items-center justify-center w-5 h-5 text-xs font-bold text-red-100 bg-red-600 rounded-full">
                     3
                   </span>
@@ -175,7 +175,7 @@ const Dashboard: React.FC = () => {
                 </div>
                 <animated.button
                   style={fadeInUp}
-                  className="relative p-2 rounded-full text-gray-800 bg-[#0B60B0]"
+                  className="relative  animate-bounce p-2 rounded-full text-gray-800 bg-[#0B60B0]"
                 >
                   <FiBell className="w-6 h-6" />
                   <span className="absolute top-0 right-0 inline-flex items-center justify-center w-5 h-5 text-xs font-bold text-red-100 bg-red-600 rounded-full">
