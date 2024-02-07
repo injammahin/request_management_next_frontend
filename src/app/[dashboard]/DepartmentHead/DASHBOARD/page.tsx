@@ -176,33 +176,43 @@ const Dashboard: React.FC = () => {
         <div className="bg-gray-100 pt-20 min-h-screen">
           <div className="container mx-auto p-6">
             <div className="flex justify-between items-center mb-6">
-              <h1 className="text-2xl font-semibold  text-center">Dashboard</h1>
+              <h1 className="text-2xl font-semibold text-center">Dashboard</h1>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-4">
-              <animated.div style={fadeInUp}>
-                {/* Cards with smaller title */}
-                <animated.div
-                  style={fadeInUp}
-                  className="p-4 bg-white text-gray-900 rounded-xl shadow-md flex justify-between items-center"
+
+            <div>
+              <div
+                className={`grid ${
+                  showAllRequests
+                    ? "grid-cols-1"
+                    : "grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+                } gap-4`}
+              >
+                {/* Service Requests Section */}
+                <div
+                  className={`p-4 bg-white text-gray-900 rounded-xl shadow-md ${
+                    showAllRequests ? "col-span-full" : ""
+                  }`}
                 >
-                  <div>
-                    <button
+                  <animated.div style={fadeInUp}>
+                    <animated.button
+                      style={fadeInUp}
                       onClick={toggleShowAllRequests}
-                      className=" text-gray-900   h-10 w-60  font-bold  rounded"
+                      className="text-gray-900 text-start h-10 w-60 font-bold rounded"
                     >
                       {showAllRequests
                         ? "Hide Requests"
                         : "Show All Service Requests"}
-                    </button>{" "}
+                      <animated.p style={fadeInUp} className="text-gray-800">
+                        You have {totalPendingToRelease} pending
+                      </animated.p>
+                    </animated.button>
                     <button className="relative   p-2 mr-16 rounded-full text-gray-800 bg-[#0B60B0]">
                       <FiBell className="w-6 h-6" />
                       <span className="absolute top-0 right-0 inline-flex items-center justify-center w-5 h-5 text-xs font-bold text-red-100 bg-red-600 rounded-full">
                         {totalPendingToRelease}
                       </span>
                     </button>
-                    <animated.p style={fadeInUp} className="text-gray-800">
-                      You have {totalPendingToRelease} pending
-                    </animated.p>
+
                     {showAllRequests && (
                       <ul>
                         {serviceRequests.map((request) => (
@@ -211,18 +221,16 @@ const Dashboard: React.FC = () => {
                             className="bg-white shadow-lg text-start border-b-2 border-gray-400 p-4 mb-4"
                           >
                             <div className="flex justify-between items-center">
-                              <h2 className="      ">
-                                <label className="font-semibold ">
-                                  {" "}
+                              <h2 className="">
+                                <label className="font-semibold">
                                   Request No:
                                 </label>{" "}
-                                {request.requestNo}|
-                                {request.reasonOfRequest.slice(0, 30)}
-                                {"....."}
+                                {request.requestNo} |{" "}
+                                {request.reasonOfRequest.slice(0, 30)}...
                               </h2>
                               <button
                                 onClick={() => toggleExpand(request.id)}
-                                className="text-white bg-[#40A2D8] hover:bg-[#0B60B0] rounded-lg px-4 py-2"
+                                className="text-white bg-green-500 hover:bg-green-700 rounded-lg px-4 py-2"
                               >
                                 {expandedRequests.includes(request.id)
                                   ? "Show Less"
@@ -404,50 +412,38 @@ const Dashboard: React.FC = () => {
                         ))}
                       </ul>
                     )}
-                  </div>
-                </animated.div>
-              </animated.div>
-              <div className=" bg-gray-200 rounded">
-                <h1>dknjerfjfn</h1>
+                  </animated.div>
+                </div>
+                <div className=" bg-gray-100 shadow-lg rounded-lg"> mahin</div>
+                <div className="bg-blue-100 rounded"> nur </div>
+                <animated.div
+                  style={jumpAnimation}
+                  onMouseEnter={() => setIsHovered(false)}
+                  onMouseLeave={() => setIsHovered(false)}
+                ></animated.div>
               </div>
-              <div className="bg-blue-300 rounded"></div>
               <animated.div
-                style={jumpAnimation}
-                onMouseEnter={() => setIsHovered(true)}
-                onMouseLeave={() => setIsHovered(false)}
-              ></animated.div>
-            </div>
-            {/* Repeat for other cards */}
-
-            {/* Chart */}
-            <animated.div
-              style={fadeInUp}
-              className="md:col-span-2 lg:col-span-4 bg-white p-5 rounded-xl shadow-md mt-3"
-            >
-              <animated.h2
                 style={fadeInUp}
-                className="font-semibold text-xl mb-4"
+                className="md:col-span-2 lg:col-span-4 bg-white p-5 rounded-xl shadow-md mt-3"
               >
-                Monthly Form Submit
-              </animated.h2>
-              <div className="h-96 ">
-                <Line data={data} />
-              </div>
-            </animated.div>
-          </div>
-        </div>
-        <div
-          className={`bg-gray-100 pt-0 min-h-screen ${
-            isMenuOpen ? "menu-open" : ""
-          }`}
-        >
-          {/* Navbar Component */}
-          <div
-            className={`container mx-auto p-6 ${
-              isMenuOpen ? "translate-x-[230px]" : ""
-            }`}
-          >
-            {/* Dashboard Content */}
+                <animated.h2
+                  style={fadeInUp}
+                  className="font-semibold text-xl mb-4"
+                >
+                  Monthly Form Submit
+                </animated.h2>
+                <div className="h-96 ">
+                  <Line data={data} />
+                </div>
+              </animated.div>
+
+              {/* Other sections that should be hidden when showAllRequests is true */}
+              {/* {!showAllRequests && (
+                <>
+                  
+                </>
+              )} */}
+            </div>
             <div className="mt-6">
               <h2 className="text-xl font-semibold mb-2">Overview</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -482,6 +478,7 @@ const Dashboard: React.FC = () => {
                 </animated.div>
               </div>
             </div>
+            {/* Additional dashboard sections */}
           </div>
         </div>
       </div>

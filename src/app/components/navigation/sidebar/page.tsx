@@ -176,70 +176,312 @@ const Dashboard: React.FC = () => {
         <div className="bg-gray-100 pt-20 min-h-screen">
           <div className="container mx-auto p-6">
             <div className="flex justify-between items-center mb-6">
-              <h1 className="text-2xl font-semibold text-center">Dashboard</h1>
+              <h1 className="text-2xl font-semibold  text-center">Dashboard</h1>
             </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-4">
+              <animated.div style={fadeInUp}>
+                {/* Cards with smaller title */}
+                <animated.div
+                  style={fadeInUp}
+                  className="p-4 bg-white text-gray-900 rounded-xl shadow-md flex justify-between items-center"
+                >
+                  <div>
+                    <button
+                      onClick={toggleShowAllRequests}
+                      className=" text-gray-900   h-10 w-60  font-bold  rounded"
+                    >
+                      {showAllRequests
+                        ? "Hide Requests"
+                        : "Show All Service Requests"}
+                    </button>{" "}
+                    <button className="relative   p-2 mr-16 rounded-full text-gray-800 bg-[#0B60B0]">
+                      <FiBell className="w-6 h-6" />
+                      <span className="absolute top-0 right-0 inline-flex items-center justify-center w-5 h-5 text-xs font-bold text-red-100 bg-red-600 rounded-full">
+                        {totalPendingToRelease}
+                      </span>
+                    </button>
+                    <animated.p style={fadeInUp} className="text-gray-800">
+                      You have {totalPendingToRelease} pending
+                    </animated.p>
+                    {showAllRequests && (
+                      <ul>
+                        {serviceRequests.map((request) => (
+                          <li
+                            key={request.id}
+                            className="bg-white shadow-lg text-start border-b-2 border-gray-400 p-4 mb-4"
+                          >
+                            <div className="flex justify-between items-center">
+                              <h2 className="      ">
+                                <label className="font-semibold ">
+                                  {" "}
+                                  Request No:
+                                </label>{" "}
+                                {request.requestNo}|
+                                {request.reasonOfRequest.slice(0, 30)}
+                                {"....."}
+                              </h2>
+                              <button
+                                onClick={() => toggleExpand(request.id)}
+                                className="text-white bg-[#40A2D8] hover:bg-[#0B60B0] rounded-lg px-4 py-2"
+                              >
+                                {expandedRequests.includes(request.id)
+                                  ? "Show Less"
+                                  : "Show More"}
+                              </button>
+                            </div>
+                            {expandedRequests.includes(request.id) && (
+                              <div className="mt-4">
+                                <>
+                                  <div>
+                                    <tbody>
+                                      <tr>
+                                        {/* Request No and Date in one row */}
+                                        <td className="border-[1px]    border-b-1 py-2 px-4 border-gray-600">
+                                          <div className=" text-sm text-gray-900">
+                                            <label className="font-semibold ">
+                                              Request No:{" "}
+                                            </label>{" "}
+                                            {request.requestNo}
+                                          </div>
+                                        </td>
 
-            <div
-              className={`grid ${
-                showAllRequests
-                  ? "grid-cols-1"
-                  : "grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
-              } gap-4`}
-            >
-              {/* Service Requests Section */}
-              <div
-                className={`p-4 bg-white text-gray-900 rounded-xl shadow-md ${
-                  showAllRequests ? "col-span-full" : ""
-                }`}
-              >
-                <div>
-                  <button
-                    onClick={toggleShowAllRequests}
-                    className="text-gray-900 h-10 w-60 font-bold rounded"
-                  >
-                    {showAllRequests
-                      ? "Hide Requests"
-                      : "Show All Service Requests"}
-                  </button>
-                  {showAllRequests && (
-                    <ul>
-                      {serviceRequests.map((request) => (
-                        <li
-                          key={request.id}
-                          className="bg-white shadow-lg text-start border-b-2 border-gray-400 p-4 mb-4"
-                        >
-                          <div className="flex justify-between items-center">
-                            <h2 className="">
-                              <label className="font-semibold">
-                                Request No:
-                              </label>{" "}
-                              {request.requestNo} |{" "}
-                              {request.reasonOfRequest.slice(0, 30)}...
-                            </h2>
-                            <button
-                              onClick={() => toggleExpand(request.id)}
-                              className="text-white bg-green-500 hover:bg-green-700 rounded-lg px-4 py-2"
-                            >
-                              {expandedRequests.includes(request.id)
-                                ? "Show Less"
-                                : "Show More"}
-                            </button>
-                          </div>
-                          {expandedRequests.includes(request.id) && (
-                            <div>{/* Detailed request information */}</div>
-                          )}
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </div>
+                                        <td className="border-[1px] border-b-1 py-2 px-4  border-gray-600">
+                                          <div className=" text-sm text-gray-900">
+                                            <label className="font-semibold ">
+                                              Date{" "}
+                                            </label>{" "}
+                                            {request.date}
+                                          </div>
+                                        </td>
+                                      </tr>
+
+                                      <tr>
+                                        {/* Request No and Date in one row */}
+                                        <td className="border-[1px] border-b-1 py-2 px-4 border-gray-600">
+                                          <div className=" text-sm text-gray-900">
+                                            <label className="font-semibold ">
+                                              Requested By{" "}
+                                            </label>{" "}
+                                            {request.requestedBy}
+                                          </div>
+                                        </td>
+
+                                        <td className="border-[1px] border-b-1 py-2 px-4 border-gray-600">
+                                          <div className=" text-sm text-gray-900">
+                                            <label className="font-semibold ">
+                                              Request For
+                                            </label>{" "}
+                                            {request.requestFor}
+                                          </div>
+                                        </td>
+                                      </tr>
+
+                                      <tr>
+                                        {/* Request No and Date in one row */}
+                                        <td className="border-[1px] border-b-1 py-2 px-4 border-gray-600">
+                                          <div className=" text-sm text-gray-900">
+                                            <label className="font-semibold ">
+                                              Department
+                                            </label>{" "}
+                                            {request.department}
+                                          </div>
+                                        </td>
+
+                                        <td className="border-[1px] border-b-1 py-2 px-4 border-gray-600">
+                                          <div className=" text-sm text-gray-900">
+                                            <label className="font-semibold ">
+                                              Employee Id
+                                            </label>{" "}
+                                            {request.employeeId}
+                                          </div>
+                                        </td>
+                                      </tr>
+
+                                      <tr>
+                                        {/* Designation in a separate row */}
+                                        <td
+                                          colSpan={2}
+                                          className="border-[1px] border-b-1 py-2 px-4 border-gray-600"
+                                        >
+                                          <div className=" text-sm text-gray-900">
+                                            <label className="font-semibold ">
+                                              Designation
+                                            </label>{" "}
+                                            {request.designation}
+                                          </div>
+                                        </td>
+                                      </tr>
+
+                                      <tr>
+                                        {/* Reason of Request in a separate row */}
+                                        <td
+                                          colSpan={2}
+                                          className="border-[1px] border-b-1 py-2 px-4 border-gray-600"
+                                        >
+                                          <div className=" text-sm text-gray-900">
+                                            <label className="font-semibold ">
+                                              Reason Of Request
+                                            </label>{" "}
+                                            {request.reasonOfRequest}
+                                          </div>
+                                        </td>
+                                      </tr>
+
+                                      <tr>
+                                        {/* Service Details in a separate row */}
+                                        <td
+                                          colSpan={2}
+                                          className="border-[1px] border-b-1 py-2 px-4 border-gray-600"
+                                        >
+                                          <div className="font-semibold text-sm text-gray-900">
+                                            <label className="font-semibold ">
+                                              Service Details
+                                            </label>{" "}
+                                            {request.serviceDetails}
+                                          </div>
+                                        </td>
+                                      </tr>
+                                    </tbody>
+                                  </div>
+
+                                  <p>
+                                    <strong>Status:</strong>{" "}
+                                    <span
+                                      className={`font-bold ${
+                                        request.supervisorStatus === "Pending"
+                                          ? "text-yellow-500"
+                                          : request.supervisorStatus ===
+                                            "Released"
+                                          ? "text-green-500"
+                                          : "text-red-500"
+                                      }`}
+                                    >
+                                      {request.supervisorStatus}
+                                    </span>
+                                  </p>
+                                  <div className="flex space-x-2 mt-3">
+                                    <button
+                                      onClick={() =>
+                                        handleAction(request.id, "release")
+                                      }
+                                      className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                                    >
+                                      Release
+                                    </button>
+                                    <button
+                                      onClick={() =>
+                                        handleAction(request.id, "decline")
+                                      }
+                                      className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+                                    >
+                                      decline
+                                    </button>
+                                  </div>
+                                  <button
+                                    onClick={() => toggleExpand(request.id)}
+                                    className="text-blue-500 mt-2 cursor-pointer"
+                                  ></button>
+                                </>
+                                {/* Add more details as needed */}
+
+                                {/* <div className="flex space-x-2 mt-3">
+                      <button
+                        onClick={() => handleAction(request.id, "release")}
+                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                      >
+                        Release
+                      </button>
+                      <button
+                        onClick={() => handleAction(request.id, "block")}
+                        className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                      >
+                        Block
+                      </button>
+                    </div> */}
+                              </div>
+                            )}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+                </animated.div>
+              </animated.div>
+              <div className=" bg-gray-200 rounded">
+                <h1>dknjerfjfn</h1>
               </div>
-
-              {/* Other sections that should be hidden when showAllRequests is true */}
-              {!showAllRequests && <>{/* Additional sections here */}</>}
+              <div className="bg-blue-300 rounded"></div>
+              <animated.div
+                style={jumpAnimation}
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
+              ></animated.div>
             </div>
+            {/* Repeat for other cards */}
 
-            {/* Additional dashboard sections */}
+            {/* Chart */}
+            <animated.div
+              style={fadeInUp}
+              className="md:col-span-2 lg:col-span-4 bg-white p-5 rounded-xl shadow-md mt-3"
+            >
+              <animated.h2
+                style={fadeInUp}
+                className="font-semibold text-xl mb-4"
+              >
+                Monthly Form Submit
+              </animated.h2>
+              <div className="h-96 ">
+                <Line data={data} />
+              </div>
+            </animated.div>
+          </div>
+        </div>
+        <div
+          className={`bg-gray-100 pt-0 min-h-screen ${
+            isMenuOpen ? "menu-open" : ""
+          }`}
+        >
+          {/* Navbar Component */}
+          <div
+            className={`container mx-auto p-6 ${
+              isMenuOpen ? "translate-x-[230px]" : ""
+            }`}
+          >
+            {/* Dashboard Content */}
+            <div className="mt-6">
+              <h2 className="text-xl font-semibold mb-2">Overview</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <animated.div
+                  style={fadeInUp}
+                  className="bg-white p-4 rounded-xl shadow-md"
+                >
+                  <animated.h3
+                    style={fadeInUp}
+                    className="font-semibold text-lg"
+                  >
+                    Total accepted forms this month
+                  </animated.h3>
+                  <animated.p style={fadeInUp} className="text-3xl">
+                    {Math.floor(acceptedForms)} +
+                  </animated.p>
+                </animated.div>
+
+                <animated.div
+                  style={fadeInUp}
+                  className="bg-white p-4 rounded-xl shadow-md"
+                >
+                  <animated.h3
+                    style={fadeInUp}
+                    className="font-semibold text-lg"
+                  >
+                    Declined forms this month
+                  </animated.h3>
+                  <animated.p style={fadeInUp} className="text-3xl">
+                    {Math.floor(declinedForms)} +
+                  </animated.p>
+                </animated.div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
