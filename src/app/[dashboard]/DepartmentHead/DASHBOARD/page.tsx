@@ -230,7 +230,7 @@ const Dashboard: React.FC = () => {
                               </h2>
                               <button
                                 onClick={() => toggleExpand(request.id)}
-                                className="text-white bg-green-500 hover:bg-green-700 rounded-lg px-4 py-2"
+                                className="text-white bg-[#40A2D8] hover:bg-[#0B60B0] rounded-lg px-2 py-1"
                               >
                                 {expandedRequests.includes(request.id)
                                   ? "Show Less"
@@ -415,7 +415,7 @@ const Dashboard: React.FC = () => {
                   </animated.div>
                 </div>
                 <div className=" bg-gray-100 shadow-lg rounded-lg"> mahin</div>
-                <div className="bg-blue-100 rounded"> nur </div>
+                <div className="bg-gay-100 rounded-lg shadow-lg"> nur </div>
                 <animated.div
                   style={jumpAnimation}
                   onMouseEnter={() => setIsHovered(false)}

@@ -407,9 +407,7 @@ const Dashboard: React.FC = () => {
                   </div>
                 </animated.div>
               </animated.div>
-              <div className=" bg-gray-200 rounded">
-                <h1>dknjerfjfn</h1>
-              </div>
+              <div className=" bg-gray-200 rounded">nur</div>
               <div className="bg-blue-300 rounded"></div>
               <animated.div
                 style={jumpAnimation}
