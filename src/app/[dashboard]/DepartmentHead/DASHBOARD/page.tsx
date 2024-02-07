@@ -204,7 +204,7 @@ const Dashboard: React.FC = () => {
                         : "Show All Service Requests"}
                     </animated.button>
 
-                    <button className="relative   p-2 mr-16 rounded-full text-gray-800 bg-[#0B60B0]">
+                    <button className="relative   p-2 mr-16 rounded-full text-gray-200 bg-[#0B60B0]">
                       <FiBell className="w-6 h-6" />
                       <span className="absolute top-0 right-0 inline-flex items-center justify-center w-5 h-5 text-xs font-bold text-red-100 bg-red-500 rounded-full">
                         {totalPendingToRelease}
@@ -425,11 +425,11 @@ const Dashboard: React.FC = () => {
                     Show All Maintenance Request
                     <animated.button
                       style={fadeInUp}
-                      className="relative   p-2 mr-16 rounded-full text-gray-800 bg-[#0B60B0]"
+                      className="relative   p-2 mr-16 rounded-full text-gray-200 bg-[#0B60B0]"
                     >
                       <FiBell className="w-6 h-6" />
                       <span className="absolute top-0 right-0 inline-flex items-center justify-center w-5 h-5 text-xs font-bold text-red-100 bg-red-500 rounded-full">
-                        {totalPendingToRelease}
+                        32
                       </span>
                     </animated.button>
                   </animated.div>
@@ -437,7 +437,7 @@ const Dashboard: React.FC = () => {
                     style={fadeInUp}
                     className="text-gray-800 font-semibold"
                   >
-                    You have 30 pending
+                    You have 32 pending
                   </animated.p>{" "}
                 </div>
                 <div className="bg-gay-100 rounded-lg shadow-lg text-start p-4 pr-4">
@@ -446,11 +446,11 @@ const Dashboard: React.FC = () => {
                     Show All Maintenance Request
                     <animated.button
                       style={fadeInUp}
-                      className="relative   p-2 mr-16 rounded-full text-gray-800 bg-[#0B60B0]"
+                      className="relative   p-2 mr-16 rounded-full text-gray-200 bg-[#0B60B0]"
                     >
                       <FiBell className="w-6 h-6 " />
                       <span className="absolute top-0 right-0 inline-flex items-center justify-center w-5 h-5 text-xs font-bold text-red-100 bg-red-500 rounded-full">
-                        {totalPendingToRelease}
+                        6
                       </span>
                     </animated.button>
                   </animated.div>

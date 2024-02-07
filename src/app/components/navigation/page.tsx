@@ -160,7 +160,7 @@ const Navbar: React.FC<NavbarProps> = ({ userRole, onMenuToggle }) => {
         </button>
 
         {/* Logo */}
-        <div className="flex items-center ">
+        <div className="flex pr lg:pr-[700px] md: ">
           <img src="/new-logo.png" alt="Logo" className="h-12 w-max mr-2" />
         </div>
 
