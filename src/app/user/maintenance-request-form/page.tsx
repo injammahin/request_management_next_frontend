@@ -215,11 +215,13 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
       >
         <form
           onSubmit={handleSubmit}
-          className="max-w-[1000px] pt-10  mx-auto mt-8 p-4 border"
+          className="max-w-[1000px] pt-10  mx-auto mt-8  border"
         >
-          <div className="text-center ">
-            <div className="border p-2 border-gray-600 font-bold text-sm flex flex-none">
-              PART 1 : Initiator Information
+          <div className="text-center  border border-gray-600 ">
+            <div className="bg-gray-300 flex justify-center items-center">
+              <h1 className="p-1  font-bold text-sm">
+                PART 1 : Initiator Information
+              </h1>
             </div>
           </div>
           <div className="grid  grid-cols-2 gap-4 ">
@@ -233,7 +235,7 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
                 id="requestNumber"
                 value={Management.requestNumber} // Display requestNo
                 readOnly
-                className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                className="block w-full py-1 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               />
             </div>
 
@@ -246,7 +248,7 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
                 name="date"
                 onChange={handleInputChange}
                 value={Management.date}
-                className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                className="block w-full py-1 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               />
             </div>
           </div>
@@ -260,7 +262,7 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
                 name="requestedBy"
                 onChange={handleInputChange}
                 value={Management.requestedBy}
-                className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                className="block w-full py-1 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               />
             </div>
 
@@ -273,11 +275,11 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
                 name="requesterName"
                 onChange={handleInputChange}
                 value={Management.requesterName}
-                className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                className="block w-full py-1 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               />
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-4 mb-4">
+          <div className="grid grid-cols-2 gap-4 ">
             <div className="flex flex-row items-center">
               <label className="font-semibold text-sm flex flex-none mr-2">
                 Subject Of Change:
@@ -287,12 +289,12 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
                 name="subofChange"
                 onChange={handleInputChange}
                 value={Management.subofChange}
-                className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                className="block w-full py-1 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               />
             </div>
 
             <div className="flex flex-row items-center">
-              <label className="font-semibold text-sm flex flex-none mr-2ock">
+              <label className="font-semibold text-sm flex flex-none mr-2">
                 Employee Id:
               </label>
               <input
@@ -300,7 +302,7 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
                 name="EmployeeId"
                 onChange={handleInputChange}
                 value={Management.EmployeeId}
-                className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                className="block w-full py-1 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               />
             </div>
           </div>
@@ -314,7 +316,7 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
                 name="department"
                 onChange={handleInputChange}
                 value={Management.department}
-                className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                className="block w-full py-1 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               />
             </div>
             <div className="flex flex-row items-center">
@@ -326,14 +328,14 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
                 name="contractNo"
                 onChange={handleInputChange}
                 value={Management.contractNo}
-                className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                className="block w-full py-1 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               />
             </div>
           </div>
           {/* //////////// */}
           <div className="grid grid-cols-2 gap-4 ">
             <div className="flex flex-row items-center">
-              <label className="font-semibold text-sm flex flex-none mr-2">
+              <label className="font-semibold text-sm flex flex-none">
                 Maintenance Type:
               </label>
               <input
@@ -341,7 +343,7 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
                 name="MaintenanceType"
                 onChange={handleInputChange}
                 value={Management.MaintenanceType}
-                className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                className="block w-full py-1 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               />
             </div>
             <div className="flex flex-row items-center">
@@ -353,7 +355,7 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
                 name="MaintenanceType"
                 onChange={handleInputChange}
                 value={Management.MaintenanceType}
-                className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                className="block w-full py-1 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               />
             </div>
           </div>
@@ -367,7 +369,7 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
               name="purposeOfActivity"
               onChange={handleInputChange}
               value={Management.purposeOfActivity}
-              className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+              className="block w-full py-1 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             />
           </div>
           {/* //////////// */}
@@ -381,7 +383,7 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
                 name="priority"
                 onChange={handleInputChange}
                 value={Management.priority}
-                className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                className="block w-full py-1 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               />
             </div>
             {/* //////////// */}
@@ -394,7 +396,7 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
                 name="impactLevel"
                 onChange={handleInputChange}
                 value={Management.impactLevel}
-                className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                className="block w-full py-1 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               />
             </div>
           </div>
@@ -409,7 +411,7 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
                 name="requiredDowntime"
                 onChange={handleInputChange}
                 value={Management.requiredDowntime}
-                className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                className="block w-full py-1 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               />
             </div>
             {/* //////////// */}
@@ -422,7 +424,7 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
                 name="mentionDowntime"
                 onChange={handleInputChange}
                 value={Management.mentionDowntime}
-                className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                className="block w-full py-1 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               />
             </div>
           </div>
@@ -437,7 +439,7 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
                 name="startDate"
                 onChange={handleInputChange}
                 value={Management.startDate}
-                className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                className="block w-full py-1 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               />
             </div>
             {/* //////////// */}
@@ -450,7 +452,7 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
                 name="startTime"
                 onChange={handleInputChange}
                 value={Management.startTime}
-                className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                className="block w-full py-1 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               />
             </div>
           </div>
@@ -465,7 +467,7 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
                 name="endDate"
                 onChange={handleInputChange}
                 value={Management.endDate}
-                className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                className="block w-full py-1 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               />
             </div>
             {/* //////////// */}
@@ -478,13 +480,15 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
                 name="endTime"
                 onChange={handleInputChange}
                 value={Management.endTime}
-                className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                className="block w-full py-1 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               />
             </div>
           </div>
-          <div className="text-center ">
-            <div className="border p-2 border-gray-600 font-bold text-sm flex flex-none">
-              PART 2: Change Preview
+          <div className="text-center  border border-gray-600 ">
+            <div className="bg-gray-300 flex justify-center items-center">
+              <h1 className="p-1  font-bold text-sm">
+                PART 2 : Change Preview
+              </h1>
             </div>
           </div>
           {/* /////// */}
@@ -497,7 +501,7 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
               name="changeLocation"
               onChange={handleInputChange}
               value={Management.changeLocation}
-              className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+              className="block w-full py-1 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             />
           </div>
           {/* ////////////////// */}
@@ -510,7 +514,7 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
               name="targetedSystemFor"
               onChange={handleInputChange}
               value={Management.targetedSystemFor}
-              className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+              className="block w-full py-1 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             />
           </div>
           <div className="flex flex-row items-center">
@@ -522,7 +526,7 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
               name="IPaddress"
               onChange={handleInputChange}
               value={Management.IPaddress}
-              className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+              className="block w-full py-1 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             />
           </div>
           <div className="flex flex-row items-center">
@@ -534,7 +538,7 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
               name="ImpactedSystemfor"
               onChange={handleInputChange}
               value={Management.ImpactedSystemfor}
-              className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+              className="block w-full py-1 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             />
           </div>
           <div className="flex flex-row items-center">
@@ -546,26 +550,28 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
               name="DetailedDescriptionOfChange"
               onChange={handleInputChange}
               value={Management.DetailedDescriptionOfChange}
-              className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+              className="block w-full py-1 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             />
           </div>
-          <div className="text-center ">
-            <div className="border p-2 pl-2 border-gray-600 font-bold text-sm flex flex-none">
-              PART 2: Change Preview
+          <div className="text-center  border border-gray-600 ">
+            <div className="bg-gray-300 flex justify-center items-center">
+              <h1 className="p-1  font-bold text-sm">
+                PART 3 : Review And Approval
+              </h1>
             </div>
           </div>
           {/* //////////////////////////////// */}
           <div className="grid  grid-cols-3  ">
-            <div className="border  p-2 border-gray-600 font-bold text-sm flex flex-none">
+            <div className="border  p-1 border-gray-600 font-bold text-sm flex flex-none">
               TasK
             </div>
-            <div className="border  p-2 border-gray-600 font-bold text-sm flex flex-none">
+            <div className="border  p-1 border-gray-600 font-bold text-sm flex flex-none">
               Start Time
             </div>
-            <div className="border  p-2 border-gray-600 font-bold text-sm flex flex-none">
+            <div className="border  p-1 border-gray-600 font-bold text-sm flex flex-none">
               End Time
             </div>
-            <div className="border  border-gray-600 font-bold text-sm flex flex-none">
+            <div className="border  p-1 border-gray-600 font-bold text-sm flex flex-none">
               Take Backup Of Database
             </div>
             <div className="flex flex-row items-center border border-gray-600 pl-2">
@@ -575,7 +581,7 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
                 name="DetailedDescriptionOfChange"
                 onChange={handleInputChange}
                 value={Management.DetailedWorkedPlanStartTime}
-                className="block w-full  py-2.5  px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                className="block w-full  py-1  px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               />
             </div>
             <div className="flex flex-row items-center border border-gray-600 pl-2">
@@ -585,7 +591,7 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
                 name="DetailedDescriptionOfChange"
                 onChange={handleInputChange}
                 value={Management.DetailedWorkedPlanEndTime}
-                className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                className="block w-full py-1 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               />
             </div>
           </div>
@@ -601,7 +607,7 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
               name="RequirementTools"
               onChange={handleInputChange}
               value={Management.RequirementTools}
-              className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+              className="block w-full py-1 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             />
           </div>
           <div className="flex flex-row items-center  pl-2">
@@ -613,7 +619,7 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
               name="Implementationteam"
               onChange={handleInputChange}
               value={Management.Implementationteam}
-              className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+              className="block w-full py-1 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             />
           </div>
           <div className="flex flex-row items-center  pl-2">
@@ -625,7 +631,7 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
               name="Communication"
               onChange={handleInputChange}
               value={Management.Communication}
-              className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+              className="block w-full py-1 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             />
           </div>
           <div className="flex flex-row items-center  pl-2">
@@ -637,12 +643,14 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
               name="RollBackPlan"
               onChange={handleInputChange}
               value={Management.RollBackPlan}
-              className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+              className="block w-full py-1 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             />
           </div>
 
-          <div className="border p-1 text-center border-gray-600 font-bold text-sm flex flex-none">
-            Change Checklist
+          <div className="text-center  border border-gray-600 ">
+            <div className="bg-gray-300 flex justify-center items-center">
+              <h1 className="p-1  font-bold text-sm">Change Checklist</h1>
+            </div>
           </div>
           <div className="grid  grid-cols-4  ">
             <div className="border p-1 text-center border-gray-600 font-bold text-sm flex flex-none">
@@ -667,7 +675,7 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
                 name="checklistStatusOne"
                 onChange={handleInputChange}
                 value={Management.checklistStatusOne}
-                className="block w-full py-2.5 px-3 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                className="block w-full py-1 px-3 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               >
                 <option value="">( Select )</option>
                 <option value="Yes">Yes</option>
@@ -684,7 +692,7 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
                 name="checklistStatusTwo"
                 onChange={handleInputChange}
                 value={Management.checklistStatusTwo}
-                className="block w-full py-2.5 px-3 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                className="block w-full py-1 px-3 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               >
                 <option value="">( Select )</option>
                 <option value="Yes">Yes</option>
@@ -701,7 +709,7 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
                 name="checklistStatusThree"
                 onChange={handleInputChange}
                 value={Management.checklistStatusThree}
-                className="block w-full py-2.5 px-3 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                className="block w-full py-1 px-3 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               >
                 <option value="">( Select )</option>
                 <option value="Yes">Yes</option>
@@ -718,7 +726,7 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
                 name="checklistStatusFour"
                 onChange={handleInputChange}
                 value={Management.checklistStatusFour}
-                className="block w-full py-2.5 px-3 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                className="block w-full py-1 px-3 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               >
                 <option value="">( Select )</option>
                 <option value="Yes">Yes</option>
@@ -735,11 +743,15 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
               name="ImpactedSystemfor"
               onChange={handleInputChange}
               value={Management.ImpactedSystemfor}
-              className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+              className="block w-full py-1 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             />
           </div>
-          <div className="border p-1 text-center border-gray-600  font-semibold text-sm flex flex-none ">
-            PART 3: Review and Approval
+          <div className="text-center  border border-gray-600 ">
+            <div className="bg-gray-300 flex justify-center items-center">
+              <h1 className="p-1  font-bold text-sm">
+                PART 4 : Executor Information
+              </h1>
+            </div>
           </div>
           <div className=" grid grid-cols-2">
             <div className="flex flex-row items-center  pl-2">
@@ -751,7 +763,7 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
                 name="ActualPriority"
                 onChange={handleInputChange}
                 value={Management.ActualPriority}
-                className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                className="block w-full py-1 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               />
             </div>
             <div className="flex flex-row items-center  pl-2">
@@ -763,7 +775,7 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
                 name="Actualimpactlevel"
                 onChange={handleInputChange}
                 value={Management.Actualimpactlevel}
-                className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                className="block w-full py-1 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               />
             </div>
           </div>
@@ -781,10 +793,11 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
               HEAD
             </label>
           </div>
-          <label className="font-semibold  p-1 text-sm flex flex-none mr-2 border border-gray-600">
-            Part 4: Executor Information
-          </label>
-
+          <div className="text-center  border border-gray-600 ">
+            <div className="bg-gray-300 flex justify-center items-center">
+              <h1 className="p-1  font-bold text-sm">PART 5 : Change Review</h1>
+            </div>
+          </div>
           <div className="flex flex-row items-center  pl-2">
             <label className="font-semibold text-sm flex flex-none mr-2">
               Execusion Team Menbers
@@ -795,7 +808,7 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
               name="ExecusionTeamMenbers"
               onChange={handleInputChange}
               value={Management.ExecusionTeamMenbers}
-              className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+              className="block w-full py-1 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             />
             <label className="font-semibold text-sm flex flex-none mr-2">
               Execusion Team Leaders
@@ -805,7 +818,7 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
               name="ExecusionTeamleaders"
               onChange={handleInputChange}
               value={Management.ExecusionTeamleaders}
-              className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+              className="block w-full py-1 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             />
           </div>
           {/* ////////////////////////////////////////////// */}
