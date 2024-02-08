@@ -664,9 +664,9 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
             <div className="flex flex-row items-center border border-gray-600 pl-2">
               <label className="font-semibold text-sm flex flex-none mr-2"></label>
               <select
-                name="RollBackPlan"
+                name="checklistStatusOne"
                 onChange={handleInputChange}
-                value={Management.RollBackPlan}
+                value={Management.checklistStatusOne}
                 className="block w-full py-2.5 px-3 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               >
                 <option value="">( Select )</option>
@@ -681,9 +681,9 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
             <div className="flex flex-row  border border-gray-600 pl-2">
               <label className="font-none text-sm flex flex-none mr-2"></label>
               <select
-                name="RollBackPlan"
+                name="checklistStatusTwo"
                 onChange={handleInputChange}
-                value={Management.RollBackPlan}
+                value={Management.checklistStatusTwo}
                 className="block w-full py-2.5 px-3 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               >
                 <option value="">( Select )</option>
@@ -698,9 +698,9 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
             <div className="flex flex-row items-center border border-gray-600 pl-2">
               <label className="font-semibold text-sm flex flex-none mr-2"></label>
               <select
-                name="RollBackPlan"
+                name="checklistStatusThree"
                 onChange={handleInputChange}
-                value={Management.RollBackPlan}
+                value={Management.checklistStatusThree}
                 className="block w-full py-2.5 px-3 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               >
                 <option value="">( Select )</option>
@@ -715,9 +715,9 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
             <div className="flex flex-row  border border-gray-600 pl-2">
               <label className="font-none text-sm flex flex-none mr-2"></label>
               <select
-                name="RollBackPlan"
+                name="checklistStatusFour"
                 onChange={handleInputChange}
-                value={Management.RollBackPlan}
+                value={Management.checklistStatusFour}
                 className="block w-full py-2.5 px-3 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               >
                 <option value="">( Select )</option>
@@ -726,9 +726,91 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
               </select>
             </div>
           </div>
+          <div className="flex flex-row items-center  pl-2">
+            <label className="font-semibold text-sm flex flex-none mr-2">
+              Impacted System For
+            </label>
+            <input
+              type="text"
+              name="ImpactedSystemfor"
+              onChange={handleInputChange}
+              value={Management.ImpactedSystemfor}
+              className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+            />
+          </div>
+          <div className="border p-1 text-center border-gray-600  font-semibold text-sm flex flex-none ">
+            PART 3: Review and Approval
+          </div>
+          <div className=" grid grid-cols-2">
+            <div className="flex flex-row items-center  pl-2">
+              <label className="font-semibold text-sm flex flex-none mr-2">
+                Actual Priority
+              </label>
+              <input
+                type="text"
+                name="ActualPriority"
+                onChange={handleInputChange}
+                value={Management.ActualPriority}
+                className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+              />
+            </div>
+            <div className="flex flex-row items-center  pl-2">
+              <label className="font-semibold text-sm flex flex-none mr-2">
+                Actual Impact Level
+              </label>
+              <input
+                type="text"
+                name="Actualimpactlevel"
+                onChange={handleInputChange}
+                value={Management.Actualimpactlevel}
+                className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+              />
+            </div>
+          </div>
+          <div className="grid grid-cols-4  ">
+            <label className="font-semibold p-1 text-sm flex flex-none mr-2  border border-gray-600">
+              Team Leader
+            </label>
+            <label className="font-semibold p-1 text-sm flex flex-none mr-2 border border-gray-600">
+              Head Of IFRA
+            </label>
+            <label className="font-semibold p-1 text-sm flex flex-none mr-2 border border-gray-600">
+              CISO
+            </label>
+            <label className="font-semibold p-1 text-sm flex flex-none mr-2 border border-gray-600">
+              HEAD
+            </label>
+          </div>
+          <label className="font-semibold  p-1 text-sm flex flex-none mr-2 border border-gray-600">
+            Part 4: Executor Information
+          </label>
+
+          <div className="flex flex-row items-center  pl-2">
+            <label className="font-semibold text-sm flex flex-none mr-2">
+              Execusion Team Menbers
+            </label>
+
+            <input
+              type="text"
+              name="ExecusionTeamMenbers"
+              onChange={handleInputChange}
+              value={Management.ExecusionTeamMenbers}
+              className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+            />
+            <label className="font-semibold text-sm flex flex-none mr-2">
+              Execusion Team Leaders
+            </label>
+            <input
+              type="text"
+              name="ExecusionTeamleaders"
+              onChange={handleInputChange}
+              value={Management.ExecusionTeamleaders}
+              className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+            />
+          </div>
           {/* ////////////////////////////////////////////// */}
 
-          <div className="flex justify-between">
+          <div className="flex justify-between p-4">
             <button
               type="button"
               className="bg-gray-500 text-white p-2 w-32 rounded hover:bg-gray-700"
@@ -750,7 +832,7 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
           )}
         </form>
 
-        {submittedDetails && (
+        {/* {submittedDetails && (
           <div className="max-w-md uppercase mx-auto mt-8 p-4 border">
             <h2 className="text-2xl font-semibold mb-4">Submitted Details</h2>
             <div>
@@ -816,7 +898,7 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
               </p>
             </div>
           </div>
-        )}
+        )} */}
       </div>
     </div>
   );
