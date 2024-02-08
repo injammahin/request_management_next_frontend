@@ -124,9 +124,12 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
   };
 
   const handleInputChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
-    const { name, value } = e.target;
+    const { name, value } = e.target as
+      | HTMLInputElement
+      | HTMLTextAreaElement
+      | HTMLSelectElement;
     setManagement((prevDetails) => ({
       ...prevDetails,
       [name]: value,
@@ -510,6 +513,220 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
               className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             />
           </div>
+          <div className="flex flex-row items-center">
+            <label className="font-semibold text-sm flex flex-none mr-2">
+              IP address:
+            </label>
+            <input
+              type="text"
+              name="IPaddress"
+              onChange={handleInputChange}
+              value={Management.IPaddress}
+              className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+            />
+          </div>
+          <div className="flex flex-row items-center">
+            <label className="font-semibold text-sm flex flex-none mr-2">
+              Impacted System For:
+            </label>
+            <input
+              type="text"
+              name="ImpactedSystemfor"
+              onChange={handleInputChange}
+              value={Management.ImpactedSystemfor}
+              className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+            />
+          </div>
+          <div className="flex flex-row items-center">
+            <label className="font-semibold text-sm flex flex-none mr-2">
+              Detailed Description Of Change / Maintenance:
+            </label>
+            <input
+              type="text"
+              name="DetailedDescriptionOfChange"
+              onChange={handleInputChange}
+              value={Management.DetailedDescriptionOfChange}
+              className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+            />
+          </div>
+          <div className="text-center ">
+            <div className="border p-2 pl-2 border-gray-600 font-bold text-sm flex flex-none">
+              PART 2: Change Preview
+            </div>
+          </div>
+          {/* //////////////////////////////// */}
+          <div className="grid  grid-cols-3  ">
+            <div className="border  p-2 border-gray-600 font-bold text-sm flex flex-none">
+              TasK
+            </div>
+            <div className="border  p-2 border-gray-600 font-bold text-sm flex flex-none">
+              Start Time
+            </div>
+            <div className="border  p-2 border-gray-600 font-bold text-sm flex flex-none">
+              End Time
+            </div>
+            <div className="border  border-gray-600 font-bold text-sm flex flex-none">
+              Take Backup Of Database
+            </div>
+            <div className="flex flex-row items-center border border-gray-600 pl-2">
+              <label className="font-semibold text-sm flex flex-none mr-2 "></label>
+              <input
+                type="text"
+                name="DetailedDescriptionOfChange"
+                onChange={handleInputChange}
+                value={Management.DetailedWorkedPlanStartTime}
+                className="block w-full  py-2.5  px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+              />
+            </div>
+            <div className="flex flex-row items-center border border-gray-600 pl-2">
+              <label className="font-semibold text-sm flex flex-none mr-2"></label>
+              <input
+                type="text"
+                name="DetailedDescriptionOfChange"
+                onChange={handleInputChange}
+                value={Management.DetailedWorkedPlanEndTime}
+                className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+              />
+            </div>
+          </div>
+
+          {/* //////////////////////////////////////////////////////////////// */}
+          <div className="flex flex-row items-center  pl-2">
+            <label className="font-semibold text-sm flex flex-none mr-2">
+              {" "}
+              Requirements( Support.Tools )
+            </label>
+            <input
+              type="text"
+              name="RequirementTools"
+              onChange={handleInputChange}
+              value={Management.RequirementTools}
+              className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+            />
+          </div>
+          <div className="flex flex-row items-center  pl-2">
+            <label className="font-semibold text-sm flex flex-none mr-2">
+              Implementation Team
+            </label>
+            <input
+              type="text"
+              name="Implementationteam"
+              onChange={handleInputChange}
+              value={Management.Implementationteam}
+              className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+            />
+          </div>
+          <div className="flex flex-row items-center  pl-2">
+            <label className="font-semibold text-sm flex flex-none mr-2">
+              Communication( Deoendent Person)
+            </label>
+            <input
+              type="text"
+              name="Communication"
+              onChange={handleInputChange}
+              value={Management.Communication}
+              className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+            />
+          </div>
+          <div className="flex flex-row items-center  pl-2">
+            <label className="font-semibold text-sm flex flex-none mr-2">
+              Roll Back Plan( If failure)
+            </label>
+            <input
+              type="text"
+              name="RollBackPlan"
+              onChange={handleInputChange}
+              value={Management.RollBackPlan}
+              className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+            />
+          </div>
+
+          <div className="border p-1 text-center border-gray-600 font-bold text-sm flex flex-none">
+            Change Checklist
+          </div>
+          <div className="grid  grid-cols-4  ">
+            <div className="border p-1 text-center border-gray-600 font-bold text-sm flex flex-none">
+              Status
+            </div>
+            <div className="border p-1 text-center border-gray-600 font-bold text-sm flex flex-none">
+              Task
+            </div>
+            <div className="border p-1 text-center border-gray-600 font-bold text-sm flex flex-none">
+              Status
+            </div>
+            <div className="border p-1 text-center border-gray-600 font-bold text-sm flex flex-none">
+              Task
+            </div>
+
+            <div className="border p-1 text-center border-gray-600 font-none text-sm flex flex-none">
+              Is the Change Test Performed ?
+            </div>
+            <div className="flex flex-row items-center border border-gray-600 pl-2">
+              <label className="font-semibold text-sm flex flex-none mr-2"></label>
+              <select
+                name="RollBackPlan"
+                onChange={handleInputChange}
+                value={Management.RollBackPlan}
+                className="block w-full py-2.5 px-3 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+              >
+                <option value="">( Select )</option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+              </select>
+            </div>
+
+            <div className="border p-1 text-center border-gray-600  text-sm flex flex-none ">
+              Is The Communication maintained ?
+            </div>
+            <div className="flex flex-row  border border-gray-600 pl-2">
+              <label className="font-none text-sm flex flex-none mr-2"></label>
+              <select
+                name="RollBackPlan"
+                onChange={handleInputChange}
+                value={Management.RollBackPlan}
+                className="block w-full py-2.5 px-3 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+              >
+                <option value="">( Select )</option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+              </select>
+            </div>
+            {/* ////// */}
+            <div className="border p-1 text-center border-gray-600 font-none text-sm flex flex-none">
+              Is the Back Up Token Of The System?
+            </div>
+            <div className="flex flex-row items-center border border-gray-600 pl-2">
+              <label className="font-semibold text-sm flex flex-none mr-2"></label>
+              <select
+                name="RollBackPlan"
+                onChange={handleInputChange}
+                value={Management.RollBackPlan}
+                className="block w-full py-2.5 px-3 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+              >
+                <option value="">( Select )</option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+              </select>
+            </div>
+
+            <div className="border p-1 text-center border-gray-600  text-sm flex flex-none ">
+              Is The Change Identifid Stable ?
+            </div>
+            <div className="flex flex-row  border border-gray-600 pl-2">
+              <label className="font-none text-sm flex flex-none mr-2"></label>
+              <select
+                name="RollBackPlan"
+                onChange={handleInputChange}
+                value={Management.RollBackPlan}
+                className="block w-full py-2.5 px-3 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+              >
+                <option value="">( Select )</option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+              </select>
+            </div>
+          </div>
+          {/* ////////////////////////////////////////////// */}
 
           <div className="flex justify-between">
             <button
