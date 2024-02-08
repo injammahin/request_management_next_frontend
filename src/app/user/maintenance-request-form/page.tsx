@@ -27,6 +27,36 @@ interface Management {
   startTime: string;
   endDate: string;
   endTime: string;
+  ////////////////////////////////////////////////////////////////
+  changeLocation: string;
+  targetedSystemFor: string;
+  IPaddress: string;
+  ImpactedSystemform: string;
+  DetailedDescriptionOfChange: string;
+  DetailedWorkedPlanTask: string;
+  DetailedWorkedPlanStartTime: string;
+  DetailedWorkedPlanEndTime: string;
+  RequirementTools: string;
+  Implementationteam: string;
+  Communication: string;
+  RollBackPlan: string;
+  checklistStatusOne: string;
+  checklistStatusTwo: string;
+  checklistStatusThree: string;
+  checklistStatusFour: string;
+  ////////////////////////////////* part -3 *////////////////////////////////
+  ImpactedSystemfor: string;
+  ActualPriority: string;
+  Actualimpactlevel: string;
+  ////////////////////////////////* part -4 *////////////////////////////////
+  ExecusionTeamMenbers: string;
+  ExecusionTeamleaders: string;
+  ////////////////////////////////* part -5 *////////////////////////////////
+  ChangeReviewForperformed: string;
+  ChangeReviewForSuccess: string;
+  ActualDowntime: string;
+  WorkExecutionStatus: string;
+
   user: string;
   [key: string]: string; // Index signature to allow any additional string properties
 }
@@ -51,6 +81,34 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
     startTime: "",
     endDate: "",
     endTime: "",
+    changeLocation: "",
+    targetedSystemFor: "",
+    IPaddress: "",
+    ImpactedSystemform: "",
+    DetailedDescriptionOfChange: "",
+    DetailedWorkedPlanTask: "",
+    DetailedWorkedPlanStartTime: "",
+    DetailedWorkedPlanEndTime: "",
+    RequirementTools: "",
+    Implementationteam: "",
+    Communication: "",
+    RollBackPlan: "",
+    checklistStatusOne: "",
+    checklistStatusTwo: "",
+    checklistStatusThree: "",
+    checklistStatusFour: "",
+    ////////////////////////////////* part -3 *////////////////////////////////
+    ImpactedSystemfor: "",
+    ActualPriority: "",
+    Actualimpactlevel: "",
+    ////////////////////////////////* part -4 *////////////////////////////////
+    ExecusionTeamMenbers: "",
+    ExecusionTeamleaders: "",
+    ////////////////////////////////* part -4 *////////////////////////////////
+    ChangeReviewForperformed: "",
+    ChangeReviewForSuccess: "",
+    ActualDowntime: "",
+    WorkExecutionStatus: "",
     user: "",
   });
   const [successMessage, setSuccessMessage] = useState<string>("");
@@ -154,93 +212,100 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
       >
         <form
           onSubmit={handleSubmit}
-          className="max-w-3xl pt-10 uppercase mx-auto mt-8 p-4 border"
+          className="max-w-[1000px] pt-10  mx-auto mt-8 p-4 border"
         >
-          <div className="grid  grid-cols-2 gap-4 mb-4">
-            <div className="relative z-0 mb-2">
-              <label className="block">
-                request number:
-                <input
-                  type="text"
-                  name="requestNumber"
-                  id="requestNumber"
-                  value={Management.requestNumber} // Display requestNo
-                  readOnly
-                  className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                />
+          <div className="text-center ">
+            <div className="border p-2 border-gray-600 font-bold text-sm flex flex-none">
+              PART 1 : Initiator Information
+            </div>
+          </div>
+          <div className="grid  grid-cols-2 gap-4 ">
+            <div className="  flex flex-row items-center  ">
+              <label className="font-semibold text-sm flex flex-none mr-2">
+                Request Number:
               </label>
+              <input
+                type="text"
+                name="requestNumber"
+                id="requestNumber"
+                value={Management.requestNumber} // Display requestNo
+                readOnly
+                className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+              />
             </div>
 
-            <div className="relative z-0 mb-2">
-              <label className="block">
-                date:
-                <input
-                  type="date"
-                  name="date"
-                  onChange={handleInputChange}
-                  value={Management.date}
-                  className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                />
+            <div className="flex flex-row items-center">
+              <label className="font-semibold flex flex-none text-sm mr-2">
+                Date:
               </label>
+              <input
+                type="date"
+                name="date"
+                onChange={handleInputChange}
+                value={Management.date}
+                className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+              />
             </div>
           </div>
           <div className="grid grid-cols-2 gap-4 mb-4">
-            <div className="mb-2">
-              <label className="block">
-                requested By:
-                <input
-                  type="text"
-                  name="requestedBy"
-                  onChange={handleInputChange}
-                  value={Management.requestedBy}
-                  className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                />
+            <div className="flex flex-row items-center">
+              <label className="font-semibold text-sm flex flex-none mr-2">
+                Requested By:
               </label>
+              <input
+                type="text"
+                name="requestedBy"
+                onChange={handleInputChange}
+                value={Management.requestedBy}
+                className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+              />
             </div>
 
-            <div className="mb-2">
-              <label className="block">
-                requester Name:
-                <input
-                  type="text"
-                  name="requesterName"
-                  onChange={handleInputChange}
-                  value={Management.requesterName}
-                  className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                />
+            <div className="flex flex-row items-center">
+              <label className="font-semibold text-sm flex flex-none mr-2">
+                Requester Name:
               </label>
+              <input
+                type="text"
+                name="requesterName"
+                onChange={handleInputChange}
+                value={Management.requesterName}
+                className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+              />
             </div>
           </div>
           <div className="grid grid-cols-2 gap-4 mb-4">
-            <div className="mb-2">
-              <label className="block">
-                subject of change:
-                <input
-                  type="text"
-                  name="subofChange"
-                  onChange={handleInputChange}
-                  value={Management.subofChange}
-                  className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                />
+            <div className="flex flex-row items-center">
+              <label className="font-semibold text-sm flex flex-none mr-2">
+                Subject Of Change:
               </label>
+              <input
+                type="text"
+                name="subofChange"
+                onChange={handleInputChange}
+                value={Management.subofChange}
+                className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+              />
             </div>
 
-            <div className="mb-2">
-              <label className="block">
-                employee Id:
-                <input
-                  type="text"
-                  name="EmployeeId"
-                  onChange={handleInputChange}
-                  value={Management.EmployeeId}
-                  className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                />
+            <div className="flex flex-row items-center">
+              <label className="font-semibold text-sm flex flex-none mr-2ock">
+                Employee Id:
               </label>
+              <input
+                type="text"
+                name="EmployeeId"
+                onChange={handleInputChange}
+                value={Management.EmployeeId}
+                className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+              />
             </div>
           </div>
-          <div className="mb-2">
-            <label className="block">
-              department:
+          <div className="grid grid-cols-2 gap-4 mb-4">
+            <div className="flex flex-row items-center">
+              <label className="font-semibold text-sm flex flex-none mr-2">
+                Department:
+              </label>
               <input
                 type="text"
                 name="department"
@@ -248,11 +313,11 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
                 value={Management.department}
                 className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               />
-            </label>
-          </div>
-          <div className="mb-2">
-            <label className="block">
-              contractNo:
+            </div>
+            <div className="flex flex-row items-center">
+              <label className="font-semibold text-sm flex flex-none mr-2">
+                Contract No:
+              </label>
               <input
                 type="text"
                 name="contractNo"
@@ -260,12 +325,14 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
                 value={Management.contractNo}
                 className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               />
-            </label>
+            </div>
           </div>
           {/* //////////// */}
-          <div className="mb-2">
-            <label className="block">
-              MaintenanceType:
+          <div className="grid grid-cols-2 gap-4 ">
+            <div className="flex flex-row items-center">
+              <label className="font-semibold text-sm flex flex-none mr-2">
+                Maintenance Type:
+              </label>
               <input
                 type="text"
                 name="MaintenanceType"
@@ -273,25 +340,39 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
                 value={Management.MaintenanceType}
                 className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               />
-            </label>
-          </div>
-          {/* //////////// */}
-          <div className="mb-2">
-            <label className="block">
-              purposeOfActivity:
+            </div>
+            <div className="flex flex-row items-center">
+              <label className="font-semibold text-sm flex flex-none mr-2">
+                Ref. Service Request:
+              </label>
               <input
                 type="text"
-                name="purposeOfActivity"
+                name="MaintenanceType"
                 onChange={handleInputChange}
-                value={Management.purposeOfActivity}
+                value={Management.MaintenanceType}
                 className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               />
-            </label>
+            </div>
           </div>
           {/* //////////// */}
-          <div className="mb-2">
-            <label className="block">
-              priority:
+          <div className="flex flex-row items-center">
+            <label className="font-semibold text-sm flex flex-none mr-2">
+              purpose Of Activity:
+            </label>
+            <input
+              type="text"
+              name="purposeOfActivity"
+              onChange={handleInputChange}
+              value={Management.purposeOfActivity}
+              className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+            />
+          </div>
+          {/* //////////// */}
+          <div className="grid grid-cols-2 ">
+            <div className="flex flex-row items-center">
+              <label className="font-semibold text-sm flex flex-none mr-2">
+                Priority:
+              </label>
               <input
                 type="text"
                 name="priority"
@@ -299,12 +380,12 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
                 value={Management.priority}
                 className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               />
-            </label>
-          </div>
-          {/* //////////// */}
-          <div className="mb-2">
-            <label className="block">
-              impactLevel:
+            </div>
+            {/* //////////// */}
+            <div className="flex flex-row items-center">
+              <label className="font-semibold text-sm flex flex-none mr-2">
+                Impact Level:
+              </label>
               <input
                 type="text"
                 name="impactLevel"
@@ -312,12 +393,14 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
                 value={Management.impactLevel}
                 className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               />
-            </label>
+            </div>
           </div>
           {/* //////////// */}
-          <div className="mb-2">
-            <label className="block">
-              requiredDowntime:
+          <div className="grid grid-cols-2 gap-4 mb-4">
+            <div className="flex flex-row items-center">
+              <label className="font-semibold text-sm flex flex-none mr-2">
+                required Downtime:
+              </label>
               <input
                 type="text"
                 name="requiredDowntime"
@@ -325,12 +408,12 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
                 value={Management.requiredDowntime}
                 className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               />
-            </label>
-          </div>
-          {/* //////////// */}
-          <div className="mb-2">
-            <label className="block">
-              mentionDowntime:
+            </div>
+            {/* //////////// */}
+            <div className="flex flex-row items-center">
+              <label className="font-semibold text-sm flex flex-none mr-2">
+                Mention Downtime:
+              </label>
               <input
                 type="text"
                 name="mentionDowntime"
@@ -338,12 +421,14 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
                 value={Management.mentionDowntime}
                 className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               />
-            </label>
+            </div>
           </div>
           {/* //////////// */}
-          <div className="mb-2">
-            <label className="block">
-              startDate:
+          <div className="grid grid-cols-2 gap-4 mb-4">
+            <div className="flex flex-row items-center">
+              <label className="font-semibold text-sm flex flex-none mr-2">
+                Start Date:
+              </label>
               <input
                 type="text"
                 name="startDate"
@@ -351,12 +436,12 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
                 value={Management.startDate}
                 className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               />
-            </label>
-          </div>
-          {/* //////////// */}
-          <div className="mb-2">
-            <label className="block">
-              startTime:
+            </div>
+            {/* //////////// */}
+            <div className="flex flex-row items-center">
+              <label className="font-semibold text-sm flex flex-none mr-2">
+                start Time:
+              </label>
               <input
                 type="text"
                 name="startTime"
@@ -364,12 +449,14 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
                 value={Management.startTime}
                 className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               />
-            </label>
+            </div>
           </div>
           {/* //////////// */}
-          <div className="mb-2">
-            <label className="block">
-              endDate:
+          <div className="grid grid-cols-2 gap-4 mb-4">
+            <div className="flex flex-row items-center">
+              <label className="font-semibold text-sm flex flex-none mr-2">
+                End Date:
+              </label>
               <input
                 type="text"
                 name="endDate"
@@ -377,12 +464,12 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
                 value={Management.endDate}
                 className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               />
-            </label>
-          </div>
-          {/* //////////// */}
-          <div className="mb-2">
-            <label className="block">
-              endTime:
+            </div>
+            {/* //////////// */}
+            <div className="flex flex-row items-center">
+              <label className="font-semibold text-sm flex flex-none mr-2">
+                End Time:
+              </label>
               <input
                 type="text"
                 name="endTime"
@@ -390,7 +477,38 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
                 value={Management.endTime}
                 className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               />
+            </div>
+          </div>
+          <div className="text-center ">
+            <div className="border p-2 border-gray-600 font-bold text-sm flex flex-none">
+              PART 2: Change Preview
+            </div>
+          </div>
+          {/* /////// */}
+          <div className="flex flex-row items-center">
+            <label className="font-semibold text-sm flex flex-none mr-2">
+              Change Location:
             </label>
+            <input
+              type="text"
+              name="changeLocation"
+              onChange={handleInputChange}
+              value={Management.changeLocation}
+              className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+            />
+          </div>
+          {/* ////////////////// */}
+          <div className="flex flex-row items-center">
+            <label className="font-semibold text-sm flex flex-none mr-2">
+              Targeted System For:
+            </label>
+            <input
+              type="text"
+              name="targetedSystemFor"
+              onChange={handleInputChange}
+              value={Management.targetedSystemFor}
+              className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+            />
           </div>
 
           <div className="flex justify-between">
