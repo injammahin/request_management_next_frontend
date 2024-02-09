@@ -106,7 +106,7 @@ const ProfilePage: React.FC = () => {
         <motion.div
           className="bg-white rounded-lg shadow-xl p-5 md:p-10"
           initial={{ scale: 0 }}
-          animate={{ rotate: 30, scale: 1 }}
+          animate={{ rotate: 36, scale: 1 }}
           transition={{
             type: "spring",
             stiffness: 260,
