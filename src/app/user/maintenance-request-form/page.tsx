@@ -210,7 +210,7 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
       <Navbar userRole={"supervisor"} onMenuToggle={handleMenuToggle} />
       <div
         className={`container mx-auto p-6 ${
-          isMenuOpen ? "translate-x-[0px]" : ""
+          isMenuOpen ? "translate-x-[120px]" : ""
         }`}
       >
         <form
