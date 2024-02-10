@@ -1,11 +1,13 @@
 // HomePage.tsx
 
 import React from "react";
-// import "./HomePage.css"; // Assuming you will create a separate CSS file for styles
+// import "./HomePage.css"; // Ensure this CSS file includes the new styles
 
 const HomePage: React.FC = () => {
   return (
     <div className="homePageContainer">
+      <div className="animatedBackground"></div>{" "}
+      {/* Parallax or animated background */}
       <div className="contentWrapper">
         <div className="logoContainer">
           <img src="./dhaka_bank.png" alt="Dhaka Bank" className="bankLogo" />
