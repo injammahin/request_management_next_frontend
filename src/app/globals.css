@@ -50,3 +50,90 @@ body {
   color: #fff;
   text-decoration: none;
 } */
+/* HomePage.css */
+
+.homePageContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: linear-gradient(to right, #a0a0c9, #3459a3);
+  color: white;
+}
+
+.contentWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 800px;
+  padding: 20px;
+}
+
+.logoContainer {
+  margin-bottom: 30px;
+  animation: fadeIn 2s ease-in-out;
+}
+
+.bankLogo {
+  width: 300px;
+  height: auto;
+}
+
+.textContainer {
+  text-align: center;
+  animation: slideUp 1s ease-in-out;
+}
+
+.welcomeText {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.loginPrompt {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+.buttonContainer {
+  display: flex;
+  gap: 20px;
+}
+
+.signInButton,
+.signUpButton {
+  padding: 10px 20px;
+  border-radius: 20px;
+  background: linear-gradient(to right, #56ab2f, #a8e063);
+  text-decoration: none;
+  color: white;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.signInButton:hover,
+.signUpButton:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

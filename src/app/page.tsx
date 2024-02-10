@@ -1,30 +1,24 @@
 // HomePage.tsx
 
 import React from "react";
+// import "./HomePage.css"; // Assuming you will create a separate CSS file for styles
 
 const HomePage: React.FC = () => {
   return (
-    <div className="flex items-center justify-center h-screen bg-gradient-to-r from-gray-500 via-gray-600 to-gray-500 text-white">
-      <div className="flex flex-col md:flex-row items-center md:items-start justify-center md:justify-between w-full max-w-5xl px-6 md:px-10">
-        <div className="flex-shrink-0 mb-8 md:mb-0">
-          <img src="./dhaka_bank.png" alt="dhaka bank" className="w-96 h-44" />
+    <div className="homePageContainer">
+      <div className="contentWrapper">
+        <div className="logoContainer">
+          <img src="./dhaka_bank.png" alt="Dhaka Bank" className="bankLogo" />
         </div>
-        <div className="text-center md:text-left max-w-xl">
-          <h1 className="text-4xl font-extrabold mb-4">
-            Please login to your portal
-          </h1>
+        <div className="textContainer">
+          <h1 className="welcomeText">Welcome to Dhaka Bank</h1>
+          <p className="loginPrompt">Please login to your portal</p>
 
-          <div className="flex space-x-4">
-            <a
-              href="/user/login"
-              className="btn-grad rounded-full px-6 py-2 hover:btn-grad-hover shadow-md transition duration-300"
-            >
+          <div className="buttonContainer">
+            <a href="/user/login" className="signInButton">
               Sign In
             </a>
-            <a
-              href="/user/registration"
-              className="btn-grad rounded-full px-6 py-3 hover:btn-grad-hover shadow-md transition duration-300"
-            >
+            <a href="/user/registration" className="signUpButton">
               Sign Up
             </a>
           </div>
