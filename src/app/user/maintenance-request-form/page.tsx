@@ -7,6 +7,9 @@ import Navbar from "@/app/components/navigation/page";
 import Link from "next/link";
 
 interface ManagementFormProps {}
+interface Roles {
+  [key: string]: string[]; // Define the structure of your roles data
+}
 
 interface Management {
   requestNumber: string;
@@ -65,11 +68,12 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
   const [Management, setManagement] = useState<Management>({
     requestNumber: "",
     subofChange: "",
-    requestedBy: "",
+    requestedBy: localStorage.getItem("userName") || "",
     date: "",
     requesterName: "",
-    EmployeeId: "",
-    department: "",
+    EmployeeId: localStorage.getItem("employeeId") || "",
+
+    department: localStorage.getItem("network") || "",
     contractNo: "",
     MaintenanceType: "",
     purposeOfActivity: "",
@@ -113,6 +117,8 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
   });
   const [successMessage, setSuccessMessage] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("");
+  const [roles, setRoles] = useState<Roles>({}); // Use the Roles interface for typing the state
+
   const [submittedDetails, setSubmittedDetails] = useState<Management | null>(
     null
   );
@@ -135,6 +141,33 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
       [name]: value,
     }));
   };
+  useEffect(() => {
+    const fetchRoles = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:3001/users/all-roles"
+        );
+        setRoles(response.data);
+        console.log(response.data);
+        if (response.data.superadmin) {
+          localStorage.setItem("superadmin", response.data.superadmin);
+        }
+        if (response.data.subadmin) {
+          localStorage.setItem("subadmin", response.data.subadmin);
+        }
+        if (response.data.ciso) {
+          localStorage.setItem("ciso", response.data.ciso);
+        }
+        if (response.data.head) {
+          localStorage.setItem("head", response.data.head);
+        }
+      } catch (error) {
+        console.error("Failed to fetch roles:", error);
+      }
+    };
+
+    fetchRoles();
+  }, []);
 
   const autofillRequestNo = () => {
     // Auto-generate requestNo based on date, department, and requestedBy
@@ -260,8 +293,9 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
               <input
                 type="text"
                 name="requestedBy"
-                onChange={handleInputChange}
+                // onChange={handleInputChange}
                 value={Management.requestedBy}
+                readOnly
                 className="block w-full py-1 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               />
             </div>
@@ -300,7 +334,8 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
               <input
                 type="text"
                 name="EmployeeId"
-                onChange={handleInputChange}
+                // onChange={handleInputChange}
+                readOnly
                 value={Management.EmployeeId}
                 className="block w-full py-1 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               />
@@ -314,7 +349,8 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
               <input
                 type="text"
                 name="department"
-                onChange={handleInputChange}
+                // onChange={handleInputChange}
+                readOnly
                 value={Management.department}
                 className="block w-full py-1 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               />
