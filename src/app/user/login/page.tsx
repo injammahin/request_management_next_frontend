@@ -1,6 +1,6 @@
 // Import necessary libraries and components
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 
@@ -10,6 +10,38 @@ const SigninPage = () => {
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const router = useRouter();
+  interface Roles {
+    [key: string]: string[]; // Define the structure of your roles data
+  }
+  const [roles, setRoles] = useState<Roles>({}); // Use the Roles interface for typing the state
+
+  useEffect(() => {
+    const fetchRoles = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:3001/users/all-roles"
+        );
+        setRoles(response.data);
+        console.log(response.data);
+        if (response.data.superadmin) {
+          localStorage.setItem("superadmin", response.data.superadmin);
+        }
+        if (response.data.subadmin) {
+          localStorage.setItem("subadmin", response.data.subadmin);
+        }
+        if (response.data.ciso) {
+          localStorage.setItem("ciso", response.data.ciso);
+        }
+        if (response.data.head) {
+          localStorage.setItem("head", response.data.head);
+        }
+      } catch (error) {
+        console.error("Failed to fetch roles:", error);
+      }
+    };
+
+    fetchRoles();
+  }, []);
 
   const handleSubmit = async () => {
     try {
