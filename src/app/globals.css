@@ -147,7 +147,7 @@ body {
   justify-content: center;
   height: 100vh;
   overflow: hidden;
-  color: rgb(5, 6, 6);
+  color: rgba(34, 35, 35, 0.872);
 }
 
 .animatedBackground {
@@ -156,8 +156,8 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(120deg, #4b6cb7, #182848);
-  clip-path: circle(30% at right 70%);
+  background: linear-gradient(120deg, #4b6cb7, #bec1c8);
+  clip-path: circle(10% at right 90%);
   animation: moveBackground 10s infinite alternate ease-in-out;
 }
 
@@ -179,7 +179,7 @@ body {
 
 .bankLogo {
   width: 300px;
-  height: auto;
+  height: 200px;
   opacity: 0;
 }
 

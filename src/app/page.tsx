@@ -10,7 +10,11 @@ const HomePage: React.FC = () => {
       {/* Parallax or animated background */}
       <div className="contentWrapper">
         <div className="logoContainer">
-          <img src="./dhaka_bank.png" alt="Dhaka Bank" className="bankLogo" />
+          <img
+            src="./new-logo.png"
+            alt="Dhaka Bank"
+            className="bankLogo1 h-20 w-96 opacity-medium"
+          />
         </div>
         <div className="textContainer">
           <h1 className="welcomeText">Welcome to Dhaka Bank</h1>
