@@ -127,6 +127,10 @@ const ProfilePage: React.FC = () => {
     // Add the logic to navigate to the edit page for maintenance request
     // router.push(`/user/editmaintenance?requestId=${id}`);
   };
+  const handleDetailsClick = (request: Maintenance) => {
+    localStorage.setItem("selectedRequestDetails", JSON.stringify(request));
+    window.location.href = "/user/edit_maintenance_request"; // Change to your details page path
+  };
 
   const handleDownloadPDF = (id: number) => {
     if (userData) {
@@ -271,10 +275,8 @@ const ProfilePage: React.FC = () => {
                           </td>
                           <td className="border-[1px] p-2 border-gray-600">
                             <button
-                              onClick={() =>
-                                handleEditMaintenanceRequest(maintenance.id)
-                              }
-                              className="bg-[#4CB9E7] rounded-lg h-8 w-28 text-white"
+                              onClick={() => handleDetailsClick(maintenance)}
+                              className="bg-[#4CB9E7] rounded-lg h-6 w-24 text-white"
                             >
                               Edit
                             </button>
