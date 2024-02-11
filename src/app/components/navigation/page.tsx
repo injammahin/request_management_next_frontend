@@ -10,6 +10,7 @@ import {
   UsersIcon,
   KeyIcon,
 } from "@heroicons/react/outline"; // Use outline icons from v2
+import { motion } from "framer-motion";
 
 // Define a TypeScript interface for the Navbar props
 interface NavbarProps {
@@ -160,9 +161,16 @@ const Navbar: React.FC<NavbarProps> = ({ userRole, onMenuToggle }) => {
         </button>
 
         {/* Logo */}
-        <div className="flex pr lg:pr-[700px] md: ">
-          <img src="/new-logo.png" alt="Logo" className="h-12 w-max mr-2" />
-        </div>
+        <motion.div
+          whileHover={{ scale: 1.1 }}
+          transition={{ duration: 0.3, yoyo: Infinity }}
+        >
+          <img
+            src="/new-logo.png"
+            alt="Logo"
+            className="h-12 w-max mr-2 lg:pr-[700px]"
+          />
+        </motion.div>
 
         {/* Navigation Links (conditionally rendered based on isMenuOpen) */}
         <div className={`lg:flex ${isMenuOpen ? "flex" : "hidden"} space-x-4`}>
