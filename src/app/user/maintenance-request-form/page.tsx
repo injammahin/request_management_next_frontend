@@ -113,6 +113,10 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
     ChangeReviewForSuccess: "",
     ActualDowntime: "",
     WorkExecutionStatus: "",
+    superadmin: localStorage.getItem("superadmin") || "",
+    subadmin: localStorage.getItem("subadmin") || "",
+    ciso: localStorage.getItem("ciso") || "",
+    head: localStorage.getItem("head") || "",
     user: "",
   });
   const [successMessage, setSuccessMessage] = useState<string>("");
@@ -816,18 +820,58 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
             </div>
           </div>
           <div className="grid grid-cols-4  ">
-            <label className="font-semibold p-1 text-sm flex flex-none mr-2  border border-gray-600">
-              Team Leader
-            </label>
-            <label className="font-semibold p-1 text-sm flex flex-none mr-2 border border-gray-600">
-              Head Of IFRA
-            </label>
-            <label className="font-semibold p-1 text-sm flex flex-none mr-2 border border-gray-600">
-              CISO
-            </label>
-            <label className="font-semibold p-1 text-sm flex flex-none mr-2 border border-gray-600">
-              HEAD
-            </label>
+            <div className=" flex items-center border border-gray-700">
+              <label className="font-semibold  flex flex-none text-sm mr-2 mx-[px]">
+                (TEAM LEADER) :
+              </label>
+              <input
+                type="text"
+                name="revokeBy"
+                // onChange={handleInputChange}
+                readOnly
+                value={Management.ciso}
+                className="block w-full py-2.5 px-0 text-sm   underline-offset-4 text-gray-900 bg-transparent text-center border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer "
+              />
+            </div>
+            <div className=" flex items-center border border-gray-700">
+              <label className="font-semibold  flex flex-none text-sm mr-2 mx-[px]">
+                (HEAD 0F IRFA) :
+              </label>
+              <input
+                type="text"
+                name="revokeBy"
+                // onChange={handleInputChange}
+                readOnly
+                value={Management.superadmin}
+                className="block w-full py-2.5 px-0 text-sm   underline-offset-4 text-gray-900 bg-transparent text-center border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer "
+              />
+            </div>
+            <div className=" flex items-center border border-gray-700">
+              <label className="font-semibold  flex flex-none text-sm mr-2 mx-[px]">
+                (CISO) :
+              </label>
+              <input
+                type="text"
+                name="revokeBy"
+                // onChange={handleInputChange}
+                readOnly
+                value={Management.ciso}
+                className="block w-full py-2.5 px-0 text-sm  underline-offset-4 text-gray-900 bg-transparent text-center border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer "
+              />
+            </div>
+            <div className=" flex items-center border border-gray-700">
+              <label className="font-semibold  flex flex-none text-sm mr-2 mx-[px]">
+                (HEAD) :
+              </label>
+              <input
+                type="text"
+                name="revokeBy"
+                // onChange={handleInputChange}
+                readOnly
+                value={Management.head}
+                className="block w-full py-2.5 px-0 text-sm   underline-offset-4 text-gray-900 bg-transparent text-center border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer "
+              />
+            </div>
           </div>
           <div className="text-center  border border-gray-600 ">
             <div className="bg-gray-300 flex justify-center items-center">
