@@ -96,65 +96,71 @@ const ProfilePage: React.FC = () => {
       className={`bg-gray-100 min-h-screen ${isMenuOpen ? "menu-open" : ""}`}
     >
       <Navbar userRole={"supervisor"} onMenuToggle={handleMenuToggle} />
-      <motion.div
-        className="container mx-auto pt-10 pb-10"
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-        exit="exit"
+      <div
+        className={`container mx-auto p-6 ${
+          isMenuOpen ? "translate-x-[200px]" : ""
+        }`}
       >
         <motion.div
-          className="bg-white rounded-lg shadow-xl p-5 md:p-10 "
-          initial={{ scale: 0 }}
-          animate={{ rotate: 360, scale: 1 }}
-          transition={{
-            type: "spring",
-            stiffness: 260,
-            damping: 20,
-          }}
+          className="container mx-auto pt-10 pb-10"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          exit="exit"
         >
           <motion.div
-            className="text-center mb-10"
-            initial={{ y: -250 }}
-            animate={{ y: -10 }}
-            transition={{ delay: 0.2, type: "spring", stiffness: 120 }}
+            className="bg-white rounded-lg shadow-xl p-5 md:p-10 "
+            initial={{ scale: 0 }}
+            animate={{ rotate: 360, scale: 1 }}
+            transition={{
+              type: "spring",
+              stiffness: 260,
+              damping: 20,
+            }}
           >
-            <h1 className="font-bold text-3xl text-gray-900">
-              User Information
-            </h1>
-            <p className="text-gray-600">View your profile details below</p>
-          </motion.div>
-          <div className="space-y-4">
-            <p>
-              <strong>Name:</strong> {userData.employee_name}
-            </p>
-            <p>
-              <strong>Email:</strong> {userData.email}
-            </p>
-            <p>
-              <strong>Role:</strong> {userData.role}
-            </p>
-            <p>
-              <strong>Department:</strong> {userData.department_id}
-            </p>
-            <p>
-              <strong>Employee ID:</strong> {userData.user_id}
-            </p>
-          </div>
-          <motion.div
-            className="mt-10 text-center"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-          >
-            <button
-              onClick={handleBackButtonClick}
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            <motion.div
+              className="text-center mb-10"
+              initial={{ y: -250 }}
+              animate={{ y: -10 }}
+              transition={{ delay: 0.2, type: "spring", stiffness: 120 }}
             >
-              Back
-            </button>
+              <h1 className="font-bold text-3xl text-gray-900">
+                User Information
+              </h1>
+              <p className="text-gray-600">View your profile details below</p>
+            </motion.div>
+            <div className="space-y-4">
+              <p>
+                <strong>Name:</strong> {userData.employee_name}
+              </p>
+              <p>
+                <strong>Email:</strong> {userData.email}
+              </p>
+              <p>
+                <strong>Role:</strong> {userData.role}
+              </p>
+              <p>
+                <strong>Department:</strong> {userData.department_id}
+              </p>
+              <p>
+                <strong>Employee ID:</strong> {userData.user_id}
+              </p>
+            </div>
+            <motion.div
+              className="mt-10 text-center"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              <button
+                onClick={handleBackButtonClick}
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              >
+                Back
+              </button>
+            </motion.div>
           </motion.div>
         </motion.div>
-      </motion.div>
+      </div>
     </div>
   );
 };
