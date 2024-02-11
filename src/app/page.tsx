@@ -7,6 +7,7 @@ const HomePage: React.FC = () => {
   return (
     <div className="homePageContainer">
       <div className="animatedBackground"></div>{" "}
+      <div className="animatedBackground1"></div>{" "}
       {/* Parallax or animated background */}
       <div className="contentWrapper">
         <div className="logoContainer">

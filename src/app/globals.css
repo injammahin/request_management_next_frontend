@@ -147,7 +147,7 @@ body {
   justify-content: center;
   height: 100vh;
   overflow: hidden;
-  color: rgba(34, 35, 35, 0.872);
+  color: rgb(34, 35, 35);
 }
 
 .animatedBackground {
@@ -156,9 +156,19 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(120deg, #4b6cb7, #bec1c8);
+  background: linear-gradient(120deg, #2f477e, #bec1c8);
   clip-path: circle(10% at right 90%);
   animation: moveBackground 10s infinite alternate ease-in-out;
+}
+.animatedBackground1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(60deg, #bec1c8, #2f477e);
+  clip-path: circle(90% at right 10%);
+  animation: moveBackground 7.5s infinite alternate ease-in-out;
 }
 
 .contentWrapper {
