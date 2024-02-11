@@ -239,6 +239,24 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
       console.error("Form submission failed:", error);
     }
   };
+  const [requestNumbers, setRequestNumbers] = useState<{ requestNo: string }[]>(
+    []
+  );
+  useEffect(() => {
+    const fetchRequestNumbers = async () => {
+      const userId = localStorage.getItem("userName");
+      try {
+        const response = await axios.get(
+          `http://localhost:3001/service-requests/by-user/${userId}`
+        );
+        setRequestNumbers(response.data); // Assuming the response is an array of objects with a requestNo property
+      } catch (error) {
+        console.error("Failed to fetch request numbers:", error);
+      }
+    };
+
+    fetchRequestNumbers();
+  }, []);
 
   return (
     <div
@@ -386,7 +404,7 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
                 className="block w-full py-1 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               />
             </div>
-            <div className="flex flex-row items-center">
+            {/* <div className="flex flex-row items-center">
               <label className="font-semibold text-sm flex flex-none mr-2">
                 Ref. Service Request:
               </label>
@@ -397,6 +415,28 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
                 value={Management.MaintenanceType}
                 className="block w-full py-1 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               />
+            </div> */}
+            <div className="flex flex-row items-center">
+              <label
+                htmlFor="requestNumber"
+                className="font-semibold text-sm flex flex-none mr-2"
+              >
+                Ref. Service Request:
+              </label>
+              <select
+                name="referenceServiceRequest"
+                id="referenceServiceRequest"
+                value={Management.referenceServiceRequest}
+                onChange={handleInputChange}
+                className="block w-full py-1 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+              >
+                <option value="">( Select Request No )</option>
+                {requestNumbers.map((request, index) => (
+                  <option key={index} value={request.requestNo}>
+                    {request.requestNo}
+                  </option>
+                ))}
+              </select>
             </div>
           </div>
           {/* //////////// */}
