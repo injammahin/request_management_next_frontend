@@ -52,13 +52,14 @@ used to fetch user data from the server when the component mounts. */
    */
   const handleUpdate = async () => {
     try {
+      // Ensure userData.id is dynamically used in the API endpoint
       const response = await axios.put(
         `http://localhost:3001/auth/${userData.id}`,
         updateData
       );
-      setUserData(response.data);
+      setUserData({ ...userData, ...response.data.id }); // Update userData with the response
       setMessage("Password change successful!");
-      setUpdateData({ password: "" });
+      setUpdateData({ password: "" }); // Reset updateData
     } catch (error) {
       console.error("Update failed:", error);
       setMessage("Password change failed. Please try again.");

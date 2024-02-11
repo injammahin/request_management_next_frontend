@@ -168,7 +168,7 @@ const Navbar: React.FC<NavbarProps> = ({ userRole, onMenuToggle }) => {
           <img
             src="/new-logo.png"
             alt="Logo"
-            className="h-12 w-max mr-2 lg:pr-[700px]"
+            className="h-12 w-max mr-2 lg:pr-[650px]"
           />
         </motion.div>
 
