@@ -17,7 +17,7 @@ interface is used to ensure that the `userData` state variable in the `ProfilePa
 the correct shape and properties. */
 interface UserDetails {
   id: number;
-  name: string;
+  employee_name: string;
   email: string;
   user_id: string;
   designation: string;
@@ -104,9 +104,9 @@ const ProfilePage: React.FC = () => {
         exit="exit"
       >
         <motion.div
-          className="bg-white rounded-lg shadow-xl p-5 md:p-10"
+          className="bg-white rounded-lg shadow-xl p-5 md:p-10 "
           initial={{ scale: 0 }}
-          animate={{ rotate: 36, scale: 1 }}
+          animate={{ rotate: 360, scale: 1 }}
           transition={{
             type: "spring",
             stiffness: 260,
@@ -126,7 +126,7 @@ const ProfilePage: React.FC = () => {
           </motion.div>
           <div className="space-y-4">
             <p>
-              <strong>Name:</strong> {userData.name}
+              <strong>Name:</strong> {userData.employee_name}
             </p>
             <p>
               <strong>Email:</strong> {userData.email}
