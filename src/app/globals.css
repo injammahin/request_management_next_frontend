@@ -158,7 +158,7 @@ body {
   bottom: 0;
   background: linear-gradient(120deg, #2f477e, #bec1c8);
   clip-path: circle(10% at right 90%);
-  animation: moveBackground 10s infinite alternate ease-in-out;
+  animation: moveBackground 15s infinite alternate ease-in-out;
 }
 .animatedBackground1 {
   position: absolute;
@@ -168,7 +168,7 @@ body {
   bottom: 0;
   background: linear-gradient(60deg, #bec1c8, #2f477e);
   clip-path: circle(90% at right 10%);
-  animation: moveBackground 7.5s infinite alternate ease-in-out;
+  animation: moveBackground 7s infinite alternate ease-in-out;
 }
 
 .contentWrapper {
