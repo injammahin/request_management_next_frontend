@@ -59,6 +59,7 @@ interface Management {
   ChangeReviewForSuccess: string;
   ActualDowntime: string;
   WorkExecutionStatus: string;
+  referenceServiceRequest: string;
 
   user: string;
   [key: string]: string; // Index signature to allow any additional string properties
@@ -101,6 +102,7 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
     checklistStatusTwo: "",
     checklistStatusThree: "",
     checklistStatusFour: "",
+    referenceServiceRequest: "",
     ////////////////////////////////* part -3 *////////////////////////////////
     ImpactedSystemfor: "",
     ActualPriority: "",
