@@ -197,11 +197,11 @@ const Dashboard: React.FC = () => {
                     <animated.button
                       style={fadeInUp}
                       onClick={toggleShowAllRequests}
-                      className="text-gray-900 text-start h-10 w-60 font-bold  rounded"
+                      className="text-gray-900 bg-gray-300 text-start  h-10 w-60 font-bold  rounded"
                     >
                       {showAllRequests
                         ? "Hide Requests"
-                        : "Show All Service Requests"}
+                        : "Show All Service Requests "}
                     </animated.button>
 
                     <button className="relative   p-2 mr-16 rounded-full text-gray-200 bg-[#0B60B0]">
