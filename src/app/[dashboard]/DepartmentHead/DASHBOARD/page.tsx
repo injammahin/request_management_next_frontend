@@ -131,8 +131,8 @@ const Dashboard: React.FC = () => {
     const targetAccepted = 1204; // Target number for accepted forms
     const targetDeclined = 234; // Target number for declined forms
 
-    const incrementAccepted = targetAccepted / 300; // Increment for accepted forms
-    const incrementDeclined = targetDeclined / 300; // Increment for declined forms
+    const incrementAccepted = targetAccepted / 10; // Increment for accepted forms
+    const incrementDeclined = targetDeclined / 10; // Increment for declined forms
 
     const animateAcceptedForms = () => {
       if (acceptedForms < targetAccepted) {
@@ -289,6 +289,35 @@ const Dashboard: React.FC = () => {
       prev.includes(id) ? prev.filter((prevId) => prevId !== id) : [...prev, id]
     );
   };
+  // New state definitions for tracking released and declined counts
+  const [releasedCount, setReleasedCount] = useState(0);
+  const [declinedCount, setDeclinedCount] = useState(0);
+
+  // Function to calculate and set the released and declined counts
+  const calculateStatusCounts = () => {
+    const releasedServiceRequests = serviceRequests.filter(
+      (request) => request.supervisorStatus === "Released"
+    ).length;
+    const declinedServiceRequests = serviceRequests.filter(
+      (request) => request.supervisorStatus === "Decline"
+    ).length;
+
+    const releasedMaintenanceRequests = maintenanceRequests.filter(
+      (request) => request.supervisorStatus === "Released"
+    ).length;
+    const declinedMaintenanceRequests = maintenanceRequests.filter(
+      (request) => request.supervisorStatus === "Declined"
+    ).length;
+
+    // Summing up the counts from both service and maintenance requests
+    setReleasedCount(releasedServiceRequests + releasedMaintenanceRequests);
+    setDeclinedCount(declinedServiceRequests + declinedMaintenanceRequests);
+  };
+
+  // Call calculateStatusCounts whenever serviceRequests or maintenanceRequests change
+  useEffect(() => {
+    calculateStatusCounts();
+  }, [serviceRequests, maintenanceRequests]);
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
@@ -858,7 +887,7 @@ const Dashboard: React.FC = () => {
                     Total accepted forms this month
                   </animated.h3>
                   <animated.p style={fadeInUp} className="text-3xl">
-                    {Math.floor(acceptedForms)} +
+                    {Math.floor(releasedCount)} +
                   </animated.p>
                 </animated.div>
 
@@ -873,7 +902,7 @@ const Dashboard: React.FC = () => {
                     Declined forms this month
                   </animated.h3>
                   <animated.p style={fadeInUp} className="text-3xl">
-                    {Math.floor(declinedForms)} +
+                    {Math.floor(declinedCount)} +
                   </animated.p>
                 </animated.div>
               </div>
