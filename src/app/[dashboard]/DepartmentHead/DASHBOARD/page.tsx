@@ -44,6 +44,71 @@ interface MaintenanceRequest {
   approvalStatus: string;
   supervisorStatus: string;
   // Define other properties as needed...
+
+  subofChange: string;
+
+  date: string;
+
+  requesterName: string;
+
+  EmployeeId: string;
+
+  department: string;
+
+  contractNo: string;
+
+  MaintenanceType: string;
+
+  purposeOfActivity: string;
+  referenceServiceRequest: string;
+
+  priority: string;
+
+  impactLevel: string;
+
+  requiredDowntime: string;
+
+  mentionDowntime: string;
+
+  startDate: string;
+
+  startTime: string;
+
+  endDate: string;
+
+  endTime: string;
+  ////////////////////////////////* part -2 *////////////////////////////////
+  changeLocation: string;
+  targetedSystemFor: string;
+  IPaddress: string;
+  ImpactedSystemform: string;
+  DetailedDescriptionOfChange: string;
+  DetailedWorkedPlanTask: string;
+  DetailedWorkedPlanStartTime: string;
+  DetailedWorkedPlanEndTime: string;
+  RequirementTools: string;
+  Implementationteam: string;
+  Communication: string;
+  RollBackPlan: string;
+  checklistStatusOne: string;
+  checklistStatusTwo: string;
+  checklistStatusThree: string;
+  checklistStatusFour: string;
+  ////////////////////////////////* part -3 *////////////////////////////////
+  ImpactedSystemfor: string;
+  ActualPriority: string;
+  Actualimpactlevel: string;
+  ////////////////////////////////* part -4 *////////////////////////////////
+  ExecusionTeamMenbers: string;
+  ExecusionTeamleaders: string;
+  ////////////////////////////////* part -5 *////////////////////////////////
+  ChangeReviewForperformed: string;
+  ChangeReviewForSuccess: string;
+  ActualDowntime: string;
+  WorkExecutionStatus: string;
+  /////////////////////////////////////
+
+  user: string;
 }
 
 const Dashboard: React.FC = () => {
@@ -179,6 +244,33 @@ const Dashboard: React.FC = () => {
       setError("Failed to perform action");
     }
   };
+  const handleMaintenanceAction = async (
+    id: number,
+    action: "release" | "decline"
+  ) => {
+    try {
+      await fetch(`http://localhost:3001/maintenance/${action}/${id}`, {
+        // Update this URL to your actual API endpoint
+        method: "PATCH",
+      });
+      // Update the maintenance request status in the local state
+      setMaintenanceRequests((prev) =>
+        prev.map((req) =>
+          req.id === id
+            ? {
+                ...req,
+                supervisorStatus:
+                  action === "release" ? "Released" : "Declined",
+              }
+            : req
+        )
+      );
+    } catch (error) {
+      console.error("Error:", error);
+      setError("Failed to perform action on maintenance request");
+    }
+  };
+
   const pendingToRelease = serviceRequests.filter(
     (request) => request.supervisorStatus === "Pending "
   );
@@ -237,7 +329,7 @@ const Dashboard: React.FC = () => {
                     <animated.button
                       style={fadeInUp}
                       onClick={toggleShowAllRequests}
-                      className="text-gray-900 bg-gray-300 text-start  h-10 w-60 font-bold  rounded"
+                      className="text-gray-900 bg-[#E0CCBE] pl-2 text-start  h-10 w-60 font-bold  rounded"
                     >
                       {showAllRequests
                         ? "Hide Requests"
@@ -250,11 +342,12 @@ const Dashboard: React.FC = () => {
                         {totalPendingToRelease}
                       </span>
                     </button>
+
                     <animated.p
                       style={fadeInUp}
                       className="text-gray-800 font-semibold"
                     >
-                      You have {totalPendingToRelease} pending
+                      You have {totalPendingToRelease} pending Service Request
                     </animated.p>
 
                     {showAllRequests && (
@@ -466,30 +559,31 @@ const Dashboard: React.FC = () => {
                   }`}
                 >
                   <animated.div style={fadeInUp}>
-                    <div className="flex">
+                    <div className="flex justify-between">
                       <animated.button
                         style={fadeInUp}
                         onClick={toggleShowAllMaintenanceRequests}
-                        className="text-gray-900 bg-gray-300 text-start h-10 w-72 f font-bold rounded"
+                        className="text-gray-900 bg-[#E0CCBE]  pl-2 text-start h-10 w-72 font-bold rounded"
                       >
                         {showAllMaintenanceRequests
                           ? "Hide Maintenance Requests"
-                          : "Show All Maintenance Requests"}
+                          : "Show All Maintenance "}
                       </animated.button>
-
-                      <button className="relative   p-2 mr-16 rounded-full text-gray-200 bg-[#0B60B0]">
-                        <FiBell className="w-6 h-6" />
-                        <span className="absolute top-0 right-0 inline-flex items-center justify-center w-5 h-5 text-xs font-bold text-red-100 bg-red-500 rounded-full">
-                          {ToReleaseMaintenance}
-                        </span>
-                      </button>
+                      <div className="pl-10">
+                        <button className="relative   p-2 mr-16 rounded-full text-gray-200 bg-[#0B60B0]">
+                          <FiBell className="w-6 h-6 " />
+                          <span className="absolute top-0 right-0 inline-flex items-center justify-center w-5 h-5 text-xs font-bold text-red-100 bg-red-500 rounded-full">
+                            {ToReleaseMaintenance}
+                          </span>
+                        </button>
+                      </div>
                     </div>
-
                     <animated.p
                       style={fadeInUp}
                       className="text-gray-800 font-semibold"
                     >
-                      You have {ToReleaseMaintenance} pending
+                      You have {ToReleaseMaintenance} pending Maintenance
+                      Request
                     </animated.p>
 
                     {showAllMaintenanceRequests && (
@@ -502,14 +596,198 @@ const Dashboard: React.FC = () => {
                             <div className="flex justify-between items-center">
                               <h2 className="">
                                 <label className="font-semibold">
-                                  Maintenance No:
+                                  Request Numner:
                                 </label>{" "}
                                 {request.requestNumber} |{" "}
+                                {/* {request.reasonOfRequest.slice(0, 30)}...| */}
                                 {request.approvalStatus}
                               </h2>
-                              {/* Add buttons for actions like release or decline if needed */}
+                              <button
+                                onClick={() => toggleExpand(request.id)}
+                                className="text-white bg-[#40A2D8] hover:bg-[#0B60B0] rounded-lg px-2 py-1"
+                              >
+                                {expandedRequests.includes(request.id)
+                                  ? "Show Less"
+                                  : "Show More"}
+                              </button>
                             </div>
-                            {/* Add more detailed information about the maintenance request here */}
+                            {expandedRequests.includes(request.id) && (
+                              <div className="mt-4">
+                                <>
+                                  <div>
+                                    <tbody>
+                                      <tr>
+                                        {/* Request No and Date in one row */}
+                                        <td className="border-[1px]    border-b-1 py-2 px-4 border-gray-600">
+                                          <div className=" text-sm text-gray-900">
+                                            <label className="font-semibold ">
+                                              Request Number:{" "}
+                                            </label>{" "}
+                                            {request.requestNumber}
+                                          </div>
+                                        </td>
+
+                                        <td className="border-[1px] border-b-1 py-2 px-4  border-gray-600">
+                                          <div className=" text-sm text-gray-900">
+                                            <label className="font-semibold ">
+                                              Date{" "}
+                                            </label>{" "}
+                                            {request.date}
+                                          </div>
+                                        </td>
+                                      </tr>
+
+                                      <tr>
+                                        {/* Request No and Date in one row */}
+                                        <td className="border-[1px] border-b-1 py-2 px-4 border-gray-600">
+                                          <div className=" text-sm text-gray-900">
+                                            <label className="font-semibold ">
+                                              Requested By{" "}
+                                            </label>{" "}
+                                            {request.date}
+                                          </div>
+                                        </td>
+
+                                        <td className="border-[1px] border-b-1 py-2 px-4 border-gray-600">
+                                          <div className=" text-sm text-gray-900">
+                                            <label className="font-semibold ">
+                                              Request For
+                                            </label>{" "}
+                                            {request.date}
+                                          </div>
+                                        </td>
+                                      </tr>
+
+                                      <tr>
+                                        {/* Request No and Date in one row */}
+                                        <td className="border-[1px] border-b-1 py-2 px-4 border-gray-600">
+                                          <div className=" text-sm text-gray-900">
+                                            <label className="font-semibold ">
+                                              Department
+                                            </label>{" "}
+                                            {request.department}
+                                          </div>
+                                        </td>
+
+                                        <td className="border-[1px] border-b-1 py-2 px-4 border-gray-600">
+                                          <div className=" text-sm text-gray-900">
+                                            <label className="font-semibold ">
+                                              Employee Id
+                                            </label>{" "}
+                                            {request.EmployeeId}
+                                          </div>
+                                        </td>
+                                      </tr>
+
+                                      <tr>
+                                        {/* Designation in a separate row */}
+                                        <td
+                                          colSpan={2}
+                                          className="border-[1px] border-b-1 py-2 px-4 border-gray-600"
+                                        >
+                                          <div className=" text-sm text-gray-900">
+                                            <label className="font-semibold ">
+                                              Designation
+                                            </label>{" "}
+                                            {request.date}
+                                          </div>
+                                        </td>
+                                      </tr>
+
+                                      <tr>
+                                        {/* Reason of Request in a separate row */}
+                                        <td
+                                          colSpan={2}
+                                          className="border-[1px] border-b-1 py-2 px-4 border-gray-600"
+                                        >
+                                          <div className=" text-sm text-gray-900">
+                                            <label className="font-semibold ">
+                                              Reason Of Request
+                                            </label>{" "}
+                                            {request.date}
+                                          </div>
+                                        </td>
+                                      </tr>
+
+                                      <tr>
+                                        {/* Service Details in a separate row */}
+                                        <td
+                                          colSpan={2}
+                                          className="border-[1px] border-b-1 py-2 px-4 border-gray-600"
+                                        >
+                                          <div className="font-semibold text-sm text-gray-900">
+                                            <label className="font-semibold ">
+                                              Service Details
+                                            </label>{" "}
+                                            {request.date}
+                                          </div>
+                                        </td>
+                                      </tr>
+                                    </tbody>
+                                  </div>
+
+                                  <p>
+                                    <strong>Status:</strong>{" "}
+                                    <span
+                                      className={`font-bold ${
+                                        request.supervisorStatus === "Pending"
+                                          ? "text-yellow-500"
+                                          : request.supervisorStatus ===
+                                            "Released"
+                                          ? "text-green-500"
+                                          : "text-red-500"
+                                      }`}
+                                    >
+                                      {request.supervisorStatus}
+                                    </span>
+                                  </p>
+                                  <div className="flex space-x-2 mt-3">
+                                    <button
+                                      onClick={() =>
+                                        handleMaintenanceAction(
+                                          request.id,
+                                          "release"
+                                        )
+                                      }
+                                      className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                                    >
+                                      Release
+                                    </button>
+                                    <button
+                                      onClick={() =>
+                                        handleMaintenanceAction(
+                                          request.id,
+                                          "decline"
+                                        )
+                                      }
+                                      className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+                                    >
+                                      decline
+                                    </button>
+                                  </div>
+                                  <button
+                                    onClick={() => toggleExpand(request.id)}
+                                    className="text-blue-500 mt-2 cursor-pointer"
+                                  ></button>
+                                </>
+                                {/* Add more details as needed */}
+
+                                {/* <div className="flex space-x-2 mt-3">
+                      <button
+                        onClick={() => handleAction(request.id, "release")}
+                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                      >
+                        Release
+                      </button>
+                      <button
+                        onClick={() => handleAction(request.id, "block")}
+                        className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                      >
+                        Block
+                      </button>
+                    </div> */}
+                              </div>
+                            )}
                           </li>
                         ))}
                       </ul>
