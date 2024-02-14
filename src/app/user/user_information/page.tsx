@@ -16,12 +16,13 @@ details. It specifies the properties and their types that should be present in a
 interface is used to ensure that the `userData` state variable in the `ProfilePage` component has
 the correct shape and properties. */
 interface UserDetails {
+  department: any;
   id: number;
   employee_name: string;
   email: string;
   user_id: string;
   designation: string;
-  department_id: string;
+  department_name: string;
   role: string;
 }
 
@@ -140,7 +141,8 @@ const ProfilePage: React.FC = () => {
                 <strong>Role:</strong> {userData.role}
               </p>
               <p>
-                <strong>Department:</strong> {userData.department_id}
+                <strong>Department:</strong>{" "}
+                {userData.department.department_name}
               </p>
               <p>
                 <strong>Employee ID:</strong> {userData.user_id}

@@ -13,24 +13,40 @@ interface Roles {
 
 interface Management {
   requestNumber: string;
+
   subofChange: string;
-  requestedBy: string;
+
   date: string;
+
   requesterName: string;
+
   EmployeeId: string;
+
   department: string;
+
   contractNo: string;
+
   MaintenanceType: string;
+
   purposeOfActivity: string;
+  referenceServiceRequest: string;
+
   priority: string;
+
   impactLevel: string;
+
   requiredDowntime: string;
+
   mentionDowntime: string;
+
   startDate: string;
+
   startTime: string;
+
   endDate: string;
+
   endTime: string;
-  ////////////////////////////////////////////////////////////////
+  ////////////////////////////////* part -2 *////////////////////////////////
   changeLocation: string;
   targetedSystemFor: string;
   IPaddress: string;
@@ -59,7 +75,7 @@ interface Management {
   ChangeReviewForSuccess: string;
   ActualDowntime: string;
   WorkExecutionStatus: string;
-  referenceServiceRequest: string;
+  /////////////////////////////////////
 
   user: string;
   [key: string]: string; // Index signature to allow any additional string properties
@@ -70,11 +86,11 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
     requestNumber: "",
     subofChange: "",
     requestedBy: localStorage.getItem("userName") || "",
-    date: "",
+    date: "2",
     requesterName: "",
+    department: localStorage.getItem("network") || "",
     EmployeeId: localStorage.getItem("employeeId") || "",
 
-    department: localStorage.getItem("network") || "",
     contractNo: "",
     MaintenanceType: "",
     purposeOfActivity: "",
@@ -357,6 +373,7 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
               </label>
               <input
                 type="text"
+                id=""
                 name="EmployeeId"
                 // onChange={handleInputChange}
                 readOnly
@@ -427,7 +444,6 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
               </label>
               <select
                 name="referenceServiceRequest"
-                id="referenceServiceRequest"
                 value={Management.referenceServiceRequest}
                 onChange={handleInputChange}
                 className="block w-full py-1 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"

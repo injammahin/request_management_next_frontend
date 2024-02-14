@@ -67,7 +67,12 @@ import Navbar from "../../components/navigation/page";
 const page = () => {
   return (
     <div>
-      <Navbar userRole={"user"} />
+      <Navbar
+        userRole={"user"}
+        onMenuToggle={function (isOpen: boolean): void {
+          throw new Error("Function not implemented.");
+        }}
+      />
 
       <div className="container mx-auto p-8 pt text-center">
         <div className="mb-8  relative group">
