@@ -1,56 +1,123 @@
 "use client";
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { FiBell } from "react-icons/fi";
+import { Line } from "react-chartjs-2";
+import { useSpring, animated } from "react-spring";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
+import Navbar from "@/app/components/navigation/page";
+// Adjust the import path based on your file structure
 
-interface Roles {
-  [key: string]: string[]; // Define the structure of your roles data
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+);
+
+interface ServiceRequest {
+  id: number;
+  requestNo: string;
+  // Define other properties as needed...
 }
 
-const RolesDisplayComponent: React.FC = () => {
-  const [roles, setRoles] = useState<Roles>({}); // Use the Roles interface for typing the state
+interface MaintenanceRequest {
+  id: number;
+  requestNumber: string;
+  // Define other properties as needed...
+}
+
+const Dashboard: React.FC = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [serviceRequests, setServiceRequests] = useState<ServiceRequest[]>([]);
+  const [maintenanceRequests, setMaintenanceRequests] = useState<
+    MaintenanceRequest[]
+  >([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchRoles = async () => {
-      try {
-        const response = await axios.get(
-          "http://localhost:3001/users/all-roles"
-        );
-        setRoles(response.data);
-        console.log(response.data);
-        if (response.data.superadmin) {
-          localStorage.setItem("superadmin", response.data.superadmin);
-        }
-        if (response.data.subadmin) {
-          localStorage.setItem("subadmin", response.data.subadmin);
-        }
-        if (response.data.ciso) {
-          localStorage.setItem("ciso", response.data.ciso);
-        }
-        if (response.data.head) {
-          localStorage.setItem("head", response.data.head);
-        }
-      } catch (error) {
-        console.error("Failed to fetch roles:", error);
-      }
-    };
+    setIsLoading(true);
+    const fetchServiceRequests = fetch(
+      "http://localhost:3001/service-requests/ApplicationUser-Management"
+    )
+      .then((response) => {
+        if (!response.ok) throw new Error("Failed to fetch service requests");
+        return response.json();
+      })
+      .then(setServiceRequests)
+      .catch((error) => {
+        console.error("Service Requests Fetch Error:", error);
+        setError("Failed to load service requests");
+      });
 
-    fetchRoles();
+    const fetchMaintenanceRequests = fetch(
+      "http://localhost:3001/maintaintance/ApplicationUser-Management"
+    )
+      .then((response) => {
+        if (!response.ok)
+          throw new Error("Failed to fetch maintenance requests");
+        return response.json();
+      })
+      .then(setMaintenanceRequests)
+      .catch((error) => {
+        console.error("Maintenance Requests Fetch Error:", error);
+        setError("Failed to load maintenance requests");
+      });
+
+    Promise.all([fetchServiceRequests, fetchMaintenanceRequests]).finally(() =>
+      setIsLoading(false)
+    );
   }, []);
 
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
+
   return (
-    <div>
-      {Object.entries(roles).map(([role, members], index) => (
-        <div key={index}>
-          <h3>{role}</h3>
-          <ul>
-            {members.map((member, memberIndex) => (
-              <li key={memberIndex}>{member}</li>
-            ))}
-          </ul>
-        </div>
-      ))}
+    <div className={`dashboard ${isMenuOpen ? "menu-open" : ""}`}>
+      <Navbar onMenuToggle={toggleMenu} userRole={""} />
+      <div className="dashboard-content">
+        <h1>Dashboard</h1>
+
+        {/* Service Requests Section */}
+        <section>
+          <h2>Service Requests</h2>
+          {serviceRequests.map((request) => (
+            <div key={request.id} className="request-card">
+              Request #{request.requestNo}
+              {/* Add more details here */}
+            </div>
+          ))}
+        </section>
+
+        {/* Maintenance Requests Section */}
+        <section>
+          <h2>Maintenance Requests</h2>
+          {maintenanceRequests.map((request) => (
+            <div key={request.id} className="request-card">
+              Maintenance #{request.requestNumber}
+              {/* Add more details here */}
+            </div>
+          ))}
+        </section>
+
+        {/* Additional sections as needed... */}
+      </div>
     </div>
   );
 };
 
-export default RolesDisplayComponent;
+export default Dashboard;

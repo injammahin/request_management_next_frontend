@@ -38,6 +38,13 @@ interface ServiceRequest {
   approvalStatus: string;
   supervisorStatus: string;
 }
+interface MaintenanceRequest {
+  id: number;
+  requestNumber: string;
+  approvalStatus: string;
+  supervisorStatus: string;
+  // Define other properties as needed...
+}
 
 const Dashboard: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -50,7 +57,11 @@ const Dashboard: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [expandedRequests, setExpandedRequests] = useState<number[]>([]);
   const [showAllRequests, setShowAllRequests] = useState(false);
-
+  const [maintenanceRequests, setMaintenanceRequests] = useState<
+    MaintenanceRequest[]
+  >([]);
+  const [showAllMaintenanceRequests, setShowAllMaintenanceRequests] =
+    useState(false);
   useEffect(() => {
     const targetAccepted = 1204; // Target number for accepted forms
     const targetDeclined = 234; // Target number for declined forms
@@ -103,16 +114,37 @@ const Dashboard: React.FC = () => {
 
   ////////////////////////////////////////////////////////////////
   useEffect(() => {
-    fetch("http://localhost:3001/service-requests/ApplicationUser-Management")
+    setIsLoading(true);
+    const fetchServiceRequests = fetch(
+      "http://localhost:3001/service-requests/ApplicationUser-Management"
+    )
       .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
+        if (!response.ok) throw new Error("Failed to fetch service requests");
         return response.json();
       })
-      .then((data) => setServiceRequests(data))
-      .catch((error) => setError(error.message))
-      .finally(() => setIsLoading(false));
+      .then(setServiceRequests)
+      .catch((error) => {
+        console.error("Service Requests Fetch Error:", error);
+        setError("Failed to load service requests");
+      });
+
+    const fetchMaintenanceRequests = fetch(
+      "http://localhost:3001/maintaintance/ApplicationUser-Management"
+    )
+      .then((response) => {
+        if (!response.ok)
+          throw new Error("Failed to fetch maintenance requests");
+        return response.json();
+      })
+      .then(setMaintenanceRequests)
+      .catch((error) => {
+        console.error("Maintenance Requests Fetch Error:", error);
+        setError("Failed to load maintenance requests");
+      });
+
+    Promise.all([fetchServiceRequests, fetchMaintenanceRequests]).finally(() =>
+      setIsLoading(false)
+    );
   }, []);
 
   const handleMenuToggle = (isOpen: boolean) => {
@@ -121,6 +153,9 @@ const Dashboard: React.FC = () => {
 
   const toggleShowAllRequests = () => {
     setShowAllRequests((prev) => !prev);
+  };
+  const toggleShowAllMaintenanceRequests = () => {
+    setShowAllMaintenanceRequests((prev) => !prev);
   };
   const handleAction = async (id: number, action: "release" | "decline") => {
     try {
@@ -150,6 +185,11 @@ const Dashboard: React.FC = () => {
   const released = serviceRequests.filter(
     (request) => request.supervisorStatus === "Pending"
   );
+  const pendingToReleaseMaintenance = maintenanceRequests.filter(
+    (request) => request.supervisorStatus === "Pending "
+  );
+  const ToReleaseMaintenance = pendingToReleaseMaintenance.length;
+
   const totalPendingToRelease = pendingToRelease.length;
   const totalReleased = released.length;
   const toggleExpand = (id: number) => {
@@ -173,7 +213,7 @@ const Dashboard: React.FC = () => {
           isMenuOpen ? "translate-x-[230px]" : ""
         }`}
       >
-        <div className="bg-gray-100 pt-20 min-h-screen">
+        <div className="bg-gray-100 p-[-400px] min-h-screen ">
           <div className="container mx-auto p-6">
             <div className="flex justify-between items-center mb-6">
               <h1 className="text-2xl font-semibold text-center">Dashboard</h1>
@@ -419,27 +459,64 @@ const Dashboard: React.FC = () => {
                     )}
                   </animated.div>
                 </div>
-                <div className="bg-gay-100 rounded-lg shadow-lg text-start p-4">
-                  <animated.div style={fadeInUp} className="font-bold">
-                    {" "}
-                    Show All Maintenance Request
-                    <animated.button
+                {/* Maintenance Requests Section */}
+                <div
+                  className={`p-4 bg-white text-gray-900 rounded-xl shadow-md ${
+                    showAllMaintenanceRequests ? "col-span-full" : ""
+                  }`}
+                >
+                  <animated.div style={fadeInUp}>
+                    <div className="flex">
+                      <animated.button
+                        style={fadeInUp}
+                        onClick={toggleShowAllMaintenanceRequests}
+                        className="text-gray-900 bg-gray-300 text-start h-10 w-72 f font-bold rounded"
+                      >
+                        {showAllMaintenanceRequests
+                          ? "Hide Maintenance Requests"
+                          : "Show All Maintenance Requests"}
+                      </animated.button>
+
+                      <button className="relative   p-2 mr-16 rounded-full text-gray-200 bg-[#0B60B0]">
+                        <FiBell className="w-6 h-6" />
+                        <span className="absolute top-0 right-0 inline-flex items-center justify-center w-5 h-5 text-xs font-bold text-red-100 bg-red-500 rounded-full">
+                          {ToReleaseMaintenance}
+                        </span>
+                      </button>
+                    </div>
+
+                    <animated.p
                       style={fadeInUp}
-                      className="relative   p-2 mr-16 rounded-full text-gray-200 bg-[#0B60B0]"
+                      className="text-gray-800 font-semibold"
                     >
-                      <FiBell className="w-6 h-6" />
-                      <span className="absolute top-0 right-0 inline-flex items-center justify-center w-5 h-5 text-xs font-bold text-red-100 bg-red-500 rounded-full">
-                        32
-                      </span>
-                    </animated.button>
+                      You have {ToReleaseMaintenance} pending
+                    </animated.p>
+
+                    {showAllMaintenanceRequests && (
+                      <ul>
+                        {maintenanceRequests.map((request) => (
+                          <li
+                            key={request.id}
+                            className="bg-white shadow-lg text-start border-b-2 border-gray-400 p-4 mb-4"
+                          >
+                            <div className="flex justify-between items-center">
+                              <h2 className="">
+                                <label className="font-semibold">
+                                  Maintenance No:
+                                </label>{" "}
+                                {request.requestNumber} |{" "}
+                                {request.approvalStatus}
+                              </h2>
+                              {/* Add buttons for actions like release or decline if needed */}
+                            </div>
+                            {/* Add more detailed information about the maintenance request here */}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
                   </animated.div>
-                  <animated.p
-                    style={fadeInUp}
-                    className="text-gray-800 font-semibold"
-                  >
-                    You have 32 pending
-                  </animated.p>{" "}
                 </div>
+
                 <div className="bg-gay-100 rounded-lg shadow-lg text-start p-4 pr-4">
                   <animated.div style={fadeInUp} className="font-bold">
                     {" "}
