@@ -86,7 +86,7 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
     requestNumber: "",
     subofChange: "",
     requestedBy: localStorage.getItem("userName") || "",
-    date: "2",
+    date: "",
     requesterName: "",
     department: localStorage.getItem("network") || "",
     EmployeeId: localStorage.getItem("employeeId") || "",
