@@ -374,9 +374,25 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
               <option value="continous">12+ ( continous )</option>
             </select>
           </div>
+          <div className="grid grid-cols-2">
+            <div></div>
+            <div className=" flex flex-row items-center">
+              <label className="font-semibold flex flex-none text-sm mr-2 ">
+                reason of request:
+                <span style={{ color: "red" }}> *</span>
+              </label>
+              <input
+                type="text"
+                name="serviceDetails"
+                onChange={handleInputChange}
+                value={serviceDetails.serviceDetails}
+                className="block w-full py-2.5 px-0   text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+              />
+            </div>
+          </div>
           <div className=" flex flex-row items-center">
             <label className="font-semibold flex flex-none text-sm mr-2 ">
-              Details of Access/Service:
+              Details of Access/Service
               <span style={{ color: "red" }}> *</span>
             </label>
             <input
@@ -384,7 +400,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
               name="serviceDetails"
               onChange={handleInputChange}
               value={serviceDetails.serviceDetails}
-              className="block w-full py-2.5 px-0  pt-16 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+              className="block w-full py-2.5 px-0  pt-12 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             />
           </div>
           <div className="grid grid-cols-2  ">
