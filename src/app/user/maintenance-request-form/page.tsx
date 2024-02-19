@@ -13,38 +13,23 @@ interface Roles {
 
 interface Management {
   requestNumber: string;
-
   subofChange: string;
-
   date: string;
-
+  requestedBy: string;
   requesterName: string;
-
   EmployeeId: string;
-
   department: string;
-
   contractNo: string;
-
   MaintenanceType: string;
-
   purposeOfActivity: string;
   referenceServiceRequest: string;
-
   priority: string;
-
   impactLevel: string;
-
   requiredDowntime: string;
-
   mentionDowntime: string;
-
   startDate: string;
-
   startTime: string;
-
   endDate: string;
-
   endTime: string;
   ////////////////////////////////* part -2 *////////////////////////////////
   changeLocation: string;
@@ -84,52 +69,95 @@ interface Management {
 const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
   const [Management, setManagement] = useState<Management>({
     requestNumber: "",
+
     subofChange: "",
-    requestedBy: localStorage.getItem("userName") || "",
+
     date: "",
+
+    requestedBy: localStorage.getItem("userName") || "",
+
     requesterName: "",
-    department: localStorage.getItem("network") || "",
+
     EmployeeId: localStorage.getItem("employeeId") || "",
 
+    department: localStorage.getItem("network") || "",
+
     contractNo: "",
+
     MaintenanceType: "",
+
     purposeOfActivity: "",
-    priority: "",
-    impactLevel: "",
-    requiredDowntime: "",
-    mentionDowntime: "",
-    startDate: "",
-    startTime: "",
-    endDate: "",
-    endTime: "",
-    changeLocation: "",
-    targetedSystemFor: "",
-    IPaddress: "",
-    ImpactedSystemform: "",
-    DetailedDescriptionOfChange: "",
-    DetailedWorkedPlanTask: "",
-    DetailedWorkedPlanStartTime: "",
-    DetailedWorkedPlanEndTime: "",
-    RequirementTools: "",
-    Implementationteam: "",
-    Communication: "",
-    RollBackPlan: "",
-    checklistStatusOne: "",
-    checklistStatusTwo: "",
-    checklistStatusThree: "",
-    checklistStatusFour: "",
+
     referenceServiceRequest: "",
+
+    priority: "",
+
+    impactLevel: "",
+
+    requiredDowntime: "",
+
+    mentionDowntime: "",
+
+    startDate: "",
+
+    startTime: "",
+
+    endDate: "",
+
+    endTime: "",
+
+    ////////////////////////////////* part -2 *////////////////////////////////
+    changeLocation: "",
+
+    targetedSystemFor: "",
+
+    IPaddress: "",
+
+    ImpactedSystemform: "",
+
+    DetailedDescriptionOfChange: "",
+
+    DetailedWorkedPlanTask: "",
+
+    DetailedWorkedPlanStartTime: "",
+
+    DetailedWorkedPlanEndTime: "",
+
+    RequirementTools: "",
+
+    Implementationteam: "",
+
+    Communication: "",
+
+    RollBackPlan: "",
+
+    checklistStatusOne: "",
+
+    checklistStatusTwo: "",
+
+    checklistStatusThree: "",
+
+    checklistStatusFour: "",
+
     ////////////////////////////////* part -3 *////////////////////////////////
     ImpactedSystemfor: "",
+
     ActualPriority: "",
+
     Actualimpactlevel: "",
+
     ////////////////////////////////* part -4 *////////////////////////////////
     ExecusionTeamMenbers: "",
+
     ExecusionTeamleaders: "",
-    ////////////////////////////////* part -4 *////////////////////////////////
+
+    ////////////////////////////////* part -5 *////////////////////////////////
     ChangeReviewForperformed: "",
+
     ChangeReviewForSuccess: "",
+
     ActualDowntime: "",
+
     WorkExecutionStatus: "",
     superadmin: localStorage.getItem("superadmin") || "",
     subadmin: localStorage.getItem("subadmin") || "",

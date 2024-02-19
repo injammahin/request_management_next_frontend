@@ -17,6 +17,7 @@ interface ServiceDetails {
   employeeId: string;
   designation: string;
   reasonOfRequest: string;
+  reasonOfRequested: string;
   serviceDetails: string;
   user: string;
   accessDateDuration: string;
@@ -46,6 +47,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
     employeeId: localStorage.getItem("employeeId") || "",
     designation: localStorage.getItem("designation") || "",
     reasonOfRequest: "",
+    reasonOfRequested: "",
     serviceDetails: "",
     user: "",
     submissionDateTime: "",
@@ -132,6 +134,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
       "employeeId",
       "designation",
       "reasonOfRequest",
+
       "serviceDetails",
       "accessDateDuration",
       "accessTimeDuration",
@@ -383,9 +386,9 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
               </label>
               <input
                 type="text"
-                name="serviceDetails"
+                name="reasonOfRequested"
                 onChange={handleInputChange}
-                value={serviceDetails.serviceDetails}
+                value={serviceDetails.reasonOfRequested}
                 className="block w-full py-2.5 px-0   text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               />
             </div>
@@ -403,28 +406,19 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
               className="block w-full py-2.5 px-0  pt-12 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             />
           </div>
-          <div className="grid grid-cols-2  ">
-            <div className="mb-2  flex flex-row items-center">
-              <label className=" font-semibold flex text-sm flex-none mr-2">
-                Change/Execusion/
-                <br />
-                request ID :
-              </label>
-              <input
-                type="text"
-                id="execusion"
-                onChange={handleInputChange}
-                value={serviceDetails.execusion}
-                className="block w-[900px]  py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-              />
-            </div>
 
-            <div className=" flex flex-row items-center text-center">
-              <label className=" mx-20 lex flex-none text-sm ">
-                referred from change/ Maintenance
-                <br /> request Form
-              </label>
-            </div>
+          <div className=" flex flex-row items-center">
+            <label className="font-semibold flex flex-none text-sm mr-2 ">
+              execusion
+              <span style={{ color: "red" }}> *</span>
+            </label>
+            <input
+              type="text"
+              name="execusion"
+              onChange={handleInputChange}
+              value={serviceDetails.execusion}
+              className="block w-full py-2.5 px-0  pt-12 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+            />
           </div>
           <div className=" flex flex-row items-center">
             <label className="font-semibold flex flex-none text-sm mr-2">
