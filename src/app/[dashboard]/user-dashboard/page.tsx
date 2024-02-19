@@ -68,10 +68,10 @@ const page = () => {
   return (
     <div>
       <Navbar
-        userRole={"user"}
-        onMenuToggle={function (isOpen: boolean): void {
-          throw new Error("Function not implemented.");
-        }}
+      // userRole={"user"}
+      // onMenuToggle={function (isOpen: boolean): void {
+      //   throw new Error("Function not implemented.");
+      // }}
       />
 
       <div className="container mx-auto p-8 pt text-center">
