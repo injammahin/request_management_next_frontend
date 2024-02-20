@@ -154,7 +154,7 @@ const RequestDetailsPage = () => {
               />
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-4 mb-4">
+          <div className="grid grid-cols-2 gap-4 ">
             <div className="flex flex-row items-center">
               <label className="font-semibold text-sm flex flex-none mr-2">
                 Requested By:
@@ -210,7 +210,7 @@ const RequestDetailsPage = () => {
               />
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-4 mb-4">
+          <div className="grid grid-cols-2 gap-4 ">
             <div className="flex flex-row items-center">
               <label className="font-semibold text-sm flex flex-none mr-2">
                 Department:
@@ -306,7 +306,7 @@ const RequestDetailsPage = () => {
             </div>
           </div>
           {/* //////////// */}
-          <div className="grid grid-cols-2 gap-4 mb-4">
+          <div className="grid grid-cols-2 gap-4 ">
             <div className="flex flex-row items-center">
               <label className="font-semibold text-sm flex flex-none mr-2">
                 required Downtime:
@@ -334,7 +334,7 @@ const RequestDetailsPage = () => {
             </div>
           </div>
           {/* //////////// */}
-          <div className="grid grid-cols-2 gap-4 mb-4">
+          <div className="grid grid-cols-2 gap-4 ">
             <div className="flex flex-row items-center">
               <label className="font-semibold text-sm flex flex-none mr-2">
                 Start Date:
@@ -362,7 +362,7 @@ const RequestDetailsPage = () => {
             </div>
           </div>
           {/* //////////// */}
-          <div className="grid grid-cols-2 gap-4 mb-4">
+          <div className="grid grid-cols-2 gap-4 ">
             <div className="flex flex-row items-center">
               <label className="font-semibold text-sm flex flex-none mr-2">
                 End Date:
