@@ -415,6 +415,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
             <input
               type="text"
               name="execusion"
+              id="execusion"
               onChange={handleInputChange}
               value={serviceDetails.execusion}
               className="block w-full py-2.5 px-0  pt-12 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
@@ -426,6 +427,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
             </label>
             <select
               name="vandorName"
+              id="vandorName"
               onChange={handleInputChange}
               value={serviceDetails.vandorName}
               className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
@@ -445,6 +447,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
             <input
               type="text"
               name="vandorAssignedReason"
+              id="vandorAssignedReason"
               onChange={handleInputChange}
               value={serviceDetails.vandorAssignedReason}
               className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
@@ -460,6 +463,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
               <input
                 type="text"
                 name="deviceRequired"
+                id="deviceRequired"
                 onChange={handleInputChange}
                 value={serviceDetails.deviceRequired}
                 className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
@@ -474,6 +478,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
               <input
                 type="text"
                 name="deviceApprovedBy"
+                id="deviceApprovedBy"
                 onChange={handleInputChange}
                 value={serviceDetails.deviceApprovedBy}
                 className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
@@ -487,6 +492,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
             <input
               type="text"
               name="WorkTeamWithId"
+              id="WorkTeamWithId"
               onChange={handleInputChange}
               value={serviceDetails.WorkTeamWithId}
               className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
@@ -499,6 +505,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
             <input
               type="text"
               name="readBy"
+              id="readBy"
               onChange={handleInputChange}
               value={serviceDetails.readBy}
               className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
@@ -512,6 +519,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
               <input
                 type="text"
                 name="ReturnTimeDate"
+                id="ReturnTimeDate"
                 onChange={handleInputChange}
                 value={serviceDetails.ReturnTimeDate}
                 className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
@@ -525,6 +533,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
               <input
                 type="text"
                 name="revokeBy"
+                id="revokeBy"
                 onChange={handleInputChange}
                 value={serviceDetails.revokeBy}
                 className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
