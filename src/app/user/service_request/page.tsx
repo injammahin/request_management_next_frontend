@@ -219,7 +219,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
       >
         <form
           onSubmit={handleSubmit}
-          className="max-w-[1000px] pt-10  mx-auto mt-8 p-4 border"
+          className="max-w-[1000px] pt-10  mx-auto mt-8 border"
         >
           <div className="grid  grid-cols-2 gap-4 ">
             <div className=" flex flex-row items-center">
@@ -419,7 +419,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
               id="execusiondata"
               onChange={handleInputChange}
               value={serviceDetails.execusiondata}
-              className="block w-full py-2.5 px-0  pt-12 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+              className="block w-full py-2.5 px-0   text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             />
           </div>
           <div className=" flex flex-row items-center">
