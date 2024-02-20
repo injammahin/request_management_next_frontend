@@ -733,7 +733,7 @@ const RequestDetailsPage = () => {
               type="button"
               className="bg-gray-500 text-white p-2 w-32 rounded hover:bg-gray-700"
             >
-              <Link href="/dashboard">Back</Link>
+              <Link href="view_maintenance_request_form">Back</Link>
             </button>
             <button
               type="submit"
