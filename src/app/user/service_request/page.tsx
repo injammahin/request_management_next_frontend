@@ -29,7 +29,7 @@ interface ServiceDetails {
   readBy: string;
   ReturnTimeDate: string;
   revokeBy: string;
-  execusion: string;
+  execusiondata: string;
   deviceApprovedBy: string;
   submissionDateTime: "";
   superadmin: string;
@@ -53,6 +53,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
     submissionDateTime: "",
     accessDateDuration: "",
     accessTimeDuration: "",
+    execusiondata: "",
     vandorName: "",
     vandorAssignedReason: "",
     deviceRequired: "",
@@ -60,7 +61,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
     readBy: "",
     ReturnTimeDate: "",
     revokeBy: "",
-    execusion: "",
+
     deviceApprovedBy: "",
     superadmin: localStorage.getItem("superadmin") || "",
     subadmin: localStorage.getItem("subadmin") || "",
@@ -414,10 +415,10 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
             </label>
             <input
               type="text"
-              name="execusion"
-              id="execusion"
+              name="execusiondata"
+              id="execusiondata"
               onChange={handleInputChange}
-              value={serviceDetails.execusion}
+              value={serviceDetails.execusiondata}
               className="block w-full py-2.5 px-0  pt-12 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             />
           </div>
