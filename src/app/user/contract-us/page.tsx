@@ -2,6 +2,7 @@
 import Navbar from "@/app/components/navigation/page";
 
 import React, { useState } from "react";
+import Link from "next/link";
 const page = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const handleMenuToggle = (isOpen: boolean) => {
@@ -142,7 +143,9 @@ const page = () => {
                               Github
                             </p>
                             <p className="text-neutral-500 dark:text-neutral-200">
-                              /injammahin
+                              <Link href="https://github.com/injammahin">
+                                https://github.com/injammahin
+                              </Link>
                             </p>
                             <p className="text-neutral-500 dark:text-neutral-200"></p>
                           </div>
