@@ -79,7 +79,7 @@ const RequestDetailsPage = () => {
   const router = useRouter();
 
   const handleBackButtonClick = () => {
-    router.push("./profile");
+    router.push("./view_maintenance_request_form");
   };
 
   const handleSubmit = async (event: React.FormEvent) => {
@@ -729,12 +729,20 @@ const RequestDetailsPage = () => {
           {/* ////////////////////////////////////////////// */}
 
           <div className="flex justify-between p-4">
-            <button
-              type="button"
-              className="bg-gray-500 text-white p-2 w-32 rounded hover:bg-gray-700"
-            >
-              <Link href="view_maintenance_request_form">Back</Link>
-            </button>
+            <div className="flex justify-between items-center">
+              <button
+                type="button"
+                className="bg-gray-800 text-white p-2 w-28 h-9 rounded hover:bg-gray-700 flex items-center"
+                onClick={handleBackButtonClick}
+              >
+                <img
+                  src="/back.svg"
+                  alt="Delete Icon"
+                  className="h-8 w-8 mr-2"
+                />
+                <span>back</span>
+              </button>
+            </div>
             <button
               type="submit"
               className="bg-blue-500 text-white p-2 rounded hover:bg-blue-700"

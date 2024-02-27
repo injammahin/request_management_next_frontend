@@ -5,6 +5,7 @@ import React, { useState, ChangeEvent, FormEvent, useEffect } from "react";
 import axios from "axios";
 import Navbar from "@/app/components/navigation/page";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 interface RequestServiceFormProps {}
 
@@ -38,6 +39,8 @@ interface ServiceDetails {
 
 const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
   const [vendorNames, setVendorNames] = useState<string[]>([]);
+  const [isFormSubmitted, setIsFormSubmitted] = useState(false);
+  const [submissionTime, setSubmissionTime] = useState("");
   const [serviceDetails, setServiceDetails] = useState<ServiceDetails>({
     requestNo: "",
     date: "",
@@ -75,6 +78,7 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
   const currentDateTime = new Date().toLocaleString();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [headRole, setHeadRole] = useState("");
+  const router = useRouter();
 
   // This function will be called by the Navbar component
   const handleMenuToggle = (isOpen: boolean) => {
@@ -123,7 +127,9 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
     serviceDetails.department,
     serviceDetails.requestedBy,
   ]);
-
+  const handleBackButtonClick = () => {
+    router.push("../dashboard/user-dashboard");
+  };
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
@@ -173,6 +179,15 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
       setSuccessMessage("");
       console.error("Form submission failed:", error);
     }
+    // Set form submission status to true
+    setIsFormSubmitted(true);
+    setSubmissionTime(new Date().toLocaleTimeString());
+    // Automatically hide the pop-up after 3 seconds
+    setTimeout(() => {
+      setIsFormSubmitted(false);
+      // Redirect to home page
+      router.push("./profile");
+    }, 2500);
   };
   interface Roles {
     [key: string]: string[]; // Define the structure of your roles data
@@ -617,12 +632,20 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
           </div>
 
           <div className="flex justify-between">
-            <button
-              type="button"
-              className="bg-gray-500 text-white p-2 w-20 rounded hover:bg-gray-700"
-            >
-              <Link href="../dashboard/user-dashboard">Back</Link>
-            </button>
+            <div className="flex justify-between items-center">
+              <button
+                type="button"
+                className="bg-gray-800 text-white p-2 w-28 h-9 rounded hover:bg-gray-700 flex items-center"
+                onClick={handleBackButtonClick}
+              >
+                <img
+                  src="/back.svg"
+                  alt="Delete Icon"
+                  className="h-8 w-8 mr-2"
+                />
+                <span>back</span>
+              </button>
+            </div>
 
             <button
               type="submit"
@@ -639,41 +662,11 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
             <p className="text-center text-red-500 mt-2">{errorMessage}</p>
           )}
         </form>
-
-        {submittedDetails && (
-          <div className="max-w-md uppercase mx-auto mt-8 p-4 border">
-            {/* <h2 className="text-2xl font-semibold mb-4">Submitted Details</h2> */}
-            {/* <div>
-              <p>
-                <strong>Request No:</strong> {submittedDetails.requestNo}
-              </p>
-              <p>
-                <strong>Date:</strong> {submittedDetails.date}
-              </p>
-              <p>
-                <strong>Requested By:</strong> {submittedDetails.requestedBy}
-              </p>
-              <p>
-                <strong>Request For:</strong> {submittedDetails.requestFor}
-              </p>
-              <p>
-                <strong>Department:</strong> {submittedDetails.department}
-              </p>
-              <p>
-                <strong>Employee Id:</strong> {submittedDetails.employeeId}
-              </p>
-              <p>
-                <strong>Designation:</strong> {submittedDetails.designation}
-              </p>
-              <p>
-                <strong>Reason Of Request:</strong>{" "}
-                {submittedDetails.reasonOfRequest}
-              </p>
-              <p>
-                <strong>Service Details:</strong>{" "}
-                {submittedDetails.serviceDetails}
-              </p>
-            </div> */}
+        {isFormSubmitted && (
+          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+            <div className="bg-white p-4 rounded-lg">
+              <p>Form submitted successfully at:{submissionTime}</p>
+            </div>
           </div>
         )}
       </div>

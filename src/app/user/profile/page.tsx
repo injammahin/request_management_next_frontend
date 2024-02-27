@@ -368,12 +368,17 @@ const ProfilePage: React.FC = () => {
                                   {request.requestNo} |{" "}
                                   {request.reasonOfRequest.slice(0, 30)}
                                   {" ....."}
-                                  <td className="  border-gray-600">
+                                  <td className=" p-2 border-gray-600">
                                     <button
                                       onClick={() => handleShowMore(request)}
-                                      className="bg-blue-500 hover:bg-blue-700 text-white  h-6 w-24 rounded"
+                                      className=" rounded-lg h-8 w-28 hover:underline text-white flex items-center justify-center space-x-1"
                                     >
-                                      Show More
+                                      <img
+                                        src="/show-all.svg"
+                                        alt="Delete Icon"
+                                        className="h-8 w-8"
+                                      />
+                                      <span></span>
                                     </button>
                                   </td>
                                 </td>
@@ -390,39 +395,45 @@ const ProfilePage: React.FC = () => {
                                       : "Show More"}
                                   </button>
                                 </td> */}
-                                <td className="border-[1px]   p-2 border-gray-600">
+                                <td className="border-[1px] p-2 border-gray-600">
                                   <button
                                     onClick={() => handleDelete(request.id)}
-                                    className="bg-[#9A031E] rounded-lg h-6 w-24 hover:underline text-white"
+                                    className=" rounded-lg h-8 w-28 hover:underline text-white flex items-center justify-center space-x-1"
                                   >
-                                    Delete
+                                    <img
+                                      src="/delete.svg"
+                                      alt="Delete Icon"
+                                      className="h-8 w-8"
+                                    />
+                                    <span></span>
                                   </button>
                                 </td>
                                 <td className="border-[1px] p-2 border-gray-600">
-                                  {/* <button
-                                    onClick={() =>
-                                      handleEditServiceRequest(request.id)
-                                    }
-                                    className="bg-[#4CB9E7] rounded-lg h-8 w-28 text-white"
-                                  >
-                                    Edit
-                                  </button> */}
                                   <button
                                     onClick={() => handleDetailsClick(request)}
-                                    className="bg-[#4CB9E7] rounded-lg h-6 w-24 text-white"
+                                    className=" rounded-lg h-8 w-28 hover:underline text-white flex items-center justify-center space-x-1"
                                   >
-                                    Edit
+                                    <img
+                                      src="/editt.svg"
+                                      alt="Delete Icon"
+                                      className="h-10 w-10"
+                                    />
+                                    <span></span>
                                   </button>
                                 </td>
                                 <td className="border-[1px] p-2 border-gray-600">
                                   <button
-                                    type="button"
                                     onClick={() =>
                                       handleDownloadPDF(request.id)
                                     }
-                                    className="bg-green-500 text-white h-6 w-28 rounded hover:bg-green-700"
+                                    className=" rounded-lg h-8 w-28 hover:underline text-white flex items-center justify-center space-x-1"
                                   >
-                                    PDF
+                                    <img
+                                      src="/download-pdf.svg"
+                                      alt="Delete Icon"
+                                      className="h-8 w-8"
+                                    />
+                                    <span></span>
                                   </button>
                                 </td>
                               </tr>

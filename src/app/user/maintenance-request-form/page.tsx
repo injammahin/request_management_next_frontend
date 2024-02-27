@@ -5,6 +5,7 @@ import React, { useState, ChangeEvent, FormEvent, useEffect } from "react";
 import axios from "axios";
 import Navbar from "@/app/components/navigation/page";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 interface ManagementFormProps {}
 interface Roles {
@@ -168,10 +169,13 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
   const [successMessage, setSuccessMessage] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [roles, setRoles] = useState<Roles>({}); // Use the Roles interface for typing the state
-
+  const router = useRouter();
+  const [isFormSubmitted, setIsFormSubmitted] = useState(false);
+  const [submissionTime, setSubmissionTime] = useState("");
   const [submittedDetails, setSubmittedDetails] = useState<Management | null>(
     null
   );
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   // This function will be called by the Navbar component
@@ -190,6 +194,9 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
       ...prevDetails,
       [name]: value,
     }));
+  };
+  const handleBackButtonClick = () => {
+    router.push("../dashboard/user-dashboard");
   };
   useEffect(() => {
     const fetchRoles = async () => {
@@ -234,6 +241,15 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    setIsFormSubmitted(true);
+    setSubmissionTime(new Date().toLocaleTimeString());
+
+    // Automatically hide the pop-up after 3 seconds
+    setTimeout(() => {
+      setIsFormSubmitted(false);
+      // Redirect to home page after 3 seconds
+      router.push("./view_maintenance_request_form");
+    }, 3000);
 
     const requiredFields = [
       "requestNumber",
@@ -990,12 +1006,20 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
           {/* ////////////////////////////////////////////// */}
 
           <div className="flex justify-between p-4">
-            <button
-              type="button"
-              className="bg-gray-500 text-white p-2 w-32 rounded hover:bg-gray-700"
-            >
-              <Link href="/dashboard">Back</Link>
-            </button>
+            <div className="flex justify-between items-center">
+              <button
+                type="button"
+                className="bg-gray-800 text-white p-2 w-28 h-9 rounded hover:bg-gray-700 flex items-center"
+                onClick={handleBackButtonClick}
+              >
+                <img
+                  src="/back.svg"
+                  alt="Delete Icon"
+                  className="h-8 w-8 mr-2"
+                />
+                <span>back</span>
+              </button>
+            </div>
             <button
               type="submit"
               className="bg-blue-500 text-white p-2 rounded hover:bg-blue-700"
@@ -1011,73 +1035,13 @@ const ManagementForm: React.FC<ManagementFormProps> = ({}) => {
           )}
         </form>
 
-        {/* {submittedDetails && (
-          <div className="max-w-md uppercase mx-auto mt-8 p-4 border">
-            <h2 className="text-2xl font-semibold mb-4">Submitted Details</h2>
-            <div>
-              <p>
-                <strong>Request number:</strong>{" "}
-                {submittedDetails.requestNumber}
-              </p>
-              <p>
-                <strong>Date:</strong> {submittedDetails.date}
-              </p>
-              <p>
-                <strong>sub of change:</strong> {submittedDetails.subofChange}
-              </p>
-              <p>
-                <strong>Requester Name:</strong>{" "}
-                {submittedDetails.requesterName}
-              </p>
-              <p>
-                <strong>Department:</strong> {submittedDetails.department}
-              </p>
-              <p>
-                <strong>Employee Id:</strong> {submittedDetails.employeeId}
-              </p>
-              <p>
-                <strong>contract no:</strong> {submittedDetails.contractNo}
-              </p>
-              <p>
-                <strong>maintenance type:</strong>{" "}
-                {submittedDetails.MaintenanceType}
-              </p>
-              <p>
-                <strong>purposeOfActivity:</strong>{" "}
-                {submittedDetails.purposeOfActivity}
-              </p>
-              <p>
-                <strong>priority:</strong> {submittedDetails.priority}
-              </p>
-              <p>
-                <strong>impact level:</strong> {submittedDetails.impactLevel}
-              </p>
-              <p>
-                <strong>requiredDowntime:</strong>{" "}
-                {submittedDetails.requiredDowntime}
-              </p>
-              <p>
-                <strong>mentionDowntime:</strong>{" "}
-                {submittedDetails.mentionDowntime}
-              </p>
-              <p>
-                <strong>start date:</strong> {submittedDetails.startDate}
-              </p>
-              <p>
-                <strong>start time:</strong>
-                {submittedDetails.startTime}
-              </p>
-              <p>
-                <strong>end date:</strong>
-                {submittedDetails.endDate}
-              </p>
-              <p>
-                <strong>end time:</strong>
-                {submittedDetails.endTime}
-              </p>
+        {isFormSubmitted && (
+          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+            <div className="bg-white p-4 rounded-lg">
+              <p>Form submitted successfully at: {submissionTime}</p>
             </div>
           </div>
-        )} */}
+        )}
       </div>
     </div>
   );

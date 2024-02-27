@@ -378,13 +378,16 @@ const RequestDetailsPage = () => {
         </div>
 
         <div className="flex justify-between">
-          <button
-            type="button"
-            className="bg-gray-500 text-white p-2 w-32 rounded hover:bg-gray-700"
-            onClick={handleBackButtonClick}
-          >
-            Back
-          </button>
+          <div className="flex justify-between items-center">
+            <button
+              type="button"
+              className="bg-gray-800 text-white p-2 w-28 h-9 rounded hover:bg-gray-700 flex items-center"
+              onClick={handleBackButtonClick}
+            >
+              <img src="/back.svg" alt="Delete Icon" className="h-8 w-8 mr-2" />
+              <span>back</span>
+            </button>
+          </div>
           <button
             type="button"
             onClick={handleSubmit}
