@@ -10,7 +10,7 @@ import jsPDF from "jspdf";
 import "jspdf-autotable";
 import Link from "next/link";
 import Modal from "@/app/components/modal/Modal";
-
+import Delete from "/public/delete.svg";
 interface UserDetails {
   id: number | undefined;
   name: string | undefined;
@@ -278,17 +278,19 @@ const ProfilePage: React.FC = () => {
                 <table className="w-full border-collapse border border-gray-600">
                   <thead>
                     <tr>
-                      <th className="border-[1px] px-60 border-gray-600">
+                      <th className="border-[1px] flex-auto font-semi-bold  px-50 border-gray-600">
                         Request Number
                       </th>
-                      <th className="border-1 p-2 border-gray-600">
+                      <th className="border-1 p-1 font-semi-bold  border-gray-600">
                         Show More
                       </th>
-                      <th className="border-[1px] p-2 border-gray-600">
+                      <th className="border-[1px] p-1 font-semi-bold  border-gray-600">
                         Delete
                       </th>
-                      <th className="border-[1px] p-2 border-gray-600">Edit</th>
-                      <th className="border-[1px] p-2 border-gray-600">
+                      <th className="border-[1px] p-2 font-semi-bold  border-gray-600">
+                        Edit
+                      </th>
+                      <th className="border-[1px] p-2 font-semi-bold  border-gray-600">
                         Download PDF
                       </th>
                     </tr>
@@ -301,36 +303,57 @@ const ProfilePage: React.FC = () => {
                             {maintenance.requestNumber}
                           </td>
                           <td className="border-[1px] p-2 border-gray-600">
-                            <button
-                              onClick={() => handleShowMore(maintenance)}
-                              className="bg-blue-500 hover:bg-blue-700 rounded-lg h-8 w-28 hover:underline text-white"
-                            >
-                              Show More
-                            </button>
+                            <td className=" p-2 border-gray-600">
+                              <button
+                                onClick={() => handleShowMore(maintenance)}
+                                className=" rounded-lg h-8 w-28 hover:underline text-white flex items-center justify-center space-x-1"
+                              >
+                                <img
+                                  src="/show-all.svg"
+                                  alt="Delete Icon"
+                                  className="h-8 w-8"
+                                />
+                                <span></span>
+                              </button>
+                            </td>
                           </td>
                           <td className="border-[1px] p-2 border-gray-600">
                             <button
                               onClick={() => handleDelete(maintenance.id)}
-                              className="bg-[#9A031E] rounded-lg h-8 w-28 hover:underline text-white"
+                              className=" rounded-lg h-8 w-28 hover:underline text-white flex items-center justify-center space-x-1"
                             >
-                              Delete
+                              <img
+                                src="/delete.svg"
+                                alt="Delete Icon"
+                                className="h-8 w-8"
+                              />
+                              <span></span>
                             </button>
                           </td>
                           <td className="border-[1px] p-2 border-gray-600">
                             <button
                               onClick={() => handleDetailsClick(maintenance)}
-                              className="bg-[#4CB9E7] rounded-lg h-6 w-24 text-white"
+                              className=" rounded-lg h-8 w-28 hover:underline text-white flex items-center justify-center space-x-1"
                             >
-                              Edit
+                              <img
+                                src="/editt.svg"
+                                alt="Delete Icon"
+                                className="h-10 w-10"
+                              />
+                              <span></span>
                             </button>
                           </td>
                           <td className="border-[1px] p-2 border-gray-600">
                             <button
-                              type="button"
                               onClick={() => handleDownloadPDF(maintenance.id)}
-                              className="bg-green-500 text-white h-8 w-32 rounded hover:bg-green-700"
+                              className=" rounded-lg h-8 w-28 hover:underline text-white flex items-center justify-center space-x-1"
                             >
-                              Download PDF
+                              <img
+                                src="/download-pdf.svg"
+                                alt="Delete Icon"
+                                className="h-8 w-8"
+                              />
+                              <span></span>
                             </button>
                           </td>
                         </tr>
