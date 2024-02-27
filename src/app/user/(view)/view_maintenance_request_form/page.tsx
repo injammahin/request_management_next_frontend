@@ -800,6 +800,101 @@ const ProfilePage: React.FC = () => {
                                   {maintenance.ExecusionTeamleaders}
                                 </div>
                               </div>
+                              <tr>
+                                {/* Service Details in a separate row */}
+                                <td
+                                  colSpan={2}
+                                  className="border-[1px] border-b-1 py-2 px-4 text-center border-gray-600"
+                                >
+                                  <div className="font-semibold text-sm text-gray-900">
+                                    show all approval status
+                                    {/* {request.id} */}
+                                  </div>
+                                </td>
+                              </tr>
+
+                              <tr>
+                                <tr className="flex">
+                                  <td
+                                    colSpan={1}
+                                    className="py-2 px-4"
+                                    style={{
+                                      borderBottom: "8px solid",
+                                      borderColor:
+                                        maintenance.supervisorStatus ===
+                                        "Released"
+                                          ? "#294B29"
+                                          : "#D24545",
+                                    }}
+                                  >
+                                    <div className=" text-sm text-gray-900">
+                                      <label className="font-semibold mr-10 underline">
+                                        Team Lead{" "}
+                                      </label>
+                                      {maintenance.supervisorStatus}
+                                    </div>
+                                  </td>
+
+                                  <td
+                                    colSpan={1}
+                                    className="py-2 px-4"
+                                    style={{
+                                      borderBottom: "8px solid",
+                                      borderColor:
+                                        maintenance.approvalStatus === "approve"
+                                          ? "#294B29"
+                                          : "#D24545",
+                                    }}
+                                  >
+                                    <div className=" text-sm text-gray-900">
+                                      <label className="font-semibold mr-10 underline ">
+                                        Head of Ifra/App{" "}
+                                      </label>
+
+                                      {maintenance.approvalStatus}
+                                    </div>
+                                  </td>
+
+                                  <td
+                                    colSpan={1}
+                                    className="py-2 px-4"
+                                    style={{
+                                      borderBottom: "8px solid",
+                                      borderColor:
+                                        maintenance.cisoStatus === "approveed"
+                                          ? "#294B29"
+                                          : "#D24545",
+                                    }}
+                                  >
+                                    <div className=" text-sm text-gray-900">
+                                      <label className="font-semibold  mr-10 underline">
+                                        CISO
+                                      </label>{" "}
+                                      {maintenance.cisoStatus}
+                                    </div>
+                                  </td>
+
+                                  <td
+                                    colSpan={1}
+                                    className="py-2 px-4 pt-2"
+                                    style={{
+                                      borderBottom: "8px solid",
+                                      borderColor:
+                                        maintenance.HeadOfDivisionStatus ===
+                                        "confirm"
+                                          ? "#294B29"
+                                          : "#D24545",
+                                    }}
+                                  >
+                                    <div className=" text-sm text-gray-900">
+                                      <label className="font-semibold mr-10  underline">
+                                        Head of Division{" "}
+                                      </label>{" "}
+                                      {maintenance.HeadOfDivisionStatus}
+                                    </div>
+                                  </td>
+                                </tr>
+                              </tr>
                               {/* ////////////////////////////////////////////// */}
                             </tbody>
 
