@@ -13,15 +13,13 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
 
   return (
     <div className="modal-backdrop">
+      <button className="cancel-button " onClick={onClose}>
+        Cancel
+      </button>
       <div className="modal-content">
         {children}
-        <div className="modal-actions">
-          <button className="cancel-button" onClick={onClose}>
-            Cancel
-          </button>
-        </div>
+        <div className="modal-actions"></div>
       </div>
-
       <style jsx>{`
         .modal-backdrop {
           position: fixed;

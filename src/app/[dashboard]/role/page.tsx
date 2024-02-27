@@ -116,7 +116,7 @@ const ProfilePage: React.FC = () => {
               <div>Request Number: {maintenance.requestNumber}</div>
               <button
                 onClick={() => handleShowMore(maintenance)}
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px- rounded"
               >
                 Show More
               </button>
