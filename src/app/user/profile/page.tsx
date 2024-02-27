@@ -10,6 +10,7 @@ import "jspdf-autotable";
 import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import Modal from "@/app/components/modal/Modal";
 
 interface UserDetails {
   id: number | undefined;
@@ -64,6 +65,8 @@ const ProfilePage: React.FC = () => {
   const [selectedRequestId, setSelectedRequestId] = useState<number | null>(
     null
   );
+  const [maintenance, setmaintenance] = useState<ServiceRequest | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const router = useRouter();
 
@@ -286,6 +289,10 @@ const ProfilePage: React.FC = () => {
   if (!userData) {
     return <LoadingSpinner loading={isLoading} />;
   }
+  const handleShowMore = (maintenance: ServiceRequest) => {
+    setmaintenance(maintenance);
+    setIsModalOpen(true);
+  };
 
   return (
     <div
@@ -361,16 +368,12 @@ const ProfilePage: React.FC = () => {
                                   {request.requestNo} |{" "}
                                   {request.reasonOfRequest.slice(0, 30)}
                                   {" ....."}
-                                  <td className=" p-2 border-gray-600">
+                                  <td className="  border-gray-600">
                                     <button
-                                      onClick={() =>
-                                        toggleShowFullForm(request)
-                                      }
-                                      className="bg-[#43766C] rounded-lg h-6 w-24 hover:underline text-white"
+                                      onClick={() => handleShowMore(request)}
+                                      className="bg-blue-500 hover:bg-blue-700 text-white  h-6 w-24 rounded"
                                     >
-                                      {request.showFullForm
-                                        ? "Show Less"
-                                        : "Show More"}
+                                      Show More
                                     </button>
                                   </td>
                                 </td>
@@ -423,262 +426,324 @@ const ProfilePage: React.FC = () => {
                                   </button>
                                 </td>
                               </tr>
-                              {request.showFullForm && (
-                                <div>
-                                  <table className="w-full  bg-gray-100">
-                                    <tbody>
-                                      <tr>
-                                        {/* Request No and Date in one row */}
-                                        <td className="border-[1px] border-b-1 py-2 px-4 border-gray-600">
+                              {isModalOpen && maintenance && (
+                                <Modal
+                                  isOpen={isModalOpen}
+                                  onClose={() => setIsModalOpen(false)}
+                                >
+                                  <tbody className="max-w-3xl  mx-auto mt-8 p-4 border pt-20">
+                                    <div className="grid  grid-cols-2 gap-4 ">
+                                      <div className="mb-2 flex flex-row items-center">
+                                        <label className=" font-semibold  text-sm flex flex-none mr-2">
+                                          Request No:
+                                        </label>
+                                        <div className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+                                          {request.requestNo}
+                                        </div>
+                                      </div>
+
+                                      <div className=" flex flex-row items-center">
+                                        <label className="font-semibold text-sm flex flex-none mr-2">
+                                          Date:
+                                          <span style={{ color: "red" }}>
+                                            *
+                                          </span>
+                                        </label>
+                                        <div className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+                                          {request.date}
+                                        </div>
+                                      </div>
+                                    </div>
+
+                                    <div className="grid grid-cols-2 gap-4 ">
+                                      <div className=" flex flex-row items-center">
+                                        <label className="font-semibold  text-sm flex flex-none mr-2">
+                                          Request By :{" "}
+                                          <span style={{ color: "red" }}>
+                                            *
+                                          </span>
+                                        </label>
+                                        <div className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+                                          {request.requestedBy}
+                                        </div>
+                                      </div>
+
+                                      <div className=" flex flex-row items-center">
+                                        <label className="font-semibold text-sm flex flex-none mr-2">
+                                          Request For:
+                                          <span style={{ color: "red" }}>
+                                            *
+                                          </span>
+                                        </label>
+                                        <div className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+                                          {request.requestFor}
+                                        </div>
+                                      </div>
+                                    </div>
+
+                                    <div className="grid grid-cols-2 gap-4 ">
+                                      <div className=" flex flex-row items-center">
+                                        <label className="font-semibold  text-sm flex flex-none mr-2">
+                                          Department:
+                                          <span style={{ color: "red" }}>
+                                            *
+                                          </span>
+                                        </label>
+                                        <div className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+                                          {request.department}
+                                        </div>
+                                      </div>
+
+                                      <div className=" flex flex-row items-center">
+                                        <label className="font-semibold flex  text-sm flex-none mr-2">
+                                          Employee Id:
+                                          <span style={{ color: "red" }}>
+                                            *
+                                          </span>
+                                        </label>
+                                        <div className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+                                          {request.employeeId}
+                                        </div>
+                                      </div>
+                                    </div>
+
+                                    <div className=" flex flex-row items-center">
+                                      <label className="font-semibold flex flex-none text-sm mr-2">
+                                        Designation:
+                                        <span style={{ color: "red" }}>*</span>
+                                      </label>
+                                      <div className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+                                        {request.designation}
+                                      </div>
+                                    </div>
+                                    <div className=" flex flex-row items-center">
+                                      <label className="font-semibold flex flex-none text-sm mr-2">
+                                        Request For Person:
+                                        <span style={{ color: "red" }}>*</span>
+                                      </label>
+                                      <div className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+                                        {request.reasonOfRequest}
+                                      </div>
+                                    </div>
+                                    <div className=" flex flex-row items-center">
+                                      <label className="font-semibold flex flex-none text-sm mr-2">
+                                        Access Date Duration:
+                                        <span style={{ color: "red" }}>*</span>
+                                      </label>
+                                      <div className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+                                        {request.accessDateDuration}
+                                      </div>
+                                    </div>
+                                    <div className=" flex flex-row items-center">
+                                      <label className="font-semibold flex flex-none text-sm mr-2">
+                                        Access Time Duration:
+                                        <span style={{ color: "red" }}>*</span>
+                                      </label>
+                                      <div className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+                                        {request.accessTimeDuration}
+                                      </div>
+                                    </div>
+                                    <div className=" flex flex-row items-center">
+                                      <label className="font-semibold flex flex-none text-sm mr-2 ">
+                                        Details of Access/Service:
+                                        <span style={{ color: "red" }}> *</span>
+                                      </label>
+                                      <div className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+                                        {request.serviceDetails}
+                                      </div>
+                                    </div>
+                                    <div className="grid grid-cols-2  ">
+                                      <div className="mb-2  flex flex-row items-center">
+                                        <label className=" font-semibold flex text-sm flex-none mr-2">
+                                          Change/Execusion/
+                                          <br />
+                                          request ID :
+                                        </label>
+                                        <div className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+                                          {request.execusion}
+                                        </div>
+                                      </div>
+
+                                      <div className=" flex flex-row items-center text-center">
+                                        <label className=" mx-20 lex flex-none text-sm ">
+                                          referred from change/ Maintenance
+                                          <br /> request Form
+                                        </label>
+                                      </div>
+                                    </div>
+                                    <div className=" flex flex-row items-center">
+                                      <label className="font-semibold flex flex-none text-sm mr-2">
+                                        Vendor Name:
+                                      </label>
+                                      <div className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+                                        {request.vandorName}
+                                      </div>
+                                    </div>
+                                    <div className=" flex flex-row items-center">
+                                      <label className="font-semibold flex flex-none text-sm mr-2">
+                                        vendor Assigned Reason:
+                                      </label>
+                                      <div className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+                                        {request.vandorAssignedReason}
+                                      </div>
+                                    </div>
+                                    <div className="grid grid-cols-2 gap-4 ">
+                                      <div className="mb-1 flex flex-row items-center">
+                                        <label className="font-semibold flex flex-none text-sm mr-2">
+                                          Tools/Device
+                                          <br />
+                                          required
+                                        </label>
+                                        <div className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+                                          {request.deviceRequired}
+                                        </div>
+                                      </div>
+
+                                      <div className="mb-1 flex flex-row items-center">
+                                        <label className="font-semibold  text-center flex flex-none text-sm mr-2">
+                                          Device
+                                          <br /> Approved By
+                                        </label>
+                                        <div className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+                                          {request.deviceApprovedBy}
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div className=" flex flex-row items-center">
+                                      <label className="font-semibold flex flex-none text-sm mr-2">
+                                        Work Team With Id
+                                      </label>
+                                      <div className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+                                        {request.WorkTeamWithId}
+                                      </div>
+                                    </div>
+                                    <div className=" flex flex-row items-center">
+                                      <label className="font-semibold flex flex-none text-sm mr-2">
+                                        Read By
+                                      </label>
+                                      <div className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+                                        {request.readBy}
+                                      </div>
+                                    </div>
+                                    <div className="grid grid-cols-2 gap-4 ">
+                                      <div className="mb-1 flex flex-row items-center">
+                                        <label className="font-semibold flex flex-none text-sm mr-2">
+                                          Revoke/return date <br /> & time:
+                                        </label>
+                                        <div className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+                                          {request.ReturnTimeDate}
+                                        </div>
+                                      </div>
+
+                                      <div className="mb-1 flex flex-row items-center">
+                                        <label className="font-semibold flex flex-none text-sm mr-2">
+                                          revoked BY:
+                                        </label>
+                                        <div className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+                                          {request.revokeBy}
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <tr>
+                                      {/* Service Details in a separate row */}
+                                      <td
+                                        colSpan={2}
+                                        className="border-[1px] border-b-1 py-2 px-4 text-center border-gray-600"
+                                      >
+                                        <div className="font-semibold text-sm text-gray-900">
+                                          show all approval status
+                                          {/* {request.id} */}
+                                        </div>
+                                      </td>
+                                    </tr>
+
+                                    <tr>
+                                      <tr className="flex">
+                                        <td
+                                          colSpan={1}
+                                          className="py-2 px-4"
+                                          style={{
+                                            borderBottom: "8px solid",
+                                            borderColor:
+                                              request.supervisorStatus ===
+                                              "Released"
+                                                ? "#294B29"
+                                                : "#D24545",
+                                          }}
+                                        >
                                           <div className=" text-sm text-gray-900">
-                                            <label className="font-semibold">
-                                              {" "}
-                                              Request No:
+                                            <label className="font-semibold mr-10 underline">
+                                              Team Lead{" "}
+                                            </label>
+                                            {request.supervisorStatus}
+                                          </div>
+                                        </td>
+
+                                        <td
+                                          colSpan={1}
+                                          className="py-2 px-4"
+                                          style={{
+                                            borderBottom: "8px solid",
+                                            borderColor:
+                                              request.approvalStatus ===
+                                              "approve"
+                                                ? "#294B29"
+                                                : "#D24545",
+                                          }}
+                                        >
+                                          <div className=" text-sm text-gray-900">
+                                            <label className="font-semibold mr-10 underline ">
+                                              Head of Ifra/App{" "}
+                                            </label>
+
+                                            {request.approvalStatus}
+                                          </div>
+                                        </td>
+
+                                        <td
+                                          colSpan={1}
+                                          className="py-2 px-4"
+                                          style={{
+                                            borderBottom: "8px solid",
+                                            borderColor:
+                                              request.cisoStatus === "approveed"
+                                                ? "#294B29"
+                                                : "#D24545",
+                                          }}
+                                        >
+                                          <div className=" text-sm text-gray-900">
+                                            <label className="font-semibold  mr-10 underline">
+                                              CISO
                                             </label>{" "}
-                                            {request.requestNo}
+                                            {request.cisoStatus}
                                           </div>
                                         </td>
 
-                                        <td className="border-[1px] border-b-1 py-2 px-4 border-gray-600">
+                                        <td
+                                          colSpan={1}
+                                          className="py-2 px-4 pt-2"
+                                          style={{
+                                            borderBottom: "8px solid",
+                                            borderColor:
+                                              request.HeadOfDivisionStatus ===
+                                              "confirm"
+                                                ? "#294B29"
+                                                : "#D24545",
+                                          }}
+                                        >
                                           <div className=" text-sm text-gray-900">
-                                            <label className="font-semibold">
-                                              Date:
+                                            <label className="font-semibold mr-10  underline">
+                                              Head of Division{" "}
                                             </label>{" "}
-                                            {request.date}
+                                            {request.HeadOfDivisionStatus}
                                           </div>
                                         </td>
                                       </tr>
+                                    </tr>
+                                  </tbody>
 
-                                      <tr>
-                                        {/* Request No and Date in one row */}
-                                        <td className="border-[1px] border-b-1 py-2 px-4 border-gray-600">
-                                          <div className=" text-sm text-gray-900">
-                                            <label className="font-semibold">
-                                              Requested By:{" "}
-                                            </label>
-                                            {request.requestedBy}
-                                          </div>
-                                        </td>
-
-                                        <td className="border-[1px] border-b-1 py-2 px-4 border-gray-600">
-                                          <div className=" text-sm text-gray-900">
-                                            <label className="font-semibold">
-                                              Request For:{" "}
-                                            </label>
-                                            {request.requestFor}
-                                          </div>
-                                        </td>
-                                      </tr>
-
-                                      <tr>
-                                        {/* Request No and Date in one row */}
-                                        <td className="border-[1px] border-b-1 py-2 px-4 border-gray-600">
-                                          <div className=" text-sm text-gray-900">
-                                            <label className="font-semibold">
-                                              Department:{" "}
-                                            </label>
-                                            {request.department}
-                                          </div>
-                                        </td>
-
-                                        <td className="border-[1px] border-b-1 py-2 px-4 border-gray-600">
-                                          <div className=" text-sm text-gray-900">
-                                            <label className="font-semibold">
-                                              Employee Id:{" "}
-                                            </label>
-                                            {request.employeeId}
-                                          </div>
-                                        </td>
-                                      </tr>
-
-                                      <tr>
-                                        {/* Designation in a separate row */}
-                                        <td
-                                          colSpan={2}
-                                          className="border-[1px] border-b-1 py-2 px-4 border-gray-600"
-                                        >
-                                          <div className=" text-sm text-gray-900">
-                                            <label className="font-semibold">
-                                              Designation:{" "}
-                                            </label>
-                                            {request.designation}
-                                          </div>
-                                        </td>
-                                      </tr>
-                                      <tr>
-                                        {/* Reason of Request in a separate row */}
-                                        <td
-                                          colSpan={2}
-                                          className="border-[1px] border-b-1 py-2 px-4 border-gray-600"
-                                        >
-                                          <div className=" text-sm text-gray-900">
-                                            <label className="font-semibold">
-                                              Request For Persons:{" "}
-                                            </label>
-                                            {request.reasonOfRequest}
-                                          </div>
-                                        </td>
-                                      </tr>
-                                      <tr>
-                                        {/* Reason of Request in a separate row */}
-                                        <td
-                                          colSpan={2}
-                                          className="border-[1px] border-b-1 py-2 px-4 border-gray-600"
-                                        >
-                                          <div className=" text-sm text-gray-900">
-                                            <label className="font-semibold">
-                                              Access Date Duration:{" "}
-                                            </label>
-                                            {request.accessDateDuration}
-                                          </div>
-                                        </td>
-                                      </tr>
-
-                                      <tr>
-                                        {/* Reason of Request in a separate row */}
-                                        <td
-                                          colSpan={2}
-                                          className="border-[1px] border-b-1 py-2 px-4 border-gray-600"
-                                        >
-                                          <div className=" text-sm text-gray-900">
-                                            <label className="font-semibold">
-                                              Access Time Duration:{" "}
-                                            </label>
-                                            {request.accessTimeDuration}
-                                          </div>
-                                        </td>
-                                      </tr>
-
-                                      <tr>
-                                        {/* Reason of Request in a separate row */}
-                                        <td
-                                          colSpan={2}
-                                          className="border-[1px] border-b-1 py-2 px-4 border-gray-600"
-                                        >
-                                          <div className=" text-sm text-gray-900">
-                                            <label className="font-semibold">
-                                              Reason Of Request :{" "}
-                                            </label>
-                                            {request.reasonOfRequest}
-                                          </div>
-                                        </td>
-                                      </tr>
-
-                                      <tr>
-                                        {/* Service Details in a separate row */}
-                                        <td
-                                          colSpan={2}
-                                          className="border-[1px] border-b-1 py-2 px-4 border-gray-600"
-                                        >
-                                          <div className=" text-sm text-gray-900">
-                                            <label className="font-semibold">
-                                              Service Details:
-                                            </label>
-                                            {request.serviceDetails}
-                                          </div>
-                                        </td>
-                                      </tr>
-
-                                      <tr>
-                                        {/* Service Details in a separate row */}
-                                        <td
-                                          colSpan={2}
-                                          className="border-[1px] border-b-1 py-2 px-4 text-center border-gray-600"
-                                        >
-                                          <div className="font-semibold text-sm text-gray-900">
-                                            show all approval status
-                                            {/* {request.id} */}
-                                          </div>
-                                        </td>
-                                      </tr>
-
-                                      <tr>
-                                        <tr className="flex">
-                                          <td
-                                            colSpan={1}
-                                            className="py-2 px-4"
-                                            style={{
-                                              borderBottom: "8px solid",
-                                              borderColor:
-                                                request.supervisorStatus ===
-                                                "Released"
-                                                  ? "#294B29"
-                                                  : "#D24545",
-                                            }}
-                                          >
-                                            <div className=" text-sm text-gray-900">
-                                              <label className="font-semibold mr-10 underline">
-                                                Team Lead{" "}
-                                              </label>
-                                              {request.supervisorStatus}
-                                            </div>
-                                          </td>
-
-                                          <td
-                                            colSpan={1}
-                                            className="py-2 px-4"
-                                            style={{
-                                              borderBottom: "8px solid",
-                                              borderColor:
-                                                request.approvalStatus ===
-                                                "approve"
-                                                  ? "#294B29"
-                                                  : "#D24545",
-                                            }}
-                                          >
-                                            <div className=" text-sm text-gray-900">
-                                              <label className="font-semibold mr-10 underline ">
-                                                Head of Ifra/App{" "}
-                                              </label>
-
-                                              {request.approvalStatus}
-                                            </div>
-                                          </td>
-
-                                          <td
-                                            colSpan={1}
-                                            className="py-2 px-4"
-                                            style={{
-                                              borderBottom: "8px solid",
-                                              borderColor:
-                                                request.cisoStatus ===
-                                                "approveed"
-                                                  ? "#294B29"
-                                                  : "#D24545",
-                                            }}
-                                          >
-                                            <div className=" text-sm text-gray-900">
-                                              <label className="font-semibold  mr-10 underline">
-                                                CISO
-                                              </label>{" "}
-                                              {request.cisoStatus}
-                                            </div>
-                                          </td>
-
-                                          <td
-                                            colSpan={1}
-                                            className="py-2 px-4 pt-2"
-                                            style={{
-                                              borderBottom: "8px solid",
-                                              borderColor:
-                                                request.HeadOfDivisionStatus ===
-                                                "confirm"
-                                                  ? "#294B29"
-                                                  : "#D24545",
-                                            }}
-                                          >
-                                            <div className=" text-sm text-gray-900">
-                                              <label className="font-semibold mr-10  underline">
-                                                Head of Division{" "}
-                                              </label>{" "}
-                                              {request.HeadOfDivisionStatus}
-                                            </div>
-                                          </td>
-                                        </tr>
-                                      </tr>
-                                    </tbody>
-                                  </table>
-                                </div>
+                                  {/* Add more fields as needed */}
+                                </Modal>
                               )}
                             </React.Fragment>
                           ))}
