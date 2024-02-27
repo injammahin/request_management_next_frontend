@@ -13,8 +13,12 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
 
   return (
     <div className="modal-backdrop">
-      <button className="cancel-button " onClick={onClose}>
-        Cancel
+      <button className=" " onClick={onClose}>
+        <img
+          src="/cancleee.svg"
+          alt="Delete Icon"
+          className="h-16 w-16 hover:bg-red-700 hover:rounded-full"
+        />
       </button>
       <div className="modal-content">
         {children}
