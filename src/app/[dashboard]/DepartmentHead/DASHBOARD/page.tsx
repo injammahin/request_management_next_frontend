@@ -399,9 +399,9 @@ const Dashboard: React.FC = () => {
                         {serviceRequests.map((request) => (
                           <li
                             key={request.id}
-                            className="bg-white shadow-lg text-start border-b-2 border-gray-400 p-4 mb-4"
+                            className="bg-white shadow-lg text-start border-b-2 border-[2px]  border-gray-400 p-4 mb-4"
                           >
-                            <div className="flex justify-between items-center">
+                            <div className="flex justify-between items-center ">
                               <h2 className="">
                                 <label className="font-semibold">
                                   Request No:
