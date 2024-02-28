@@ -27,16 +27,31 @@ ChartJS.register(
 interface ServiceRequest {
   id: number;
   requestNo: string;
-  requestedBy: string;
-  department: string;
-  designation: string;
   date: string;
+  requestedBy: string;
   requestFor: string;
+  department: string;
   employeeId: string;
+  designation: string;
   reasonOfRequest: string;
   serviceDetails: string;
+  user: string;
+  accessDateDuration: string;
+  accessTimeDuration: string;
+  vandorName: string;
+  vandorAssignedReason: string;
+  deviceRequired: string;
+  WorkTeamWithId: string;
+  readBy: string;
+  ReturnTimeDate: string;
+  revokeBy: string;
+  execusion: string;
+  deviceApprovedBy: string;
   approvalStatus: string;
   supervisorStatus: string;
+  cisoStatus: string;
+  HeadOfDivisionStatus: string;
+  showFullForm: boolean;
 }
 interface MaintenanceRequest {
   id: number;
@@ -408,114 +423,230 @@ const Dashboard: React.FC = () => {
                               <div className="mt-4">
                                 <>
                                   <div>
-                                    <tbody>
-                                      <tr>
-                                        {/* Request No and Date in one row */}
-                                        <td className="border-[1px]    border-b-1 py-2 px-4 border-gray-600">
-                                          <div className=" text-sm text-gray-900">
-                                            <label className="font-semibold ">
-                                              Request No:{" "}
-                                            </label>{" "}
+                                    <tbody className="max-w-3xl   mx-auto mt-8 p-4 border pt-20">
+                                      <div className="grid  grid-cols-2 gap-4 ">
+                                        <div className="mb-2 flex flex-row items-center">
+                                          <label className=" font-semibold  text-sm flex flex-none mr-2">
+                                            Request No:
+                                          </label>
+                                          <div className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
                                             {request.requestNo}
                                           </div>
-                                        </td>
+                                        </div>
 
-                                        <td className="border-[1px] border-b-1 py-2 px-4  border-gray-600">
-                                          <div className=" text-sm text-gray-900">
-                                            <label className="font-semibold ">
-                                              Date{" "}
-                                            </label>{" "}
+                                        <div className=" flex flex-row items-center">
+                                          <label className="font-semibold text-sm flex flex-none mr-2">
+                                            Date:
+                                            <span style={{ color: "red" }}>
+                                              *
+                                            </span>
+                                          </label>
+                                          <div className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
                                             {request.date}
                                           </div>
-                                        </td>
-                                      </tr>
+                                        </div>
+                                      </div>
 
-                                      <tr>
-                                        {/* Request No and Date in one row */}
-                                        <td className="border-[1px] border-b-1 py-2 px-4 border-gray-600">
-                                          <div className=" text-sm text-gray-900">
-                                            <label className="font-semibold ">
-                                              Requested By{" "}
-                                            </label>{" "}
+                                      <div className="grid grid-cols-2 gap-4 ">
+                                        <div className=" flex flex-row items-center">
+                                          <label className="font-semibold  text-sm flex flex-none mr-2">
+                                            Request By :{" "}
+                                            <span style={{ color: "red" }}>
+                                              *
+                                            </span>
+                                          </label>
+                                          <div className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
                                             {request.requestedBy}
                                           </div>
-                                        </td>
+                                        </div>
 
-                                        <td className="border-[1px] border-b-1 py-2 px-4 border-gray-600">
-                                          <div className=" text-sm text-gray-900">
-                                            <label className="font-semibold ">
-                                              Request For
-                                            </label>{" "}
+                                        <div className=" flex flex-row items-center">
+                                          <label className="font-semibold text-sm flex flex-none mr-2">
+                                            Request For:
+                                            <span style={{ color: "red" }}>
+                                              *
+                                            </span>
+                                          </label>
+                                          <div className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
                                             {request.requestFor}
                                           </div>
-                                        </td>
-                                      </tr>
+                                        </div>
+                                      </div>
 
-                                      <tr>
-                                        {/* Request No and Date in one row */}
-                                        <td className="border-[1px] border-b-1 py-2 px-4 border-gray-600">
-                                          <div className=" text-sm text-gray-900">
-                                            <label className="font-semibold ">
-                                              Department
-                                            </label>{" "}
+                                      <div className="grid grid-cols-2 gap-4 ">
+                                        <div className=" flex flex-row items-center">
+                                          <label className="font-semibold  text-sm flex flex-none mr-2">
+                                            Department:
+                                            <span style={{ color: "red" }}>
+                                              *
+                                            </span>
+                                          </label>
+                                          <div className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
                                             {request.department}
                                           </div>
-                                        </td>
+                                        </div>
 
-                                        <td className="border-[1px] border-b-1 py-2 px-4 border-gray-600">
-                                          <div className=" text-sm text-gray-900">
-                                            <label className="font-semibold ">
-                                              Employee Id
-                                            </label>{" "}
+                                        <div className=" flex flex-row items-center">
+                                          <label className="font-semibold flex  text-sm flex-none mr-2">
+                                            Employee Id:
+                                            <span style={{ color: "red" }}>
+                                              *
+                                            </span>
+                                          </label>
+                                          <div className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
                                             {request.employeeId}
                                           </div>
-                                        </td>
-                                      </tr>
+                                        </div>
+                                      </div>
 
-                                      <tr>
-                                        {/* Designation in a separate row */}
-                                        <td
-                                          colSpan={2}
-                                          className="border-[1px] border-b-1 py-2 px-4 border-gray-600"
-                                        >
-                                          <div className=" text-sm text-gray-900">
-                                            <label className="font-semibold ">
-                                              Designation
-                                            </label>{" "}
-                                            {request.designation}
+                                      <div className=" flex flex-row items-center">
+                                        <label className="font-semibold flex flex-none text-sm mr-2">
+                                          Designation:
+                                          <span style={{ color: "red" }}>
+                                            *
+                                          </span>
+                                        </label>
+                                        <div className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+                                          {request.designation}
+                                        </div>
+                                      </div>
+                                      <div className=" flex flex-row items-center">
+                                        <label className="font-semibold flex flex-none text-sm mr-2">
+                                          Request For Person:
+                                          <span style={{ color: "red" }}>
+                                            *
+                                          </span>
+                                        </label>
+                                        <div className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+                                          {request.reasonOfRequest}
+                                        </div>
+                                      </div>
+                                      <div className=" flex flex-row items-center">
+                                        <label className="font-semibold flex flex-none text-sm mr-2">
+                                          Access Date Duration:
+                                          <span style={{ color: "red" }}>
+                                            *
+                                          </span>
+                                        </label>
+                                        <div className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+                                          {request.accessDateDuration}
+                                        </div>
+                                      </div>
+                                      <div className=" flex flex-row items-center">
+                                        <label className="font-semibold flex flex-none text-sm mr-2">
+                                          Access Time Duration:
+                                          <span style={{ color: "red" }}>
+                                            *
+                                          </span>
+                                        </label>
+                                        <div className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+                                          {request.accessTimeDuration}
+                                        </div>
+                                      </div>
+                                      <div className=" flex flex-row items-center">
+                                        <label className="font-semibold flex flex-none text-sm mr-2 ">
+                                          Details of Access/Service:
+                                          <span style={{ color: "red" }}>
+                                            {" "}
+                                            *
+                                          </span>
+                                        </label>
+                                        <div className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+                                          {request.serviceDetails}
+                                        </div>
+                                      </div>
+                                      <div className="grid grid-cols-2  ">
+                                        <div className="mb-2  flex flex-row items-center">
+                                          <label className=" font-semibold flex text-sm flex-none mr-2">
+                                            Change/Execusion/
+                                            <br />
+                                            request ID :
+                                          </label>
+                                          <div className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+                                            {request.execusion}
                                           </div>
-                                        </td>
-                                      </tr>
+                                        </div>
 
-                                      <tr>
-                                        {/* Reason of Request in a separate row */}
-                                        <td
-                                          colSpan={2}
-                                          className="border-[1px] border-b-1 py-2 px-4 border-gray-600"
-                                        >
-                                          <div className=" text-sm text-gray-900">
-                                            <label className="font-semibold ">
-                                              Reason Of Request
-                                            </label>{" "}
-                                            {request.reasonOfRequest}
+                                        <div className=" flex flex-row items-center text-center">
+                                          <label className=" mx-20 lex flex-none text-sm ">
+                                            referred from change/ Maintenance
+                                            <br /> request Form
+                                          </label>
+                                        </div>
+                                      </div>
+                                      <div className=" flex flex-row items-center">
+                                        <label className="font-semibold flex flex-none text-sm mr-2">
+                                          Vendor Name:
+                                        </label>
+                                        <div className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+                                          {request.vandorName}
+                                        </div>
+                                      </div>
+                                      <div className=" flex flex-row items-center">
+                                        <label className="font-semibold flex flex-none text-sm mr-2">
+                                          vendor Assigned Reason:
+                                        </label>
+                                        <div className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+                                          {request.vandorAssignedReason}
+                                        </div>
+                                      </div>
+                                      <div className="grid grid-cols-2 gap-4 ">
+                                        <div className="mb-1 flex flex-row items-center">
+                                          <label className="font-semibold flex flex-none text-sm mr-2">
+                                            Tools/Device
+                                            <br />
+                                            required
+                                          </label>
+                                          <div className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+                                            {request.deviceRequired}
                                           </div>
-                                        </td>
-                                      </tr>
+                                        </div>
 
-                                      <tr>
-                                        {/* Service Details in a separate row */}
-                                        <td
-                                          colSpan={2}
-                                          className="border-[1px] border-b-1 py-2 px-4 border-gray-600"
-                                        >
-                                          <div className="font-semibold text-sm text-gray-900">
-                                            <label className="font-semibold ">
-                                              Service Details
-                                            </label>{" "}
-                                            {request.serviceDetails}
+                                        <div className="mb-1 flex flex-row items-center">
+                                          <label className="font-semibold  text-center flex flex-none text-sm mr-2">
+                                            Device
+                                            <br /> Approved By
+                                          </label>
+                                          <div className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+                                            {request.deviceApprovedBy}
                                           </div>
-                                        </td>
-                                      </tr>
+                                        </div>
+                                      </div>
+                                      <div className=" flex flex-row items-center">
+                                        <label className="font-semibold flex flex-none text-sm mr-2">
+                                          Work Team With Id
+                                        </label>
+                                        <div className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+                                          {request.WorkTeamWithId}
+                                        </div>
+                                      </div>
+                                      <div className=" flex flex-row items-center">
+                                        <label className="font-semibold flex flex-none text-sm mr-2">
+                                          Read By
+                                        </label>
+                                        <div className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+                                          {request.readBy}
+                                        </div>
+                                      </div>
+                                      <div className="grid grid-cols-2 gap-4 ">
+                                        <div className="mb-1 flex flex-row items-center">
+                                          <label className="font-semibold flex flex-none text-sm mr-2">
+                                            Revoke/return date <br /> & time:
+                                          </label>
+                                          <div className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+                                            {request.ReturnTimeDate}
+                                          </div>
+                                        </div>
+
+                                        <div className="mb-1 flex flex-row items-center">
+                                          <label className="font-semibold flex flex-none text-sm mr-2">
+                                            revoked BY:
+                                          </label>
+                                          <div className="block w-full py-2.5 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+                                            {request.revokeBy}
+                                          </div>
+                                        </div>
+                                      </div>
                                     </tbody>
                                   </div>
 
