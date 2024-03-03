@@ -682,7 +682,7 @@ const ProfilePage: React.FC = () => {
                                                 : "#D24545",
                                           }}
                                         >
-                                          <div className=" text-sm text-gray-900">
+                                          <div className=" border border-3 border-gray-700 text-sm text-gray-900">
                                             <label className="font-semibold mr-10 underline">
                                               Team Lead{" "}
                                             </label>
@@ -702,7 +702,7 @@ const ProfilePage: React.FC = () => {
                                                 : "#D24545",
                                           }}
                                         >
-                                          <div className=" text-sm text-gray-900">
+                                          <div className="border border-3 border-gray-700 text-sm text-gray-900">
                                             <label className="font-semibold mr-10 underline ">
                                               Head of Ifra/App{" "}
                                             </label>
@@ -722,7 +722,7 @@ const ProfilePage: React.FC = () => {
                                                 : "#D24545",
                                           }}
                                         >
-                                          <div className=" text-sm text-gray-900">
+                                          <div className="border border-3 border-gray-700 text-sm text-gray-900">
                                             <label className="font-semibold  mr-10 underline">
                                               CISO
                                             </label>{" "}
@@ -742,7 +742,7 @@ const ProfilePage: React.FC = () => {
                                                 : "#D24545",
                                           }}
                                         >
-                                          <div className=" text-sm text-gray-900">
+                                          <div className=" border border-3 border-gray-700 text-sm text-gray-900">
                                             <label className="font-semibold mr-10  underline">
                                               Head of Division{" "}
                                             </label>{" "}

@@ -389,7 +389,7 @@ const ProfilePage: React.FC = () => {
                                   </div>
                                 </div>
                               </div>
-                              <div className="grid grid-cols-2 gap-4 mb-4">
+                              <div className="grid grid-cols-2 gap-4 ">
                                 <div className="flex flex-row items-center">
                                   <label className="font-semibold text-sm flex flex-none mr-2">
                                     Requested By:
@@ -427,7 +427,7 @@ const ProfilePage: React.FC = () => {
                                   </div>
                                 </div>
                               </div>
-                              <div className="grid grid-cols-2 gap-4 mb-4">
+                              <div className="grid grid-cols-2 gap-4 ">
                                 <div className="flex flex-row items-center">
                                   <label className="font-semibold text-sm flex flex-none mr-2">
                                     Department:
@@ -462,6 +462,9 @@ const ProfilePage: React.FC = () => {
                                   >
                                     Ref. Service Request:
                                   </label>
+                                  <div className="block w-full py-1 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+                                    {maintenance.referenceServiceRequest}
+                                  </div>
                                 </div>
                               </div>
                               {/* //////////// */}
@@ -494,7 +497,7 @@ const ProfilePage: React.FC = () => {
                                 </div>
                               </div>
                               {/* //////////// */}
-                              <div className="grid grid-cols-2 gap-4 mb-4">
+                              <div className="grid grid-cols-2 gap-4 ">
                                 <div className="flex flex-row items-center">
                                   <label className="font-semibold text-sm flex flex-none mr-2">
                                     required Downtime:
@@ -514,7 +517,7 @@ const ProfilePage: React.FC = () => {
                                 </div>
                               </div>
                               {/* //////////// */}
-                              <div className="grid grid-cols-2 gap-4 mb-4">
+                              <div className="grid grid-cols-2 gap-4 ">
                                 <div className="flex flex-row items-center">
                                   <label className="font-semibold text-sm flex flex-none mr-2">
                                     Start Date:
@@ -534,7 +537,7 @@ const ProfilePage: React.FC = () => {
                                 </div>
                               </div>
                               {/* //////////// */}
-                              <div className="grid grid-cols-2 gap-4 mb-4">
+                              <div className="grid grid-cols-2 gap-4 ">
                                 <div className="flex flex-row items-center">
                                   <label className="font-semibold text-sm flex flex-none mr-2">
                                     End Date:
@@ -850,7 +853,7 @@ const ProfilePage: React.FC = () => {
                                           : "#D24545",
                                     }}
                                   >
-                                    <div className=" text-sm text-gray-900">
+                                    <div className="border border-3 border-gray-700 text-sm text-gray-900">
                                       <label className="font-semibold mr-10 underline">
                                         Team Lead{" "}
                                       </label>
@@ -869,7 +872,7 @@ const ProfilePage: React.FC = () => {
                                           : "#D24545",
                                     }}
                                   >
-                                    <div className=" text-sm text-gray-900">
+                                    <div className="border border-3 border-gray-700 text-sm text-gray-900">
                                       <label className="font-semibold mr-10 underline ">
                                         Head of Ifra/App{" "}
                                       </label>
@@ -889,7 +892,7 @@ const ProfilePage: React.FC = () => {
                                           : "#D24545",
                                     }}
                                   >
-                                    <div className=" text-sm text-gray-900">
+                                    <div className="border border-3 border-gray-700 text-sm text-gray-900">
                                       <label className="font-semibold  mr-10 underline">
                                         CISO
                                       </label>{" "}
@@ -909,7 +912,7 @@ const ProfilePage: React.FC = () => {
                                           : "#D24545",
                                     }}
                                   >
-                                    <div className=" text-sm text-gray-900">
+                                    <div className=" border border-3 border-gray-700 text-sm text-gray-900">
                                       <label className="font-semibold mr-10  underline">
                                         Head of Division{" "}
                                       </label>{" "}
