@@ -56,7 +56,7 @@ interface ServiceRequest {
 interface MaintenanceRequest {
   id: number;
   requestNumber: string;
-  approvalStatus: string;
+
   supervisorStatus: string;
   // Define other properties as needed...
 
@@ -275,30 +275,37 @@ const Dashboard: React.FC = () => {
       }
     }
   };
-  const handleMaintenanceAction = async (
-    id: number,
-    action: "release" | "decline"
-  ) => {
-    try {
-      await fetch(`http://localhost:3001/maintenance/${action}/${id}`, {
-        // Update this URL to your actual API endpoint
-        method: "PATCH",
-      });
-      // Update the maintenance request status in the local state
-      setMaintenanceRequests((prev) =>
-        prev.map((req) =>
-          req.id === id
-            ? {
-                ...req,
-                supervisorStatus:
-                  action === "release" ? "Released" : "Declined",
-              }
-            : req
-        )
-      );
-    } catch (error) {
-      console.error("Error:", error);
-      setError("Failed to perform action on maintenance request");
+  const handleApproveMaintenance = async (id: number, p0: string) => {
+    if (confirmAction("release", id)) {
+      try {
+        await axios.patch(`http://localhost:3001/maintaintance/release/${id}`);
+        // Filter out the approved maintenance request
+        setMaintenanceRequests((prev) =>
+          prev.filter((request) => request.id !== id)
+        );
+        setSuccessMessage(`Maintenance request ${id} approved successfully`);
+      } catch (error) {
+        console.error(`Error approving maintenance request ${id}:`, error);
+      }
+    }
+  };
+  const handleDeclineMaintenance = async (id: number, p0: string) => {
+    if (confirmAction("block", id)) {
+      try {
+        await axios.patch(`http://localhost:3001/maintaintance/block/${id}`);
+        // Update the maintenance request status in the state without reloading
+        setMaintenanceRequests((prev) =>
+          prev.map((request) => {
+            if (request.id === id) {
+              return { ...request, supervisorStatus: "blocked" }; // Adjust the status property according to your data structure
+            }
+            return request;
+          })
+        );
+        setSuccessMessage(`Maintenance request ${id} declined successfully`);
+      } catch (error) {
+        console.error(`Error declining maintenance request ${id}:`, error);
+      }
     }
   };
 
@@ -772,7 +779,7 @@ const Dashboard: React.FC = () => {
                                 </label>{" "}
                                 {request.requestNumber} |{" "}
                                 {/* {request.reasonOfRequest.slice(0, 30)}...| */}
-                                {request.approvalStatus}
+                                {request.supervisorStatus}
                               </h2>
                               <button
                                 onClick={() => toggleExpand(request.id)}
@@ -916,7 +923,7 @@ const Dashboard: React.FC = () => {
                                   <div className="flex space-x-2 mt-3">
                                     <button
                                       onClick={() =>
-                                        handleMaintenanceAction(
+                                        handleApproveMaintenance(
                                           request.id,
                                           "release"
                                         )
@@ -927,14 +934,14 @@ const Dashboard: React.FC = () => {
                                     </button>
                                     <button
                                       onClick={() =>
-                                        handleMaintenanceAction(
+                                        handleDeclineMaintenance(
                                           request.id,
-                                          "decline"
+                                          "blocked"
                                         )
                                       }
                                       className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
                                     >
-                                      Blocked
+                                      Block
                                     </button>
                                   </div>
                                   <button
