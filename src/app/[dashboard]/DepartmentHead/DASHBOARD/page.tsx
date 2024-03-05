@@ -56,7 +56,7 @@ interface ServiceRequest {
 interface MaintenanceRequest {
   id: number;
   requestNumber: string;
-
+  requestedBy: string;
   supervisorStatus: string;
   // Define other properties as needed...
 
@@ -132,7 +132,7 @@ const Dashboard: React.FC = () => {
   const [declinedForms, setDeclinedForms] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
   const [pendingRequests, setPendingRequests] = useState<ServiceRequest[]>([]);
-
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
   ////////////////////////////////////////////////////////////////
   const [serviceRequests, setServiceRequests] = useState<ServiceRequest[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -243,12 +243,13 @@ const Dashboard: React.FC = () => {
     window.confirm(`Are you sure you want to ${action} request ${id}?`);
 
   const handleApprove = async (id: number) => {
-    if (confirmAction("release", id)) {
+    if (confirmAction("approve", id)) {
       try {
         await axios.patch(
           `http://localhost:3001/service-requests/release/${id}`
         );
-        setPendingRequests((prev) =>
+        // Filter out the approved request
+        setServiceRequests((prev) =>
           prev.filter((request) => request.id !== id)
         );
         setSuccessMessage(`Request ${id} approved successfully`);
@@ -262,12 +263,14 @@ const Dashboard: React.FC = () => {
     if (confirmAction("decline", id)) {
       try {
         await axios.patch(`http://localhost:3001/service-requests/block/${id}`);
-        setPendingRequests((prev) =>
-          prev.map((request) =>
-            request.id === id
-              ? { ...request, approvalStatus: "Declined" }
-              : request
-          )
+        // Update the request status in the state without reloading
+        setServiceRequests((prev) =>
+          prev.map((request) => {
+            if (request.id === id) {
+              return { ...request, supervisorStatus: "blocked" }; // Adjust the status property according to your data structure
+            }
+            return request;
+          })
         );
         setSuccessMessage(`Request ${id} declined successfully`);
       } catch (error) {
@@ -275,6 +278,7 @@ const Dashboard: React.FC = () => {
       }
     }
   };
+
   const handleApproveMaintenance = async (id: number, p0: string) => {
     if (confirmAction("release", id)) {
       try {
@@ -308,6 +312,16 @@ const Dashboard: React.FC = () => {
       }
     }
   };
+  useEffect(() => {
+    if (successMessage) {
+      const timer = setTimeout(() => {
+        setSuccessMessage(null); // Clear the success message
+      }, 3000); // 3000ms = 3 seconds
+
+      // Clear the timeout if the component unmounts or the successMessage changes before the 3 seconds are up
+      return () => clearTimeout(timer);
+    }
+  }, [successMessage]);
 
   const pendingToRelease = serviceRequests.filter(
     (request) => request.supervisorStatus === "Pending "
@@ -377,6 +391,23 @@ const Dashboard: React.FC = () => {
             <div className="flex justify-between items-center mb-6">
               <h1 className="text-2xl font-semibold text-center">Dashboard</h1>
             </div>
+            {successMessage && (
+              <div
+                style={{
+                  position: "fixed",
+                  top: "20%",
+                  left: "50%",
+                  transform: "translate(-50%, -50%)",
+                  backgroundColor: "white",
+                  padding: "20px",
+                  zIndex: 100,
+                  borderRadius: "10px",
+                  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+                }}
+              >
+                {successMessage}
+              </div>
+            )}
 
             <div>
               <div
@@ -794,114 +825,482 @@ const Dashboard: React.FC = () => {
                               <div className="mt-4">
                                 <>
                                   <div>
-                                    <tbody>
-                                      <tr>
-                                        {/* Request No and Date in one row */}
-                                        <td className="border-[1px]    border-b-1 py-2 px-4 border-gray-600">
-                                          <div className=" text-sm text-gray-900">
-                                            <label className="font-semibold ">
-                                              Request Number:{" "}
-                                            </label>{" "}
+                                    <tbody className="max-w-[1000px] pt-10  mx-auto mt-8  border">
+                                      <div className="text-center  border border-gray-600 ">
+                                        <div className="bg-gray-300 flex justify-center items-center">
+                                          <h1 className="p-1  font-bold text-sm">
+                                            PART 1 : Initiator Information
+                                          </h1>
+                                        </div>
+                                      </div>
+                                      <div className="grid  grid-cols-2 gap-4 ">
+                                        <div className="  flex flex-row items-center  ">
+                                          <label className="font-semibold text-sm flex flex-none mr-2">
+                                            Request Number:
+                                          </label>
+                                          <div className="block w-full py-1 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
                                             {request.requestNumber}
                                           </div>
-                                        </td>
+                                        </div>
 
-                                        <td className="border-[1px] border-b-1 py-2 px-4  border-gray-600">
-                                          <div className=" text-sm text-gray-900">
-                                            <label className="font-semibold ">
-                                              Date{" "}
-                                            </label>{" "}
+                                        <div className="flex flex-row items-center">
+                                          <label className="font-semibold flex flex-none text-sm mr-2">
+                                            Date:
+                                          </label>
+                                          <div className="block w-full py-1 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
                                             {request.date}
                                           </div>
-                                        </td>
-                                      </tr>
-
-                                      <tr>
-                                        {/* Request No and Date in one row */}
-                                        <td className="border-[1px] border-b-1 py-2 px-4 border-gray-600">
-                                          <div className=" text-sm text-gray-900">
-                                            <label className="font-semibold ">
-                                              Requested By{" "}
-                                            </label>{" "}
-                                            {request.date}
+                                        </div>
+                                      </div>
+                                      <div className="grid grid-cols-2 gap-4 ">
+                                        <div className="flex flex-row items-center">
+                                          <label className="font-semibold text-sm flex flex-none mr-2">
+                                            Requested By:
+                                          </label>
+                                          <div className="block w-full py-1 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+                                            {request.requestedBy}
                                           </div>
-                                        </td>
+                                        </div>
 
-                                        <td className="border-[1px] border-b-1 py-2 px-4 border-gray-600">
-                                          <div className=" text-sm text-gray-900">
-                                            <label className="font-semibold ">
-                                              Request For
-                                            </label>{" "}
-                                            {request.date}
+                                        <div className="flex flex-row items-center">
+                                          <label className="font-semibold text-sm flex flex-none mr-2">
+                                            Requester Name:
+                                          </label>
+                                          <div className="block w-full py-1 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+                                            {request.requesterName}
                                           </div>
-                                        </td>
-                                      </tr>
-
-                                      <tr>
-                                        {/* Request No and Date in one row */}
-                                        <td className="border-[1px] border-b-1 py-2 px-4 border-gray-600">
-                                          <div className=" text-sm text-gray-900">
-                                            <label className="font-semibold ">
-                                              Department
-                                            </label>{" "}
-                                            {request.department}
+                                        </div>
+                                      </div>
+                                      <div className="grid grid-cols-2 gap-4 ">
+                                        <div className="flex flex-row items-center">
+                                          <label className="font-semibold text-sm flex flex-none mr-2">
+                                            Subject Of Change:
+                                          </label>
+                                          <div className="block w-full py-1 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+                                            {request.subofChange}
                                           </div>
-                                        </td>
+                                        </div>
 
-                                        <td className="border-[1px] border-b-1 py-2 px-4 border-gray-600">
-                                          <div className=" text-sm text-gray-900">
-                                            <label className="font-semibold ">
-                                              Employee Id
-                                            </label>{" "}
+                                        <div className="flex flex-row items-center">
+                                          <label className="font-semibold text-sm flex flex-none mr-2">
+                                            Employee Id:
+                                          </label>
+                                          <div className="block w-full py-1 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
                                             {request.EmployeeId}
                                           </div>
-                                        </td>
-                                      </tr>
-
-                                      <tr>
-                                        {/* Designation in a separate row */}
-                                        <td
-                                          colSpan={2}
-                                          className="border-[1px] border-b-1 py-2 px-4 border-gray-600"
-                                        >
-                                          <div className=" text-sm text-gray-900">
-                                            <label className="font-semibold ">
-                                              Designation
-                                            </label>{" "}
-                                            {request.date}
+                                        </div>
+                                      </div>
+                                      <div className="grid grid-cols-2 gap-4 ">
+                                        <div className="flex flex-row items-center">
+                                          <label className="font-semibold text-sm flex flex-none mr-2">
+                                            Department:
+                                          </label>
+                                          <div className="block w-full py-1 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+                                            {request.department}
                                           </div>
-                                        </td>
-                                      </tr>
-
-                                      <tr>
-                                        {/* Reason of Request in a separate row */}
-                                        <td
-                                          colSpan={2}
-                                          className="border-[1px] border-b-1 py-2 px-4 border-gray-600"
-                                        >
-                                          <div className=" text-sm text-gray-900">
-                                            <label className="font-semibold ">
-                                              Reason Of Request
-                                            </label>{" "}
-                                            {request.date}
+                                        </div>
+                                        <div className="flex flex-row items-center">
+                                          <label className="font-semibold text-sm flex flex-none mr-2">
+                                            Contract No:
+                                          </label>
+                                          <div className="block w-full py-1 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+                                            {request.contractNo}
                                           </div>
-                                        </td>
-                                      </tr>
+                                        </div>
+                                      </div>
+                                      {/* //////////// */}
+                                      <div className="grid grid-cols-2 gap-4 ">
+                                        <div className="flex flex-row items-center">
+                                          <label className="font-semibold text-sm flex flex-none">
+                                            Maintenance Type:
+                                          </label>
+                                          <div className="block w-full py-1 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+                                            {request.MaintenanceType}
+                                          </div>
+                                        </div>
+                                        <div className="flex flex-row items-center">
+                                          <label
+                                            htmlFor="requestNumber"
+                                            className="font-semibold text-sm flex flex-none mr-2"
+                                          >
+                                            Ref. Service Request:
+                                          </label>
+                                          <div className="block w-full py-1 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+                                            {request.referenceServiceRequest}
+                                          </div>
+                                        </div>
+                                      </div>
+                                      {/* //////////// */}
+                                      <div className="flex flex-row items-center">
+                                        <label className="font-semibold text-sm flex flex-none mr-2">
+                                          purpose Of Activity:
+                                        </label>
+                                        <div className="block w-full py-1 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+                                          {request.purposeOfActivity}
+                                        </div>
+                                      </div>
+                                      {/* //////////// */}
+                                      <div className="grid grid-cols-2 ">
+                                        <div className="flex flex-row items-center">
+                                          <label className="font-semibold text-sm flex flex-none mr-2">
+                                            Priority:
+                                          </label>
+                                          <div className="block w-full py-1 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+                                            {request.priority}
+                                          </div>
+                                        </div>
+                                        {/* //////////// */}
+                                        <div className="flex flex-row items-center">
+                                          <label className="font-semibold text-sm flex flex-none mr-2">
+                                            Impact Level:
+                                          </label>
+                                          <div className="block w-full py-1 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+                                            {request.impactLevel}
+                                          </div>
+                                        </div>
+                                      </div>
+                                      {/* //////////// */}
+                                      <div className="grid grid-cols-2 gap-4 ">
+                                        <div className="flex flex-row items-center">
+                                          <label className="font-semibold text-sm flex flex-none mr-2">
+                                            required Downtime:
+                                          </label>
+                                          <div className="block w-full py-1 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+                                            {request.requiredDowntime}
+                                          </div>
+                                        </div>
+                                        {/* //////////// */}
+                                        <div className="flex flex-row items-center">
+                                          <label className="font-semibold text-sm flex flex-none mr-2">
+                                            Mention Downtime:
+                                          </label>
+                                          <div className="block w-full py-1 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+                                            {request.mentionDowntime}
+                                          </div>
+                                        </div>
+                                      </div>
+                                      {/* //////////// */}
+                                      <div className="grid grid-cols-2 gap-4 ">
+                                        <div className="flex flex-row items-center">
+                                          <label className="font-semibold text-sm flex flex-none mr-2">
+                                            Start Date:
+                                          </label>
+                                          <div className="block w-full py-1 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+                                            {request.startDate}
+                                          </div>
+                                        </div>
+                                        {/* //////////// */}
+                                        <div className="flex flex-row items-center">
+                                          <label className="font-semibold text-sm flex flex-none mr-2">
+                                            start Time:
+                                          </label>
+                                          <div className="block w-full py-1 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+                                            {request.startTime}
+                                          </div>
+                                        </div>
+                                      </div>
+                                      {/* //////////// */}
+                                      <div className="grid grid-cols-2 gap-4 ">
+                                        <div className="flex flex-row items-center">
+                                          <label className="font-semibold text-sm flex flex-none mr-2">
+                                            End Date:
+                                          </label>
+                                          <div className="block w-full py-1 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+                                            {request.endDate}
+                                          </div>
+                                        </div>
+                                        {/* //////////// */}
+                                        <div className="flex flex-row items-center">
+                                          <label className="font-semibold text-sm flex flex-none mr-2">
+                                            End Time:
+                                          </label>
+                                          <div className="block w-full py-1 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+                                            {request.endTime}
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div className="text-center  border border-gray-600 ">
+                                        <div className="bg-gray-300 flex justify-center items-center">
+                                          <h1 className="p-1  font-bold text-sm">
+                                            PART 2 : Change Preview
+                                          </h1>
+                                        </div>
+                                      </div>
+                                      {/* /////// */}
+                                      <div className="flex flex-row items-center">
+                                        <label className="font-semibold text-sm flex flex-none mr-2">
+                                          Change Location:
+                                        </label>
+                                        <div className="block w-full py-1 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+                                          {request.changeLocation}
+                                        </div>
+                                      </div>
+                                      {/* ////////////////// */}
+                                      <div className="flex flex-row items-center">
+                                        <label className="font-semibold text-sm flex flex-none mr-2">
+                                          Targeted System For:
+                                        </label>
+                                        <div className="block w-full py-1 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+                                          {request.targetedSystemFor}
+                                        </div>
+                                      </div>
+                                      <div className="flex flex-row items-center">
+                                        <label className="font-semibold text-sm flex flex-none mr-2">
+                                          IP address:
+                                        </label>
+                                        <div className="block w-full py-1 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+                                          {request.IPaddress}
+                                        </div>
+                                      </div>
+                                      <div className="flex flex-row items-center">
+                                        <label className="font-semibold text-sm flex flex-none mr-2">
+                                          Impacted System For:
+                                        </label>
+                                        <div className="block w-full py-1 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+                                          {request.ImpactedSystemfor}
+                                        </div>
+                                      </div>
+                                      <div className="flex flex-row items-center">
+                                        <label className="font-semibold text-sm flex flex-none mr-2">
+                                          Detailed Description Of Change /
+                                          Maintenance:
+                                        </label>
+                                        <div className="block w-full py-1 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+                                          {request.DetailedDescriptionOfChange}
+                                        </div>
+                                      </div>
+                                      <div className="text-center  border border-gray-600 ">
+                                        <div className="bg-gray-300 flex justify-center items-center">
+                                          <h1 className="p-1  font-bold text-sm">
+                                            PART 3 : Review And Approval
+                                          </h1>
+                                        </div>
+                                      </div>
+                                      {/* //////////////////////////////// */}
+                                      <div className="grid  grid-cols-3  ">
+                                        <div className="border  p-1 border-gray-600 font-bold text-sm flex flex-none">
+                                          TasK
+                                        </div>
+                                        <div className="border  p-1 border-gray-600 font-bold text-sm flex flex-none">
+                                          Start Time
+                                        </div>
+                                        <div className="border  p-1 border-gray-600 font-bold text-sm flex flex-none">
+                                          End Time
+                                        </div>
+                                        <div className="border  p-1 border-gray-600 font-bold text-sm flex flex-none">
+                                          Take Backup Of Database
+                                        </div>
+                                        <div className="flex flex-row items-center border border-gray-600 pl-2">
+                                          <label className="font-semibold text-sm flex flex-none mr-2 "></label>
+                                          <div className="block w-full py-1 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+                                            {
+                                              request.DetailedWorkedPlanStartTime
+                                            }
+                                          </div>
+                                        </div>
+                                        <div className="flex flex-row items-center border border-gray-600 pl-2">
+                                          <label className="font-semibold text-sm flex flex-none mr-2"></label>
+                                          <div className="block w-full py-1 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+                                            {request.DetailedWorkedPlanEndTime}
+                                          </div>
+                                        </div>
+                                      </div>
 
+                                      {/* //////////////////////////////////////////////////////////////// */}
+                                      <div className="flex flex-row items-center  pl-2">
+                                        <label className="font-semibold text-sm flex flex-none mr-2">
+                                          {" "}
+                                          Requirements( Support.Tools )
+                                        </label>
+                                        <div className="block w-full py-1 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+                                          {request.RequirementTools}
+                                        </div>
+                                      </div>
+                                      <div className="flex flex-row items-center  pl-2">
+                                        <label className="font-semibold text-sm flex flex-none mr-2">
+                                          Implementation Team
+                                        </label>
+                                        <div className="block w-full py-1 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+                                          {request.Implementationteam}
+                                        </div>
+                                      </div>
+                                      <div className="flex flex-row items-center  pl-2">
+                                        <label className="font-semibold text-sm flex flex-none mr-2">
+                                          Communication( Deoendent Person)
+                                        </label>
+                                        <div className="block w-full py-1 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+                                          {request.Communication}
+                                        </div>
+                                      </div>
+                                      <div className="flex flex-row items-center  pl-2">
+                                        <label className="font-semibold text-sm flex flex-none mr-2">
+                                          Roll Back Plan( If failure)
+                                        </label>
+                                        <div className="block w-full py-1 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+                                          {request.RollBackPlan}
+                                        </div>
+                                      </div>
+
+                                      <div className="text-center  border border-gray-600 ">
+                                        <div className="bg-gray-300 flex justify-center items-center">
+                                          <h1 className="p-1  font-bold text-sm">
+                                            Change Checklist
+                                          </h1>
+                                        </div>
+                                      </div>
+                                      <div className="grid  grid-cols-4  ">
+                                        <div className="border p-1 text-center border-gray-600 font-bold text-sm flex flex-none">
+                                          Status
+                                        </div>
+                                        <div className="border p-1 text-center border-gray-600 font-bold text-sm flex flex-none">
+                                          Task
+                                        </div>
+                                        <div className="border p-1 text-center border-gray-600 font-bold text-sm flex flex-none">
+                                          Status
+                                        </div>
+                                        <div className="border p-1 text-center border-gray-600 font-bold text-sm flex flex-none">
+                                          Task
+                                        </div>
+
+                                        <div className="border p-1 text-center border-gray-600 font-none text-sm flex flex-none">
+                                          Is the Change Test Performed ?
+                                        </div>
+                                        <div className="flex flex-row items-center border border-gray-600 pl-2">
+                                          <label className="font-semibold text-sm flex flex-none mr-2"></label>
+                                          <div className="block w-full py-1 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+                                            {request.checklistStatusOne}
+                                          </div>
+                                        </div>
+
+                                        <div className="border p-1 text-center border-gray-600  text-sm flex flex-none ">
+                                          Is The Communication maintained ?
+                                        </div>
+                                        <div className="flex flex-row  border border-gray-600 pl-2">
+                                          <label className="font-none text-sm flex flex-none mr-2"></label>
+                                          <div className="block w-full py-1 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+                                            {request.checklistStatusTwo}
+                                          </div>
+                                        </div>
+                                        {/* ////// */}
+                                        <div className="border p-1 text-center border-gray-600 font-none text-sm flex flex-none">
+                                          Is the Back Up Token Of The System?
+                                        </div>
+                                        <div className="flex flex-row items-center border border-gray-600 pl-2">
+                                          <label className="font-semibold text-sm flex flex-none mr-2"></label>
+                                          <div className="block w-full py-1 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+                                            {request.checklistStatusThree}
+                                          </div>
+                                        </div>
+
+                                        <div className="border p-1 text-center border-gray-600  text-sm flex flex-none ">
+                                          Is The Change Identifid Stable ?
+                                        </div>
+                                        <div className="flex flex-row  border border-gray-600 pl-2">
+                                          <label className="font-none text-sm flex flex-none mr-2"></label>
+                                          <div className="block w-full py-1 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+                                            {request.checklistStatusFour}
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div className="flex flex-row items-center  pl-2">
+                                        <label className="font-semibold text-sm flex flex-none mr-2">
+                                          Impacted System For
+                                        </label>
+                                        <div className="block w-full py-1 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+                                          {request.ImpactedSystemfor}
+                                        </div>
+                                      </div>
+                                      <div className="text-center  border border-gray-600 ">
+                                        <div className="bg-gray-300 flex justify-center items-center">
+                                          <h1 className="p-1  font-bold text-sm">
+                                            PART 4 : Executor Information
+                                          </h1>
+                                        </div>
+                                      </div>
+                                      <div className=" grid grid-cols-2">
+                                        <div className="flex flex-row items-center  pl-2">
+                                          <label className="font-semibold text-sm flex flex-none mr-2">
+                                            Actual Priority
+                                          </label>
+                                          <div className="block w-full py-1 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+                                            {request.ActualPriority}
+                                          </div>
+                                        </div>
+                                        <div className="flex flex-row items-center  pl-2">
+                                          <label className="font-semibold text-sm flex flex-none mr-2">
+                                            Actual Impact Level
+                                          </label>
+                                          <div className="block w-full py-1 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+                                            {request.Actualimpactlevel}
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div className="grid grid-cols-4  ">
+                                        <div className=" flex items-center border border-gray-700">
+                                          <label className="font-semibold  flex flex-none text-sm mr-2 mx-[px]">
+                                            (TEAM LEADER) :
+                                          </label>
+                                          {/* <div className="block w-full py-1 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+                                            {maintenance.ciso}
+                                          </div> */}
+                                        </div>
+                                        <div className=" flex items-center border border-gray-700">
+                                          <label className="font-semibold  flex flex-none text-sm mr-2 mx-[px]">
+                                            (HEAD 0F IRFA) :
+                                          </label>
+                                          {/* <div className="block w-full py-1 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+                                            {request.superadmin}
+                                          </div> */}
+                                        </div>
+                                        <div className=" flex items-center border border-gray-700">
+                                          <label className="font-semibold  flex flex-none text-sm mr-2 mx-[px]">
+                                            (CISO) :
+                                          </label>
+                                          {/* <div className="block w-full py-1 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+                                            {request.ciso}
+                                          </div> */}
+                                        </div>
+                                        <div className=" flex items-center border border-gray-700">
+                                          <label className="font-semibold  flex flex-none text-sm mr-2 mx-[px]">
+                                            (HEAD) :
+                                          </label>
+                                          {/* <div className="block w-full py-1 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+                                            {request.head}
+                                          </div> */}
+                                        </div>
+                                      </div>
+                                      <div className="text-center  border border-gray-600 ">
+                                        <div className="bg-gray-300 flex justify-center items-center">
+                                          <h1 className="p-1  font-bold text-sm">
+                                            PART 5 : Change Review
+                                          </h1>
+                                        </div>
+                                      </div>
+                                      <div className="flex flex-row items-center  pl-2">
+                                        <label className="font-semibold text-sm flex flex-none mr-2">
+                                          Execusion Team Menbers
+                                        </label>
+
+                                        <div className="block w-full py-1 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+                                          {request.ExecusionTeamMenbers}
+                                        </div>
+                                        <label className="font-semibold text-sm flex flex-none mr-2">
+                                          Execusion Team Leaders:
+                                        </label>
+
+                                        <div className="block w-full py-1 px-0 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+                                          {request.ExecusionTeamleaders}
+                                        </div>
+                                      </div>
                                       <tr>
                                         {/* Service Details in a separate row */}
                                         <td
                                           colSpan={2}
-                                          className="border-[1px] border-b-1 py-2 px-4 border-gray-600"
-                                        >
-                                          <div className="font-semibold text-sm text-gray-900">
-                                            <label className="font-semibold ">
-                                              Service Details
-                                            </label>{" "}
-                                            {request.date}
-                                          </div>
-                                        </td>
+                                          className="border-[1px] border-b-1 py-2 px-4 text-center border-gray-600"
+                                        ></td>
                                       </tr>
+
+                                      {/* ////////////////////////////////////////////// */}
                                     </tbody>
                                   </div>
 
