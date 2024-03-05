@@ -14,6 +14,7 @@ import {
   Legend,
 } from "chart.js";
 import Navbar from "@/app/components/navigation/page";
+import axios from "axios";
 
 ChartJS.register(
   CategoryScale,
@@ -47,10 +48,9 @@ interface ServiceRequest {
   revokeBy: string;
   execusion: string;
   deviceApprovedBy: string;
-  approvalStatus: string;
+
   supervisorStatus: string;
-  cisoStatus: string;
-  HeadOfDivisionStatus: string;
+
   showFullForm: boolean;
 }
 interface MaintenanceRequest {
@@ -131,6 +131,8 @@ const Dashboard: React.FC = () => {
   const [acceptedForms, setAcceptedForms] = useState(0);
   const [declinedForms, setDeclinedForms] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
+  const [pendingRequests, setPendingRequests] = useState<ServiceRequest[]>([]);
+
   ////////////////////////////////////////////////////////////////
   const [serviceRequests, setServiceRequests] = useState<ServiceRequest[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -237,26 +239,40 @@ const Dashboard: React.FC = () => {
   const toggleShowAllMaintenanceRequests = () => {
     setShowAllMaintenanceRequests((prev) => !prev);
   };
-  const handleAction = async (id: number, action: "release" | "decline") => {
-    try {
-      await fetch(`http://localhost:3001/service-requests/${action}/${id}`, {
-        method: "PATCH",
-      });
-      // Update the status in the local state
-      setServiceRequests((prev) =>
-        prev.map((req) =>
-          req.id === id
-            ? {
-                ...req,
-                supervisorStatus:
-                  action === "release" ? "Released" : "declined",
-              }
-            : req
-        )
-      );
-    } catch (error) {
-      console.error("Error:", error);
-      setError("Failed to perform action");
+  const confirmAction = (action: string, id: number) =>
+    window.confirm(`Are you sure you want to ${action} request ${id}?`);
+
+  const handleApprove = async (id: number) => {
+    if (confirmAction("release", id)) {
+      try {
+        await axios.patch(
+          `http://localhost:3001/service-requests/release/${id}`
+        );
+        setPendingRequests((prev) =>
+          prev.filter((request) => request.id !== id)
+        );
+        setSuccessMessage(`Request ${id} approved successfully`);
+      } catch (error) {
+        console.error(`Error approving request ${id}:`, error);
+      }
+    }
+  };
+
+  const handleDecline = async (id: number) => {
+    if (confirmAction("decline", id)) {
+      try {
+        await axios.patch(`http://localhost:3001/service-requests/block/${id}`);
+        setPendingRequests((prev) =>
+          prev.map((request) =>
+            request.id === id
+              ? { ...request, approvalStatus: "Declined" }
+              : request
+          )
+        );
+        setSuccessMessage(`Request ${id} declined successfully`);
+      } catch (error) {
+        console.error(`Error declining request ${id}:`, error);
+      }
     }
   };
   const handleMaintenanceAction = async (
@@ -408,7 +424,7 @@ const Dashboard: React.FC = () => {
                                 </label>{" "}
                                 {request.requestNo} |{" "}
                                 {request.reasonOfRequest.slice(0, 30)}...|
-                                {request.approvalStatus}
+                                {request.supervisorStatus}
                               </h2>
                               <button
                                 onClick={() => toggleExpand(request.id)}
@@ -667,20 +683,16 @@ const Dashboard: React.FC = () => {
                                   </p>
                                   <div className="flex space-x-2 mt-3">
                                     <button
-                                      onClick={() =>
-                                        handleAction(request.id, "release")
-                                      }
-                                      className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                                      className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+                                      onClick={() => handleApprove(request.id)}
                                     >
-                                      Release
+                                      Approve
                                     </button>
                                     <button
-                                      onClick={() =>
-                                        handleAction(request.id, "decline")
-                                      }
-                                      className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+                                      className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                                      onClick={() => handleDecline(request.id)}
                                     >
-                                      decline
+                                      Decline
                                     </button>
                                   </div>
                                   <button
@@ -922,7 +934,7 @@ const Dashboard: React.FC = () => {
                                       }
                                       className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
                                     >
-                                      decline
+                                      Blocked
                                     </button>
                                   </div>
                                   <button
@@ -1047,3 +1059,6 @@ const Dashboard: React.FC = () => {
 };
 
 export default Dashboard;
+function setSuccessMessage(arg0: string) {
+  throw new Error("Function not implemented.");
+}
