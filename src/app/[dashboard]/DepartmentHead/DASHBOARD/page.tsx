@@ -472,17 +472,7 @@ const Dashboard: React.FC = () => {
                                 {request.reasonOfRequest.slice(0, 30)}...|
                                 {request.supervisorStatus}
                               </h2>
-                              <p
-                                className={`text-sm font-semibold mt-2 ${
-                                  seenRequests.includes(request.id)
-                                    ? "text-green-500"
-                                    : "text-red-500"
-                                }`}
-                              >
-                                {seenRequests.includes(request.id)
-                                  ? "Seen"
-                                  : "Unseen"}
-                              </p>
+
                               <button
                                 onClick={() => toggleExpand(request.id)}
                                 className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700"
