@@ -138,6 +138,8 @@ const Dashboard: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [expandedRequests, setExpandedRequests] = useState<number[]>([]);
+  const [seenRequests, setSeenRequests] = useState<number[]>([]);
+
   const [showAllRequests, setShowAllRequests] = useState(false);
   const [maintenanceRequests, setMaintenanceRequests] = useState<
     MaintenanceRequest[]
@@ -340,7 +342,13 @@ const Dashboard: React.FC = () => {
     setExpandedRequests((prev) =>
       prev.includes(id) ? prev.filter((prevId) => prevId !== id) : [...prev, id]
     );
+
+    // If expanding and the form hasn't been marked as seen yet, mark it as seen
+    if (!expandedRequests.includes(id) && !seenRequests.includes(id)) {
+      setSeenRequests((prev) => [...prev, id]);
+    }
   };
+
   // New state definitions for tracking released and declined counts
   const [releasedCount, setReleasedCount] = useState(0);
   const [declinedCount, setDeclinedCount] = useState(0);
@@ -464,9 +472,20 @@ const Dashboard: React.FC = () => {
                                 {request.reasonOfRequest.slice(0, 30)}...|
                                 {request.supervisorStatus}
                               </h2>
+                              <p
+                                className={`text-sm font-semibold mt-2 ${
+                                  seenRequests.includes(request.id)
+                                    ? "text-green-500"
+                                    : "text-red-500"
+                                }`}
+                              >
+                                {seenRequests.includes(request.id)
+                                  ? "Seen"
+                                  : "Unseen"}
+                              </p>
                               <button
                                 onClick={() => toggleExpand(request.id)}
-                                className="text-white bg-[#40A2D8] hover:bg-[#0B60B0] rounded-lg px-2 py-1"
+                                className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700"
                               >
                                 {expandedRequests.includes(request.id)
                                   ? "Show Less"
