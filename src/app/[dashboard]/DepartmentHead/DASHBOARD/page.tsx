@@ -398,7 +398,7 @@ const Dashboard: React.FC = () => {
                   top: "20%",
                   left: "50%",
                   transform: "translate(-50%, -50%)",
-                  backgroundColor: "white",
+                  backgroundColor: "gray",
                   padding: "20px",
                   zIndex: 100,
                   borderRadius: "10px",
@@ -801,7 +801,7 @@ const Dashboard: React.FC = () => {
                         {maintenanceRequests.map((request) => (
                           <li
                             key={request.id}
-                            className="bg-white shadow-lg text-start border-b-2 border-gray-400 p-4 mb-4"
+                            className="bg-white shadow-lg text-start border-b-2 border-[2px] border-gray-400 p-4 mb-4"
                           >
                             <div className="flex justify-between items-center">
                               <h2 className="">
