@@ -1409,20 +1409,20 @@ const Dashboard: React.FC = () => {
                   onMouseLeave={() => setIsHovered(false)}
                 ></animated.div>
               </div>
-              <animated.div
+              {/* <animated.div
                 style={fadeInUp}
                 className="md:col-span-2 lg:col-span-4 bg-white p-5 rounded-xl shadow-md mt-3"
-              >
-                <animated.h2
+              > */}
+              {/* <animated.h2
                   style={fadeInUp}
                   className="font-semibold text-xl mb-4"
                 >
                   Monthly Form Submit
-                </animated.h2>
-                <div className="h-96 ">
+                </animated.h2> */}
+              {/* <div className="h-96 ">
                   <Line data={data} />
-                </div>
-              </animated.div>
+                </div> */}
+              {/* </animated.div> */}
 
               {/* Other sections that should be hidden when showAllRequests is true */}
               {/* {!showAllRequests && (

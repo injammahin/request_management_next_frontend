@@ -75,8 +75,72 @@ const SigninPage = () => {
           router.push("/dashboard/user-dashboard");
         } else if (response.data.role === "superadmin") {
           router.push("/dashboard/admin2-dashboard");
-        } else if (response.data.role === "subadmin") {
+          ///////////////////////////////-applicationuser-management/////////////////////////////////
+        } else if (response.data.role === "DHOapplicationusermanagement") {
           router.push("/dashboard/DepartmentHead/DASHBOARD");
+          ///////////////////////////////alternative-channels/////////////////////////////////
+        } else if (response.data.role === "DHOalternativechannels") {
+          router.push(
+            "/dashboard/DepartmentHead/AlternativeChannels-dashboard"
+          );
+          ///////////////////////////////CardsAndATMSystem/////////////////////////////////
+        } else if (response.data.role === "DHOcardsandatmsystem") {
+          router.push("/dashboard/DepartmentHead/CardsAndATMSystem");
+          ///////////////////////////////CorporateApplication/////////////////////////////////
+        } else if (response.data.role === "DHOcorporateapplication") {
+          router.push("/dashboard/DepartmentHead/CorporateApplication");
+          ///////////////////////////////DatabaseAdministration/////////////////////////////////
+        } else if (response.data.role === "DHOdatabaseadministration") {
+          router.push("/dashboard/DepartmentHead/DatabaseAdministration");
+          ///////////////////////////////DataCenterManagement/////////////////////////////////
+        } else if (response.data.role === "DHOdatacentermanagement") {
+          router.push("/dashboard/DepartmentHead/DataCenterManagement");
+          ///////////////////////////////DataCenterPassiveInfrastructure/////////////////////////////////
+        } else if (
+          response.data.role === "DHOdatacenterpassiveinfrastructure"
+        ) {
+          router.push(
+            "/dashboard/DepartmentHead/DataCenterPassiveInfrastructure"
+          );
+          ///////////////////////////////HelpDesk/////////////////////////////////
+        } else if (response.data.role === "DHOhelpdesk") {
+          router.push("/dashboard/DepartmentHead/HelpDesk");
+          ///////////////////////////////InitiativesAndProjects/////////////////////////////////
+        } else if (response.data.role === "DHOinitiativesandprojects") {
+          router.push("/dashboard/DepartmentHead/InitiativesAndProjects");
+          ///////////////////////////////ITSecurityAndCompliance/////////////////////////////////
+        } else if (response.data.role === "DHOitsecurityandcompliance") {
+          router.push("/dashboard/DepartmentHead/ITSecurityAndCompliance");
+          ///////////////////////////////MiddlewareAdministration/////////////////////////////////
+        } else if (response.data.role === "DHOmiddlewareadministration") {
+          router.push("/dashboard/DepartmentHead/MiddlewareAdministration");
+          ///////////////////////////////MISAndDataSupport/////////////////////////////////
+        } else if (response.data.role === "DHOmisandsatasupport") {
+          router.push("/dashboard/DepartmentHead/MISAndDataSupport");
+          ///////////////////////////////NetworkManagement/////////////////////////////////
+        } else if (response.data.role === "DHOnetworkmanagement") {
+          router.push("/dashboard/DepartmentHead/NetworkManagement");
+          ///////////////////////////////ProcurementzzAndAssetManagement/////////////////////////////////
+        } else if (
+          response.data.role === "DHOprocurementzzandassetmanagement"
+        ) {
+          router.push(
+            "/dashboard/DepartmentHead/ProcurementzzAndAssetManagement"
+          );
+          ///////////////////////////////RetailApplication/////////////////////////////////
+        } else if (response.data.role === "DHOretailapplication") {
+          router.push("/dashboard/DepartmentHead/RetailApplication");
+          ///////////////////////////////ServerAndStorageManagement/////////////////////////////////
+        } else if (response.data.role === "DHOserverandstoragemanagement") {
+          router.push("/dashboard/DepartmentHead/ServerAndStorageManagement");
+          ///////////////////////////////Swift/////////////////////////////////
+        } else if (response.data.role === "DHOswift") {
+          router.push("/dashboard/DepartmentHead/Swift");
+          ///////////////////////////////WindowsSystemManagement/////////////////////////////////
+        } else if (response.data.role === "DHOwindowssystemmanagement") {
+          router.push("/dashboard/DepartmentHead/WindowsSystemManagement");
+
+          ////////////////////////////
         } else if (response.data.role === "ciso") {
           router.push("/dashboard/ciso-dashboard");
         } else if (response.data.role === "head") {
