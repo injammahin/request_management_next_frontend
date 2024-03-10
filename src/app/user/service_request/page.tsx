@@ -670,7 +670,6 @@ const RequestServiceForm: React.FC<RequestServiceFormProps> = ({}) => {
           </div>
         )}
       </div>
-      <div></div>
     </div>
   );
 };
